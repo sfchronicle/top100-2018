@@ -1,0 +1,91 @@
+footer {
+  background:#EEE;
+  opacity:1;
+  font-family:@title;
+  border-top: 1px solid #CCC;
+  color: #666;
+  margin-top: 30px;
+  padding:10px 0;
+
+  .footer-content{
+    padding: 37px 20px 10px;
+    max-width: 1100px;
+    margin: auto;
+
+    @media @mobile{
+      padding-bottom:0;
+    }
+  }
+  .logo {
+    width: 100%;
+    padding: 0;
+    margin: 0 ;
+    border-bottom:1px solid #ccc;
+  }
+  a {
+
+    color: #666;
+    &:hover {
+      color: #666;
+    }
+  }
+  .fa {
+    font-size: 20px;
+    color: #666;
+    &:hover {
+      color: #666;
+    }
+  }
+
+  h3 {
+    color:#666;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  .top-list {
+    width: 100%;
+  }
+
+  .hcsf_links {
+    width: 100%;
+
+    li {
+      max-width: none;
+      list-style-type: none;
+      float: left;
+      padding: 0 20px;
+
+      &.top-list{
+        padding:0;
+      }
+      @media @mobile {
+        padding: 0 15px;
+      }
+    }
+    color: white;
+    font-size: 10px;
+  }
+}
+
+.copyright-wrap{
+  border-top: 1px solid #CCC;
+  margin: 1.4em 0;
+  
+  .hearst-logo{
+    float:left;
+    width:90px;
+  }
+
+  .copyright{
+    float:right;
+    font-size: 10px;
+    font-family:@title;
+    line-height: 1em;
+    margin:13px 0 0;
+    padding:0;
+
+  }
+}

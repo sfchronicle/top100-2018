@@ -1,0 +1,44 @@
+{% set next_photo = next_article[0].wcm_img.split(' ') %}
+{% set prev_photo = prev_article[0].wcm_img.split(' ') %}
+{% set nextone_photo = nextone_article[0].wcm_img.split(' ') %}
+
+
+      <hr>
+
+      <div id="related-rest">
+        <div class="rtitle">
+          <div><a href="{{ url_for('index') }}"><button id="filter-btn" class="btn-link search related"><i class="fa fa-search" aria-hidden="true"></i> Search</button></a></div>
+          <div>Search again or explore these restaurants:</div>
+        </div>
+        <div class="wrap">
+          <a href="{{ url_for('index') }}{{prev_article[0]['slug']}}">
+            <img src="http://ww3.hdnux.com/photos/60/22/02/{{ prev_photo[0] }}/3/premium_gallery_landscape.jpg">
+          </a>
+          <div class="name">
+            <div>{{prev_article[0]['Name']}}</div>
+          </div>
+          <div class="info">{{prev_article[0]['Cuisine']}} | {{prev_article[0]['SubRegion']}}</div>        
+        </div>
+        
+        <div class="wrap">
+          <a href="{{ url_for('index') }}{{next_article[0]['slug']}}">
+            <img src="http://ww3.hdnux.com/photos/60/22/02/{{ next_photo[0] }}/3/premium_gallery_landscape.jpg">
+          </a>
+          <div class="name">
+            <div>{{next_article[0]['Name']}}</div>
+          </div>
+          <div class="info">{{next_article[0]['Cuisine']}} | {{next_article[0]['SubRegion']}}</div>
+        </div>
+
+        <div class="wrap">
+          <a href="{{ url_for('index') }}{{nextone_article[0]['slug']}}">
+            <img src="http://ww3.hdnux.com/photos/60/22/02/{{ nextone_photo[0] }}/3/premium_gallery_landscape.jpg">
+          </a>
+          <div class="name">
+            <div>{{nextone_article[0]['Name']}}</div>
+          </div>
+          <div class="info">{{nextone_article[0]['Cuisine']}} | {{nextone_article[0]['SubRegion']}}</div>
+        </div>
+
+
+      </div>

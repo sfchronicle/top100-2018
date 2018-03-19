@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% include 'components/_social.html' %}
+{% endblock %}
+
+<!-- Paywall defaults at meterA. Change below if needed  -->
+{% block paywall %}meterA{% endblock %}
+
+<!-- Authors for analytics to track -->
+{% block author %}Lucio Villa, Emma O'Neill{% endblock %}
+
+{% block content %}
+
+{% include 'components/_top-nav.html' %}
+
+<div id="log-in-instructions">
+	<div class="login">
+    <!-- Gigya signin -->
+    <div class="treg-is-gigya gigya_menu" >
+      <div class="gigya-login">
+      <div id="exit">X</div>
+        <div class="login-header">Login with your subscription account to save restaurants to "My List" and/or "Favorites."</div>
+        <div class="treg-gya-login-widget"></div>
+        <div class="subscribe">
+          <h6 class="no-sub">Don't have a subscription?</h6>
+          <a class="gya-btn" href="https://offers.sfchronicle.com/offers/top100?groupid=31" target="_blank">Subscribe</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="container">
+  <div id="header">
+    <div id="cover-wrapper">
+      <div class="cover"></div>
+      <div class="sf-logo"><a href="http://www.sfchronicle.com/" target="_blank"><img src="./assets/logos/sf_logo_black.png"></a></div>
+      <div class="top100-logo">
+       <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2017</span></h1>
+       {% include 'components/_social-links.html' %}
+       <div class="byline byline-title">By <a href="mailto:mbauer@sfchronicle.com">Michael Bauer</a></div>
+      </div>
+    </div>
+
+    <div id="search" class="search-container">
+      <span class="search"><i class="fa fa-search" aria-hidden="true"></i></span>
+      <input class="input" id="searchrestaurants" type="text" placeholder='Try "French" or "Oakland" ...' />
+    </div>
+    <div class="filters-container">
+
+      <div class="dropdown-container" id="choose-neighborhood">
+        <select name="select" id="select-neighborhood">
+          <option value='all' class="option">Neighborhoods</option>
+        </select>
+      </div>
+      <div class="dropdown-container" id="choose-cuisine">
+        <select name="select" id="select-cuisine">
+          <option value='all' class="option">Cuisines</option>
+        </select>
+      </div>
+      <div class="dropdown-container" id="choose-prices">
+        <select name="select" id="select-price">
+          <option value='all' class="option">Prices</option>
+          <option value='onedollar' class="option" style="background:url('./assets/graphics/one-dollar.png');">$</option>
+          <option value='twodollar' class="option">$$</option>
+          <option value='threedollar' class="option">$$$</option>
+          <option value='fourdollar' class="option">$$$$</option>
+          <option value='potofgold' class="option">High Prix Fixe</option>
+        </select>
+      </div>
+      <div class="dropdown-container" id="choose-noise">
+        <select name="select" id="select-noise">
+          <option value='all' class="option">Noise levels</option>
+          <option value='onebell' class="option">Pleasantly quiet</option>
+          <option value='twobells' class="option">Can talk easily</option>
+          <option value='threebells' class="option">Somewhat loud</option>
+          <option value='fourbells' class="option">Raised voices required</option>
+          <option value='bomb' class="option">Shouting required</option>
+        </select>
+      </div>
+
+      <div class="button filter" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
+
+      <div class="button filter" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
+
+      <div class="button filter" id="showall"><i class="fa fa-home" aria-hidden="true"></i>Clear filters</div>
+
+      <div class="button filter" id="about"><i class="fa fa-info-circle" aria-hidden="true"></i>About</div>
+
+      <div class="button filter" id="mylist-checked"><i class="fa fa-check-square-o" aria-hidden="true"></i>My list</div>
+
+      <div class="button filter" id="mylist-starred"><i class="fa fa-star" aria-hidden="true"></i>My favorites</div>
+
+    </div>
+
+    <div id="in-house" class="clearfix">
+      <a class="btn-link links" href="https://sfchronicle.myshopify.com/products/san-francisco-chronicle-top-100-restaurants-2017?top100project" target="_blank">Magazine</a>
+      <a class="btn-link links" href="https://info.sfchronicle.com/dineout" target="_blank">Sweepstakes</a>
+    </div>
+
+  </div>
+
+  {% include 'components/_bottom-nav.html' %}
+
+  <div id="restaurants">
+    <div id="brunch-spots" class="page">Brunch Spots</div>
+    <div id="new-additions" class="page">New Additions</div>
+    <div class="count-results hide" id="count-results">100 result(s)</div>
+    <div class="intro hide" id="intro-container">PLACEHOLDER FOR INTRO</div>
+    <div id="restaurants-wrap">
+    	PENDING COMPREHENSIVE FIX
+      <!-- <% json.info.forEach(function(r) { %>
+        <% var restaurantID = r.Name.toLowerCase().replace(/ /g,'').replace(/'/g,'').replace(/\./g,''); %>
+        <% var cuisines = r.Cuisine.toLowerCase().replace(/ /g,'').replace('and',' '); %>
+        <% var regions = r.Region.toLowerCase().replace(/\//g, " ").replace(/ /g,''); %>
+        <% var neighborhoods0 = r.SubRegion.toLowerCase().replace(",","/").replace(/ /g,''); %>
+        <% var neighborhoods = neighborhoods0.replace(/\//g," "); %>
+        <% var noise = r.Noise.toLowerCase().replace(/ /g,''); %>
+        <% var price = r.PriceCategory.toLowerCase().replace(/ /g,''); %>
+        <% if (r.New) { var new_var = r.New.toLowerCase(); } else { var new_var = "";} %>
+        <% if (r.Brunch != "No") { var brunch_var = "brunch"; } else { var brunch_var = "";} %>
+        <% if (r.wcm_img){ var photos = r["wcm_img"].toString().split(" "); } %> -->
+        <!-- <div class="restaurant <%=restaurantID%> <%=cuisines%> <%=regions%> <%=neighborhoods%> <%=new_var%> <%=brunch_var%> <%=price%> <%=noise%> active" id="<%=restaurantID%>">
+        	<a href="/2017/top-100-restaurants/<%= r.slug %>" target="_blank">
+            <img src="http://ww3.hdnux.com/photos/60/06/11/<%= photos[0] %>/7/premium_landscape.jpg">
+          </a>
+          <div class="name clearfix">
+            <div class="rname"><%= r.Name %> <%= r.otherName %></div>
+            <div class="favorites">
+              <span class="check-restaurant" id="check<%=restaurantID%>"><i class="fa fa-square-o" aria-hidden="true"></i></span>
+              <span class="save-restaurant" id="save<%=restaurantID%>"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+            </div>
+          </div>
+          <div class="info"><%= r.Cuisine %> | <%= r.SubRegion %></div>
+        </div>
+      <% }); %> -->
+    </div>
+    <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try new search filters.</div>
+    <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Click the star next to any restaurant's name to add it to this list.</div>
+    <div class="hide" id="no-checked-restaurants">Use this list to keep track of which restaurants you've visted, or anything you like! Click the checkbox next to any restaurant's name to add it to this list.</div>
+
+    {% include 'components/_footer.html' %}
+
+  </div>
+
+</div>
+
+<script src="{{url_for('static', filename='scripts/landing.js')}}"></script>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function() {
+    App.init();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,30 @@
+<div id="top-nav">
+
+  <a href="http://www.sfchronicle.com" target="_blank">
+    <div class="logo-link desktop">
+    	<img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_black.png"></img>
+    </div>
+    <div class="logo-link mobile">
+    	<img src="http://projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></img>
+    </div>
+  </a>
+
+  <div class="link"><a href="http://projects.sfchronicle.com/2017/top-100-restaurants/" class="home-link">
+   <span class="top100 top">Top 100 </span><span class="rest top">RESTAURANTS </span><span class="year top">2017</span></a>
+  </div>
+
+  <a href="{{ url_for('index') }}">
+	<button id="filter-btn" class="btn-link search"><i class="fa fa-search" aria-hidden="true"></i> Search</button></a>
+
+  <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{{restaurant.slug}}%2F&text={{restaurant.TwitterText|urlencode}}&hashtags={{config.HASHTAG}}">
+  <button id="filter-btn" class="btn-link search" style="right: 0;">
+  <i class="fa fa-twitter" aria-hidden="true" style="font-size: 18px;"></i>
+  </button></a>
+
+  <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{{restaurant.slug}}%2F', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+  <button id="filter-btn" class="btn-link search" style="right: 36px;font-size: 17px;">
+    <i class="fa fa-facebook" aria-hidden="true"></i>
+  </button></a>
+
+
+</div>

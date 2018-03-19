@@ -1,0 +1,124 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>{{restaurant.PageTitle}}</title>
+    <meta name="__sync_contentCategory" content="{% block paywall %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="http://www.sfchronicle.com/favicon.ico?v=3">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}?4">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    
+    {% include 'components/_hearst.html' %}
+
+    <!-- Begin Hearst analytics -->
+    <script type="text/javascript">
+        var omni_channelPath = "Food :: Top 100 2017";
+        var omni_title = "{{ restaurant.Name|safe }}";
+        var omni_paywallSite = "1";
+        var omni_className = "article";
+        var omni_publicationDate = "{{ config.DATE }} 00:00:00";
+        var omni_authorName = "{% block author %}{% endblock %}";
+        var omni_authorTitle = "San Francisco Chronicle staff";
+
+        var HDN = HDN || {};
+        HDN.dataLayer = HDN.dataLayer || {};
+
+        // HDN.dataLayer object for content and href data
+        HDN.dataLayer.content = HDN.dataLayer.content || {};
+        HDN.dataLayer.href = HDN.dataLayer.href || {};
+        HDN.dataLayer.content.title = "{{ restaurant.Name|safe }}";
+        HDN.dataLayer.content.subtitle = "";
+        HDN.dataLayer.content.objectId = "";
+        HDN.dataLayer.content.objectType = "article";
+        HDN.dataLayer.content.sectionPath = ['Food', 'Special Projects'];
+        HDN.dataLayer.content.pubDate = "{{ config.DATE }} 00:00:00";
+        HDN.dataLayer.content.wordCount = "";
+        HDN.dataLayer.content.keywords = [];
+        HDN.dataLayer.content.keySubjects = [];
+        HDN.dataLayer.content.keyPersons = [];
+        HDN.dataLayer.content.keyOrganizations = [];
+        HDN.dataLayer.content.keyConcepts = [];
+        HDN.dataLayer.content.keyCategories = [];
+        HDN.dataLayer.content.keyPlaces = [];
+        HDN.dataLayer.content.keyNlpPerson = [];
+        HDN.dataLayer.content.keyNlpLocation = [];
+        HDN.dataLayer.content.keyNlpOrganization = [];
+        HDN.dataLayer.content.keyNlpEvent = [];
+        HDN.dataLayer.content.keyNlpWorkOfArt = [];
+        HDN.dataLayer.content.keyNlpConsumerGood = [];
+        HDN.dataLayer.content.keyNlpOther = [];
+        HDN.dataLayer.content.keyNlpUnknown = [];
+
+        // HDN.dataLayer object for source information
+        HDN.dataLayer.source = HDN.dataLayer.source || {};
+        HDN.dataLayer.source.authorName = "Michael Bauer, Kitty Morgan, Russell Yip, Paolo Luchesi, Lucio Villa, Emma O'Neill";
+        HDN.dataLayer.source.authorTitle = "San Francisco Chronicle Staff";
+        HDN.dataLayer.source.originalSourceSite = "SF";
+        HDN.dataLayer.source.publishingSite = "premiumsfgate";
+        HDN.dataLayer.source.sourceSite = "sfgate";
+        
+        // HDN.dataLayer object for sharing information
+        HDN.dataLayer.sharing = HDN.dataLayer.sharing || {};
+        HDN.dataLayer.sharing.openGraphUrl = "http://projects.sfchronicle.com/2017/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.sharing.openGraphType = "article";
+
+        HDN.dataLayer.href.pageUrl = "http://projects.sfchronicle.com/2017/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.href.canonicalUrl = "http://projects.sfchronicle.com/2017/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.href.pageUrlPath = window.location.pathname;
+        HDN.dataLayer.href.pageUrlPathFolders = window.location.pathname.replace(/[A-Za-z0-9-_.]+$/, '');
+        HDN.dataLayer.href.pageUrlQueryParams = window.location.search.replace(/^\?/, '');
+        HDN.dataLayer.href.pageUrlHash = window.location.hash;
+
+        // HDN.dataLayer object for presentation information
+        HDN.dataLayer.presentation = HDN.dataLayer.presentation || {};
+        HDN.dataLayer.presentation.hasSlideshow = "";
+        HDN.dataLayer.presentation.hasSlideshowListView = "";
+        HDN.dataLayer.presentation.hasVideo = "";
+        HDN.dataLayer.presentation.hasInteractive = "";
+
+        // HDN.dataLayer object for paywall information
+        HDN.dataLayer.paywall = HDN.dataLayer.paywall || {};
+        HDN.dataLayer.paywall.premiumStatus = "isPremium";
+        HDN.dataLayer.paywall.premiumEndDate = "";
+    </script>
+    <!-- End Hearst analytics -->
+
+    <!-- Hearst analytics: Ensighten -->
+    <script type="text/javascript">
+      (function(e) {
+        var t = '//nexus.ensighten.com/hearst/news/Bootstrap.js';
+        if (e.cookie.indexOf("nsghtn") > -1) {
+          if(e.cookie.indexOf("nsghtn=test-dev") > -1) {
+          console.log("Ensighten :: Test-Dev"); t = "//nexus-test.ensighten.com/hearst/news-dev/Bootstrap.js";
+          } else if(e.cookie.indexOf("nsghtn=test") > -1) {
+          console.log("Ensighten :: Test"); t = "//nexus-test.ensighten.com/hearst/news/Bootstrap.js";
+          } else if(e.cookie.indexOf("nsghtn=dev") > -1) {
+          console.log("Ensighten :: Dev"); t = "//nexus.ensighten.com/hearst/news-dev/Bootstrap.js";
+          }
+        }
+        e.write("<scr"+"ipt src='"+e.location.protocol+t+"'></scr"+"ipt>");
+      })(document);
+    </script>
+    <!-- End Hearst analytics: Ensighten -->
+
+    {% block head %}{% endblock %}
+
+  </head>
+  <body class="{% if config.DEV %}debug{% endif %}">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    {% block content %}{% endblock %}
+
+    
+    <script src="{{url_for('static', filename='scripts/main.js')}}"></script>
+
+    {% block javascript %}{% endblock %}
+
+</body>
+</html>

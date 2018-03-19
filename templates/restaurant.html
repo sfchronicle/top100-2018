@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% include 'components/_social.html' %}
+{% endblock %}
+
+<!-- Paywall defaults at meterA  -->
+{% block paywall %}meterA{% endblock %}
+
+<!-- Authors for analytics to track -->
+{% block author %}Michael Bauer, Kitty Morgan, Russell Yip, Paolo Luchesi, Lucio Villa, Emma O'Neill{% endblock %}
+
+{% block content %}
+
+
+  {% set photos = restaurant.wcm_img.split(' ') %}
+
+  {% include 'components/_top-nav.html' %}
+
+
+
+  <div class="restaurant">
+
+    <div class="header">
+      <div class="image" style="background-image: url(http://ww3.hdnux.com/photos/60/22/02/{{ photos[1] }}/7/1200x0.jpg);">
+        <img class="img-tablet" src="http://ww3.hdnux.com/photos/60/22/02/{{ photos[1] }}/7/premium_gallery_landscape.jpg?">
+      </div>
+      <div class="wrap">
+        <h1>{{restaurant.Name}} {{restaurant.otherName|safe}}</h1>
+        <!-- <div class="fave"><span><i class="fa fa-star-o" aria-hidden="true"></i> Add to</span><span><i class="fa fa-star" aria-hidden="true"></i> Remove from</span> Favorites</div> -->
+        <div class="infobox">
+          <div><span>Cuisine</span><br>{{restaurant.Cuisine}}</div>
+          <div><span>Neighborhood</span><br>{{restaurant.SubRegion}}</div>
+          <div><span>Phone</span><br><a href="tel:{{restaurant.Phone.replace('(','').replace(') ','-')}}" class="phone-link"><i class="fa fa-phone" aria-hidden="true"></i>{{restaurant.Phone}}</a></div>
+          <div><span>Noise</span><br>
+            {% if restaurant.Noise == 'ONE BELL' %}
+                <i class="fa fa-bell"></i>
+            {% elif restaurant.Noise == 'TWO BELLS' %}
+                 <i class="fa fa-bell"></i>
+            {% elif restaurant.Noise == 'THREE BELLS' %}
+                 <i class="fa fa-bell"></i>
+                 <i class="fa fa-bell"></i>
+                 <i class="fa fa-bell"></i>
+            {% elif restaurant.Noise == 'FOUR BELLS' %}
+                 <i class="fa fa-bell"></i>
+                 <i class="fa fa-bell"></i>
+                 <i class="fa fa-bell"></i>
+                 <i class="fa fa-bell"></i>
+            {% elif restaurant.Noise == 'BOMB' %}
+                 <i class="fa fa-bomb"></i>
+            {% endif %}
+          </div>
+          <div><span>Address</span><br><a href="https://www.google.com/maps/place/{{restaurant.GoogleAddress}}"  target="_blank" class="google-link"><i class="fa fa-map-marker" aria-hidden="true"></i>{{restaurant.GoogleAddress}}</a></div>
+          {% if restaurant.Website %}
+          <div><span>Website</span><br><a href="{{restaurant.Website}}" target="_blank" class="restaurant-link"><i class="fa fa-external-link" aria-hidden="true"></i>{{restaurant.Website}}</a></div>
+          {% endif %}
+          <div><span>Prices</span><br>{{restaurant.Prices}}</div>
+          <div><span>Seats</span><br>{{restaurant.Seats}}</div>
+          <div><span>Specialties</span><br>{{restaurant.Specialties}}</div>
+          <div><span>Parking</span><br>{{restaurant.Parking}}</div>
+
+          {% if restaurant.otherlocation == 'Yes' %}
+            <div><span>Other location</span><br>{{restaurant.otherlocationname}}
+              <br><a href="https://www.google.com/maps/place/{{restaurant.OtherLocationGoogleAddress}}"  target="_blank" class="google-link"><i class="fa fa-map-marker" aria-hidden="true"></i>{{restaurant.OtherLocationGoogleAddress}}</a>
+              <br><a href="tel:{{restaurant.OtherLocationPhone.replace('(','').replace(') ','-')}}" class="phone-link"><i class="fa fa-phone" aria-hidden="true"></i>{{restaurant.OtherLocationPhone}}</a>
+            </div>
+          {% endif %}
+          {% if restaurant.otherotherlocation == 'Yes' %}
+            <div><span>Other location</span><br>{{restaurant.otherotherlocationname}}
+              <br><a href="https://www.google.com/maps/place/{{restaurant.OtherOtherLocationGoogleAddress}}"  target="_blank" class="google-link"><i class="fa fa-map-marker" aria-hidden="true"></i>{{restaurant.OtherOtherLocationGoogleAddress}}</a>
+              <br><a href="tel:{{restaurant.OtherOtherLocationPhone.replace('(','').replace(') ','-')}}" class="phone-link"><i class="fa fa-phone" aria-hidden="true"></i>{{restaurant.OtherOtherLocationPhone}}</a>
+            </div>
+          {% endif %}
+
+          {% for r in article %}
+          <div class="vitals"><span>Vitals</span><br>{{r.Vitals}}</div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="article">
+
+      {% for r in article %}
+        <p>{{ r.Text }}</p>
+      {% endfor %}
+
+        <div class="photos swiper-container">
+          {% set articlePhotos = photos.pop(1) %}
+          <div class="swiper-wrapper">
+            {% for f in photos %}
+            <div class="swiper-slide"><img src="http://ww3.hdnux.com/photos/60/22/02/{{f}}/7/premium_gallery_landscape.jpg"></div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+           <div class="photo-byline">Photography by {{restaurant.photographer}}</div>
+        </div>
+    </div>
+    {% include 'components/_related.html' %}
+    {% include 'components/_footer.html' %}
+
+
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function() {
+    App.init();
+  });
+</script>
+{% endblock %}

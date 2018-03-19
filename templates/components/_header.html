@@ -1,0 +1,32 @@
+<header class="fixed">
+  <div class="navigation">
+    
+    <a href="http://www.sfchronicle.com" target="_blank">
+      <div class="logo-link link">
+        <img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_black.png">
+      </div>
+      <div id='mobile-logo' class="logo-link">
+        <img src="http://projects.sfchronicle.com/shared/logos/sfletter_c_black.png">
+      </div>
+    </a>
+
+    <div>
+
+      <div class="link social">
+        <a id="mail-icon" title="Share via email" href="mailto:?subject={{title|urlencode}}&body={{description|urlencode}}%0A%0Ahttp%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{% if slug %}{{slug}}%2F{% endif %}"><i class="fa fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <div class="link social">
+        <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH|urlencode}}%2F{% if slug %}{{slug}}%2F{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;"><i class="fa fa-facebook"></i>
+        </a>
+      </div>
+      
+      <div class="link social">
+        <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}{% if slug %}{{slug}}%2F{% endif %}&text={{twitter_text|urlencode}}&hashtags={{config.HASHTAG}}"><i class="fa fa-twitter"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</header>
