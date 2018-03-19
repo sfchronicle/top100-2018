@@ -1,8 +1,40 @@
+#log-in-instructions {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  font-family: @title;
+  top: 0;
+  height: 100%;
+  left: 0;
+  right: 0;
+  overflow:scroll;
+  width: 100%;
+
+  &.show {
+    display: block;
+  }
+}
+
+.login-header{
+  font-size: 16px;
+  font-family: @title;
+  padding: 5px 0 10px 0;
+  margin-bottom: 5px;
+  text-align: center;
+  border-bottom: 1px solid #7d7d7d;
+}
+
+
+#exit{
+  cursor:pointer;
+}
 .hidden{
 	display:none;
 }
 .gigya_menu .gya-title.treg-logged-in span {
-  background: url(http://treg.hearstnp.com/assets/gya_sites/sfchronicle_com/images/user.svg) 0 0 no-repeat;
+  background: url(https://treg.hearstnp.com/assets/gya_sites/sfchronicle_com/images/user.svg) 0 0 no-repeat;
 }
 
 .gigya_menu .gya-title {
@@ -18,7 +50,7 @@
 	cursor: pointer;
 	text-transform: uppercase;
 	color: white;
-	font-family: antennaregular;
+	font-family: @sans-serif-light;
 	font-size: 11px;
 
 	@media @mobile{
@@ -27,11 +59,45 @@
 }
 
 
-.gigya_menu .gya-content {
-	@media (min-width: 1280px){
-    bottom: 0;
-    left: 0;
-    position:fixed;
-    top: inherit;
-	}
+.gigya-login{
+	background-color: #fff;
+  -webkit-box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12), 1px 0 2px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+  -moz-box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12),1px 0 2px 0 rgba(0,0,0,0.12),0 1px 1px 0 rgba(0,0,0,0.24);
+  box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12), 1px 0 2px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+  display: block;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  left: 0;
+  margin: 10px auto;
+  width: 265px;
+  z-index: 10000000;
+
+  @media @width650{
+  	top:0;
+  }
+}
+
+.treg-gya-subscribe-link{
+  display: none !important;
+}
+
+h6.treg-conditional.treg-is-premium.gya-vcenter{
+  display: none !important;
+}
+.gya-header{
+  height:40px;
+}
+.no-sub{
+  font-family: "Sanchez Bold",serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 10px auto;
+}
+
+.gya-rule {
+  background: none;
+  height: 5px;
+  text-align:center;
 }

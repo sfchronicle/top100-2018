@@ -12,8 +12,6 @@
 
 {% block content %}
 
-{% include 'components/_top-nav.html' %}
-
 <div id="log-in-instructions">
 	<div class="login">
     <!-- Gigya signin -->
@@ -35,7 +33,7 @@
   <div id="header">
     <div id="cover-wrapper">
       <div class="cover"></div>
-      <div class="sf-logo"><a href="http://www.sfchronicle.com/" target="_blank"><img src="./assets/logos/sf_logo_black.png"></a></div>
+      <div class="sf-logo"><a href="http://www.sfchronicle.com/" target="_blank"><img src="https://projects.sfchronicle.com/shared/logos/sfc_logo_black.png"></a></div>
       <div class="top100-logo">
        <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2017</span></h1>
        {% include 'components/_social-links.html' %}
@@ -62,7 +60,7 @@
       <div class="dropdown-container" id="choose-prices">
         <select name="select" id="select-price">
           <option value='all' class="option">Prices</option>
-          <option value='onedollar' class="option" style="background:url('./assets/graphics/one-dollar.png');">$</option>
+          <option value='onedollar' class="option" style="background:url('{{url_for('static', filename='graphics/one-dollar.png')}}');">$</option>
           <option value='twodollar' class="option">$$</option>
           <option value='threedollar' class="option">$$$</option>
           <option value='fourdollar' class="option">$$$$</option>
