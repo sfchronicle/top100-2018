@@ -5,14 +5,14 @@ from itertools import tee, islice, chain, izip
 import os
 
 app.config['TEST_PROJECT_PATH'] = 'test-proj'
-app.config['PROJECT_YEAR'] = '2017'
+app.config['PROJECT_YEAR'] = '2018'
 
 # Site paths
-app.config['STAGING_PATH'] = 'top2017'
+app.config['STAGING_PATH'] = 'top2018'
 app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 
 # Publication date 
-app.config['DATE'] = '2017-04-01'
+app.config['DATE'] = '2018-04-01'
 
 # Hashtag
 app.config['HASHTAG'] = 'Top100restaurants'
@@ -21,29 +21,18 @@ app.config['HASHTAG'] = 'Top100restaurants'
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
-info = os.path.join(SITE_ROOT, "data", "info.sheet.json")
-print info
-with open(info) as rest:
-  print rest
-  restaurants = json.load(rest)
-
-docs_info = os.path.join(SITE_ROOT, "data", "top_100_2017_digital_text.json")
-with open(docs_info) as info:
-  rinfo = json.load(info)
-  text = rinfo['restaurants']
+restaurant_data = os.path.join(SITE_ROOT, "data", "top_100_2018_digital_text.json")
+with open(restaurant_data) as r:
+  data = json.load(r)
+  restaurants = data['restaurants']
 
 
 @app.route("/")
 def index():
 
-  restaurant_info = [x for x in restaurants]
-  restaurant = restaurant_info[0]
-  article = [y for y in text]
 
   return render_template(
     'index.html',
-    restaurant=restaurant,
-    article=article,
     restaurants=restaurants
   )
 
@@ -52,21 +41,18 @@ def restaurant_view(slug):
   
   restaurant_info = [x for x in restaurants if x['slug'] == slug]
   restaurant = restaurant_info[0]
-  article = [y for y in text if y['slug'] == slug]
+  article = [y for y in restaurants if y['slug'] == slug]
 
-  next_article = [y for y in restaurants if y['slug'] == restaurant['next']]
-  prev_article = [y for y in restaurants if y['slug'] == restaurant['previous']]
-  nextone_article = [y for y in restaurants if y['slug'] == restaurant['nextone']]
+  # next_article = [y for y in restaurants if y['slug'] == restaurant['next']]
+  # prev_article = [y for y in restaurants if y['slug'] == restaurant['previous']]
+  # nextone_article = [y for y in restaurants if y['slug'] == restaurant['nextone']]
 
 
   return render_template(
     'restaurant.html',
     restaurant=restaurant,
     article=article,
-    restaurants=restaurants,
-    prev_article=prev_article,
-    next_article=next_article,
-    nextone_article=nextone_article
+    restaurants=restaurants
   )
 
 
