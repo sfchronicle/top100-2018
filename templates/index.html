@@ -38,89 +38,23 @@
       </div>
     </div>
 
+    {% include 'components/_top-nav.html' %}
+
     <div id="container">
 
-      <div id="header">
+      <div id="lead-image"></div>
 
-        <div id="cover-wrapper">
-          <div class="cover"></div>
-          <div class="sf-logo"><a href="https://www.sfchronicle.com" target="_blank"><img src="https://projects.sfchronicle.com/shared/logos/sfc_logo_black.png"></a></div>
-          <div class="top100-logo">
-           <h1><span class="top100">Top 100 </span><span class="rest">RESTAURANTS </span><span class="year">2018</span></h1>
-           <!-- Need landing page social variables -->
-           {# include 'components/_landing-social-links.html' #}
-           <div class="byline byline-title">By <a href="mailto:mbauer@sfchronicle.com">Michael Bauer</a></div>
-          </div>
-        </div>
+      <div id="intro">
+        <p>So many high-quality restaurants have opened in recent years that it feels as if we’re in the golden age of dining. The downside: It can take a lot of gold to eat out these days.</p>
 
-        <div id="search" class="search-container">
-          <span class="search"><i class="fa fa-search" aria-hidden="true"></i></span>
-          <input class="input" id="searchrestaurants" type="text" placeholder='Try "French" or "Oakland" ...' />
-        </div>
+        <p>I hope you find these restaurants as worthy as I do. Either way, I look forward to your feedback.</p>
 
-        <div class="filters-container">
-
-          <div class="dropdown-container" id="choose-neighborhood">
-            <select name="select" id="select-neighborhood">
-              <option value='all' class="option">Neighborhoods</option>
-            </select>
-          </div>
-
-          <div class="dropdown-container" id="choose-cuisine">
-            <select name="select" id="select-cuisine">
-              <option value='all' class="option">Cuisines</option>
-            </select>
-          </div>
-
-          <div class="dropdown-container" id="choose-prices">
-            <select name="select" id="select-price">
-              <option value='all' class="option">Prices</option>
-              <option value='onedollar' class="option" style="background:url('{{url_for('static', filename='graphics/one-dollar.png')}}');">$</option>
-              <option value='twodollar' class="option">$$</option>
-              <option value='threedollar' class="option">$$$</option>
-              <option value='fourdollar' class="option">$$$$</option>
-              <option value='potofgold' class="option">High Prix Fixe</option>
-            </select>
-          </div>
-
-          <div class="dropdown-container" id="choose-noise">
-            <select name="select" id="select-noise">
-              <option value='all' class="option">Noise levels</option>
-              <option value='onebell' class="option">Pleasantly quiet</option>
-              <option value='twobells' class="option">Can talk easily</option>
-              <option value='threebells' class="option">Somewhat loud</option>
-              <option value='fourbells' class="option">Raised voices required</option>
-              <option value='bomb' class="option">Shouting required</option>
-            </select>
-          </div>
-
-          <div class="button filter" id="new"><i class="fa fa-plus-circle" aria-hidden="true"></i>New additions</div>
-          <div class="button filter" id="brunch"><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</div>
-          <div class="button filter" id="showall"><i class="fa fa-home" aria-hidden="true"></i>Clear filters</div>
-          <div class="button filter" id="about"><i class="fa fa-info-circle" aria-hidden="true"></i>About</div>
-          <div class="button filter" id="mylist-checked"><i class="fa fa-check-square-o" aria-hidden="true"></i>My list</div>
-          <div class="button filter" id="mylist-starred"><i class="fa fa-star" aria-hidden="true"></i>My favorites</div>
-
-        </div><!-- Closing .filters-container -->
-
-        <div id="in-house" class="clearfix">
-          <a class="btn-link links" href="https://sfchronicle.myshopify.com/products/san-francisco-chronicle-top-100-restaurants-2017?top100project" target="_blank">Magazine</a>
-          <a class="btn-link links" href="https://info.sfchronicle.com/dineout" target="_blank">Sweepstakes</a>
-        </div>
-
-      </div><!-- Closing .header -->
-
-      {% include 'components/_bottom-nav.html' %}
+        <p><em>- Michael Bauer</em></p>
+      </div>
 
       <div id="restaurants">
-        
-        <div id="brunch-spots" class="page">Brunch Spots</div>
-        <div id="new-additions" class="page">New Additions</div>
-        <div class="count-results hide" id="count-results">100 result(s)</div>
-        <div class="intro hide" id="intro-container">PLACEHOLDER FOR INTRO</div>
-
-        <div id="restaurants-wrap">
-
+        <div id="results">
+          <div class="count-results hide" id="count-results">100 result(s)</div>
           {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
           <div class="restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
           	<a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
@@ -129,8 +63,8 @@
             <div class="name clearfix">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
               <div class="favorites">
-                <span class="check-restaurant" id="check{{ r.slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
-                <span class="save-restaurant" id="save{{ r.slug }}"><i class="fa fa-star-o" aria-hidden="true"></i></span>
+                Save
+                <span class="save-restaurant" id="save{{ r.slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
               </div>
             </div>
             <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
@@ -146,6 +80,8 @@
         {% include 'components/_footer.html' %}
 
       </div><!-- Closing #restaurants -->
+
+      {% include 'components/_bottom-nav.html' %}
 
     </div><!-- Closing #container -->
 

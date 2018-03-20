@@ -27,13 +27,6 @@ hr{
 	}
 }
 
-.name{
-	font-size:1em;
-	font-family:@sans-serif;
-	.display-flex;
-	.justify-content(space-between);
-}
-
 .info{
 	font-family:@title;
 	font-size:14px;
@@ -226,6 +219,28 @@ hr{
   box-shadow: 0 1px 5px 1px #ccc;
   position: relative;
   height:46px;
+
+  @media @mobile {
+  	height: 40px;
+
+  	.top100.top {
+  		font-size: 15px;
+  	}
+  }
+
+  div.link {
+  	.rest {
+  		@media @tablet {
+	  		display: none;
+	  	}
+  	}
+
+  	.year {
+  		@media @tablet {
+	  		display: none;
+	  	}
+  	}
+  }
 
   .logo-link{
   	position: absolute;

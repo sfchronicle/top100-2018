@@ -16,6 +16,7 @@
   <a href="{{ url_for('index') }}">
 	<button id="filter-btn" class="btn-link search"><i class="fa fa-search" aria-hidden="true"></i> Search</button></a>
 
+  {% if restaurant %}
   <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{{restaurant.slug}}%2F&text={{restaurant.TwitterText|urlencode}}&hashtags={{config.HASHTAG}}">
   <button id="filter-btn" class="btn-link search" style="right: 0;">
   <i class="fa fa-twitter" aria-hidden="true" style="font-size: 18px;"></i>
@@ -25,6 +26,7 @@
   <button id="filter-btn" class="btn-link search" style="right: 36px;font-size: 17px;">
     <i class="fa fa-facebook" aria-hidden="true"></i>
   </button></a>
+   {% endif %}
 
 
 </div>
