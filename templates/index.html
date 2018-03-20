@@ -52,6 +52,15 @@
         <p><em>- Michael Bauer</em></p>
       </div>
 
+      <div id="search">
+        <div id="search-bar">
+          <input type="text" placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <button><i class="fa fa-plus-square" aria-hidden="true"></i>New on list</button>
+        <button><i class="fa fa-coffee" aria-hidden="true"></i>Brunch spots</button>
+        <button><i class="fa fa-map-marker" aria-hidden="true"></i>View on map</button>
+      </div>
+
       <div id="restaurants">
         <div id="results">
           <div class="count-results hide" id="count-results">100 result(s)</div>
@@ -60,7 +69,7 @@
           	<a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
               <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
             </a>
-            <div class="name clearfix">
+            <div class="name">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
               <div class="favorites">
                 Save
@@ -74,8 +83,7 @@
         </div>
 
         <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try new search filters.</div>
-        <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Click the star next to any restaurant's name to add it to this list.</div>
-        <div class="hide" id="no-checked-restaurants">Use this list to keep track of which restaurants you've visted, or anything you like! Click the checkbox next to any restaurant's name to add it to this list.</div>
+        <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Check the box next to any restaurant's name to add it to this list.</div>
 
         {% include 'components/_footer.html' %}
 
