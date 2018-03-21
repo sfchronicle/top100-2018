@@ -25,5 +25,11 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babelify": "^8.0.0",
+    "browser-pack-flat": "^3.0.8",
+    "browserify": "^16.1.1",
+    "exorcist": "^1.0.1"
+  }
 }

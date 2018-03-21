@@ -4,21 +4,21 @@
 // <%= pkg.name %> <%= pkg.version %>
 'use strict';
 
-var path = require("path");
-var fs = require("fs");
-var url = require("url");
+var path = require('path');
+var fs = require('fs');
+var url = require('url');
 
 module.exports = function (grunt) {
 
   
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks("grunt-contrib-connect");
-  grunt.loadNpmTasks("grunt-contrib-copy");
-  grunt.loadNpmTasks("grunt-open");
-  grunt.loadNpmTasks("grunt-run");
-  grunt.loadTasks("./tasks");
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-run');
+  grunt.loadTasks('./tasks');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -31,7 +31,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['static/scripts/**/*.js'],
-        tasks: ['jshint', 'build']
+        tasks: ['build', 'bundle']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -49,9 +49,9 @@ module.exports = function (grunt) {
     connect: {
       dev: {
         options: {
-          hostname: "0.0.0.0",
+          hostname: '0.0.0.0',
           livereload: true,
-          base: "./build",
+          base: './build',
           //middleware to protect against case-insensitive file systems
           middleware: function(connect, options, ware) {
             var base = options.base.pop();
@@ -64,7 +64,7 @@ module.exports = function (grunt) {
               fs.readdir(dir, function(err, list) {
                 if (!err && list.indexOf(filename) == -1) {
                   response.statusCode = 404;
-                  response.end("<pre>            404 Not Found\n-this space intentionally left blank-</pre>");
+                  response.end('<pre>            404 Not Found\n-this space intentionally left blank-</pre>');
                 } else {
                   next();
                 }
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
         path: 'http://127.0.0.1:5000'
       },
       prod: {
-        path: 'http://projects.sfchronicle.com/2017/<%= grunt.data.json.project.production_path %>'
+        path: 'https://projects.sfchronicle.com/2018/<%= grunt.data.json.project.production_path %>'
       }
     },
 
@@ -138,6 +138,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'less',
     'build',
+    'bundle',
     'connect:dev',
     'watch'
   ]);
@@ -145,7 +146,7 @@ module.exports = function (grunt) {
   // Build static files; defaults to dev. Command = 'grunt build:production'
   grunt.registerTask('build', function(target) {
     if (target) {
-      grunt.task.run (['run:' + target, 'php']);
+      grunt.task.run (['run:' + target, 'php', 'bundle']);
     } else {
       grunt.task.run(['run:dev']);
     }
