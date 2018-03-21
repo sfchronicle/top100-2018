@@ -11,6 +11,8 @@ app.config['PROJECT_YEAR'] = '2018'
 app.config['STAGING_PATH'] = 'top2018'
 app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 
+app.config['PAYWALL'] = 'meter'
+
 # Publication date 
 app.config['DATE'] = '2018-04-01'
 
