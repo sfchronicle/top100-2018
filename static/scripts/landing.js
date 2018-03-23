@@ -1,7 +1,4 @@
-'use strict';
-
 require("./lib/social");
-
 
 // function to find minimum
 Array.prototype.min = function() {
@@ -741,5 +738,5 @@ $(document).ready(function () {
       check_filters();
     }
   }
-  
+
 });

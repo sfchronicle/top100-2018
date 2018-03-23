@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Top 100 2018</title>
+    <meta name="ispremium" content="1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="https://www.sfchronicle.com/favicon.ico?v=3">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    {% include 'components/_hearst.html' %}
+    {% include 'components/_landing-analytics.html' %}
+    {% include 'components/_landing-social.html' %}
+  </head>
+
+  <body class="{% if config.DEV %}debug{% endif %}">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div id="log-in-instructions">
+    	<div class="login">
+        <!-- Gigya signin -->
+        <div class="treg-is-gigya gigya_menu" >
+          <div class="gigya-login">
+          <div id="exit">X</div>
+            <div class="login-header">Login with your subscription account to save restaurants to "My List" and/or "Favorites."</div>
+            <div class="treg-gya-login-widget"></div>
+            <div class="subscribe">
+              <h6 class="no-sub">Don't have a subscription?</h6>
+              <a class="gya-btn" href="https://offers.sfchronicle.com/offers/top100?groupid=31" target="_blank">Subscribe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'components/_top-nav.html' %}
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+    <!-- Mapbox GL -->
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
+
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+    <div class="tooltip-map" id="tooltip"></div>
+
+
+    <!-- {% include 'components/_footer.html' %} -->
+    <script>
+      var restaurants = {{ restaurants|tojson }};
+    </script>
+    <script src="/static/scripts/map.js"></script>
+
+  </body>
+</html>

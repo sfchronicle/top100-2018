@@ -1,7 +1,4 @@
-'use strict';
-
 require("./lib/social");
-
 
 // Slider
 if($('.swiper-slide').length === 1){
@@ -10,5 +7,5 @@ if($('.swiper-slide').length === 1){
   var mySwiper = new Swiper ('.swiper-container', {
     pagination: '.swiper-pagination',
     paginationClickable: true
-  }); 
+  });
 }

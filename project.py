@@ -13,7 +13,7 @@ app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 
 app.config['PAYWALL'] = 'meter'
 
-# Publication date 
+# Publication date
 app.config['DATE'] = '2018-04-01'
 
 # Hashtag
@@ -28,6 +28,14 @@ with open(restaurant_data) as r:
   data = json.load(r)
   restaurants = data['restaurants']
 
+@app.route("/map/")
+def mapfile():
+
+
+  return render_template(
+    'map.html',
+    restaurants=restaurants
+  )
 
 @app.route("/")
 def index():
@@ -40,7 +48,7 @@ def index():
 
 @app.route('/<slug>/')
 def restaurant_view(slug):
-  
+
   restaurant_info = [x for x in restaurants if x['slug'] == slug]
   restaurant = restaurant_info[0]
   article = [y for y in restaurants if y['slug'] == slug]
