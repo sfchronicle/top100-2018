@@ -39,11 +39,16 @@
   top: 0;
   bottom: 0;
   overflow-y: scroll;
-  padding-top: 180px;
-  .restaurant {
+  padding-top: 220px;
+  .map-restaurant {
     display: none;
+    margin-bottom: 40px;
     &.active {
       display: block;
+    }
+    img {
+      // max-width: 300px;
+      width: 100%;
     }
   }
 }
@@ -61,6 +66,9 @@
 #no-results {
   margin-top: 250px;
   display: none;
+  font-family: @main;
+  font-size: 20px;
+  font-style: italic;
   &:empty {
     display: none;
   }
@@ -124,4 +132,15 @@
     }
   }
 
+}
+
+.num-results {
+  font-family: @main;
+  font-size: 14px;
+  font-style: italic;
+  display: none;
+  padding-bottom: 30px;
+  &.active {
+    display: block;
+  }
 }

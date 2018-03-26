@@ -62,8 +62,9 @@
       </div>
       <div id="no-results">There are no results for your search. Please try again.</div>
       <div class="scrolly-restaurants">
+        <div class="num-results">There <span id="num-results-search"></span> for your search.</div>
       {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
-        <div class="restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
+        <div class="map-restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
           <a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
             <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
           </a>

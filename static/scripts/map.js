@@ -55,7 +55,7 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
   if (filterval != ""){
 
-  $(".restaurant").filter(function() {
+  $(".map-restaurant").filter(function() {
 
     var classes = this.className.split(" ");
     for (var i=0; i< classes.length; i++) {
@@ -79,16 +79,24 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
   if (count != 0){
     $("#no-results").css("display","none");
-    $(".scrolly-restaurants").css("padding-top","180px");
+    $(".scrolly-restaurants").css("padding-top","220px");
+    $(".num-results").addClass("active");
+    if (count == 1){
+      document.getElementById("num-results-search").innerHTML = "is 1 result";
+    } else {
+      document.getElementById("num-results-search").innerHTML = "are "+count+" results";
+    }
   } else {
     $("#no-results").css("display","block");
     $(".scrolly-restaurants").css("padding-top","0px");
+    $(".num-results").removeClass("active");
   }
 
   } else {
-    $(".restaurant").addClass("active");
+    $(".map-restaurant").addClass("active");
     $("#no-results").css("display","none");
     count = restaurants.length;
+    $(".num-results").removeClass("active");
   }
   console.log(count);
 
@@ -96,9 +104,10 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
 document.getElementById("reset-map-button").addEventListener("click",function(){
   console.log("click");
-  $(".scrolly-restaurants").css("padding-top","180px");
+  $(".scrolly-restaurants").css("padding-top","220px");
   $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
   document.getElementById('mapsearchbar').value = "";
   $("#no-results").css("display","none");
-  $(".restaurant").addClass("active");
+  $(".map-restaurant").addClass("active");
+  $(".num-results").removeClass("active");
 });
