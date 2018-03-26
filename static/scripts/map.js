@@ -93,3 +93,12 @@ $("#mapsearchbar").bind("input propertychange", function () {
   console.log(count);
 
 });
+
+document.getElementById("reset-map-button").addEventListener("click",function(){
+  console.log("click");
+  $(".scrolly-restaurants").css("padding-top","180px");
+  $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
+  document.getElementById('mapsearchbar').value = "";
+  $("#no-results").css("display","none");
+  $(".restaurant").addClass("active");
+});
