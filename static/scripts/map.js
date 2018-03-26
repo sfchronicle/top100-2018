@@ -35,8 +35,9 @@ var purpleIcon = new L.Icon({
   // shadowSize: [, 41]
 });
 
-restaurants.forEach(function(d){
+restaurants.forEach(function(d,dIDX){
   var html_str = "<b>"+d.Name+"</b>";
+  // var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   map.addLayer(marker);
 });
