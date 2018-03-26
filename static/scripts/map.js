@@ -39,8 +39,57 @@ restaurants.forEach(function(d,dIDX){
   var html_str = "<b>"+d.Name+"</b>";
   // var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
+  marker._icon.classList.add(d.slug);
   map.addLayer(marker);
 });
 
+var count;
 
-console.log(restaurants);
+// searchbar code
+$("#mapsearchbar").bind("input propertychange", function () {
+  var filterval = $(this).val().toLowerCase().replace(/ /g,'');
+  var class_match = 0;
+  count = 0;
+
+  $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
+
+  if (filterval != ""){
+
+  $(".restaurant").filter(function() {
+
+    var classes = this.className.split(" ");
+    for (var i=0; i< classes.length; i++) {
+
+      var current_class = classes[i].toLowerCase();
+
+      if ( current_class.match(filterval)) {
+        class_match = class_match + 1;
+      }
+    }
+
+    if (class_match > 0) {
+      $(this).addClass("active");
+      count+=1;
+    } else {
+      $(this).removeClass("active");
+    }
+    class_match = 0;
+
+  });
+
+  if (count != 0){
+    $("#no-results").css("display","none");
+    $(".scrolly-restaurants").css("padding-top","180px");
+  } else {
+    $("#no-results").css("display","block");
+    $(".scrolly-restaurants").css("padding-top","0px");
+  }
+
+  } else {
+    $(".restaurant").addClass("active");
+    $("#no-results").css("display","none");
+    count = restaurants.length;
+  }
+  console.log(count);
+
+});

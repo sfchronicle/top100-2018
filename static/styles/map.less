@@ -39,16 +39,30 @@
   top: 0;
   bottom: 0;
   overflow-y: scroll;
-  padding-top: 50px;
+  padding-top: 180px;
+  .restaurant {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
 }
 
-.map-locator, .map-review {
+.map-locator, .map-review, .map-directions {
   color: @main;
   text-decoration: underline;
   cursor: pointer;
   font-size: 14px;
   .fa {
     padding-right: 10px;
+  }
+}
+
+#no-results {
+  margin-top: 250px;
+  display: none;
+  &:empty {
+    display: none;
   }
 }
 
@@ -61,6 +75,9 @@
   right: 0;
   background: white;
   z-index: 110;
+  -webkit-box-shadow: 0 0 6px 0 #696969;
+  -moz-box-shadow: 0 0 6px 0 #696969;
+  box-shadow: 0 0 6px 0 #696969;
   .map-title {
     font-weight: 600;
     padding-bottom: 15px;
@@ -74,6 +91,7 @@
     width: 120px;
     text-align: center;
     cursor: pointer;
+    margin-bottom: 20px;
     &:hover {
       background: @main;
       color: white;
@@ -81,8 +99,29 @@
   }
   .map-search {
     font-size: 16px;
+    padding-bottom: 5px;
   }
   .map-search-container {
-    border-bottom: 1px solid @light-gray;
+    line-height: 1.2;
+    .fa {
+      color: @dark-gray;
+      margin-right: 5px;
+    }
+    input {
+      border-radius: 5px;
+      font-family: @main;
+      padding: 5px;
+      width: 90%;
+      font-size: 14px;
+      margin-bottom: 20px;
+      @media @tablet {
+        width: 100%;
+      }
+      @media @mobile {
+        width: 90%;
+        font-size: 16px;
+      }
+    }
   }
+
 }

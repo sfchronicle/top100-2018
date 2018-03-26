@@ -54,11 +54,11 @@
     <div class="map-sidebar">
       <div id="stick-me">
         <div class="map-title">Restaurant List</div>
-        <div class="map-button" id="reset-map-button">Reset map</div>
         <div class="map-search-container">
-          <span class="map-search">Search by restaurant or city:</span>
-          <input class="map-input" id="mapsearchbar" type="text" placeholder="Try French or Oakland ... ">
+          <div class="map-search">Search by restaurant or city:</div>
+          <div class="map-input"><i class="fa fa-search" aria-hidden="true"></i><input class="map-input" id="mapsearchbar" type="text" placeholder="Try French or Oakland ... "></div>
         </div>
+        <div class="map-button" id="reset-map-button">Reset map</div>
       </div>
       <div id="no-results">There are no results for your search. Please try again.</div>
       <div class="scrolly-restaurants">
@@ -71,14 +71,16 @@
             <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
             <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
             <div class="map-locator"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Find me on the map</div>
-            <div class="map-review"><i class="fa fa-external-link" aria-hidden="true"></i>Read the review</div>
+            <div class="map-review"><a href="../{{r.slug}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>Read the review</a></div>
+            <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Get directions</a></div>
         </div>
       </div>
       {% endfor %}
       </div>
+      {% include 'components/_footer.html' %}
     </div>
 
-    <!-- {% include 'components/_footer.html' %} -->
+    <!--  -->
     <script>
       var restaurants = {{ restaurants|tojson }};
     </script>
