@@ -121,35 +121,22 @@ document.getElementById("reset-map-button").addEventListener("click",function(){
 });
 
 var locatorList = document.getElementsByClassName("map-locator");
-console.log(restaurants);
-// var lIDX;
-for (var ll=0; ll<locatorList.length; ll++){
-  // var lIDX = ll;
-  locatorList[ll].addEventListener("click",function(l){
-    // console.log(lIDX);
-    console.log("click");
-    console.log($("."+l.target.id.split("map-locator-")[1]))
-    $("."+l.target.id.split("map-locator-")[1]).css("height","100px");
-    console.log($("."+l.target.id.split("map-locator-")[1]))
-    // console.log(maptarget[0]);
+var td;
+for (var t = 0; t < locatorList.length; t++){
+    td = locatorList[t];
+    console.log(t);
+    if (typeof window.addEventListener === 'function'){
+        (function (_td) {
+            td.addEventListener('click', function(){
+                var IDX = _td.id.split("map-locator-")[1];//_td.classList[0].split("day")[1];
+                map.setView([restaurants[IDX].Lat,restaurants[IDX].Lng],14);
 
-    // map.setView([restaurants[lIDX].Lat,restaurants[lIDX].Lng],14);
-    // map.setView(e.target.getLatLng(),12);
-  })
-};
+                $(".leaflet-interactive").css("height","32px");
+                $(".leaflet-interactive").css("width","20px");
 
-// var td;
-// for (var t = 0; t < locatorList.length; t++){
-//     td = locatorList[t];
-//     console.log(t);
-//     if (typeof window.addEventListener === 'function'){
-//         (function (_td) {
-//             td.addEventListener('click', function(){
-//                 var IDX = t;//_td.classList[0].split("day")[1];
-//                 console.log(_td);
-//                 console.log(IDX);
-//                 console.log("click");
-//             });
-//         })(td);
-//     }
-// }
+                $("."+restaurants[IDX].slug).css("height","45px");
+                $("."+restaurants[IDX].slug).css("width","30px");
+            });
+        })(td);
+    }
+}
