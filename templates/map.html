@@ -56,7 +56,7 @@
         <div id="stick-me">
           <div class="map-title">Restaurant List</div>
           <div class="map-search-container">
-            <div class="map-search">Search by restaurant or city:</div>
+            <div class="map-search">Search by restaurant, city or cuisine:</div>
             <div class="map-input"><i class="fa fa-search" aria-hidden="true"></i><input class="map-input" id="mapsearchbar" type="text" placeholder="Try French or Oakland ... "></div>
           </div>
           <div class="map-button" id="reset-map-button">Reset map</div>
@@ -65,7 +65,7 @@
         <div class="scrolly-restaurants">
           <div class="num-results">There <span id="num-results-search"></span> for your search.</div>
         {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
-          <div class="map-restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
+          <div class="map-restaurant {{ r.Name }} {{ r.Cuisine.replace(' ','') }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
             <a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
               <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
             </a>

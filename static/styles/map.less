@@ -2,6 +2,39 @@
   position: relative;
 }
 
+.rest-name-popup {
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+
+.click-popup {
+  padding-top: 5px;
+  font-size: 14px;
+  .fa {
+    padding-right: 5px;
+  }
+}
+
+.rest-img-link-popup {
+  img {
+    max-width: 200px;
+  }
+}
+
+.leaflet-interactive {
+  display: none !important;
+  &.active {
+    display: block !important;
+  //   z-index: 1000;
+  //   pointer-events: all;
+  }
+}
+
+.leaflet-marker-icon {
+  pointer-events: all !important;
+}
+
 #map {
   pointer-events: all;
   position: fixed;

@@ -44,10 +44,12 @@ function clickZoom(e) {
 }
 
 restaurants.forEach(function(d,dIDX){
-  var html_str = "<b>"+d.Name+"</b>";
+  var photos = d.wcm_img.split(' ');
+  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
   // var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
-  marker._icon.classList.add(d.slug);
+  var class_str = " "+d.slug+ " "+d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase()+" "+d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase()+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
+  marker._icon.className += class_str;
   map.addLayer(marker);
 });
 
@@ -56,14 +58,37 @@ var count;
 // searchbar code
 $("#mapsearchbar").bind("input propertychange", function () {
   var filterval = $(this).val().toLowerCase().replace(/ /g,'');
+  console.log(filterval);
   var class_match = 0;
   count = 0;
 
-  $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
+  $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
 
   if (filterval != ""){
 
   $(".map-restaurant").filter(function() {
+
+    var classes = this.className.split(" ");
+    for (var i=0; i< classes.length; i++) {
+
+      var current_class = classes[i].toLowerCase();
+
+      if ( current_class.match(filterval)) {
+        class_match = class_match + 1;
+      }
+    }
+
+    if (class_match > 0) {
+      $(this).addClass("active");
+      count+=1;
+    } else {
+      $(this).removeClass("active");
+    }
+    class_match = 0;
+
+  });
+
+  $(".leaflet-marker-icon").filter(function() {
 
     var classes = this.className.split(" ");
     for (var i=0; i< classes.length; i++) {
@@ -102,6 +127,8 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
   } else {
     $(".map-restaurant").addClass("active");
+    $(".leaflet-marker-icon").addClass("active");
+
     $("#no-results").css("display","none");
     count = restaurants.length;
     $(".num-results").removeClass("active");
@@ -112,10 +139,16 @@ $("#mapsearchbar").bind("input propertychange", function () {
 document.getElementById("reset-map-button").addEventListener("click",function(){
   console.log("click");
   $(".scrolly-restaurants").css("padding-top","220px");
+
   $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
+  $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
+
   document.getElementById('mapsearchbar').value = "";
-  $("#no-results").css("display","none");
+
   $(".map-restaurant").addClass("active");
+  $(".leaflet-marker-icon").addClass("active");
+
+  $("#no-results").css("display","none");
   $(".num-results").removeClass("active");
   map.setView([sf_lat,sf_long], zoom_deg);
 });
@@ -123,20 +156,19 @@ document.getElementById("reset-map-button").addEventListener("click",function(){
 var locatorList = document.getElementsByClassName("map-locator");
 var td;
 for (var t = 0; t < locatorList.length; t++){
-    td = locatorList[t];
-    console.log(t);
-    if (typeof window.addEventListener === 'function'){
-        (function (_td) {
-            td.addEventListener('click', function(){
-                var IDX = _td.id.split("map-locator-")[1];//_td.classList[0].split("day")[1];
-                map.setView([restaurants[IDX].Lat,restaurants[IDX].Lng],14);
+  td = locatorList[t];
+  if (typeof window.addEventListener === 'function'){
+    (function (_td) {
+      td.addEventListener('click', function(){
+        var IDX = _td.id.split("map-locator-")[1];//_td.classList[0].split("day")[1];
+        map.setView([restaurants[IDX].Lat,restaurants[IDX].Lng],14);
 
-                $(".leaflet-interactive").css("height","32px");
-                $(".leaflet-interactive").css("width","20px");
+        $(".leaflet-interactive").css("height","32px");
+        $(".leaflet-interactive").css("width","20px");
 
-                $("."+restaurants[IDX].slug).css("height","45px");
-                $("."+restaurants[IDX].slug).css("width","30px");
-            });
-        })(td);
-    }
+        $("."+restaurants[IDX].slug).css("height","45px");
+        $("."+restaurants[IDX].slug).css("width","30px");
+      });
+    })(td);
+  }
 }
