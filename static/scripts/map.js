@@ -43,6 +43,7 @@ function clickZoom(e) {
     map.setView(e.target.getLatLng());
 }
 
+var markersArray = [];
 restaurants.forEach(function(d,dIDX){
   var photos = d.wcm_img.split(' ');
   var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
@@ -51,7 +52,10 @@ restaurants.forEach(function(d,dIDX){
   var class_str = " "+d.slug+ " "+d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase()+" "+d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase()+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
   marker._icon.className += class_str;
   map.addLayer(marker);
+  markersArray.push(marker);
 });
+
+console.log(markersArray);
 
 var count;
 
@@ -162,12 +166,7 @@ for (var t = 0; t < locatorList.length; t++){
       td.addEventListener('click', function(){
         var IDX = _td.id.split("map-locator-")[1];//_td.classList[0].split("day")[1];
         map.setView([restaurants[IDX].Lat,restaurants[IDX].Lng],14);
-
-        $(".leaflet-interactive").css("height","32px");
-        $(".leaflet-interactive").css("width","20px");
-
-        $("."+restaurants[IDX].slug).css("height","45px");
-        $("."+restaurants[IDX].slug).css("width","30px");
+        markersArray[IDX].openPopup();
       });
     })(td);
   }
