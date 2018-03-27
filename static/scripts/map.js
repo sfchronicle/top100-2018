@@ -2,8 +2,8 @@ require("./lib/social");
 require("./lib/leaflet-mapbox-gl");
 
 // setting parameters for the center of the map and initial zoom level
-var sf_lat = 37.7749;
-var sf_long = -122.4294;
+var sf_lat = 37.825809;
+var sf_long = -122.371562;
 var zoom_deg = 12;//13 zoomed out
 
 // initialize map with center position and zoom levels
@@ -11,6 +11,10 @@ var map = L.map("map", {
   zoomControl: false,
   scrollWheelZoom: false,
 }).setView([sf_lat,sf_long], zoom_deg);
+
+L.control.zoom({
+     position:'bottomleft'
+}).addTo(map);
 
 // var gl = L.mapboxGL({
 //     accessToken: 'pk.eyJ1IjoiZW1ybyIsImEiOiJjaXl2dXUzMGQwMDdsMzJuM2s1Nmx1M29yIn0._KtME1k8LIhloMyhMvvCDA',
@@ -35,10 +39,14 @@ var purpleIcon = new L.Icon({
   // shadowSize: [, 41]
 });
 
+function clickZoom(e) {
+    map.setView(e.target.getLatLng());
+}
+
 restaurants.forEach(function(d,dIDX){
   var html_str = "<b>"+d.Name+"</b>";
   // var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
-  var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
+  var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
   marker._icon.classList.add(d.slug);
   map.addLayer(marker);
 });
@@ -98,7 +106,6 @@ $("#mapsearchbar").bind("input propertychange", function () {
     count = restaurants.length;
     $(".num-results").removeClass("active");
   }
-  console.log(count);
 
 });
 
@@ -110,4 +117,39 @@ document.getElementById("reset-map-button").addEventListener("click",function(){
   $("#no-results").css("display","none");
   $(".map-restaurant").addClass("active");
   $(".num-results").removeClass("active");
+  map.setView([sf_lat,sf_long], zoom_deg);
 });
+
+var locatorList = document.getElementsByClassName("map-locator");
+console.log(restaurants);
+// var lIDX;
+for (var ll=0; ll<locatorList.length; ll++){
+  // var lIDX = ll;
+  locatorList[ll].addEventListener("click",function(l){
+    // console.log(lIDX);
+    console.log("click");
+    console.log($("."+l.target.id.split("map-locator-")[1]))
+    $("."+l.target.id.split("map-locator-")[1]).css("height","100px");
+    console.log($("."+l.target.id.split("map-locator-")[1]))
+    // console.log(maptarget[0]);
+
+    // map.setView([restaurants[lIDX].Lat,restaurants[lIDX].Lng],14);
+    // map.setView(e.target.getLatLng(),12);
+  })
+};
+
+// var td;
+// for (var t = 0; t < locatorList.length; t++){
+//     td = locatorList[t];
+//     console.log(t);
+//     if (typeof window.addEventListener === 'function'){
+//         (function (_td) {
+//             td.addEventListener('click', function(){
+//                 var IDX = t;//_td.classList[0].split("day")[1];
+//                 console.log(_td);
+//                 console.log(IDX);
+//                 console.log("click");
+//             });
+//         })(td);
+//     }
+// }

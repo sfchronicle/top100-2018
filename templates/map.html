@@ -46,39 +46,41 @@
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
 
-    <div class="map-container">
-      <div id="map"></div>
-    </div>
-    <div class="tooltip-map" id="tooltip"></div>
+    <div class="restaurant-map">
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+      <div class="tooltip-map" id="tooltip"></div>
 
-    <div class="map-sidebar">
-      <div id="stick-me">
-        <div class="map-title">Restaurant List</div>
-        <div class="map-search-container">
-          <div class="map-search">Search by restaurant or city:</div>
-          <div class="map-input"><i class="fa fa-search" aria-hidden="true"></i><input class="map-input" id="mapsearchbar" type="text" placeholder="Try French or Oakland ... "></div>
+      <div class="map-sidebar">
+        <div id="stick-me">
+          <div class="map-title">Restaurant List</div>
+          <div class="map-search-container">
+            <div class="map-search">Search by restaurant or city:</div>
+            <div class="map-input"><i class="fa fa-search" aria-hidden="true"></i><input class="map-input" id="mapsearchbar" type="text" placeholder="Try French or Oakland ... "></div>
+          </div>
+          <div class="map-button" id="reset-map-button">Reset map</div>
         </div>
-        <div class="map-button" id="reset-map-button">Reset map</div>
-      </div>
-      <div id="no-results">There are no results for your search. Please try again.</div>
-      <div class="scrolly-restaurants">
-        <div class="num-results">There <span id="num-results-search"></span> for your search.</div>
-      {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
-        <div class="map-restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
-          <a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
-            <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
-          </a>
-          <div class="name">
-            <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
-            <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
-            <div class="map-locator"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Find me on the map</div>
-            <div class="map-review"><a href="../{{r.slug}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>Read the review</a></div>
-            <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Get directions</a></div>
+        <div id="no-results">There are no results for your search. Please try again.</div>
+        <div class="scrolly-restaurants">
+          <div class="num-results">There <span id="num-results-search"></span> for your search.</div>
+        {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
+          <div class="map-restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
+            <a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
+              <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
+            </a>
+            <div class="name">
+              <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
+              <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
+              <div class="map-locator" id="map-locator-{{r.slug}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Find me on the map</div>
+              <div class="map-review"><a href="../{{r.slug}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>Read the review</a></div>
+              <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Get directions</a></div>
+          </div>
         </div>
+        {% endfor %}
+        </div>
+        {% include 'components/_footer.html' %}
       </div>
-      {% endfor %}
-      </div>
-      {% include 'components/_footer.html' %}
     </div>
 
     <!--  -->
