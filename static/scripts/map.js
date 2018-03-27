@@ -55,8 +55,6 @@ restaurants.forEach(function(d,dIDX){
   markersArray.push(marker);
 });
 
-console.log(markersArray);
-
 var count;
 
 // searchbar code
@@ -66,7 +64,10 @@ $("#mapsearchbar").bind("input propertychange", function () {
   var class_match = 0;
   count = 0;
 
-  $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
+  // $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
+  // $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
+  // $(window).animate({ scrollTop: 0 }, "fast");
+  $('html, body').animate({ scrollTop: 0 }, "fast");
 
   if (filterval != ""){
 
@@ -106,13 +107,14 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
     if (class_match > 0) {
       $(this).addClass("active");
-      count+=1;
     } else {
       $(this).removeClass("active");
     }
     class_match = 0;
 
   });
+
+  console.log(count);
 
   if (count != 0){
     $("#no-results").css("display","none");
@@ -144,8 +146,7 @@ document.getElementById("reset-map-button").addEventListener("click",function(){
   console.log("click");
   $(".scrolly-restaurants").css("padding-top","220px");
 
-  $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
-  $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
+  $('html, body').animate({ scrollTop: 0 }, "fast");
 
   document.getElementById('mapsearchbar').value = "";
 
