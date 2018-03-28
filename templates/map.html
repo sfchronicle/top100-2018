@@ -39,12 +39,12 @@
     {% include 'components/_top-nav.html' %}
 
     <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script> -->
 
     <!-- Mapbox GL -->
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
+    <!-- <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script> -->
 
     <div class="restaurant-map">
       <div class="map-container">
@@ -54,12 +54,11 @@
 
       <div class="map-sidebar">
         <div id="stick-me">
-          <div class="map-title">Restaurant List</div>
+          <div class="map-title">Restaurant List</div><div class="map-button" id="reset-map-button">Reset map</div>
           <div class="map-search-container">
             <div class="map-search">Search by restaurant, city or cuisine:</div>
             <div class="map-input"><i class="fa fa-search" aria-hidden="true"></i><input class="map-input" id="mapsearchbar" type="text" placeholder="Try French or Oakland ... "></div>
           </div>
-          <div class="map-button" id="reset-map-button">Reset map</div>
         </div>
         <div id="no-results">There are no results for your search. Please try again.</div>
         <div class="scrolly-restaurants">
@@ -79,11 +78,13 @@
         </div>
         {% endfor %}
         </div>
-        {% include 'components/_footer.html' %}
+
+        <div class="credits">
+          Map developed by <a href="mailto:eoneill@sfchronicle.com">Emma O'Neill</a>
+        </div>
       </div>
     </div>
 
-    <!--  -->
     <script>
       var restaurants = {{ restaurants|tojson }};
     </script>

@@ -1,5 +1,6 @@
 require("./lib/social");
 require("./lib/leaflet-mapbox-gl");
+require("leaflet");
 
 // setting parameters for the center of the map and initial zoom level
 if (screen.width <= 480){
@@ -27,13 +28,32 @@ L.control.zoom({
 //     style: 'mapbox://styles/emro/cj8bybgjo6muo2rpu8r43ur4z'
 // }).addTo(map);
 
-var Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+// var Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+// 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+// 	subdomains: 'abcd',
+// 	minZoom: 0,
+// 	maxZoom: 20,
+// 	ext: 'png'
+// }).addTo(map);
+
+// var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+// 	attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+// 	maxZoom: 16
+// }).addTo(map);
+
+var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	subdomains: 'abcd',
 	minZoom: 0,
-	maxZoom: 20,
+	maxZoom: 18,
 	ext: 'png'
 }).addTo(map);
+
+// var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+// 	subdomains: 'abcd',
+// 	maxZoom: 19
+// }).addTo(map);
 
 // icon for restaurants
 var purpleIcon = new L.Icon({
@@ -56,7 +76,11 @@ var markersArray = [];
 restaurants.forEach(function(d,dIDX){
   var photos = d.wcm_img.split(' ');
   var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
-  var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
+  if (screen.width <= 480){
+      var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
+  } else {
+      var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
+  }
   if (d.OtherLocationAddress){
     var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[0];
     var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[0];
@@ -79,7 +103,11 @@ restaurants.forEach(function(d,dIDX){
     console.log(d.Name);
     var photos = d.wcm_img.split(' ');
     var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
-    var marker = L.marker([37.764403+0.002*stupid_var,-122.356585+0.002*stupid_var], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
+    if (screen.width <= 480){
+        var marker = L.marker([37.764403+0.002*stupid_var,-122.356585+0.002*stupid_var], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
+    } else {
+        var marker = L.marker([37.764403+0.002*stupid_var,-122.356585+0.002*stupid_var], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
+    }
     if (d.OtherLocationAddress){
       var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
       var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
