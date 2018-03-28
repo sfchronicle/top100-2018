@@ -2,9 +2,15 @@ require("./lib/social");
 require("./lib/leaflet-mapbox-gl");
 
 // setting parameters for the center of the map and initial zoom level
-var sf_lat = 37.825809;
-var sf_long = -122.371562;
-var zoom_deg = 12;//13 zoomed out
+if (screen.width <= 480){
+  var sf_lat = 37.779480;
+  var sf_long = -122.426623;
+  var zoom_deg = 11;//13 zoomed out
+} else {
+  var sf_lat = 37.825809;
+  var sf_long = -122.371562;
+  var zoom_deg = 12;//13 zoomed out
+}
 
 // initialize map with center position and zoom levels
 var map = L.map("map", {
@@ -43,17 +49,53 @@ function clickZoom(e) {
     map.setView(e.target.getLatLng());
 }
 
+// all the markers for the map
 var markersArray = [];
+
+// markers for restaurants
 restaurants.forEach(function(d,dIDX){
   var photos = d.wcm_img.split(' ');
   var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
-  // var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
-  var class_str = " "+d.slug+ " "+d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase()+" "+d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase()+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
+  if (d.OtherLocationAddress){
+    var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[0];
+    var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[0];
+  } else {
+    var regionstring = d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
+    var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
+  }
+  var class_str = " "+d.slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
   marker._icon.className += class_str;
   map.addLayer(marker);
   markersArray.push(marker);
 });
+
+// markers for restaurants with two locations
+var stupid_var = 0;
+// NEED TO UPDATE THIS ----------------------------------------------------------------------------------------------------
+restaurants.forEach(function(d,dIDX){
+  if (d.OtherLocationAddress){
+    console.log("WE HAVE A DOUBLE ADDRESS");
+    console.log(d.Name);
+    var photos = d.wcm_img.split(' ');
+    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
+    var marker = L.marker([37.764403+0.002*stupid_var,-122.356585+0.002*stupid_var], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
+    if (d.OtherLocationAddress){
+      var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
+      var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
+    } else {
+      var regionstring = d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
+      var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
+    }
+    var class_str = " "+d.slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
+    marker._icon.className += class_str;
+    map.addLayer(marker);
+    markersArray.push(marker);
+    stupid_var ++;
+  }
+});
+// NEED TO UPDATE THIS ----------------------------------------------------------------------------------------------------
+
 
 var count;
 
@@ -118,7 +160,7 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
   if (count != 0){
     $("#no-results").css("display","none");
-    $(".scrolly-restaurants").css("padding-top","220px");
+    // $(".scrolly-restaurants").css("padding-top","220px");
     $(".num-results").addClass("active");
     if (count == 1){
       document.getElementById("num-results-search").innerHTML = "is 1 result";
@@ -127,7 +169,7 @@ $("#mapsearchbar").bind("input propertychange", function () {
     }
   } else {
     $("#no-results").css("display","block");
-    $(".scrolly-restaurants").css("padding-top","0px");
+    // $(".scrolly-restaurants").css("padding-top","0px");
     $(".num-results").removeClass("active");
   }
 
@@ -144,7 +186,7 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
 document.getElementById("reset-map-button").addEventListener("click",function(){
   console.log("click");
-  $(".scrolly-restaurants").css("padding-top","220px");
+  // $(".scrolly-restaurants").css("padding-top","220px");
 
   $('html, body').animate({ scrollTop: 0 }, "fast");
 
