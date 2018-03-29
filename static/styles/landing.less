@@ -173,7 +173,7 @@
 	font-family: @sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #7a709a;
+  color: @main;
   font-size: 20px;
 
   &.bottom{
@@ -334,6 +334,24 @@
 	}
 }
 
+.secondary-link {
+  background: @main;
+  color: white;
+  height: 46px;
+  top: 0;
+
+  a {
+    padding-top: 6px;
+    vertical-align: middle;
+    color: white;
+    text-transform: uppercase;
+    font-family: @title;
+    font-weight: 800;
+    font-size: 14px;
+    height: 100%;
+  }
+}
+
 
 
 .link-button {
@@ -364,6 +382,16 @@
 			color:@main;
 		}
 	}
+}
+
+.social-link {
+  display: inline-block;
+  float: right;
+  font-size: 18px;
+  padding-top: 10px;
+  a {
+    padding-right: 10px;
+  }
 }
 
 #bottom-nav{

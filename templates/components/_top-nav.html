@@ -10,11 +10,12 @@
   </a>
 
   <div class="link"><a href="http://projects.sfchronicle.com/2017/top-100-restaurants/" class="home-link">
-   <span class="top100 top">Top 100 </span><span class="rest top">RESTAURANTS </span><span class="year top">2017</span></a>
+   <span class="top100 top">Top 100 </span><span class="rest top">RESTAURANTS </span><span class="year top">2018</span></a>
   </div>
 
-  <a href="{{ url_for('index') }}">
-	<button id="filter-btn" class="btn-link search"><i class="fa fa-search" aria-hidden="true"></i> Search</button></a>
+  <div class="link secondary-link"><a href="./" class="home-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+
+  <div class="link secondary-link"><a href="../map" class="home-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
   {% if restaurant %}
   <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{{restaurant.slug}}%2F&text={{restaurant.TwitterText|urlencode}}&hashtags={{config.HASHTAG}}">
@@ -26,6 +27,26 @@
   <button id="filter-btn" class="btn-link search" style="right: 36px;font-size: 17px;">
     <i class="fa fa-facebook" aria-hidden="true"></i>
   </button></a>
+   {% else %}
+
+   <div class="social-link email">
+    <a id="mail-icon" title="Share via email" href="mailto:?subject=<%= grunt.data.json.project.title_landing %>&body=<%= grunt.data.json.project.description_landing %>%0A%0Ahttp%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>">
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+    </a>
+  </div>
+
+  <div class="social-link">
+    <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+      <i class="fa fa-facebook"></i>
+    </a>
+  </div>
+
+  <div class="social-link">
+    <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>&text=<%= grunt.data.json.project.twitter_text_landing %>&hashtags=<%= grunt.data.json.project.hashtag %>">
+      <i class="fa fa-twitter"></i>
+    </a>
+  </div>
+
    {% endif %}
 
 

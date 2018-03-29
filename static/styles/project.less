@@ -7,7 +7,9 @@ hr{
 	.flex-wrap(wrap);
 	justify-content: center;
 	align-items: center;
-	flex-direction: column-reverse;
+	@media @mobile {
+		flex-direction: column-reverse;
+	}
 	#lead-image {
 		.flex(0 0 60%);
 		@media @mobile {
@@ -16,6 +18,7 @@ hr{
 	}
 	#intro {
 		.flex(0 0 40%);
+		font-size: 18px;
 		@media @mobile {
 			.flex(0 0 100%);
 		}
@@ -263,10 +266,14 @@ hr{
   	}
   }
 
+	.link, .logo-link {
+		display: inline-block;
+	}
+
   .logo-link{
-  	position: absolute;
-    top: 0;
-    left: 0;
+  	// position: absolute;
+    // top: 0;
+    // left: 0;
     line-height:1.8;
 
     img{
@@ -302,9 +309,9 @@ hr{
   }
 
   .link{
-    text-align: center;
+    // text-align: left;
     margin: 0 auto;
-    display:block;
+    // display:block;
 
     @media @width650{
 	    margin: 0 0 0 40px;

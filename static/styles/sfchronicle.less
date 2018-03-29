@@ -6,7 +6,7 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
+  -moz-osx-font-smoothing: grayscale;
 
   //Safari, you're the worst
   -webkit-tap-highlight-color: transparent;
@@ -34,17 +34,17 @@ main {
 }
 
 a {
-  color: @gray-blue;
+  color: @main;
   text-decoration: none;
   outline: 0 !important;
   &:hover {
-    color: darken(@gray-blue,10%);
+    color: darken(@main,10%);
   }
   img {
     border: none;
   }
   :hover {
-    color: darken(@gray-blue,10%);
+    color: darken(@main,10%);
   }
 }
 
@@ -83,7 +83,7 @@ p {
 
   a {
     text-decoration: none;
-    color: @gray-blue;
+    color: @main;
   }
 
   @media @mobile {
@@ -246,7 +246,7 @@ text {
 }
 
 .specialhead-top {
-  color: @gray-blue;
+  color: @main;
   font-family: @banner;
   font-size: 18px;
   text-transform: uppercase;
@@ -293,7 +293,7 @@ text {
 
   &.special {
     a {
-      color: @gray-blue;
+      color: @main;
     }
   }
   &.social {
@@ -301,7 +301,7 @@ text {
     margin: 0 6px;
     padding: 3px 2px;
     a {
-      color: @gray-blue;
+      color: @main;
     }
   }
   &.email {
