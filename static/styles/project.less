@@ -2,6 +2,27 @@ hr{
 	width:80%
 }
 
+.lead-container {
+	.display-flex;
+	.flex-wrap(wrap);
+	justify-content: center;
+	align-items: center;
+	flex-direction: column-reverse;
+	#lead-image {
+		.flex(0 0 60%);
+		@media @mobile {
+			.flex(0 0 100%);
+		}
+	}
+	#intro {
+		.flex(0 0 40%);
+		@media @mobile {
+			.flex(0 0 100%);
+		}
+	}
+	margin-bottom: 30px;
+}
+
 .home-link {
 	display:inline-block;
 	width:100%;
