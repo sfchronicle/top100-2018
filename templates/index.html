@@ -64,8 +64,31 @@
       <div id="restaurants">
         <div id="results">
           <div class="count-results hide" id="count-results">100 result(s)</div>
-          {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
-          <div class="restaurant {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.slug }}">
+          {% set cuisineString = "" %}
+          {% set regionString = "" %}
+
+          {% for r in restaurants %}
+            {% set photos = r.wcm_img.split(' ') %}
+
+            {% if (cuisineString.find(r.Cuisine) == -1): %}
+            {% set cuisineString = cuisineString + r.Cuisine + "|" %}
+            {% endif %}
+
+            {% if (regionString.find(r.Region) == -1): %}
+            {% set regionString = regionString + r.Region + "|" %}
+            {% endif %}
+
+            {% if (regionString.find(r.SubRegion) == -1): %}
+            {% set regionString = regionString + r.SubRegion + "|" %}
+            {% endif %}
+
+            <script>
+              /* Sending vars to JS */
+              var cuisineString = "{{ cuisineString }}";     
+              var regionString = "{{ regionString }}";  
+            </script>
+
+          <div class="restaurant active {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }}" id="{{ r.slug }}">
           	<a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
               <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
             </a>

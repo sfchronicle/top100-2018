@@ -14,22 +14,13 @@ var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 // how long to wait before saving
 var timeTimeout = 5000;
 
-// search bar code -------------------------------------------------------------
+console.log(restaurants);
 
+// search bar code -------------------------------------------------------------
 // IMPORTANT: Keep this updated with filter options
 function getFilterList() {
-  var cuisineArray = [
-    "French",
-    "Japanese",
-    "American",
-    "Chinese",
-  ]
-  var regionArray = [
-    "Oakland",
-    "Mission",
-    "Hayes Valley",
-    "South San Francisco",
-  ]
+  var cuisineArray = cuisineString.split("|");
+  var regionArray = regionString.split("|");
   var allArrays = [cuisineArray, regionArray];
   var masterArray = [];
   for (var i = 0; i < allArrays.length; i++){
@@ -37,6 +28,8 @@ function getFilterList() {
   }
   return masterArray;
 }
+
+console.log("LOGGING IN LANMDING!", cuisineString, regionString);
 
 // Create autocomplete
 $( "#search-bar input" ).autocomplete({
