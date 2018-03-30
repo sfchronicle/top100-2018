@@ -81,13 +81,13 @@
   width: 100%;
 
   .map-container {
-    .flex(0 0 65%);
+    .flex(0 0 60%);
     @media @mobile {
       .flex(0 0 100%);
     }
   }
   .map-sidebar {
-    .flex(0 0 35%);
+    .flex(0 0 40%);
     @media @mobile {
       .flex(0 0 100%);
       z-index: 0;
@@ -98,7 +98,7 @@
 .map-sidebar {
   z-index: 100;
   background: white;
-  padding: 20px;
+  padding: 10px;
   padding-top: 200px;
   @media @mobile {
     z-index: 0;
@@ -110,12 +110,35 @@
 .scrolly-restaurants {
   .map-restaurant {
     display: none;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid @light-gray;
+    .display-flex;
+    .flex-wrap(wrap);
+    // .align-items(center);
+    .img-link-map {
+      .flex(0 0 50%);
+      padding-right: 10px;
+      // align-items: center;
+      a {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+      }
+    }
+    .name {
+      .flex(0 0 50%);
+    }
     &.active {
-      display: block;
+      .display-flex;
+      .flex-wrap(wrap);
     }
     img {
       width: 100%;
+      line-height: 1;
+      height: 100%;
+      vertical-align: middle;
     }
   }
 }
@@ -151,7 +174,7 @@
 
 #stick-me {
   padding-top: 50px;
-  width: 35%;
+  width: 40%;
   padding: 60px 20px 0 20px;
   position: fixed;
   top: 0;
