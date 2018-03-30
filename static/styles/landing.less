@@ -13,7 +13,7 @@
 
 .ui-widget-content .ui-menu-item-wrapper {
 	font-family: @sans-serif-light;
-	
+
 	&.ui-state-active {
 	  background: #F7C82C;
 	  border: none;
@@ -57,6 +57,8 @@
 		.display-flex;
 		.justify-content(center);
 		.flex-wrap(wrap);
+    padding-top: 10px;
+    background: lighten(@main,15%);
 
 		button {
   		font-family: @sans-serif-light;
@@ -82,7 +84,8 @@
   	}
 
 		#search-bar {
-			width: 25%;
+			// width: 25%;
+      width: 90%;
     	position: relative;
     	margin-right: 10px;
     	margin-left: 40px;
