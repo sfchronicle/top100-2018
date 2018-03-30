@@ -43,11 +43,13 @@ $( "#search-bar input" ).autocomplete({
     // Sort alphabetically, limit results
     response(results.sort().slice(0, 5));
   },
+  // Find matches on selection
   select: function( event, ui ) {
     findMatches(ui.item.value);
   }
 });
 
+// Find matches while typing
 $("#search-bar input").on("input", function(){
   findMatches($(this).val());
 });
@@ -62,73 +64,30 @@ var findMatches = function(term){
       return false;
     }
   });
+
   // Turn all restaurants that don't match off
   $(".restaurant").not(matchingEntries).removeClass("active");
+
   // Turn all restaurants that do match on
   matchingEntries.addClass("active");
+
+  // Show restaurant count 
+  count = matchingEntries.length;
+  let resultText = " results";
+
+  // Special handling for 1 result
+  if (count == 1){
+    resultText = " result";
+  }
+  $('#count-results').text(count + resultText);
+
+  // Don't show results if it's the full list
+  if (count < 100){
+    $('#count-results').removeClass("hide");
+  } else {
+    $('#count-results').addClass("hide");
+  }
 }
-
-// searchbar code
-// $("#searchrestaurants").bind("input propertychange", function () {
-//   var filter = $(this).val().toLowerCase().replace(/ /g,'').replace().replace(/'/g,'');
-//   var class_match = 0;
-//   count = 0;
-
-//   var button_list = document.getElementsByClassName("button");
-//   for (var i=0; i<button_list.length; i++) {
-//     button_list[i].classList.remove("selected");
-//   };
-//   if (filter == "") {
-//     document.getElementById("showall").classList.add("selected");
-//   }
-
-//   selCuisine.selectedIndex = 0;
-//   selNeighborhoods.selectedIndex = 0;
-//   selNoise.selectedIndex = 0;
-//   selPrice.selectedIndex = 0;
-
-//   selNeighborhoods.classList.remove("active");
-//   selPrice.classList.remove("active");
-//   selNoise.classList.remove("active");
-//   selCuisine.classList.remove("active");
-
-//   document.getElementById("intro-container").classList.add("hide");
-//   document.getElementById("restaurants-wrap").classList.remove("hide");
-
-//   $(".restaurant").filter(function() {
-
-//     var classes = this.className.split(" ");
-//     for (var i=0; i< classes.length; i++) {
-
-//       var current_class = classes[i].toLowerCase();
-//       if ( current_class.match(filter)) {
-//         class_match = class_match + 1;
-//       }
-//     }
-//     if (class_match > 0) {
-//       $(this).addClass("active");
-//       count+=1;
-//     } else {
-//       $(this).removeClass("active");
-//     }
-//     class_match = 0;
-
-//   });
-
-//   // display text for empty search results
-//   if (count > 0) {
-//     document.getElementById('search-noresults').classList.add("hide");
-//     document.getElementById('count-results').classList.remove("hide");
-//     document.getElementById('count-results').innerHTML = count+" result(s)";
-//   } else {
-//     document.getElementById('search-noresults').classList.remove("hide");
-//     document.getElementById('count-results').classList.add("hide");
-//   }
-//   if (count == 100) {
-//     document.getElementById('count-results').classList.add("hide");
-//   }
-
-// });
 
 // check for log on information on load ------------------------------------------------
 
