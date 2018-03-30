@@ -1,21 +1,13 @@
 <div id="top-nav">
 
-  <a href="http://www.sfchronicle.com" target="_blank">
-    <div class="logo-link desktop">
-    	<img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_black.png"></img>
-    </div>
-    <div class="logo-link mobile">
-    	<img src="http://projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></img>
-    </div>
-  </a>
-
-  <div class="link"><a href="http://projects.sfchronicle.com/2017/top-100-restaurants/" class="home-link">
-   <span class="top100 top">Top 100 </span><span class="rest top">RESTAURANTS </span><span class="year top">2018</span></a>
+  <div class="logo-link desktop">
+  	<a href="http://www.sfchronicle.com" target="_blank"><img src="https://projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></img></a>
+  </div>
+  <div class="logo-link mobile">
+  	<a href="http://www.sfchronicle.com" target="_blank"><img src="https://projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></img></a>
   </div>
 
-  <div class="link secondary-link"><a href="./" class="home-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
-
-  <div class="link secondary-link"><a href="../map" class="home-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+  <div class="link"><a href="../" class="top100-top top">Top 100</a></div>
 
   {% if restaurant %}
   <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{{restaurant.slug}}%2F&text={{restaurant.TwitterText|urlencode}}&hashtags={{config.HASHTAG}}">
@@ -48,6 +40,23 @@
   </div>
 
    {% endif %}
+
+   <div class="secondary-link-container">
+
+     <div class="link secondary-link active"><a href="./#search" class="home-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+
+     <div class="link secondary-link"><a href="../map" class="home-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+
+     <div class="link secondary-link"><a href="../regions" class="home-link"><i class="fa fa-map" aria-hidden="true"></i> Regions</a></div>
+
+     <div class="link secondary-link"><a href="../new" class="home-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> Cuisines</a></div>
+
+     <div class="link secondary-link"><a href="../new" class="home-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+
+     <div class="link secondary-link"><a href="../new" class="home-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+
+     <div class="link secondary-link"><a href="../new" class="home-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+   </div>
 
 
 </div>
