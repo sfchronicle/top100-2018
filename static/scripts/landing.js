@@ -16,22 +16,26 @@ var timeTimeout = 5000;
 
 console.log(restaurants);
 
-// smooth scrolling down to nav elements
-$(document).on('click', 'a[href^="#"]', function(e) {
-    // target element id
-    var id = $(this).attr('href');
-    // target element
-    var $id = $(id);
-    if ($id.length === 0) {
-        return;
-    }
-    // prevent standard hash navigation (avoid blinking in IE)
-    e.preventDefault();
-    // top position relative to the document
-    var pos = $(id).offset().top - 80;
-    // animated top scrolling
-    $('body, html').animate({scrollTop: pos});
-});
+// stick the second nav once you get to it -------------------------------------
+
+window.onscroll = function() {activate()};
+
+function activate() {
+  var sticker = document.getElementById('search');
+  var sticker_ph = document.getElementById('search-stick-ph');
+  var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
+  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
+  console.log(window_top);
+  console.log(div_top);
+  if (window_top > div_top) {
+    sticker.classList.add('fixed-second');
+    sticker_ph.style.display = 'block'; // puts in a placeholder for where sticky used to be for smooth scrolling
+  } else {
+    sticker.classList.remove('fixed-second');
+    sticker_ph.style.display = 'none'; // puts in a placeholder for where sticky used to be for smooth scrolling
+  }
+
+}
 
 // search bar code -------------------------------------------------------------
 // IMPORTANT: Keep this updated with filter options
