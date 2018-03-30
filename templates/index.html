@@ -11,6 +11,7 @@
     <script src="//projects.sfchronicle.com/shared/js/jquery.min.js"></script>
     <script src="//projects.sfchronicle.com/shared/js/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="//projects.sfchronicle.com/shared/js/jquery-ui.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     {% include 'components/_hearst.html' %}
     {% include 'components/_landing-analytics.html' %}
     {% include 'components/_landing-social.html' %}
@@ -45,14 +46,19 @@
     <div id="container">
 
       <div class="lead-container">
+
         <div id="intro">
+          <p>So many high-quality restaurants have opened in recent years that it feels as if we’re in the golden age of dining. The downside: It can take a lot of gold to eat out these days.</p>
+
+          <p>I hope you find these restaurants as worthy as I do. Either way, I look forward to your feedback.</p>
+
           <p>So many high-quality restaurants have opened in recent years that it feels as if we’re in the golden age of dining. The downside: It can take a lot of gold to eat out these days.</p>
 
           <p>I hope you find these restaurants as worthy as I do. Either way, I look forward to your feedback.</p>
 
           <p><em>- Michael Bauer</em></p>
         </div>
-        <div id="lead-image"></div>
+        <div id="lead-image"><img src="../static/photos/Bauer1011_Petit_Crenn_Bauer1011_Petit_Crenn.3.jpg"></img></div>
       </div>
 
       <div id="search">
@@ -89,9 +95,9 @@
 
             <script>
               /* Sending vars to JS */
-              var cuisineString = "{{ cuisineString }}";     
-              var regionString = "{{ regionString }}"; 
-              var nameString = "{{ nameString }}";   
+              var cuisineString = "{{ cuisineString }}";
+              var regionString = "{{ regionString }}";
+              var nameString = "{{ nameString }}";
             </script>
 
           <div class="restaurant active {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }}" id="{{ r.slug }}">

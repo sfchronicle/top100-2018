@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
     <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
-    
+
     {% include 'components/_hearst.html' %}
 
     <!-- Begin Hearst analytics -->
@@ -61,7 +62,7 @@
         HDN.dataLayer.source.originalSourceSite = "SF";
         HDN.dataLayer.source.publishingSite = "premiumsfgate";
         HDN.dataLayer.source.sourceSite = "sfgate";
-        
+
         // HDN.dataLayer object for sharing information
         HDN.dataLayer.sharing = HDN.dataLayer.sharing || {};
         HDN.dataLayer.sharing.openGraphUrl = "http://projects.sfchronicle.com/2017/top-100-restaurants/{{restaurant.slug}}";
@@ -116,7 +117,7 @@
     <![endif]-->
     {% block content %}{% endblock %}
 
-    
+
     <script src="/static/scripts/main.js"></script>
 
     {% block javascript %}{% endblock %}

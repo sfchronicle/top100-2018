@@ -1,0 +1,190 @@
+
+.top100, .top100-top, .year{
+	// font-family: @sans-serif;
+  font-family: 'Fjalla One', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: @main;
+  font-size: 20px;
+
+  &.bottom{
+  	font-size:19px;
+  }
+
+  &.top{
+  	font-size:19px;
+  }
+
+}
+
+.rest{
+  font-family: 'Fjalla One', sans-serif;
+	// font-family: @sans-serif-light;
+  text-transform: uppercase;
+  color: black;
+  font-weight:100;
+  letter-spacing: 1px;
+  font-size: 20px;
+
+  &.bottom{
+  	font-size:19px;
+  }
+
+  &.top{
+  	font-size:20px;
+
+  	@media @mobile{
+  		font-size:19px;
+  	}
+  }
+}
+
+
+
+#top-nav{
+  box-shadow: 0 1px 5px 1px #ccc;
+  position: fixed;
+  height:46px;
+  a, .link, .logo-link {
+    display: inline-block;
+    height: 46px;
+    top: 0;
+    vertical-align: top;
+  }
+
+  @media @mobile {
+  	height: 40px;
+
+  	.top100.top {
+  		font-size: 15px;
+  	}
+  }
+	.top100-top {
+		font-size: 30px;
+    vertical-align: top;
+    margin-right: 5px;
+	}
+
+  div.link {
+  	.rest {
+  		@media @tablet {
+	  		display: none;
+	  	}
+  	}
+
+  	.year {
+  		@media @tablet {
+	  		display: none;
+	  	}
+  	}
+  }
+
+	.link, .logo-link {
+		display: inline-block;
+		a {
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+	.secondary-link-container {
+	  display: inline-block;
+	}
+
+	.secondary-link {
+	  background: lighten(@main,25%);
+	  color: white;
+	  height: 46px;
+	  top: 0;
+	  float: left;
+	  margin: 0 1px!important;
+
+	  a {
+	    padding: 10px;
+	    vertical-align: middle;
+	    // color: white;
+	    color: black;
+	    text-transform: uppercase;
+	    font-family: @title;
+	    font-weight: 800;
+	    font-size: 14px;
+	    height: 100%;
+	  }
+	  &.active {
+	    background: @main;
+	    a {
+	      color: white;
+	    }
+	  }
+	}
+
+  .logo-link{
+  	// position: absolute;
+    // top: 0;
+    // left: 0;
+    padding-top: 5px;
+    line-height:1;
+		vertical-align: center;
+		margin-left: 10px;
+    margin-right: 5px;
+		top:0;
+		// width: 100%;
+		height: 100%;
+		vertical-align: center;
+
+    img{
+    	// width:180px;
+    	height: 38px;
+    }
+
+    &.mobile{
+    	display:none;
+
+    	img{
+    		width:19px;
+
+    		@media @mobile{
+    			width:15px;
+    		}
+    	}
+
+    	@media @width650{
+    		display:block;
+    	}
+
+    	@media @mobile{
+    		padding-top:6px;
+    	}
+    }
+
+    &.desktop{
+    	@media @width650{
+    		display:none;
+    	}
+    }
+  }
+
+  .link{
+    // text-align: left;
+    margin: 0 auto;
+    // display:block;
+
+    @media @width650{
+	    margin: 0 0 0 40px;
+    	display: inline-block;
+    }
+
+    @media @mobile{
+    	padding: 8px 0 2px;
+    	margin: 0 0 0 35px;
+    }
+  }
+
+  .search{
+    position: absolute;
+    right: 65px;
+    top: 0;
+    height: 100%;
+  }
+}

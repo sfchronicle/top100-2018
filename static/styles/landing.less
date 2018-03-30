@@ -1,14 +1,21 @@
 
+// #lead-image {
+//   text-align: center;
+//   width: 100%;
+//   // max-width: 1400px;
+//   margin: auto;
+//   overflow: hidden;
+//   height: 600px;
+//   background-size: cover;
+//   // background-image: url(http://ww3.hdnux.com/photos/60/22/02/12565595/7/1400x900.jpg);
+//   background-image: url(../photos/tsukiji0910_ph.1.jpg);
+//   background-position: center;
+// }
+
 #lead-image {
-  text-align: center;
-  width: 100%;
-  max-width: 1400px;
-  margin: auto;
-  overflow: hidden;
-  height: 400px;
-  background-size: cover;
-  background-image: url(http://ww3.hdnux.com/photos/60/22/02/12565595/7/1400x900.jpg);
-  background-position: center;
+  img {
+    width: 100%;
+  }
 }
 
 .ui-widget-content .ui-menu-item-wrapper {
@@ -181,43 +188,6 @@
 	}
 }
 
-.top100, .year{
-	font-family: @sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: @main;
-  font-size: 20px;
-
-  &.bottom{
-  	font-size:19px;
-  }
-
-  &.top{
-  	font-size:19px;
-  }
-
-}
-
-.rest{
-	font-family: @sans-serif-light;
-  text-transform: uppercase;
-  font-weight:100;
-  letter-spacing: 1px;
-  font-size: 20px;
-
-  &.bottom{
-  	font-size:19px;
-  }
-
-  &.top{
-  	font-size:20px;
-
-  	@media @mobile{
-  		font-size:19px;
-  	}
-  }
-}
-
 #nouser {
 	text-align: center;
 	color: red;
@@ -345,26 +315,6 @@
 		display: none;
 	}
 }
-
-.secondary-link {
-  background: @main;
-  color: white;
-  height: 46px;
-  top: 0;
-
-  a {
-    padding-top: 6px;
-    vertical-align: middle;
-    color: white;
-    text-transform: uppercase;
-    font-family: @title;
-    font-weight: 800;
-    font-size: 14px;
-    height: 100%;
-  }
-}
-
-
 
 .link-button {
 	display: inline-block;
