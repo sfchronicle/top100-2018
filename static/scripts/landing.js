@@ -21,7 +21,8 @@ console.log(restaurants);
 function getFilterList() {
   var cuisineArray = cuisineString.split("|");
   var regionArray = regionString.split("|");
-  var allArrays = [cuisineArray, regionArray];
+  var nameArray = nameString.split("|");
+  var allArrays = [cuisineArray, regionArray, nameArray];
   var masterArray = [];
   for (var i = 0; i < allArrays.length; i++){
     masterArray = masterArray.concat(allArrays[i]);
@@ -33,7 +34,11 @@ console.log("LOGGING IN LANMDING!", cuisineString, regionString);
 
 // Create autocomplete
 $( "#search-bar input" ).autocomplete({
-  source: getFilterList().sort()
+  source: function(request, response) {
+    var results = $.ui.autocomplete.filter(getFilterList(), request.term);
+    // Sort alphabetically, limit results
+    response(results.sort().slice(0, 5));
+  }
 });
 
 // searchbar code

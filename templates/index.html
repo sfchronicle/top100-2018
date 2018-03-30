@@ -66,6 +66,7 @@
           <div class="count-results hide" id="count-results">100 result(s)</div>
           {% set cuisineString = "" %}
           {% set regionString = "" %}
+          {% set nameString = "" %}
 
           {% for r in restaurants %}
             {% set photos = r.wcm_img.split(' ') %}
@@ -82,10 +83,15 @@
             {% set regionString = regionString + r.SubRegion + "|" %}
             {% endif %}
 
+            {% if (nameString.find(r.Name) == -1): %}
+            {% set nameString = nameString + r.Name + "|" %}
+            {% endif %}
+
             <script>
               /* Sending vars to JS */
               var cuisineString = "{{ cuisineString }}";     
-              var regionString = "{{ regionString }}";  
+              var regionString = "{{ regionString }}"; 
+              var nameString = "{{ nameString }}";   
             </script>
 
           <div class="restaurant active {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }}" id="{{ r.slug }}">
