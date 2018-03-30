@@ -5,10 +5,12 @@
     <title>Top 100 2018</title>
     <meta name="ispremium" content="1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" href="https://www.sfchronicle.com/favicon.ico?v=3">
+    <link rel="icon" href="//www.sfchronicle.com/favicon.ico?v=3">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    <script src="//projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    <script src="//projects.sfchronicle.com/shared/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//projects.sfchronicle.com/shared/js/jquery-ui.min.css">
     {% include 'components/_hearst.html' %}
     {% include 'components/_landing-analytics.html' %}
     {% include 'components/_landing-social.html' %}
@@ -57,8 +59,6 @@
         <div id="search-bar">
           <input type="text" placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
         </div>
-        <button><i class="fa fa-plus-square" aria-hidden="true"></i>New</button>
-        <button><i class="fa fa-coffee" aria-hidden="true"></i>Brunch</button>
       </div>
 
       <div id="restaurants">
