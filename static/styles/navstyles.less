@@ -5,15 +5,15 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   color: @main;
-  font-size: 20px;
+  font-size: 25px;
 
-  &.bottom{
-  	font-size:19px;
-  }
+  // &.bottom{
+  // 	font-size:19px;
+  // }
 
-  &.top{
-  	font-size:19px;
-  }
+  // &.top{
+  // 	font-size:19px;
+  // }
 
 }
 
@@ -24,7 +24,8 @@
   color: black;
   font-weight:100;
   letter-spacing: 1px;
-  font-size: 20px;
+  font-size: 25px;
+  padding-top: 5px;
 
   &.bottom{
   	font-size:19px;
@@ -52,6 +53,10 @@
   height: 52px;
 }
 
+.link {
+  padding-top: 5px;
+}
+
 
 #top-nav{
   box-shadow: 0 1px 1px 1px #ccc;
@@ -73,9 +78,10 @@
   	}
   }
 	.top100-top {
-		font-size: 30px;
+		font-size: 25px;
     vertical-align: top;
-    margin-right: 5px;
+    padding-top: 5px;
+    // margin-right: 5px;
 	}
 
   div.link {
@@ -103,10 +109,15 @@
 
 	.secondary-link-container {
 	  display: inline-block;
+    opacity: 0;
+    float: center;
+    &.active {
+      opacity: 1;
+    }
 	}
 
 	.secondary-link {
-	  background: lighten(@main,25%);
+	  // background: lighten(@main,25%);
 	  color: white;
 	  height: 46px;
 	  top: 0;
@@ -114,15 +125,19 @@
 	  margin: 0 1px!important;
 
 	  a {
-	    padding: 10px;
+      padding: 5px;
+      padding-top: 10px;
+	    // padding: 10px;
 	    vertical-align: middle;
 	    // color: white;
 	    color: black;
 	    text-transform: uppercase;
-	    font-family: @title;
+	    // font-family: @title;
+      font-family: @banner;
 	    font-weight: 800;
-	    font-size: 14px;
+	    font-size: 12px;
 	    height: 100%;
+      color: @dark-gray;
 	  }
 	  &.active {
 	    background: @main;
