@@ -59,6 +59,9 @@
 #container{
 	width:100%;
 	margin-top: 46px;
+  @media @mobile {
+    margin-top: 0;
+  }
 
 	#search {
 		.display-flex;
@@ -347,16 +350,6 @@
 	}
 }
 
-.social-link {
-  display: inline-block;
-  float: right;
-  font-size: 18px;
-  padding-top: 10px;
-  a {
-    padding-right: 10px;
-  }
-}
-
 #bottom-nav{
 	position:fixed;
 	width:100%;
@@ -367,8 +360,6 @@
 	-webkit-box-shadow: 0 0 6px 0 #696969;
   -moz-box-shadow: 0 0 6px 0 #696969;
   box-shadow: 0 0 6px 0 #696969;
-
-
 
   .link{
   	vertical-align: 1px;
