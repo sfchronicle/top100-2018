@@ -43,8 +43,9 @@ function getFilterList() {
   // NOTE: If we want to curate these instead of pull them dynamically off list
   // Replace the vars below with a complete array of autocomplete options
   var cuisineArray = cuisineString.split("|");
-  var regionArray = regionString.split("|");
-  var nameArray = nameString.split("|");
+  var regionArray = regionString.split(/,|\||\//);
+  // Fix some names
+  var nameArray = nameString.replace(/&amp;/g, "&").replace(/&#39;/g, "'").split("|");
   // Combine all arrays
   var allArrays = [cuisineArray, regionArray, nameArray];
   var masterArray = [];
@@ -196,7 +197,7 @@ function errorCallBack() {
 
 // response if a user is logged in
 function successCallBack(identity) {
-  console.log("TEST A", identity);
+  console.log("TEST A BC", identity);
   if (identity.edbId != null) {
     console.log("YAY LOGGED IN");
     // console.log("success");
