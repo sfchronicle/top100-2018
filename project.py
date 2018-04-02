@@ -49,9 +49,9 @@ def index():
 @app.route('/<slug>/')
 def restaurant_view(slug):
 
-  restaurant_info = [x for x in restaurants if x['slug'] == slug]
+  restaurant_info = [x for x in restaurants if x['Slug'] == slug]
   restaurant = restaurant_info[0]
-  article = [y for y in restaurants if y['slug'] == slug]
+  article = [y for y in restaurants if y['Slug'] == slug]
 
   # next_article = [y for y in restaurants if y['slug'] == restaurant['next']]
   # prev_article = [y for y in restaurants if y['slug'] == restaurant['previous']]
@@ -73,4 +73,4 @@ def internal_error(error):
 @freezer.register_generator
 def restaurant_view():
   for restaurant in restaurants:
-    yield { 'slug': restaurant['slug']}
+    yield { 'slug': restaurant['Slug']}
