@@ -56,8 +56,6 @@ function getFilterList() {
   return masterArray;
 }
 
-console.log("LOGGING IN LANMDING!", cuisineString, regionString);
-
 // Create autocomplete
 $( "#search-bar input" ).autocomplete({
   source: function(request, response) {

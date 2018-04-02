@@ -6,8 +6,18 @@ console.log("RUNNING MAIN");
 if($('.swiper-slide').length === 1){
   $('.swiper-pagination').css('display', 'none');
 } else {
-  var mySwiper = new Swiper ('.swiper-container', {
-    pagination: '.swiper-pagination',
-    paginationClickable: true
-  });
+	// Create swiper
+	var swiperData = {
+    spaceBetween: 100,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  }
+
+  if ($(window).width() > 767){
+  	// Only enable pagination at desktop size
+		swiperData.pagination = '.swiper-pagination';
+    swiperData.paginationClickable = true;
+	}
+
+  var mySwiper = new Swiper('.swiper-container', swiperData);
 }
