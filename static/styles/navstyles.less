@@ -1,24 +1,25 @@
 
 .top100, .top100-top, .year{
 	// font-family: @sans-serif;
-  font-family: 'Fjalla One', sans-serif;
+  font-family: @logo2;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: @main;
   font-size: 25px;
+}
 
-  // &.bottom{
-  // 	font-size:19px;
-  // }
-
-  // &.top{
-  // 	font-size:19px;
-  // }
-
+#top100-nav-link{
+  opacity: 0;
+  -webkit-transition: opacity 500ms linear;
+  -ms-transition: opacity 500ms linear;
+  transition: opacity 500ms linear;
+  &.active {
+    opacity: 1;
+  }
 }
 
 .rest{
-  font-family: 'Fjalla One', sans-serif;
+  font-family: @logo2;
 	// font-family: @sans-serif-light;
   text-transform: uppercase;
   color: black;
@@ -81,17 +82,20 @@
 		font-size: 25px;
     vertical-align: top;
     padding-top: 5px;
+    font-weight: 800;
     // margin-right: 5px;
 	}
 
   div.link {
   	.rest {
+      // font-weight: 800;
   		@media @tablet {
 	  		display: none;
 	  	}
   	}
 
   	.year {
+      font-weight: 800;
   		@media @tablet {
 	  		display: none;
 	  	}
@@ -114,6 +118,7 @@
     -webkit-transition: opacity 500ms linear;
     -ms-transition: opacity 500ms linear;
     transition: opacity 500ms linear;
+    margin-left: 10px;
     &.active {
       opacity: 1;
     }
@@ -127,6 +132,10 @@
 	  float: left;
 	  margin: 0 1px!important;
 
+    .fa {
+      padding-right: 1px;
+    }
+
 	  a {
       padding: 5px;
       padding-top: 10px;
@@ -134,11 +143,11 @@
 	    vertical-align: middle;
 	    // color: white;
 	    color: black;
-	    text-transform: uppercase;
+	    // text-transform: uppercase;
 	    // font-family: @title;
-      font-family: @banner;
-	    font-weight: 800;
-	    font-size: 12px;
+      font-family: @logo2;
+	    // font-weight: 800;
+	    font-size: 14px;
 	    height: 100%;
       color: @dark-gray;
 	  }

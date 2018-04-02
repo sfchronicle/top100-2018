@@ -25,6 +25,12 @@ function activate() {
   var sticker_ph = document.getElementById('search-stick-ph');
   var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
   var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
+  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 46;
+  if (window_top > intro_top){
+    $("#top100-nav-link").addClass("active");
+  } else {
+    $("#top100-nav-link").removeClass("active");
+  }
   if (window_top > div_top) {
     $(".secondary-link-container").addClass("active");
     sticker.classList.add('fixed-second');
@@ -93,7 +99,7 @@ var findMatches = function(term){
   // Turn all restaurants that do match on
   matchingEntries.addClass("active");
 
-  // Show restaurant count 
+  // Show restaurant count
   count = matchingEntries.length;
   let resultText = " results";
 
