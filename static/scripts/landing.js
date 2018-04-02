@@ -25,12 +25,12 @@ function activate() {
   var sticker_ph = document.getElementById('search-stick-ph');
   var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
   var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
-  console.log(window_top);
-  console.log(div_top);
   if (window_top > div_top) {
+    $(".secondary-link-container").addClass("active");
     sticker.classList.add('fixed-second');
     sticker_ph.style.display = 'block'; // puts in a placeholder for where sticky used to be for smooth scrolling
   } else {
+    $(".secondary-link-container").removeClass("active");
     sticker.classList.remove('fixed-second');
     sticker_ph.style.display = 'none'; // puts in a placeholder for where sticky used to be for smooth scrolling
   }
