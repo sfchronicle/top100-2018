@@ -24,9 +24,14 @@ app.config['HASHTAG'] = 'Top100restaurants'
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 restaurant_data = os.path.join(SITE_ROOT, "data", "top_100_2018_digital_text.json")
+intro_data = os.path.join(SITE_ROOT, "data", "2018_bauer_intro_top_100.json")
 with open(restaurant_data) as r:
   data = json.load(r)
   restaurants = data['restaurants']
+
+with open(intro_data) as i:
+  data = json.load(i)
+  intro = data['text']
 
 @app.route("/map/")
 def mapfile():
@@ -43,7 +48,8 @@ def index():
 
   return render_template(
     'index.html',
-    restaurants=restaurants
+    restaurants=restaurants,
+    intro=intro
   )
 
 @app.route('/<slug>/')

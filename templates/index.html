@@ -59,11 +59,9 @@
       </div>
 
       <div id="intro">
-        <% json.2018_bauer_intro_top_100.text.forEach(function(d,didx){ %>
-          <% if (d.type == "text") { %>
-            <p><%=d.value %></p>
-          <% }; %>
-        <% }); %>
+        {% for i in intro %}
+          <p>{{i.value}}</p>
+        {% endfor %}
         <p><em>- Michael Bauer</em></p>
       </div>
 
