@@ -111,6 +111,9 @@
 	  display: inline-block;
     opacity: 0;
     float: center;
+    -webkit-transition: opacity 500ms linear;
+    -ms-transition: opacity 500ms linear;
+    transition: opacity 500ms linear;
     &.active {
       opacity: 1;
     }
