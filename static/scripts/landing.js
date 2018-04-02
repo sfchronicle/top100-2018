@@ -14,9 +14,19 @@ var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 // how long to wait before saving
 var timeTimeout = 5000;
 
-console.log(restaurants);
+// smooth scroll to skip reading Michael's intro if you want
+document.getElementById("instructions").addEventListener("click",function(){
 
+    // top position relative to the document
+    var pos = $("#search-stick-here").offset().top-30;
+
+    // animated top scrolling
+    $('body, html').animate({scrollTop: pos});
+});
+
+// scrolling functionality: ----------------------------------------------------
 // stick the second nav once you get to it -------------------------------------
+// fade in various nav elements depending on page location ---------------------
 
 window.onscroll = function() {activate()};
 
