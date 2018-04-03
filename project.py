@@ -50,7 +50,7 @@ def index():
     intro=intro
   )
 
-@app.route('/<collection>/')
+@app.route('/guides/<collection>/')
 def collection_view(collection):
   return render_template(
     'collection.html',
@@ -85,6 +85,8 @@ def internal_error(error):
 def restaurant_view():
   for restaurant in restaurants:
     yield { 'slug': restaurant['Slug']}
+
+@freezer.register_generator
 def collection_view():
   for collection in collections:
-    yield { 'collection': collection}
+    yield { 'collection': collection }
