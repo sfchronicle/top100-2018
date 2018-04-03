@@ -1,2 +1,22 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Top 100 2018</title>
+    <meta name="ispremium" content="1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="https://www.sfchronicle.com/favicon.ico?v=3">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Cardo|Fjalla+One|Pathway+Gothic+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    {% include 'components/_hearst.html' %}
+    {% include 'components/_landing-analytics.html' %}
+    {% include 'components/_landing-social.html' %}
+  </head>
 
-<div class="title">{{collection}} ¯\_(ツ)_/¯</div>
+{% include 'components/_top-nav.html' %}
+<div class="title">{{collection}}</div>
+
+{% include 'components/_footer.html' %}

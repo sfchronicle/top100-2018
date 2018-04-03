@@ -39,7 +39,8 @@ with open(intro_data) as i:
 def mapfile():
   return render_template(
     'map.html',
-    restaurants=restaurants
+    restaurants=restaurants,
+    map="map"
   )
 
 @app.route("/")

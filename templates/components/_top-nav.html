@@ -38,40 +38,49 @@
 
    {% endif %}
 
-   <div class="secondary-link-container">
+  {% if (collection or map) %}
+    <div class="secondary-link-container active">
+  {% else %}
+    <div class="secondary-link-container">
+  {% endif %}
+
 
      <div class="link secondary-link active"><a href="./#search" class="home-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
      <div class="link secondary-link"><a href="../map" class="home-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
-     <div class="link secondary-link"><a href="../regions" class="home-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
+     <div class="link secondary-link"><a href="../guides/regions" class="home-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
 
-     <div class="link secondary-link"><a href="../cuisines" class="home-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+     <div class="link secondary-link"><a href="../guides/cuisines" class="home-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
 
-     <div class="link secondary-link"><a href="../brunch" class="home-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+     <div class="link secondary-link"><a href="../guides/brunch" class="home-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
 
-     <div class="link secondary-link"><a href="../classics" class="home-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+     <div class="link secondary-link"><a href="../guides/classics" class="home-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
 
-     <div class="link secondary-link"><a href="../new" class="home-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+     <div class="link secondary-link"><a href="../guides/new" class="home-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
    </div>
 
 
 </div>
 
-<div class="secondary-link-container-mobile">
+{% if (collection or map) %}
+  <div class="secondary-link-container-mobile active">
+{% else %}
+  <div class="secondary-link-container-mobile">
+{% endif %}
 
   <div class="link secondary-link active" id="search-button"><a href="./#search" class="home-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
   <div class="link secondary-link"><a href="../map" class="home-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
-  <div class="link secondary-link"><a href="../regions" class="home-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
+  <div class="link secondary-link"><a href="../guides/regions" class="home-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
 
-  <div class="link secondary-link"><a href="../cuisines" class="home-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+  <div class="link secondary-link"><a href="../guides/cuisines" class="home-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
 
-  <div class="link secondary-link"><a href="../brunch" class="home-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+  <div class="link secondary-link"><a href="../guides/brunch" class="home-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
 
-  <div class="link secondary-link"><a href="../classics" class="home-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+  <div class="link secondary-link"><a href="../guides/classics" class="home-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
 
-  <div class="link secondary-link"><a href="../new" class="home-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+  <div class="link secondary-link"><a href="../guides/new" class="home-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
 
 </div>
