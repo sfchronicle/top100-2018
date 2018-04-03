@@ -24,12 +24,9 @@ document.getElementById("instructions").addEventListener("click",function(){
 });
 
 // determine phone vs desktop
-console.log(window.devicePixelRatio);
 if (screen.width > window.devicePixelRatio*480){
-  console.log("desktop");
   window.onscroll = function() {activate()};
 } else {
-  console.log("mobile");
   window.onscroll = function() {activateMobile()};
 
   // smooth scroll to skip reading Michael's intro if you want
