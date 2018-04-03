@@ -1,44 +1,79 @@
-{% set next_photo = next_article[0].wcm_img.split(' ') %}
-{% set prev_photo = prev_article[0].wcm_img.split(' ') %}
-{% set nextone_photo = nextone_article[0].wcm_img.split(' ') %}
 
+<div id="related-rest">
+  <div class="rtitle">
+    <div><a href=""><button id="filter-btn" class="btn-link search related"><i class="fa fa-search" aria-hidden="true"></i> Search</button></a></div>
+    <div id="explore-text">There are <span class="number">99</span> restaurants in the Top 100 you haven't seen yet. <span>Still hungry?</span></div>
+    <div id="nearing-text">There are only <span class="number">99</span> restaurants in the Top 100 you haven't seen yet. <span>You've almost sampled them all!</span></div>
+    <div id="final-text">You've seen all <span class="number">100</span> restaurants in the Top 100. Did you add your favorites to <span><a href="/mylist">your list</a></span>?</div>
+  </div>
+  <div class="wrap">
+    <a href="">
+      <img src="">
+    </a>
+    <div class="name">
+      <div></div>
+    </div>
+    <div class="info"></div>        
+  </div>
+  
+  <div class="wrap">
+    <a href="">
+      <img src>
+    </a>
+    <div class="name">
+      <div></div>
+    </div>
+    <div class="info"></div>        
+  </div>
 
-      <hr>
+  <div class="wrap">
+    <a href="">
+      <img src>
+    </a>
+    <div class="name">
+      <div></div>
+    </div>
+    <div class="info"></div>        
+  </div>
+</div>
 
-      <div id="related-rest">
-        <div class="rtitle">
-          <div><a href="{{ url_for('index') }}"><button id="filter-btn" class="btn-link search related"><i class="fa fa-search" aria-hidden="true"></i> Search</button></a></div>
-          <div>Search again or explore these restaurants:</div>
-        </div>
-        <div class="wrap">
-          <a href="{{ url_for('index') }}{{prev_article[0]['slug']}}">
-            <img src="http://ww3.hdnux.com/photos/60/22/02/{{ prev_photo[0] }}/3/premium_gallery_landscape.jpg">
-          </a>
-          <div class="name">
-            <div>{{prev_article[0]['Name']}}</div>
-          </div>
-          <div class="info">{{prev_article[0]['Cuisine']}} | {{prev_article[0]['SubRegion']}}</div>        
-        </div>
-        
-        <div class="wrap">
-          <a href="{{ url_for('index') }}{{next_article[0]['slug']}}">
-            <img src="http://ww3.hdnux.com/photos/60/22/02/{{ next_photo[0] }}/3/premium_gallery_landscape.jpg">
-          </a>
-          <div class="name">
-            <div>{{next_article[0]['Name']}}</div>
-          </div>
-          <div class="info">{{next_article[0]['Cuisine']}} | {{next_article[0]['SubRegion']}}</div>
-        </div>
+<script>
+  var restaurants = {{ restaurants|tojson }};
+  var restaurant = {{ this_restaurant|tojson }};
 
-        <div class="wrap">
-          <a href="{{ url_for('index') }}{{nextone_article[0]['slug']}}">
-            <img src="http://ww3.hdnux.com/photos/60/22/02/{{ nextone_photo[0] }}/3/premium_gallery_landscape.jpg">
-          </a>
-          <div class="name">
-            <div>{{nextone_article[0]['Name']}}</div>
-          </div>
-          <div class="info">{{nextone_article[0]['Cuisine']}} | {{nextone_article[0]['SubRegion']}}</div>
-        </div>
+  // Find restaurant that matches the current name
+  var thisRestaurant = restaurants.find(function(element) {
+    return element.Name == restaurant.Name;
+  });
 
+  // Get index of current restaurant
+  var thisRestaurantIndex = restaurants.indexOf(thisRestaurant);
 
-      </div>
+  // Related restaurants are the next 3
+  var relatedRestaurants = [];
+  relatedRestaurants[0] = restaurants[thisRestaurantIndex+1];
+  relatedRestaurants[1] = restaurants[thisRestaurantIndex+2];
+  relatedRestaurants[2] = restaurants[thisRestaurantIndex+3];
+  console.log(relatedRestaurants);
+
+  // Set values on HTML
+  $("#related-rest .wrap").each(function(index){
+    // Get URL with no query or hash (or trailing slash)
+    var fullUrl = location.href.split('#')[0].split('?')[0].slice(0, -1);
+    // Get array based on slashes
+    fullUrl = fullUrl.split("/");
+    // Remove the restaurant path and rejoin
+    fullUrl.pop();
+    fullUrl = fullUrl.join("/"); 
+    // Set new path using slug
+    $(this).find("a").attr("href", fullUrl+"/"+relatedRestaurants[index].Slug);
+    // Set image URL
+    if (relatedRestaurants[index].wcm_img){
+      $(this).find("img").attr("src", "https://ww3.hdnux.com/photos/60/22/02/"+relatedRestaurants[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
+    }
+    // Set name
+    $(this).find(".name div").text(relatedRestaurants[index].Name);
+    // Set region
+    $(this).find(".info").text(relatedRestaurants[index].Region + " | " + relatedRestaurants[index].SubRegion);
+  });
+</script>

@@ -1,4 +1,5 @@
 require("./lib/social");
+var cookies = require("./cookies");
 
 // function to find minimum
 Array.prototype.min = function() {

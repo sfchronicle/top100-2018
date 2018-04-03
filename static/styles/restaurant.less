@@ -48,6 +48,7 @@
   .flex-wrap(wrap);
   .justify-content(space-between);
   border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 
   @media @width1100{
   	padding:20px 10px;	
@@ -100,6 +101,9 @@
   padding: 0 10px;
 
   h1 {
+  	font-family: @fancy-serif;
+  	border-bottom: 1px solid #ccc;
+
   	@media @mobile {
   		font-size: 30px;
     	line-height: 35px;
@@ -124,8 +128,18 @@
 	padding:10px;
 }
 
+.swiper-container-horizontal>.swiper-pagination-bullets {
+	bottom: -10px;
+}
+
+.swiper-pagination {
+	@media @tablet {
+		display: none;
+	}
+}
+
 .swiper-pagination-bullet-active {
-  background: #7a709a;
+  background: #EDBE22;
 }
 
 .swiper-container {
@@ -151,9 +165,22 @@
 }
 
 .swiper-button-prev, .swiper-button-next {
-  background-color: @light-gray;
+  background-color: rgba(100, 100, 100, 0.5);
   padding: 30px;
   border-radius: 30px;
+  background-image: none;
+
+  i {
+  	font-size: 35px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #EDBE22;
+  }
+}
+
+.swiper-button-prev i {
+	right: 19px;
 }
 
 #related-rest{
@@ -162,6 +189,18 @@
 	.flex-wrap(wrap);
 	max-width:1000px;
 	margin:2em auto;
+
+	#nearing-text, #final-text {
+		display: none;
+	}
+
+	.rtitle span {
+		color: #EDBE22;
+
+		&.number {
+			font-size: 130%;
+		}
+	}
 
 	@media @mobile{
 		margin: 1em auto;
@@ -190,7 +229,9 @@
 		margin-bottom:1em;
 
 		@media @mobile{
-	    font-size: 15px;
+	    font-size: 17px;
+	    margin-top: 30px;
+    	margin-bottom: 0;
 		}
 	}
 

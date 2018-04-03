@@ -23,13 +23,12 @@
     <div class="carousel swiper-container">
       <div class="swiper-wrapper">
         {% for f in photos %}
-        <div class="swiper-slide"><img src="http://ww3.hdnux.com/photos/60/22/02/{{f}}/7/premium_gallery_landscape.jpg"></div>
-        {% endfor %}
-        
+        <div class="swiper-slide"><img src="https://ww3.hdnux.com/photos/60/22/02/{{f}}/7/premium_gallery_landscape.jpg"></div>
+        {% endfor %}        
       </div>
       <!-- Add Arrows -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+      <div class="swiper-button-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
       <!-- Add Pagination Buttons -->
       <div class="swiper-pagination"></div>
       <div class="photo-byline">Photography by {{restaurant.photographer}}</div>
@@ -91,16 +90,13 @@
           </div>
         {% endif %}
 
-        {% for r in article %}
-        <div class="vitals"><span>Vitals</span><br>{{r.Vitals}}</div>
-        {% endfor %}
-
       </div>
     </div>
 
-
     <!-- Commenting out Related Logic for now -->
-    {# include 'components/_related.html' #}
+    {% with this_restaurant=restaurant %}
+    {% include 'components/_related.html' %}
+    {% endwith %}
     {% include 'components/_footer.html' %}
 
 
