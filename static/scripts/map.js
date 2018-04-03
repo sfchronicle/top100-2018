@@ -81,7 +81,7 @@ restaurants.forEach(function(d,dIDX){
   } else {
       var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
   }
-  if (d.OtherLocationAddress){
+  if (d.OtherLat){
     var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[0];
     var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[0];
   } else {
@@ -96,7 +96,7 @@ restaurants.forEach(function(d,dIDX){
 
 // markers for restaurants with two locations
 restaurants.forEach(function(d,dIDX){
-  if (d.OtherLocationAddress){
+  if (d.OtherLat){
     console.log("WE HAVE A DOUBLE ADDRESS");
     var photos = d.wcm_img.split(' ');
     var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
@@ -105,13 +105,28 @@ restaurants.forEach(function(d,dIDX){
     } else {
       var marker = L.marker([d.OtherLat,d.OtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
     }
-    if (d.OtherLocationAddress){
-      var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
-      var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
+    var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
+    var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
+    var class_str = " "+d.Slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
+    marker._icon.className += class_str;
+    map.addLayer(marker);
+    markersArray.push(marker);
+  }
+});
+
+// markers for restaurants with two locations
+restaurants.forEach(function(d,dIDX){
+  if (d.OtherOtherLat){
+    console.log("WE HAVE A TRIPLE ADDRESS");
+    var photos = d.wcm_img.split(' ');
+    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
+    if (screen.width <= 480){
+      var marker = L.marker([d.OtherOtherLat,d.OtherOtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
     } else {
-      var regionstring = d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
-      var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
+      var marker = L.marker([d.OtherOtherLat,d.OtherOtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
     }
+    var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[2];
+    var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[2];
     var class_str = " "+d.Slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
     marker._icon.className += class_str;
     map.addLayer(marker);
