@@ -106,15 +106,15 @@
               var nameString = "{{ nameString }}";
             </script>
 
-          <div class="restaurant active {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }}" id="{{ r.slug }}">
-          	<a href="{{ url_for('index') }}{{r.slug}}" target="_blank">
+          <div class="restaurant active {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }}" id="{{ r.Slug }}">
+          	<a href="{{ url_for('index') }}{{r.Slug}}" target="_blank">
               <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
             </a>
             <div class="name">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
               <div class="favorites">
                 Save
-                <span class="save-restaurant" id="save{{ r.slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
+                <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
               </div>
             </div>
             <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
