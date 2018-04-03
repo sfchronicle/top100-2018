@@ -19,7 +19,9 @@ app.config['DATE'] = '2018-04-01'
 # Hashtag
 app.config['HASHTAG'] = 'Top100restaurants'
 
-
+# name collections
+collections = ["regions","cuisines","brunch","classics","new"]
+print(collections)
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
@@ -35,8 +37,6 @@ with open(intro_data) as i:
 
 @app.route("/map/")
 def mapfile():
-
-
   return render_template(
     'map.html',
     restaurants=restaurants
@@ -44,12 +44,18 @@ def mapfile():
 
 @app.route("/")
 def index():
-
-
   return render_template(
     'index.html',
     restaurants=restaurants,
     intro=intro
+  )
+
+@app.route('/<collection>/')
+def collection_view(collection):
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection=collection
   )
 
 @app.route('/<slug>/')
@@ -62,7 +68,6 @@ def restaurant_view(slug):
   # next_article = [y for y in restaurants if y['slug'] == restaurant['next']]
   # prev_article = [y for y in restaurants if y['slug'] == restaurant['previous']]
   # nextone_article = [y for y in restaurants if y['slug'] == restaurant['nextone']]
-
 
   return render_template(
     'restaurant.html',
@@ -80,3 +85,6 @@ def internal_error(error):
 def restaurant_view():
   for restaurant in restaurants:
     yield { 'slug': restaurant['Slug']}
+def collection_view():
+  for collection in collections:
+    yield { 'collection': collection}
