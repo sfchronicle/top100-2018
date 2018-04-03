@@ -87,7 +87,9 @@ $("#related-rest .wrap").each(function(index){
   fullUrl.pop();
   fullUrl = fullUrl.join("/"); 
   // Set new path using slug
-  $(this).find("a").attr("href", fullUrl+"/"+relatedRestaurants[index].Slug);
+  var finalUrl = fullUrl+"/"+relatedRestaurants[index].Slug;
+  $(this).find("a").attr("href", finalUrl);
+  $(".rtitle .next-link").attr("href", finalUrl);
   // Set image URL
   if (relatedRestaurants[index].wcm_img){
     $(this).find("img").attr("src", "https://ww3.hdnux.com/photos/60/22/02/"+relatedRestaurants[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
