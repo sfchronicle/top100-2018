@@ -17,19 +17,33 @@ var timeTimeout = 5000;
 
 // smooth scroll to skip reading Michael's intro if you want
 document.getElementById("instructions").addEventListener("click",function(){
-
     // top position relative to the document
     var pos = $("#search-stick-here").offset().top-30;
-
     // animated top scrolling
     $('body, html').animate({scrollTop: pos});
 });
 
+// determine phone vs desktop
+console.log(window.devicePixelRatio);
+if (screen.width > window.devicePixelRatio*480){
+  console.log("desktop");
+  window.onscroll = function() {activate()};
+} else {
+  console.log("mobile");
+  window.onscroll = function() {activateMobile()};
+
+  // smooth scroll to skip reading Michael's intro if you want
+  document.getElementById("search-button").addEventListener("click",function(){
+      // top position relative to the document
+      var pos = $("#search").offset().top-60;
+      // animated top scrolling
+      $('body, html').animate({scrollTop: pos});
+  });
+}
+
 // scrolling functionality: ----------------------------------------------------
 // stick the second nav once you get to it -------------------------------------
 // fade in various nav elements depending on page location ---------------------
-
-window.onscroll = function() {activate()};
 
 function activate() {
   var sticker = document.getElementById('search');
@@ -51,7 +65,22 @@ function activate() {
     sticker.classList.remove('fixed-second');
     sticker_ph.style.display = 'none'; // puts in a placeholder for where sticky used to be for smooth scrolling
   }
+}
 
+function activateMobile() {
+  var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
+  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
+  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 46;
+  if (window_top > intro_top){
+    $("#top100-nav-link").addClass("active");
+  } else {
+    $("#top100-nav-link").removeClass("active");
+  }
+  if (window_top > div_top) {
+    $(".secondary-link-container-mobile").addClass("active");
+  } else {
+    $(".secondary-link-container-mobile").removeClass("active");
+  }
 }
 
 // search bar code -------------------------------------------------------------

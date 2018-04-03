@@ -57,10 +57,16 @@
   right: 0;
   height: 52px;
   box-shadow: 0 1px 1px 1px #ccc;
+  @media @mobile {
+    top: 70px;
+  }
 }
 
 #search-stick-ph {
   height: 52px;
+  @media @mobile {
+    display: none;
+  }
 }
 
 .link {
@@ -123,7 +129,7 @@
 	}
 }
 
-.secondary-link-container {
+.secondary-link-container, .secondary-link-container-mobile {
   display: inline-block;
   opacity: 0;
   float: center;
@@ -134,6 +140,35 @@
   &.active {
     opacity: 1;
   }
+  @media @mobile {
+    -webkit-transition: opacity 10ms linear;
+    -ms-transition: opacity 10ms linear;
+    transition: opacity 10ms linear;
+  }
+}
+
+.secondary-link-container-mobile {
+  display: none;
+  @media @mobile {
+    display: block;
+    position: fixed;
+    top: 37px;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    z-index: 999;
+    height: 37px;
+    background: white;
+    -webkit-box-shadow: 0 0 6px 0 #696969;
+    -moz-box-shadow: 0 0 6px 0 #696969;
+    box-shadow: 0 0 6px 0 #696969;
+  }
+}
+
+.secondary-link-container {
+  @media @mobile {
+    display: none;
+  }
 }
 
 .secondary-link {
@@ -141,21 +176,33 @@
   height: 46px;
   top: 0;
   float: left;
-  margin: 0 1px!important;
+  margin: 0 1px;
+  @media @mobile {
+    margin: 0 0 2px 0;
+    height: 37px;
+  }
 
   .fa {
     padding-right: 1px;
+    @media @mobile {
+      display: none;
+    }
   }
 
   a {
-    padding: 5px;
-    padding-top: 10px;
+    padding: 0 10px;
+    padding-top: 7px;
     vertical-align: middle;
     color: black;
     font-family: @logo2;
-    font-size: 14px;
+    font-size: 17px;
     height: 100%;
     color: @dark-gray;
+    @media @mobile {
+      font-size: 16px;
+      padding: 0 6px;
+      padding-top: 7px;
+    }
   }
   &.active {
     background: @main;
