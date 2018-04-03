@@ -23,7 +23,7 @@
     <div class="carousel swiper-container">
       <div class="swiper-wrapper">
         {% for f in photos %}
-        <div class="swiper-slide"><img src="https://ww3.hdnux.com/photos/60/22/02/{{f}}/7/premium_gallery_landscape.jpg"></div>
+        <div class="swiper-slide"><img data-noload-src="https://ww3.hdnux.com/photos/60/22/02/{{f}}/7/"></div>
         {% endfor %}        
       </div>
       <!-- Add Arrows -->
@@ -94,9 +94,7 @@
     </div>
 
     <!-- Commenting out Related Logic for now -->
-    {% with this_restaurant=restaurant %}
     {% include 'components/_related.html' %}
-    {% endwith %}
     {% include 'components/_footer.html' %}
 
 

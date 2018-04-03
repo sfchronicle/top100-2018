@@ -119,7 +119,8 @@
 
     <script>
         // Pass slug to main for saving cookie
-        var restaurantSlug = restaurant.Slug;
+        var restaurant = {{ restaurant|tojson }};
+        var restaurants = {{ restaurants|tojson }};
     </script>
     <script src="/static/scripts/main.js"></script>
 
