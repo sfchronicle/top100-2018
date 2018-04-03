@@ -20,6 +20,8 @@
 
   <div class="restaurant">
 
+    <h1>{{restaurant.Name}} {{restaurant.otherName|safe}}</h1>
+
     <div class="carousel swiper-container">
       <div class="swiper-wrapper">
         {% for f in photos %}
@@ -34,16 +36,15 @@
       <div class="photo-byline">Photography by {{restaurant.photographer}}</div>
     </div>
 
+    <p id="mobile-h1">{{restaurant.Name}} {{restaurant.otherName|safe}}</p>
+
     <div class="article">
-
-      <h1>{{restaurant.Name}} {{restaurant.otherName|safe}}</h1>
-
       {% for r in article %}
         <p>{{ r.Text }}</p>
       {% endfor %}
-
-        
     </div>
+
+
 
     <div class="wrap">
       <div class="infobox">
@@ -95,9 +96,9 @@
 
     <!-- Commenting out Related Logic for now -->
     {% include 'components/_related.html' %}
-    {% include 'components/_footer.html' %}
-
 
   </div>
+
+  {% include 'components/_footer.html' %}
 
 {% endblock %}
