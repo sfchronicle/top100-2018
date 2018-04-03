@@ -198,6 +198,15 @@
     font-size: 17px;
     height: 100%;
     color: @dark-gray;
+
+    &:hover, :hover {
+      color: @main-hover;
+    }
+
+    &.search-link:hover, &.search-link :hover {
+      color: @main-hover;
+    }
+
     @media @mobile {
       font-size: 16px;
       padding: 0 6px;
