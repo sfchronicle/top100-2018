@@ -4,7 +4,12 @@
   	<a href="http://www.sfchronicle.com" target="_blank"><img src="https://projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></img></a>
   </div>
 
-  <div class="link" id="top100-nav-link"><a href="../"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
+  {% if (collection or map) %}
+    <div class="link active" id="top100-nav-link"><a href="../"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
+  {% else %}
+    <div class="link" id="top100-nav-link"><a href="../"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
+  {% endif %}
+
 
   {% if restaurant %}
   <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F{{config.PROJECT_YEAR}}%2F{{config.PRODUCTION_PATH}}%2F{{restaurant.slug}}%2F&text={{restaurant.TwitterText|urlencode}}&hashtags={{config.HASHTAG}}">
@@ -43,7 +48,6 @@
   {% else %}
     <div class="secondary-link-container">
   {% endif %}
-
 
      <div class="link secondary-link active"><a href="./#search" class="home-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
