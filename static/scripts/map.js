@@ -88,25 +88,22 @@ restaurants.forEach(function(d,dIDX){
     var regionstring = d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
     var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
   }
-  var class_str = " "+d.slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
+  var class_str = " "+d.Slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
   marker._icon.className += class_str;
   map.addLayer(marker);
   markersArray.push(marker);
 });
 
 // markers for restaurants with two locations
-var stupid_var = 0;
-// NEED TO UPDATE THIS ----------------------------------------------------------------------------------------------------
 restaurants.forEach(function(d,dIDX){
   if (d.OtherLocationAddress){
     console.log("WE HAVE A DOUBLE ADDRESS");
-    console.log(d.Name);
     var photos = d.wcm_img.split(' ');
     var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
     if (screen.width <= 480){
-        var marker = L.marker([37.764403+0.002*stupid_var,-122.356585+0.002*stupid_var], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
+      var marker = L.marker([d.OtherLat,d.OtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
     } else {
-        var marker = L.marker([37.764403+0.002*stupid_var,-122.356585+0.002*stupid_var], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
+      var marker = L.marker([d.OtherLat,d.OtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str).on("click",clickZoom);
     }
     if (d.OtherLocationAddress){
       var regionstring = d.Region.replace(/ /g,'').replace("/"," ").toLowerCase().split(",")[1];
@@ -115,15 +112,12 @@ restaurants.forEach(function(d,dIDX){
       var regionstring = d.Region.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
       var subregionstring = d.SubRegion.replace(/ /g,'').replace("/"," ").replace(","," ").toLowerCase();
     }
-    var class_str = " "+d.slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
+    var class_str = " "+d.Slug+ " "+regionstring+" "+subregionstring+" "+d.Cuisine.replace(/ /g,'').toLowerCase()+" active";
     marker._icon.className += class_str;
     map.addLayer(marker);
     markersArray.push(marker);
-    stupid_var ++;
   }
 });
-// NEED TO UPDATE THIS ----------------------------------------------------------------------------------------------------
-
 
 var count;
 

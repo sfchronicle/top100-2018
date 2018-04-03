@@ -60,7 +60,7 @@
   position: fixed;
   top: 0;
   height: 100%;
-  width: 65%;
+  width: 60%;
   z-index: 0;
   cursor: auto;
   @media @mobile {
@@ -79,7 +79,6 @@
   .display-flex;
   .flex-wrap(wrap);
   width: 100%;
-
   .map-container {
     .flex(0 0 60%);
     @media @mobile {
@@ -88,11 +87,18 @@
   }
   .map-sidebar {
     .flex(0 0 40%);
+    height: auto;
     @media @mobile {
       .flex(0 0 100%);
       z-index: 0;
     }
   }
+}
+
+.map-credit {
+  margin-top: 50px;
+  font-size: 14px;
+  margin-bottom: 30px;
 }
 
 .map-sidebar {
@@ -113,8 +119,8 @@
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid @light-gray;
-    .display-flex;
-    .flex-wrap(wrap);
+    // .display-flex;
+    // .flex-wrap(wrap);
     // .align-items(center);
     .img-link-map {
       .flex(0 0 50%);
