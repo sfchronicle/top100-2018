@@ -4,10 +4,10 @@
   	<a href="http://www.sfchronicle.com" target="_blank"><img src="https://projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></img></a>
   </div>
 
-  {% if (collection or map) %}
-    <div class="link active" id="top100-nav-link"><a href="http://localhost:8000"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
-  {% else %}
+  {% if (homepage) %}
     <div class="link" id="top100-nav-link"><a href="http://localhost:8000"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
+  {% else %}
+    <div class="link active" id="top100-nav-link"><a href="http://localhost:8000"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
   {% endif %}
 
    <div class="social-link email">
