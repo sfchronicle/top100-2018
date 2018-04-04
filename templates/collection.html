@@ -50,6 +50,19 @@
   </div>
 {% endif %}
 
+{% if (collection == "cuisines") %}
+  {% set cuisineList = '' %}
+  <div class="cuisines-container">
+    {% for r in restaurants %}
+      {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
+      {% if cuisineName not in cuisineList %}
+        <div class="cuisine-button" id="{{cuisineName}}-cuisine">{{r.Cuisine}}</div>
+      {% endif %}
+      {% set cuisineList = cuisineList + cuisineName %}
+    {% endfor %}
+  </div>
+{% endif %}
+
 <div class="restaurant-container">
 <div class="restaurant-inner-container">
 {% for r in restaurants %}
@@ -59,8 +72,9 @@
 
     {% set regionName = r.Region.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
     {% set subregionName = r.SubRegion.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
+    {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
 
-    <div class="restaurant active {{ regionName }} {{ subregionName }}" target="_blank">
+    <div class="restaurant active {{ regionName }} {{ subregionName }} {{cuisineName}}" target="_blank">
         <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
       </a>
       <div class="name">
