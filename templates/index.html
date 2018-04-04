@@ -60,7 +60,7 @@
 
       <div id="intro">
         {% for i in intro %}
-          <p>{{i.value}}</p>
+          <p>{{i.value|safe}}</p>
         {% endfor %}
         <p><em>- Michael Bauer</em></p>
       </div>
