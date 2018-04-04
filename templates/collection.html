@@ -20,10 +20,57 @@
 
 <div class="title">{{collection}}</div>
 
+{% if (collection == "regions") %}
+  <div class="regions-container">
+    <div class="region-button" id="sf-region">San Francisco</div>
+    <div class="region-button" id="northbay-region">North Bay</div>
+    <div class="region-button" id="southbay-region">South Bay</div>
+    <div class="region-button" id="eastbay-region">East Bay</div>
+  </div>
+  <div class="subregions-container" id="sf-subregions">
+    <div class="subregion-button" id="soma-subregion">SoMa</div>
+    <div class="subregion-button" id="mission-subregion">Mission</div>
+    <div class="subregion-button" id="financialdistrict-subregion">Financial District</div>
+    <div class="subregion-button" id="presidio-subregion">SoMa</div>
+  </div>
+  <div class="subregions-container" id="northbay-subregions">
+    <div class="subregion-button" id="napa-subregion">Napa</div>
+    <div class="subregion-button" id="sonoma-subregion">Sonoma</div>
+    <div class="subregion-button" id="healdsburg-subregion">Healdsburg</div>
+    <div class="subregion-button" id="yountville-subregion">Yountville</div>
+  </div>
+  <div class="subregions-container" id="southbay-subregions">
+    <div class="subregion-button" id="burlingame-subregion">Burlingame</div>
+    <div class="subregion-button" id="losgatos-subregion">Los Gatos</div>
+  </div>
+  <div class="subregions-container" id="eastbay-subregions">
+    <div class="subregion-button" id="berkeley-subregion">Berkeley</div>
+    <div class="subregion-button" id="oakland-subregion">Oakland</div>
+    <div class="subregion-button" id="portcosta-subregion">Port Costa</div>
+  </div>
+{% endif %}
+
 <div class="restaurant-container">
 <div class="restaurant-inner-container">
 {% for r in restaurants %}
   {% set photos = r.wcm_img.split(' ') %}
+
+  {% if (collection == "regions" or collection == "cuisines") %}
+
+    <div class="restaurant active" target="_blank">
+        <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
+      </a>
+      <div class="name">
+        <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
+        <div class="favorites">
+          Save
+          <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
+        </div>
+      </div>
+      <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
+    </div>
+
+  {% endif %}
 
   {% if (collection == "brunch" and r.Brunch != "No") %}
     <div class="restaurant active" target="_blank">
@@ -77,3 +124,5 @@
 </div>
 
 {% include 'components/_footer.html' %}
+
+<script src="/static/scripts/collections.js"></script>

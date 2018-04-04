@@ -1,0 +1,36 @@
+
+.regions-container {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.region-button, .subregion-button {
+  padding: 5px 20px;
+  display: inline-block;
+  color: @main;
+  background: lighten(@light-gray,26%);
+  font-family: @logo2;
+  font-weight: 800;
+  &:hover {
+    background: @light-gray;
+    cursor: pointer;
+    color: black;
+  }
+  &.active {
+    background: @light-gray;
+    cursor: pointer;
+    color: black;
+  }
+}
+
+.subregions-container {
+  max-width: 1400px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  display: none;
+  &.active {
+    display: block;
+  }
+}
