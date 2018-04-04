@@ -51,17 +51,11 @@
 {% endif %}
 
 {% if (collection == "cuisines") %}
-  {% set cuisineList = '' %}
+  {% set cuisineList = 'American','Chinese','Drink-centric','French','Greek','Hawaiian','Indian','International','Italian','Japanese','Mexican','Moroccan','Northern California','Rotisserie','Seafood','Spanish','Thai','Vietnamese' %}
   <div class="cuisines-container">
-    {% for r in restaurants %}
-      {% set cuisineNameList = r.Cuisine.split('and') %}
-      {% for n in cuisineNameList %}
-        {% if n not in cuisineList %}
-          {% set cuisineName = n.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
-          <div class="cuisine-button" id="{{cuisineName}}-cuisine">{{n}}</div>
-        {% endif %}
-      {% endfor %}
-      {% set cuisineList = cuisineList + " " + r.Cuisine %}
+    {% for c in cuisineList %}
+      {% set cuisineName = c.lower().replace('-','').replace(' ','').replace(',',' ').replace('/',' ') %}
+      <div class="cuisine-button" id="{{cuisineName}}-cuisine">{{c}}</div>
     {% endfor %}
   </div>
 {% endif %}
@@ -75,7 +69,7 @@
 
     {% set regionName = r.Region.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
     {% set subregionName = r.SubRegion.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
-    {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ').replace('and',' ') %}
+    {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ').replace('and',' ').replace('-','') %}
 
     <div class="restaurant active {{ regionName }} {{ subregionName }} {{cuisineName}}" target="_blank">
         <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
