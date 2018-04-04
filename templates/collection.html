@@ -31,7 +31,7 @@
     <div class="subregion-button" id="soma-subregion">SoMa</div>
     <div class="subregion-button" id="mission-subregion">Mission</div>
     <div class="subregion-button" id="financialdistrict-subregion">Financial District</div>
-    <div class="subregion-button" id="presidio-subregion">SoMa</div>
+    <div class="subregion-button" id="presidio-subregion">Presidio</div>
   </div>
   <div class="subregions-container" id="northbay-subregions">
     <div class="subregion-button" id="napa-subregion">Napa</div>
@@ -57,7 +57,10 @@
 
   {% if (collection == "regions" or collection == "cuisines") %}
 
-    <div class="restaurant active" target="_blank">
+    {% set regionName = r.Region.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
+    {% set subregionName = r.SubRegion.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
+
+    <div class="restaurant active {{ regionName }} {{ subregionName }}" target="_blank">
         <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
       </a>
       <div class="name">

@@ -35,8 +35,40 @@ document.getElementById("eastbay-region").addEventListener("click",function(){
   checkRestaurants("eastbay");
 });
 
+// buttons for subregions
+var subregionsButtons = document.getElementsByClassName("subregion-button")
+var td;
+for (var t = 0; t < subregionsButtons.length; t++){
+  td = document.getElementById(subregionsButtons[t].id);
+  if (typeof window.addEventListener === 'function'){
+    (function (_td) {
+      td.addEventListener('click', function(){
+        $(".subregion-button").removeClass("active");
+        _td.classList.add("active");
+        checkRestaurants(_td.id.split("-")[0])
+      });
+    })(td);
+  };
+}
+
+
 function checkRestaurants(key){
 
+  $(".restaurant").filter(function() {
 
+    // check all the classes for the restaurant
+    var classes = this.className.toLowerCase().split(" ");
+
+    // check region
+    region_flag = (classes.indexOf(key.toLowerCase())>0);
+
+    // show it if yes
+    if (region_flag == 1){
+      $(this).addClass("active");
+    } else {
+      $(this).removeClass("active");
+    }
+
+  });
 
 }
