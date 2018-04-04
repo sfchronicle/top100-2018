@@ -74,12 +74,12 @@
 </div>
 
 {% if (homepage) %}
-  <div class="secondary-link-container-mobile">
-{% else %}
   <div class="secondary-link-container-mobile homepage">
+{% else %}
+  <div class="secondary-link-container-mobile active">
 {% endif %}
 
-  <div class="link secondary-link search {{homepage}}" id="search-button"><a href="https://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+  <div class="link secondary-link search {{homepage}}" id="search-button"><a href="http://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
   <div class="link secondary-link {{map}}"><a href="http://localhost:8000/map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
