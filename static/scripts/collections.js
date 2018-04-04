@@ -5,6 +5,7 @@ document.getElementById("sf-region").addEventListener("click",function(){
   $(".subregions-container").removeClass("active");
   document.getElementById("sf-region").classList.add("active");
   document.getElementById("sf-subregions").classList.add("active");
+  checkRestaurants("sanfrancisco");
 });
 
 document.getElementById("northbay-region").addEventListener("click",function(){
@@ -13,6 +14,7 @@ document.getElementById("northbay-region").addEventListener("click",function(){
   $(".subregions-container").removeClass("active");
   document.getElementById("northbay-region").classList.add("active");
   document.getElementById("northbay-subregions").classList.add("active");
+  checkRestaurants("northbay");
 });
 
 document.getElementById("southbay-region").addEventListener("click",function(){
@@ -21,6 +23,7 @@ document.getElementById("southbay-region").addEventListener("click",function(){
   $(".subregions-container").removeClass("active");
   document.getElementById("southbay-region").classList.add("active");
   document.getElementById("southbay-subregions").classList.add("active");
+  checkRestaurants("southbay");
 });
 
 document.getElementById("eastbay-region").addEventListener("click",function(){
@@ -29,4 +32,11 @@ document.getElementById("eastbay-region").addEventListener("click",function(){
   $(".subregions-container").removeClass("active");
   document.getElementById("eastbay-region").classList.add("active");
   document.getElementById("eastbay-subregions").classList.add("active");
+  checkRestaurants("eastbay");
 });
+
+function checkRestaurants(key){
+
+
+
+}
