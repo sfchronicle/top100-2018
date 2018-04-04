@@ -48,7 +48,8 @@ def index():
   return render_template(
     'index.html',
     restaurants=restaurants,
-    intro=intro
+    intro=intro,
+    homepage="homepage"
   )
 
 @app.route('/guides/<collection>/')

@@ -10,8 +10,6 @@
     <div class="link" id="top100-nav-link"><a href="http://localhost:8000"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
   {% endif %}
 
-
-  {% if restaurant %}
    <div class="social-link email">
     <a id="mail-icon" title="Share via email" href="mailto:?subject=<%= grunt.data.json.project.title_landing %>&body=<%= grunt.data.json.project.description_landing %>%0A%0Ahttp%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>">
       <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -30,7 +28,6 @@
     </a>
   </div>
 
-  {% endif %}
 
   {% if collection == "regions" %}
   {% set regions = "regions" %}
@@ -52,13 +49,13 @@
   {% set new = "new" %}
   {% endif %}
 
-  {% if (collection or map) %}
-    <div class="secondary-link-container active">
-  {% else %}
+  {% if (homepage) %}
     <div class="secondary-link-container">
+  {% else %}
+    <div class="secondary-link-container active">
   {% endif %}
 
-     <div class="link secondary-link search"><a href="http://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+     <div class="link secondary-link search {{homepage}}"><a href="http://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
      <div class="link secondary-link {{map}}"><a href="http://localhost:8000/map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
@@ -76,13 +73,13 @@
 
 </div>
 
-{% if (collection or map) %}
-  <div class="secondary-link-container-mobile active">
-{% else %}
+{% if (homepage) %}
   <div class="secondary-link-container-mobile">
+{% else %}
+  <div class="secondary-link-container-mobile homepage">
 {% endif %}
 
-  <div class="link secondary-link active" id="search-button"><a href="https://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+  <div class="link secondary-link search {{homepage}}" id="search-button"><a href="https://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
   <div class="link secondary-link {{map}}"><a href="http://localhost:8000/map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
