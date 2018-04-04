@@ -5,9 +5,9 @@
   </div>
 
   {% if (collection or map) %}
-    <div class="link active" id="top100-nav-link"><a href="../"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
+    <div class="link active" id="top100-nav-link"><a href="http://localhost:8000"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
   {% else %}
-    <div class="link" id="top100-nav-link"><a href="../"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
+    <div class="link" id="top100-nav-link"><a href="http://localhost:8000"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
   {% endif %}
 
 
@@ -30,7 +30,27 @@
     </a>
   </div>
 
-   {% endif %}
+  {% endif %}
+
+  {% if collection == "regions" %}
+  {% set regions = "regions" %}
+  {% endif %}
+
+  {% if collection == "cuisines" %}
+  {% set cuisines = "cuisines" %}
+  {% endif %}
+
+  {% if collection == "brunch" %}
+  {% set brunch = "brunch" %}
+  {% endif %}
+
+  {% if collection == "classics" %}
+  {% set classics = "classics" %}
+  {% endif %}
+
+  {% if collection == "new" %}
+  {% set new = "new" %}
+  {% endif %}
 
   {% if (collection or map) %}
     <div class="secondary-link-container active">
@@ -38,19 +58,19 @@
     <div class="secondary-link-container">
   {% endif %}
 
-     <div class="link secondary-link active"><a href="./#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+     <div class="link secondary-link search"><a href="http://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
-     <div class="link secondary-link"><a href="../map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+     <div class="link secondary-link {{map}}"><a href="http://localhost:8000/map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
-     <div class="link secondary-link"><a href="../guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
+     <div class="link secondary-link {{regions}}"><a href="http://localhost:8000/guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
 
-     <div class="link secondary-link"><a href="../guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+     <div class="link secondary-link {{cuisines}}"><a href="http://localhost:8000/guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
 
-     <div class="link secondary-link"><a href="../guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+     <div class="link secondary-link {{brunch}}"><a href="http://localhost:8000/guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
 
-     <div class="link secondary-link"><a href="../guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+     <div class="link secondary-link {{classics}}"><a href="http://localhost:8000/guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
 
-     <div class="link secondary-link"><a href="../guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+     <div class="link secondary-link {{new}}"><a href="http://localhost:8000/guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
    </div>
 
 
@@ -62,18 +82,18 @@
   <div class="secondary-link-container-mobile">
 {% endif %}
 
-  <div class="link secondary-link active" id="search-button"><a href="./#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+  <div class="link secondary-link active" id="search-button"><a href="https://localhost:8000/#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
-  <div class="link secondary-link"><a href="../map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+  <div class="link secondary-link {{map}}"><a href="http://localhost:8000/map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
-  <div class="link secondary-link"><a href="../guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
+  <div class="link secondary-link {{regions}}"><a href="http://localhost:8000/guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
 
-  <div class="link secondary-link"><a href="../guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+  <div class="link secondary-link {{cuisines}}"><a href="http://localhost:8000/guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
 
-  <div class="link secondary-link"><a href="../guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+  <div class="link secondary-link {{brunch}}"><a href="http://localhost:8000/guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
 
-  <div class="link secondary-link"><a href="../guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+  <div class="link secondary-link {{classics}}"><a href="http://localhost:8000/guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
 
-  <div class="link secondary-link"><a href="../guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+  <div class="link secondary-link {{new}}"><a href="http://localhost:8000/guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
 
 </div>
