@@ -50,8 +50,10 @@ function activate() {
   var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 46;
   if (window_top > intro_top){
     $("#top100-nav-link").addClass("active");
+    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfletter_c_black.png");
   } else {
     $("#top100-nav-link").removeClass("active");
+    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfc_logo_black.png");
   }
   if (window_top > div_top) {
     $(".secondary-link-container").addClass("active");
@@ -70,8 +72,12 @@ function activateMobile() {
   var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 46;
   if (window_top > intro_top){
     $("#top100-nav-link").addClass("active");
+    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfletter_c_black.png");
   } else {
     $("#top100-nav-link").removeClass("active");
+    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfc_logo_black.png");
+
+    
   }
   if (window_top > div_top) {
     $(".secondary-link-container-mobile").addClass("active");

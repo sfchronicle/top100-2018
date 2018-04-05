@@ -1,11 +1,10 @@
 
 .top100, .top100-top, .year{
-	// font-family: @sans-serif;
   font-family: @logo2;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: @main;
-  font-size: 25px;
+  font-size: 21px;
 }
 
 #top100-nav-link{
@@ -13,6 +12,7 @@
   -webkit-transition: opacity 500ms linear;
   -ms-transition: opacity 500ms linear;
   transition: opacity 500ms linear;
+  line-height:0;
   &.active {
     opacity: 1;
   }
@@ -33,13 +33,11 @@
 
 .rest{
   font-family: @logo2;
-	// font-family: @sans-serif-light;
   text-transform: uppercase;
   color: black;
   font-weight:100;
   letter-spacing: 1px;
-  font-size: 25px;
-  padding-top: 5px;
+  font-size: 21px;
 
   &.top{
   	font-size:20px;
@@ -56,7 +54,9 @@
   left: 0;
   right: 0;
   height: 52px;
-  box-shadow: 0 1px 1px 1px #ccc;
+  box-shadow: 0 1px 1px 0px #ccc;
+  z-index:2019;
+
   @media @mobile {
     top: 70px;
   }
@@ -69,38 +69,30 @@
   }
 }
 
-.link {
-  padding-top: 5px;
-  @media @mobile {
-    padding-top: 0px;
-  }
-}
 
 
 #top-nav{
   box-shadow: 0 1px 1px 1px #ccc;
   position: fixed;
   height:46px;
-  
-  a, .link, .logo-link {
-    display: inline-block;
-    vertical-align: top;
-  }
+  top:0;
+  width:100%;
+  z-index:2018;
+  background:#fff;
+  .display-flex;
+  .align-items(center);
 
-  @media @mobile {
+  @media @width1100 {
   	height: 40px;
 
   	.top100.top {
   		font-size: 15px;
   	}
   }
+
 	.top100-top {
-		font-size: 25px;
-    vertical-align: top;
-    padding-top: 5px;
     font-weight: 800;
-    // margin-right: 5px;
-	}
+  }
 
   div.link {
   	.rest {
@@ -116,28 +108,35 @@
 	  	}
   	}
   }
+
+  .logo{
+
+    .img{
+      -webkit-transition: opacity 500ms linear;
+      -ms-transition: opacity 500ms linear;
+      transition: opacity 500ms linear;
+    }
+  }
 }
 
-.link, .logo-link {
-	display: inline-block;
-	a {
-		display: inline-block;
-		height: 100%;
-		width: 100%;
-	}
+#social-links{
+  position:fixed;
+  top:0;
+  right:0;
 }
 
 .secondary-link-container, .secondary-link-container-mobile {
-  display: inline-block;
+
   opacity: 0;
-  float: center;
   -webkit-transition: opacity 500ms linear;
   -ms-transition: opacity 500ms linear;
   transition: opacity 500ms linear;
   margin-left: 10px;
+
   &.active {
     opacity: 1;
   }
+
   @media @mobile {
     -webkit-transition: opacity 10ms linear;
     -ms-transition: opacity 10ms linear;
@@ -147,34 +146,41 @@
 
 .secondary-link-container-mobile {
   display: none;
-  @media @mobile {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  z-index: 999;
+  height: 37px;
+  background: white;
+  -webkit-box-shadow: 0 0 6px 0 #ccc;
+  -moz-box-shadow: 0 0 6px 0 #ccc;
+  box-shadow: 0 0 6px 0 #ccc;
+
+  .secondary-link{
+    float:left;   
+    padding: 1px 3px;
+  }
+
+  @media @width1100 {
     display: block;
-    position: fixed;
-    top: 37px;
-    left: 0;
-    right: 0;
-    margin-left: 0;
-    z-index: 999;
-    height: 37px;
-    background: white;
-    -webkit-box-shadow: 0 0 6px 0 #696969;
-    -moz-box-shadow: 0 0 6px 0 #696969;
-    box-shadow: 0 0 6px 0 #696969;
   }
 }
 
 .secondary-link-container {
-  @media @mobile {
+  .display-flex;
+  height:100%;
+
+  @media @width1100 {
     display: none;
   }
 }
 
 .secondary-link {
   color: white;
-  height: 46px;
-  top: 0;
-  float: left;
-  margin: 0 1px;
+  padding:5px;
+
   @media @mobile {
     margin: 0 0 2px 0;
     height: 37px;
@@ -210,22 +216,20 @@
   }
 }
 
-.logo-link{
-    padding-top: 5px;
-    line-height:1;
-		margin-left: 10px;
-    margin-right: 5px;
-		top:0;
-		height: 100%;
+.logo{
+	margin: 0 10px;
+  line-height:0;
 
-    img{
-    	height: 21px;
-      @media @mobile {
-        height: 28px;
-      }
-    }
-
-  .link{
-    margin: 0 auto;
+  img{
+  	height: 20px;
   }
+}
+
+// jQuery UI styles
+.ui-widget.ui-widget-content{
+    z-index:2019;
+}
+
+.ui-menu .ui-menu-item{
+    width:100%;
 }
