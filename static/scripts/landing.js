@@ -119,6 +119,9 @@ $("#search-bar input").on("input", function(){
 
 // Finds and displays results that match the term
 var findMatches = function(term){
+  // Scroll user back to stop to observe results
+  $('body,html').animate({ scrollTop: $('#restaurants').position().top-80 }, 150);
+
   var searchTerm = term.toLowerCase();
   var matchingEntries = $(".restaurant").filter(function() {
     if ($(this).attr("class").toLowerCase().indexOf(searchTerm) != -1){
@@ -540,21 +543,4 @@ function check_filters() {
 //   document.body.classList.remove("noverflow");
 // });
 
-// navigation controls ---------------------------------------------------------
 
-// filter button on mobile scrolls to top
-$('#filter-btn').on('click', function(){
-    $('body,html').animate({ scrollTop: $('#search').position().top },150);
-});
-
-// show the bottom nav only on small screens and after certain scroll height
-$(document).scroll(function() {
-  var y = $(this).scrollTop();
-  var topDiv = $('#header').outerHeight( true )-10;
-  var x = $(this).width();
-  if (y > topDiv && x < 650){
-    $('#bottom-nav').show();
-  } else {
-    $('#bottom-nav').hide();
-  }
-});
