@@ -115,6 +115,13 @@ $( "#search-bar input" ).autocomplete({
 // Find matches while typing
 $("#search-bar input").on("input", function(){
   findMatches($(this).val());
+
+  // If there's a value in the search bar, allow cancel
+  if ($(this).val()){
+    $(".cancel-search").show();
+  } else {
+    $(".cancel-search").hide();
+  }
 });
 
 // Finds and displays results that match the term
@@ -158,11 +165,22 @@ var findMatches = function(term){
 
   // Don't show results if it's the full list
   if (count < 100){
-    $('#count-results').removeClass("hide");
+    $('#count-results').show();
   } else {
-    $('#count-results').addClass("hide");
+    $('#count-results').hide();
   }
 }
+
+// Cancel search by pressing the X button
+$(".cancel-search").on("click", function(){
+  showAllRestaurants();
+
+  // Hide button
+  $(this).hide();
+
+  // Wipe text
+  $("#search-bar input").val("");
+});
 
 // check for log on information on load ------------------------------------------------
 
@@ -398,38 +416,10 @@ qsa(".check-restaurant").forEach(function(restaurant,index) {
 
 // function to show all restaurants ------------------------------------------------------------------
 
-function showall_function() {
-
+function showAllRestaurants() {
   count = 100;
-
-  document.getElementById("restaurants-wrap").classList.remove("hide");
-  document.getElementById("intro-container").classList.add("hide");
-
-  var button_list = document.getElementsByClassName("button");
-  for (var i=0; i<button_list.length; i++) {
-    button_list[i].classList.remove("selected");
-  };
-
-  document.getElementById("showall").classList.add("selected");
-
-  document.getElementById('searchrestaurants').value = "";
-  document.getElementById('brunch').value = "all";
-  document.getElementById('new').value = "all";
-
-  document.getElementById('no-saved-restaurants').classList.add("hide");
-  document.getElementById('no-checked-restaurants').classList.add("hide");
-  document.getElementById("search-noresults").classList.add("hide");
-
-  selCuisine.selectedIndex = 0;
-  selNeighborhoods.selectedIndex = 0;
-  selNoise.selectedIndex = 0;
-  selPrice.selectedIndex = 0;
-
-  $(".restaurant").filter(function() {
-    $(this).addClass("active");
-  });
-  document.getElementById('count-results').classList.add("hide");
-
+  $(".restaurant").addClass("active");
+  $("#count-results").hide();
 }
 
 
