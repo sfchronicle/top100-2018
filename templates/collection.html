@@ -28,20 +28,21 @@
     <div class="region-button" id="eastbay-region">East Bay</div>
   </div>
   <div class="subregions-container" id="sf-subregions">
-    <div class="subregion-button" id="soma-subregion">SoMa</div>
-    <div class="subregion-button" id="mission-subregion">Mission</div>
-    <div class="subregion-button" id="financialdistrict-subregion">Financial District</div>
-    <div class="subregion-button" id="presidio-subregion">Presidio</div>
+    {% set sfsubs = 'Castro','Chinatown','Civic Center','Dogpatch','Embarcadero','Financial District','Hayes Valley','Marina/Cow Hollow','Mission','Noe Valley','NoPa','North Beach','Pacific Heights','Presidio','Russian Hill/Nob Hill','SoMa','South Beach','Tenderloin','The Richmond','Union Square','Western Addition' %}
+    {% for c in sfsubs %}
+      {% set subname = c.lower().replace('-','').replace(' ','').replace(',',' ').replace('/',' ') %}
+      <div class="subregion-button" id="{{subname}}-subregion">{{c}}</div>
+    {% endfor %}
   </div>
   <div class="subregions-container" id="northbay-subregions">
-    <div class="subregion-button" id="napa-subregion">Napa</div>
-    <div class="subregion-button" id="sonoma-subregion">Sonoma</div>
-    <div class="subregion-button" id="healdsburg-subregion">Healdsburg</div>
-    <div class="subregion-button" id="yountville-subregion">Yountville</div>
+    {% set northbaysubs = 'Healdsburg','Napa','San Anselmo','Sausalito','Sonoma','St. Helena','Yountville'%}
+    {% for c in northbaysubs %}
+      {% set subname = c.lower().replace('-','').replace(' ','').replace(',',' ').replace('/',' ') %}
+      <div class="subregion-button" id="{{subname}}-subregion">{{c}}</div>
+    {% endfor %}
   </div>
   <div class="subregions-container" id="southbay-subregions">
-    <div class="subregion-button" id="burlingame-subregion">Burlingame</div>
-    <div class="subregion-button" id="losgatos-subregion">Los Gatos</div>
+    <!-- <div class="subregion-button" id="millbrae-subregion">Millbrae</div> -->
   </div>
   <div class="subregions-container" id="eastbay-subregions">
     <div class="subregion-button" id="berkeley-subregion">Berkeley</div>
