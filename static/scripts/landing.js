@@ -145,6 +145,15 @@ var findMatches = function(term){
   if (count == 1){
     resultText = " result";
   }
+
+  // Special handling for no results
+  if (count == 0){
+    $(".search-noresults").show();
+  } else {
+    $(".search-noresults").hide();
+  }
+
+  // Show results
   $('#count-results').text(count + resultText);
 
   // Don't show results if it's the full list
