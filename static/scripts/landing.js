@@ -80,6 +80,17 @@ function activateMobile() {
   }
 }
 
+// Give restaurants that haven't been seen yet a little flag
+$(function(){
+  var restaurantCookie = getCookie("sfc_top100_2018");
+  $(".restaurant").each(function(){
+    if (restaurantCookie.indexOf($(this).attr("id")) == -1){
+      $(this).find(".border").addClass("unseen");
+    }
+  });
+});
+
+
 // search bar code -------------------------------------------------------------
 // IMPORTANT: Keep this updated with filter options
 function getFilterList() {
@@ -406,10 +417,7 @@ qsa(".check-restaurant").forEach(function(restaurant,index) {
       document.body.classList.add("noverflow");
 
     }
-
   });
-
-
 });
 
 
