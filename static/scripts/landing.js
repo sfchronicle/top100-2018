@@ -203,13 +203,15 @@ $(".cancel-search").on("click", function(){
 
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // temporary code for testing ---------------------------
-var edbId = "11220453";
+var identity = {
+  edbId: "11220453"
+}
 var restaurantList;
 var saveTimer;
 
 function setCheckUser(delay, repetitions, success, error) {
-  if (edbId) {
-    success(edbId);
+  if (identity.edbId) {
+    success(identity.edbId);
     console.log("SET USER SUCCESS");
   } else {
     error();
@@ -301,10 +303,10 @@ function getData() {
   $.ajax({
     method: "GET",
     dataType: "json",
-    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist/" + edbId,
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + edbId,
     error: function(msg) {
       restaurantList = [];
-      // console.log("fail");
+      console.log("fail");
     },
     success: function(data) {
       // console.log("success");
@@ -317,17 +319,13 @@ function getData() {
   });
 }
 
-// set stars and checks on load for a particular user
+// set checks on load for a particular user
 function setIcons() {
   savedData.forEach(function(saveID){
     var elem = document.getElementById(saveID);
-    if ($("i", elem).hasClass("fa-star-o")) {
-      $("i", elem).toggleClass("fa-star-o fa-star");
-    }
     if ($("i", elem).hasClass("fa-square-o")) {
       $("i", elem).toggleClass("fa-square-o fa-check-square-o");
     }
-    // $("i", elem).toggleClass("fa-star-o fa-star");
   });
 }
 
@@ -342,60 +340,20 @@ function saveNewData() {
   // console.log("SENDING DATA ");
   // console.log(JSON.stringify(newSavedData));
   $.ajax({
-      method: "POST",
-      data: JSON.stringify(newSavedData),
-      contentType: "application/json",
-      success: function(msg) { console.log("success"); },
-      error: function(msg) { console.log("fail"); },
-      url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2017/checklist"
-    });
-  //   return false;
-  // });
+    method: "POST",
+    data: JSON.stringify(newSavedData),
+    contentType: "application/json",
+    success: function(msg) { console.log("success"); },
+    error: function(msg) { console.log("fail"); },
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist"
+  });
 }
 
 qsa(".save-restaurant").forEach(function(restaurant,index) {
-  restaurant.addEventListener("click", function(e) {
+  restaurant.addEventListener("click", function(e) {xw
     // console.log(restaurant.id);
 
     if (restaurantList) {
-      $("i", this).toggleClass("fa-star-o fa-star");
-
-      // console.log(savedData);
-      // console.log(restaurantList);
-
-      // are we adding or removing the restaurant from the list?
-      if(  $("i", this).hasClass("fa-star") ) {
-        // console.log("we do not have this restaurant yet");
-        restaurantList.push(restaurant.id);
-        // console.log(restaurantList);
-      } else {
-        // console.log("we need to remove this restaurant")
-        var index = restaurantList.indexOf(restaurant.id);
-        restaurantList.splice(index,1);
-        // console.log(restaurantList);
-      }
-
-      // save new data
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(saveNewData(),timeTimeout);
-
-    } else {
-
-      document.getElementById("log-in-instructions").classList.add("show");
-      document.body.classList.add("noverflow");
-
-    }
-
-  });
-
-});
-
-qsa(".check-restaurant").forEach(function(restaurant,index) {
-  restaurant.addEventListener("click", function(e) {
-    // console.log(restaurant.id);
-
-    if (restaurantList) {
-
       $("i", this).toggleClass("fa-square-o fa-check-square-o");
 
       // console.log(savedData);
@@ -423,9 +381,10 @@ qsa(".check-restaurant").forEach(function(restaurant,index) {
       document.body.classList.add("noverflow");
 
     }
-  });
-});
 
+  });
+
+});
 
 
 // function to show all restaurants ------------------------------------------------------------------
