@@ -1,16 +1,98 @@
+.lead-container {
+	
+	.display-flex;
+	background:#000;
+	.align-items(center);
 
-// #lead-image {
-//   text-align: center;
-//   width: 100%;
-//   // max-width: 1400px;
-//   margin: auto;
-//   overflow: hidden;
-//   height: 600px;
-//   background-size: cover;
-//   // background-image: url(http://ww3.hdnux.com/photos/60/22/02/12565595/7/1400x900.jpg);
-//   background-image: url(../photos/tsukiji0910_ph.1.jpg);
-//   background-position: center;
-// }
+	@media @width1200{
+		.flex-direction(column-reverse);
+		padding-bottom:20px;
+	}
+
+	.overlay-container {
+		.flex(0 0 35%);
+		padding:0 2%;
+
+		@media @width1200{
+			margin-top:20px;
+		}
+	}
+
+	.lead-desktop {
+
+		.flex(1 0 50%);
+		line-height:0;
+
+		img{
+			width:100%;
+		}
+
+	}
+
+	.overlay {
+		color: white;
+
+		.link{
+			line-height:1.2;
+			padding-bottom:10px;
+		}
+
+		@media @width1200{
+			text-align:center;
+		}
+	}
+
+	.deck {
+		padding-top: 20px;
+		font-size:17px;
+		border-top:1px solid #ccc;
+		text-align:left;
+		
+		@media @mobile {
+			font-size:15px;
+		}
+	}
+
+	#buttons{
+		margin-top:15px;
+	}
+
+	.instructions {
+		padding: 5px 10px;
+		font-size: 13px;
+		text-transform:uppercase;
+		font-family:@sans-serif-bold;
+		margin:0 5px;
+		background:darken(@main, 19%);
+		float:left;
+
+		.fa {
+			font-size: 22px;
+		}
+		cursor: pointer;
+	}
+	.top-date {
+		color: white;
+		border-bottom: 1px solid @light-gray;
+		font-family: @logo-script;
+		font-size: 20px;
+	}
+	.top100-hed, .top100-hed-rest {
+		font-family: @logo2;
+		font-size: 50px;
+		text-transform: uppercase;
+		color:@main;
+
+		@media @width1200{
+			font-size:35px;
+			text-align:center;
+		}
+	}
+	.top100-hed-rest {
+		color: white;
+	}
+}
+
 
 #lead-image {
   img {

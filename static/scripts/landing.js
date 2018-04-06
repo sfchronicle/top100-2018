@@ -16,9 +16,17 @@ var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 var timeTimeout = 5000;
 
 // smooth scroll to skip reading Michael's intro if you want
-document.getElementById("instructions").addEventListener("click",function(){
+document.getElementById("restaurants").addEventListener("click",function(){
     // top position relative to the document
     var pos = $("#search-stick-here").offset().top-30;
+    // animated top scrolling
+    $('body, html').animate({scrollTop: pos});
+});
+
+// smooth scroll to read Michael's intro
+document.getElementById("introduction").addEventListener("click",function(){
+    // top position relative to the document
+    var pos = $("#intro").offset().top-60;
     // animated top scrolling
     $('body, html').animate({scrollTop: pos});
 });
@@ -47,7 +55,7 @@ function activate() {
   var sticker_ph = document.getElementById('search-stick-ph');
   var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
   var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
-  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 46;
+  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 70;
   if (window_top > intro_top){
     $("#top100-nav-link").addClass("active");
     $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfletter_c_black.png");
