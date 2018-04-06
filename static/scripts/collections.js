@@ -1,6 +1,8 @@
 
+// if we are on the "Regions" collection, implement "Regions" buttons and drop-downs
 if (document.getElementById("sf-region")){
 
+  // if reader clicks on "SF" region, show appropriate sub-regions and filter
   document.getElementById("sf-region").addEventListener("click",function(){
     $(".region-button").removeClass("active");
     $(".subregion-button").removeClass("active");
@@ -10,6 +12,7 @@ if (document.getElementById("sf-region")){
     checkRestaurants("sanfrancisco");
   });
 
+  // if reader clicks on "North Bay", show appropriate sub-regions and filter
   document.getElementById("northbay-region").addEventListener("click",function(){
     $(".region-button").removeClass("active");
     $(".subregion-button").removeClass("active");
@@ -19,6 +22,7 @@ if (document.getElementById("sf-region")){
     checkRestaurants("northbay");
   });
 
+  // if reader clicks on "South Bay", show appropriate sub-regions and filter
   document.getElementById("southbay-region").addEventListener("click",function(){
     $(".region-button").removeClass("active");
     $(".subregion-button").removeClass("active");
@@ -28,6 +32,7 @@ if (document.getElementById("sf-region")){
     checkRestaurants("southbay");
   });
 
+  // if reader clicks on "East Bay", show appropriate sub-regions and filter
   document.getElementById("eastbay-region").addEventListener("click",function(){
     $(".region-button").removeClass("active");
     $(".subregion-button").removeClass("active");
@@ -39,12 +44,16 @@ if (document.getElementById("sf-region")){
 
 }
 
+// if we are on the "Cuisines" collection, implement "Cuisines" buttons and drop-downs
 if (document.getElementById("select-regions")){
 
+  // these are our 4 drop-downs for mobile
   var chooseRegion = document.getElementById('select-regions');
   var chooseEastbay = document.getElementById('select-eastbay-subregions');
   var chooseNorthbay = document.getElementById('select-northbay-subregions');
   var chooseSF = document.getElementById('select-sf-subregions');
+
+  // if reader picks a "region", show appropriate sub-region dropdowns and reset various things and filter results
   chooseRegion.addEventListener('change', function(d) {
     var key = chooseRegion.value.split("-")[0];
     console.log(key);
@@ -56,16 +65,19 @@ if (document.getElementById("select-regions")){
     check_dropdowns(key);
   });
 
+  // if reader chooses "East Bay", filter results
   chooseEastbay.addEventListener('change', function(d) {
     var key = chooseEastbay.value.split("-")[0];
     check_dropdowns(key);
   });
 
+  // if reader chooses "North Bay", filter results
   chooseNorthbay.addEventListener('change', function(d) {
     var key = chooseNorthbay.value.split("-")[0];
     check_dropdowns(key);
   });
 
+  // if reader chooses "SF", filter results
   chooseSF.addEventListener('change', function(d) {
     var key = chooseSF.value.split("-")[0];
     check_dropdowns(key);
@@ -73,8 +85,11 @@ if (document.getElementById("select-regions")){
 
 }
 
+// implementing "Cuisines" drop downs is much easier because we don't have sub-filters
+// only implement this drop down if we are on the "Cuisines" page
 if (document.getElementById("select-cuisine")){
 
+  // filter results based on "Cuisines" drop down select value
   var chooseCuisine = document.getElementById('select-cuisine');
   chooseCuisine.addEventListener('change', function(d) {
     var key = chooseCuisine.value.split("-")[0];
@@ -116,7 +131,7 @@ for (var t = 0; t < cuisinesButtons.length; t++){
   };
 }
 
-
+// this is our function for filtering results based on buttons (aka Desktop filtering)
 function checkRestaurants(key){
 
   $(".restaurant").filter(function() {
@@ -138,6 +153,7 @@ function checkRestaurants(key){
 
 }
 
+// this is our function for filtering results based on buttons (aka Mobile filtering)
 function check_dropdowns(key) {
 
   console.log(key);
