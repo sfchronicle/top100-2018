@@ -4,7 +4,7 @@
   z-index: 3000;
   background: rgba(0, 0, 0, 0.5);
   font-size: 20px;
-  font-family: @title;
+  font-family: @banner;
   top: 0;
   height: 100%;
   left: 0;
@@ -19,7 +19,7 @@
 
 .login-header{
   font-size: 16px;
-  font-family: @title;
+  font-family: @banner;
   padding: 5px 0 10px 0;
   margin-bottom: 5px;
   text-align: center;
@@ -28,7 +28,13 @@
 
 
 #exit{
-  cursor:pointer;
+  cursor: pointer;
+  border: 2px solid @dark-gray;
+  border-radius: 5px;
+  background: white;
+  width: 35px;
+  float: right;
+  color: @dark-gray;
 }
 .hidden{
 	display:none;
@@ -50,7 +56,7 @@
 	cursor: pointer;
 	text-transform: uppercase;
 	color: white;
-	font-family: @sans-serif-light;
+	font-family: @banner;
 	font-size: 11px;
 
 	@media @mobile{
@@ -83,6 +89,10 @@
   display: none !important;
 }
 
+.subscribe .gya-btn {
+  outline: inherit !important;
+}
+
 h6.treg-conditional.treg-is-premium.gya-vcenter{
   display: none !important;
 }
@@ -90,7 +100,7 @@ h6.treg-conditional.treg-is-premium.gya-vcenter{
   height:40px;
 }
 .no-sub{
-  font-family: "Sanchez Bold",serif;
+  font-family: @banner, serif;
   font-size: 14px;
   font-weight: normal;
   margin: 10px auto;

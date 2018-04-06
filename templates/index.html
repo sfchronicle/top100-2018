@@ -29,8 +29,8 @@
         <!-- Gigya signin -->
         <div class="treg-is-gigya gigya_menu" >
           <div class="gigya-login">
-          <div id="exit">X</div>
-            <div class="login-header">Login with your subscription account to save restaurants to "My List" and/or "Favorites."</div>
+          <div id="exit"><i class="fa fa-close"></i></div>
+            <div class="login-header">Log in with your subscription account to save restaurants to your list.</div>
             <div class="treg-gya-login-widget"></div>
             <div class="subscribe">
               <h6 class="no-sub">Don't have a subscription?</h6>
@@ -122,7 +122,7 @@
             </a>
             <div class="name">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
-              <div class="favorites">
+              <div class="save-button">
                 Save
                 <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
               </div>
@@ -142,7 +142,7 @@
 
     </div><!-- Closing #container -->
 
-    <script src="/static/scripts/landing.js"></script>
+    <script src="{{ url_for('index') }}static/scripts/landing.js"></script>
 
   </body>
 </html>

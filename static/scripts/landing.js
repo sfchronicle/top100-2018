@@ -9,9 +9,6 @@ Array.prototype.min = function() {
 // variable to keep track of number of restaurants displayed
 var count = 100;
 
-// defining function for looking at multiple elements
-var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
-
 // how long to wait before saving
 var timeTimeout = 5000;
 
@@ -107,7 +104,6 @@ $(function(){
 
 // search bar code -------------------------------------------------------------
 // IMPORTANT: Keep this updated with filter options
-console.log("cuisineString", cuisineString, typeof cuisineString);
 function getFilterList() {
   // NOTE: If we want to curate these instead of pull them dynamically off list
   // Replace the vars below with a complete array of autocomplete options
@@ -212,125 +208,91 @@ $(".cancel-search").on("click", function(){
 
 // DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // temporary code for testing ---------------------------
-var identity = {
-  edbId: "11220453"
-}
+var userIdentity;
 var restaurantList;
-var saveTimer;
 
-function setCheckUser(delay, repetitions, success, error) {
-  if (identity.edbId) {
-    success(identity.edbId);
-    console.log("SET USER SUCCESS");
-  } else {
-    error();
+// Sets the user ID from treg (hopefully) 
+var checkUser = function(repetitions) {
+  // Set a timeout logic waits for resolution
+  var delay = 500;
+
+  if (!repetitions){
+    // Start us off with 0 if unspecified
+    repetitions = 0;
+  }
+
+  if (userIdentity){
+    // If we already know the user's identity, we can bail out here
+    return userIdentity;
+  }
+  
+  // Keep setting a timeout until we have what we need
+  setTimeout(function(){
+    var user = fetchIdentity();
+    if (user || user === null){
+      // If we found a user, set the var
+      userIdentity = user;
+      // If we're developing on localhost, use a test identity
+      if (window.location.href.indexOf("localhost") != -1){
+        // NOTE: Comment this next line out if you want to test what happens 
+        // when a user is not logged in (in the local dev environment)
+        // Alternatively, increment the integer to start with fresh data
+        userIdentity = 11220454;
+      } 
+      // Only get data if it's actually the user
+      // Otherwise, we will need to prompt a login
+      if (userIdentity){
+        getData(userIdentity);
+      }
+    } else {
+      if (repetitions < 10){
+        checkUser(repetitions+1);
+      } else {
+        // If we've looped 10 times, bail out
+        return null;
+      }
+    }
+  }, delay);
+
+  // Return null if we didn't resolve anything
+  return null;
+}
+
+var fetchIdentity = function(){
+  console.log(treg, treg.identity, treg.identity.id);
+  if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
+    // We have a valid object, so return the ID
+    // NOTE: The ID might be null, but we know one way or another
+    return treg.identity.id;
+  } else {  
+    // The objects are not ready yet
+    return null;
   }
 }
 
-// DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// var edbId;
-// var restaurantList;
-// var saveTimer;
-// function setCheckUser(delay, repetitions, success, error) {
-//   console.log("CHECKING");
+// Start by seeing if we can get the user on load
+checkUser();
 
-//   var x = 0;
-//   var intervalID = window.setInterval(function () {
-//   console.log("INTERVAL", intervalID);
-//   console.log("syncPaymeterSdk", syncPaymeterSdk);
-
-//     // loop while waiting for syncPaymeterSdk to load
-//     if ( window.syncPaymeterSdk ) {
-//       window.clearInterval( intervalID );
-
-//       if ( treg.identity.edbId ) {
-
-//         success(treg.identity);
-//         console.log("SUCCESS", treg.identity);
-
-//       } else {
-
-//         var a = window.syncPaymeterSdk;
-//         a.events.registerHandler( a.events.onAuthorizeSuccess, function () {
-//           // set callback for completion of authorization
-//           if ( treg.identity.edbId ) {
-//             if ( success && typeof(success) === "function" ) {
-//               success(treg.identity);
-//             }
-//           } else {
-//             if ( error && typeof(error) === "function" ) {
-//               error();
-//             }
-//           }
-//         }) || error();
-//       }
-
-//     } else if ( ++x === repetitions ) {
-//       window.clearInterval( intervalID );
-//       if ( error && typeof(error) === "function" ) {
-//         error();
-//       }
-//     }
-
-//   }, delay );
-
-// }
-// DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// response if a user is not logged in
-function errorCallBack() {
-  console.log("error");
-  $("#nouser").removeClass("hidden");
-
-  // check to see if user logs on after load
-  if (treg.hasActiveSession() == false) {
-    // console.log("no active session");
-    treg.registerEvent(treg.event.onSessionFound, function ()   {
-      // we are going to keep checking for the user ID if people log in
-      // console.log("now we are checking again");
-      successCallBack(treg.identity);
-      console.log(treg.identity);
-    });
-  }
-}
-
-// response if a user is logged in
-function successCallBack(identity) {
-  console.log("TEST A BC", identity);
-  if (identity.edbId != null) {
-    console.log("YAY LOGGED IN");
-    // console.log("success");
-    edbId = identity.edbId;
-    console.log(edbId);
-    getData();
-  }
-}
-
-// retreive data
-var savedData;
+// Get data
 function getData() {
   $.ajax({
     method: "GET",
     dataType: "json",
-    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + edbId,
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + userIdentity,
     error: function(msg) {
+      // This can error if there's no data yet -- go ahead and just set it blank
       restaurantList = [];
-      console.log("fail");
     },
     success: function(data) {
-      // console.log("success");
-      savedData = data;
-      console.log("DATA:", data);
-      restaurantList = savedData;
+      restaurantList = data;
       setIcons();
-      // console.log(savedData);
     }
   });
 }
 
 // set checks on load for a particular user
 function setIcons() {
-  savedData.forEach(function(saveID){
+  restaurantList.forEach(function(saveID){
     var elem = document.getElementById(saveID);
     if ($("i", elem).hasClass("fa-square-o")) {
       $("i", elem).toggleClass("fa-square-o fa-check-square-o");
@@ -338,61 +300,56 @@ function setIcons() {
   });
 }
 
-// check to see if a user is logged on on load
-var result = setCheckUser( 500, 5, successCallBack, errorCallBack );
-console.log("GET RESULT:", result);
-
 // saving restaurants as favorites ------------------------------------------------
 
-function saveNewData() {
-  var newSavedData = {edbId:edbId,restaurants:restaurantList};
-  // console.log("SENDING DATA ");
-  // console.log(JSON.stringify(newSavedData));
+function saveNewData(user, restaurants) {
+  var newSavedData = {
+    "edbId":user,
+    "restaurants":restaurants
+  };
+  console.log("SENDING DATA ");
+  console.log(JSON.stringify(newSavedData));
   $.ajax({
     method: "POST",
     data: JSON.stringify(newSavedData),
     contentType: "application/json",
-    success: function(msg) { console.log("success"); },
-    error: function(msg) { console.log("fail"); },
+    error: function(msg) { 
+      console.log("Failed to save data"); 
+    },
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist"
   });
 }
 
-qsa(".save-restaurant").forEach(function(restaurant,index) {
-  restaurant.addEventListener("click", function(e) {xw
-    // console.log(restaurant.id);
+$(".save-button").each(function(index) {
+  $(this).on("click", function(e) {
 
-    if (restaurantList) {
-      $("i", this).toggleClass("fa-square-o fa-check-square-o");
+    if (userIdentity) {
+      // Get ID for saving
+      var itemID = $(this).find(".save-restaurant").attr("id");
 
-      // console.log(savedData);
-      // console.log(restaurantList);
+      // Either check or uncheck
+      $("i", $(this)).toggleClass("fa-square-o fa-check-square-o");
 
       // are we adding or removing the restaurant from the list?
-      if(  $("i", this).hasClass("fa-check-square-o") ) {
-        // console.log("we do not have this restaurant yet");
-        restaurantList.push(restaurant.id);
-        // console.log(restaurantList);
+      if( $("i", $(this)).hasClass("fa-check-square-o") ) {
+        console.log("we do not have this restaurant yet, ID: ", itemID);
+        restaurantList.push(itemID);
+        console.log(restaurantList);
       } else {
-        // console.log("we need to remove this restaurant")
-        var index = restaurantList.indexOf(restaurant.id);
+        console.log("we need to remove this restaurant, ID: ", itemID)
+        var index = restaurantList.indexOf(itemID);
         restaurantList.splice(index,1);
-        // console.log(restaurantList);
       }
 
-      // save new data
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(saveNewData(),timeTimeout);
+      // Save new data
+      saveNewData(userIdentity, restaurantList);
 
     } else {
-
-      document.getElementById("log-in-instructions").classList.add("show");
-      document.body.classList.add("noverflow");
-
+      // User hasn't logged in -- prompt them to do so
+      $("#log-in-instructions").show();
+      $("body, html").css("overflow-y", "hidden");
     }
-
   });
-
 });
 
 
@@ -407,121 +364,46 @@ function showAllRestaurants() {
 
 // function to show "my list" restaurants -------------------------------------------------------------
 
-function mylist_function(list) {
+function showMyList() {
+  var prefix = "save";
+  // Remove yellow from the search item 
+  $(".search").removeClass("homepage");
 
-  document.getElementById("restaurants-wrap").classList.remove("hide");
-  document.getElementById("intro-container").classList.add("hide");
-  document.getElementById("search-noresults").classList.add("hide");
-
-
-  var listID = list.getAttribute("id");
-  // console.log(listID);
-  if (listID == "mylist-starred") {
-    var prefix = "save";
+  if (userIdentity === null){
+    $("#log-in-instructions").show();
+    $("body, html").css("overflow-y", "hidden");
   } else {
-    var prefix = "check";
+    // TODO: Show list as a filter
+    console.log(restaurantList);
+    // var fav_count = 0;
+    // $(".restaurant").filter(function() {
+    //   var thisID = this.getAttribute("id");
+
+    //   if (restaurantList.indexOf(prefix+thisID) > -1) {
+    //     $(this).addClass("active");
+    //     fav_count += 1;
+    //   } else {
+    //     $(this).removeClass("active");
+    //   }
+    // });
+
+    // if (fav_count == 0) {
+    //   $('#no-saved-restaurants').show();
+    // } else {
+    //   $('#no-saved-restaurants').hide();
+    // }
   }
-  var button_list = document.getElementsByClassName("button");
-  for (var i=0; i<button_list.length; i++) {
-    button_list[i].classList.remove("selected");
-  };
-
-  document.getElementById(listID).classList.add("selected");
-
-  document.getElementById('searchrestaurants').value = "";
-  document.getElementById('brunch').value = "all";
-  document.getElementById('new').value = "all";
-
-  selNeighborhoods.classList.remove("active");
-  selPrice.classList.remove("active");
-  selNoise.classList.remove("active");
-  selCuisine.classList.remove("active");
-
-  var fav_count = 0;
-  $(".restaurant").filter(function() {
-    var thisID = this.getAttribute("id");
-
-    if (restaurantList.indexOf(prefix+thisID) > -1) {
-      $(this).addClass("active");
-      fav_count += 1;
-    } else {
-      $(this).removeClass("active");
-    }
-  });
-
-  // document.getElementById('count-results').classList.add("hide");
-  if (fav_count == 0) {
-    if (prefix == "save") {
-      document.getElementById('no-checked-restaurants').classList.add("hide");
-      document.getElementById('no-saved-restaurants').classList.remove("hide");
-    } else {
-      document.getElementById('no-saved-restaurants').classList.add("hide");
-      document.getElementById('no-checked-restaurants').classList.remove("hide");
-    }
-    document.getElementById('count-results').classList.add("hide");
-  } else {
-    document.getElementById('no-saved-restaurants').classList.add("hide");
-    document.getElementById('no-checked-restaurants').classList.add("hide");
-    document.getElementById('count-results').classList.remove("hide");
-    document.getElementById('count-results').innerHTML = fav_count+" result(s)";
-
-  }
-
 }
 
-// function to assess all the filters when user picks a new one ---------------------------------------
+// event listener for "My List" button
+$(".mylist").on("click",function() {
+  $(this).toggleClass("selected");
+  showMyList();
+});
 
-var cuisine_flag = 1, neighborhood_flag = 1, new_flag = 1, brunch_flag = 1, alcohol_flag = 1, noise_flag = 1, price_flag = 1, flag_min = 1;
-
-function check_filters() {
-
-  document.getElementById("restaurants-wrap").classList.remove("hide");
-  document.getElementById("intro-container").classList.add("hide");
-  document.getElementById("about").classList.remove("selected");
-
-  document.getElementById('searchrestaurants').value = "";
-
-  count = 0;
-  showall_button.classList.remove("selected");
-  mylist_starred_button.classList.remove("selected");
-  mylist_checked_button.classList.remove("selected");
-
-  document.getElementById('no-saved-restaurants').classList.add("hide");
-  document.getElementById('no-checked-restaurants').classList.add("hide");
-
-  // display text for empty search results
-  if (count > 0) {
-    document.getElementById('search-noresults').classList.add("hide");
-    document.getElementById('count-results').classList.remove("hide");
-    document.getElementById('count-results').innerHTML = count+" result(s)";
-  } else {
-    document.getElementById('search-noresults').classList.remove("hide");
-    document.getElementById('count-results').classList.add("hide");
-  }
-  if (count == 100) {
-    showall_button.classList.add("selected");
-    document.getElementById('count-results').classList.add("hide");
-  }
-
-};
-
-// // event listener for "My List" button
-// var mylist_checked_button = document.getElementById('mylist-checked');
-// mylist_checked_button.addEventListener("click",function() {
-//   if (edbId) {
-//     $(this).toggleClass("selected");
-//     mylist_function(this);
-//   } else {
-//     document.getElementById("log-in-instructions").classList.add("show");
-//     document.body.classList.add("noverflow");
-//   }
-// });
-
-// // event listener for "My List" button
-// var close_instructions = document.getElementById('exit');
-// close_instructions.addEventListener("click",function() {
-//   document.getElementById("log-in-instructions").classList.remove("show");
-//   document.body.classList.remove("noverflow");
-// });
-
+// event listener for "My List" button
+$("#exit").on("click", function(){
+  $("#log-in-instructions").hide();
+  $("body, html").css("overflow-y", "auto");
+})
 

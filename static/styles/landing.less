@@ -315,9 +315,6 @@
 		.flex-wrap(wrap);
 		width:100%;
 		.justify-content(initial);
-		&.hide {
-			display: none;
-		}
 
 		@media @tablet{
 			padding:15px;
@@ -344,7 +341,7 @@
 					font-family:@fancy-serif;
 				}
 
-				.favorites {
+				.save-button {
 					background: #e5e6ea;
 					font-size: 12px;
 					padding: 8px;
@@ -415,9 +412,6 @@
   text-align:center;
   width: 100%;
   font-family: @title;
-	&.hide {
-		display: none;
-	}
 }
 
 .link-button {
@@ -547,14 +541,11 @@
 	}
 }
 
-#no-checked-restaurants, #no-saved-restaurants {
-		margin: 3% 0 0 3%;
-    font-family: @title;
-    padding: 10px;
-    max-width: 550px;
-	&.hide {
-		display: none;
-	}
+#no-saved-restaurants {
+	margin: 3% 0 0 3%;
+  font-family: @title;
+  padding: 10px;
+  max-width: 550px;
 }
 
 .button {
@@ -647,9 +638,10 @@
 	.entry-name{
 		font-family:@sans-serif-light;
 	}
-	&.hide {
-		display: none;
-	}
+}
+
+.hide {
+	display: none;
 }
 
 .noverflow{
