@@ -99,6 +99,16 @@
       <div class="cuisine-button" id="{{cuisineName}}-cuisine">{{c}}</div>
     {% endfor %}
   </div>
+  <div class="dropdown-container cusines-dropdown active" id="cuisines-dropdown">
+    <div class="select-text">Filter by cuisine:</div>
+    <select name="select" id="select-cuisine">
+      <option value='allcuisines' class="option">All</option>
+      {% for c in cuisineList %}
+        {% set cuisineName = c.lower().replace('-','').replace(' ','').replace(',',' ').replace('/',' ') %}
+        <option value="{{cuisineName}}-cuisine">{{c}}</option>
+      {% endfor %}
+    </select>
+  </div>
 {% endif %}
 
 <div class="restaurant-container">

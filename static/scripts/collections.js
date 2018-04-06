@@ -73,6 +73,16 @@ if (document.getElementById("select-regions")){
 
 }
 
+if (document.getElementById("select-cuisine")){
+
+  var chooseCuisine = document.getElementById('select-cuisine');
+  chooseCuisine.addEventListener('change', function(d) {
+    var key = chooseCuisine.value.split("-")[0];
+    check_dropdowns(key);
+  });
+
+}
+
 // buttons for subregions
 var subregionsButtons = document.getElementsByClassName("subregion-button")
 var td;
@@ -132,7 +142,7 @@ function check_dropdowns(key) {
 
   console.log(key);
 
-  if (key != "all"){
+  if (key != "all" && key != "allcuisines"){
 
     if (key.indexOf("all") != -1){
       var newkey = key.split("all")[1];
