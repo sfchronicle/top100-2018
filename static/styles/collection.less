@@ -1,8 +1,43 @@
 
+.dropdown-container {
+  font-size: 16px;
+  padding-top: 10px;
+  .select-text {
+    font-size: 14px;
+    display: inline-block;
+    padding-right: 5px;
+    font-family: @title;
+    @media @tablet {
+      padding-bottom: 10px;
+    }
+  }
+  select {
+    display: inline-block;
+    font-family: @title;
+    font-size: 14px;
+    background: white;//lighten(@light-gray,5%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    min-width: 160px;
+  }
+  display: none;
+  @media @mobile {
+    &.active {
+      display: block;
+      width: 90%;
+      margin: auto;
+    }
+  }
+}
+
+
 .regions-container, .cuisines-container {
   max-width: 1400px;
   margin: auto;
   text-align: center;
+  @media @mobile {
+    display: none;
+  }
 }
 
 .region-button, .subregion-button, .cuisine-button {
@@ -24,6 +59,12 @@
   }
 }
 
+.region-button {
+  @media @mobile {
+    margin-top: 5px;
+  }
+}
+
 .cuisine-button, .subregion-button {
   margin-top: 10px;
 }
@@ -36,5 +77,8 @@
   display: none;
   &.active {
     display: block;
+    @media @mobile {
+      display: none;
+    }
   }
 }

@@ -39,6 +39,40 @@ if (document.getElementById("sf-region")){
 
 }
 
+if (document.getElementById("select-regions")){
+
+  var chooseRegion = document.getElementById('select-regions');
+  var chooseEastbay = document.getElementById('select-eastbay-subregions');
+  var chooseNorthbay = document.getElementById('select-northbay-subregions');
+  var chooseSF = document.getElementById('select-sf-subregions');
+  chooseRegion.addEventListener('change', function(d) {
+    var key = chooseRegion.value.split("-")[0];
+    console.log(key);
+    chooseEastbay.value = "all";
+    chooseNorthbay.value = "all";
+    chooseSF.value = "all";
+    $(".subregions-dropdown").removeClass("active");
+    $("#"+key+"-subregions-dropdown").addClass("active");
+    check_dropdowns(key);
+  });
+
+  chooseEastbay.addEventListener('change', function(d) {
+    var key = chooseEastbay.value.split("-")[0];
+    check_dropdowns(key);
+  });
+
+  chooseNorthbay.addEventListener('change', function(d) {
+    var key = chooseNorthbay.value.split("-")[0];
+    check_dropdowns(key);
+  });
+
+  chooseSF.addEventListener('change', function(d) {
+    var key = chooseSF.value.split("-")[0];
+    check_dropdowns(key);
+  });
+
+}
+
 // buttons for subregions
 var subregionsButtons = document.getElementsByClassName("subregion-button")
 var td;
@@ -91,5 +125,40 @@ function checkRestaurants(key){
     }
 
   });
+
+}
+
+function check_dropdowns(key) {
+
+  console.log(key);
+
+  if (key != "all"){
+
+    if (key.indexOf("all") != -1){
+      var newkey = key.split("all")[1];
+    } else {
+      var newkey = key;
+    }
+
+    $(".restaurant").filter(function() {
+
+      // check all the classes for the restaurant
+      var classes = this.className.toLowerCase().split(" ");
+
+      // check region
+      region_flag = (classes.indexOf(newkey)>0);
+
+      // show it if yes
+      if (region_flag == 1){
+        $(this).addClass("active");
+      } else {
+        $(this).removeClass("active");
+      }
+
+    });
+
+  } else {
+    $(".restaurant").addClass("active");
+  }
 
 }
