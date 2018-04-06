@@ -251,3 +251,18 @@ for (var t = 0; t < locatorList.length; t++){
     })(td);
   }
 }
+
+// see if the reader is loading a specific restaurant
+$(document).ready(function(){
+
+  if(window.location.hash) {
+    console.log(window.location.hash.split("#")[1]);
+    for (var idx=0; idx<restaurants.length; idx++){
+      if (window.location.hash.split("#")[1] == restaurants[idx].Slug){
+        map.setView([restaurants[idx].Lat,restaurants[idx].Lng],14);
+        markersArray[idx].openPopup();
+      }
+    }
+  }
+
+});
