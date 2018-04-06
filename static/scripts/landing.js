@@ -107,6 +107,7 @@ $(function(){
 
 // search bar code -------------------------------------------------------------
 // IMPORTANT: Keep this updated with filter options
+console.log("cuisineString", cuisineString, typeof cuisineString);
 function getFilterList() {
   // NOTE: If we want to curate these instead of pull them dynamically off list
   // Replace the vars below with a complete array of autocomplete options
@@ -152,7 +153,7 @@ $("#search-bar input").on("input", function(){
 // Finds and displays results that match the term
 var findMatches = function(term){
   // Scroll user back to stop to observe results
-  $('body,html').animate({ scrollTop: $('#restaurants').position().top-80 }, 150);
+  $('body,html').animate({ scrollTop: $('#results').position().top-80 }, 150);
 
   var searchTerm = term.toLowerCase();
   var matchingEntries = $(".restaurant").filter(function() {
