@@ -1,59 +1,52 @@
 .lead-container {
 	
-	.display-flex;
-	background:#000;
-	.align-items(center);
-
-	@media @width1200{
-		.flex-direction(column-reverse);
-		padding-bottom:20px;
+	@media @mobile{
+		margin-top:40px;
 	}
+	position:relative;
 
 	.overlay-container {
-		.flex(0 0 35%);
-		padding:0 2%;
+		text-align:center;
+    position: absolute;
+    background: #00000070;
+    height: 100%;
+    top:0;
+    width: 100%;
+    padding-top: 10%;
+		z-index:1;
 
-		@media @width1200{
-			margin-top:20px;
+		@media @mobile{
+			position:static;
+			padding:10px 20px 20px;
+			background:#000;
 		}
 	}
-
-	.lead-desktop {
-
-		.flex(1 0 50%);
-		line-height:0;
-
-		img{
-			width:100%;
-		}
-
-	}
-
-	.overlay {
-		color: white;
-
-		.link{
-			line-height:1.2;
-			padding-bottom:10px;
-		}
-
-		@media @width1200{
-			text-align:center;
-		}
+	
+	.top100-hed{
+		display:none;
 	}
 
 	.deck {
-		padding-top: 20px;
-		font-size:17px;
+		display:none;
+		color:#fff;
+    max-width: 700px;
+    margin: 0 auto;
+		padding: 20px;
+		font-size:19px;
+		text-align:center;
 		border-top:1px solid #ccc;
-		text-align:left;
 		
 		@media @mobile {
-			font-size:15px;
+			font-size:16px;
+			padding:10px 0 0;
+
 		}
 	}
 
 	#buttons{
+		.display-flex;
+		.align-items(center);
+		.justify-content(center);
 		margin-top:15px;
 	}
 
@@ -64,7 +57,6 @@
 		font-family:@sans-serif-bold;
 		margin:0 5px;
 		background:darken(@main, 19%);
-		float:left;
 
 		.fa {
 			font-size: 22px;
@@ -77,15 +69,15 @@
 		font-family: @logo-script;
 		font-size: 20px;
 	}
+
 	.top100-hed, .top100-hed-rest {
 		font-family: @logo2;
-		font-size: 50px;
+		font-size: 100px;
 		text-transform: uppercase;
 		color:@main;
 
 		@media @width1200{
 			font-size:35px;
-			text-align:center;
 		}
 	}
 	.top100-hed-rest {
@@ -94,10 +86,8 @@
 }
 
 
-#lead-image {
-  img {
-    width: 100%;
-  }
+#lead-video {
+	line-height:0;
 }
 
 .ui-widget-content .ui-menu-item-wrapper {
@@ -140,7 +130,7 @@
 
 #container{
 	width:100%;
-	margin-top: 46px;
+	margin-top: 40px;
 
   @media @mobile {
     margin-top: 0;

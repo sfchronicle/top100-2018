@@ -47,20 +47,21 @@
 
       <div class="lead-container">
         
+        <div id="lead-video">
+          <video width="100%" muted autoplay playsinline loop id="video-topper">   <source src="{{url_for('static', filename='videos/cover2.mp4')}}" type="video/mp4"> </video>
+        </div>
+        
         <div class="overlay-container">
           <div class="overlay">
-            <div class="link"><span class="top100-hed">Top 100 </span><span class="top100-hed-rest">Restaurants </span><span class="top100-hed">2018</span></div>
-            <div class="deck">This is the 23rd annual guide I’ve compiled, and the selections are continually evolving. Unlike many lists on the Internet, the Top 100 is heavily vetted. Every restaurant has been visited a minimum of three times, and in most cases many more. Each year, I revisit the restaurants in the previous year’s guide, compare them to the new restaurants that I’m considering and cull the ones that aren’t up to standard. This keeps the list current and raises the bar each year.<br><br>– Michael Bauer</div>
-            <div id="buttons">
-              <div class="instructions" id="introduction">Read the intro</div>
-              <div class="instructions" id="restaurants">Restaurants</div>
+            <div class="top100-hed">Top 100 <span class="top100-hed-rest">Restaurants </span>2018</div>
+            <div class="deck">Read Michael Bauer's picks on the best restaurants in the Bay Area, with the finest dining, the best ambiances and the most memorable experiences.
+              <div id="buttons">
+                <div class="instructions" id="introduction">Read the intro</div>
+                <div class="instructions" id="scroll-rest">Restaurants</div>
+              </div>
             </div>
-            
           </div>
         </div>
-
-        <div id="lead-image" class="lead-desktop"><img src="{{url_for('static', filename='photos/Bauer0318_Benu.4.jpg')}}"></img></div>
-        <!-- <div id="lead-image" class="lead-mobile"><img src="{{url_for('static', filename='photos/Bauer0318_Benu.4.jpg')}}"></img></div> -->
       
       </div>
 

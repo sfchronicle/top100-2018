@@ -16,7 +16,7 @@ var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 var timeTimeout = 5000;
 
 // smooth scroll to skip reading Michael's intro if you want
-document.getElementById("restaurants").addEventListener("click",function(){
+document.getElementById("scroll-rest").addEventListener("click",function(){
     // top position relative to the document
     var pos = $("#search-stick-here").offset().top-30;
     // animated top scrolling
@@ -524,4 +524,19 @@ function check_filters() {
 //   document.body.classList.remove("noverflow");
 // });
 
+
+var windowWidth = $(window).width();
+if(windowWidth > 480) {
+    var timerHed = setInterval(function(){
+    $(".top100-hed").fadeIn(2000);
+      clearInterval(timerHed);
+  }, 2000);
+
+  var timerDek = setInterval(function(){
+    $(".deck").fadeIn(2000);
+      clearInterval(timerDek);
+  }, 4000);
+}else{
+  $(".top100-hed, .deck").show();
+}
 
