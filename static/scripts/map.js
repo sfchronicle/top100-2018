@@ -7,10 +7,12 @@ if (screen.width <= 480){
   var sf_lat = 37.779480;
   var sf_long = -122.426623;
   var zoom_deg = 11;//13 zoomed out
+  var lat_offset = 0.0055;
 } else {
   var sf_lat = 37.825809;
   var sf_long = -122.371562;
   var zoom_deg = 12;//13 zoomed out
+  var lat_offset = 0;
 }
 
 // initialize map with center position and zoom levels
@@ -66,7 +68,7 @@ var purpleIcon = new L.Icon({
 });
 
 function clickZoom(e) {
-    map.setView(e.target.getLatLng());
+  map.setView(e.target.getLatLng());
 }
 
 // all the markers for the map
@@ -245,7 +247,7 @@ for (var t = 0; t < locatorList.length; t++){
     (function (_td) {
       td.addEventListener('click', function(){
         var IDX = _td.id.split("map-locator-")[1];//_td.classList[0].split("day")[1];
-        map.setView([restaurants[IDX].Lat,restaurants[IDX].Lng],14);
+        map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
         markersArray[IDX].openPopup();
       });
     })(td);
@@ -259,7 +261,7 @@ $(document).ready(function(){
     console.log(window.location.hash.split("#")[1]);
     for (var idx=0; idx<restaurants.length; idx++){
       if (window.location.hash.split("#")[1] == restaurants[idx].Slug){
-        map.setView([restaurants[idx].Lat,restaurants[idx].Lng],14);
+        map.setView([+restaurants[idx].Lat+lat_offset,restaurants[idx].Lng],14);
         markersArray[idx].openPopup();
       }
     }
