@@ -151,14 +151,25 @@ var findMatches = function(term){
   // Scroll user back to stop to observe results
   $('body,html').animate({ scrollTop: $('#results').position().top-80 }, 150);
 
-  var searchTerm = term.toLowerCase();
-  var matchingEntries = $(".restaurant").filter(function() {
-    if ($(this).attr("class").toLowerCase().indexOf(searchTerm) != -1){
-      return true;
-    } else {
+  var matchingEntries;
+  if (typeof term === "string"){
+    var searchTerm = term.toLowerCase();
+    matchingEntries = $(".restaurant").filter(function() {
+      if ($(this).attr("class").toLowerCase().indexOf(searchTerm) != -1){
+        return true;
+      } else {
+        return false;
+      }
+    });
+  } else {
+    // This would indicate we're searching by array, so filter differently
+    matchingEntries = $(".restaurant").filter(function() {
+      if (term.indexOf($(this).attr("id")) != -1){
+        return true;
+      }
       return false;
-    }
-  });
+    });
+  }
 
   // Turn all restaurants that don't match off
   $(".restaurant").not(matchingEntries).removeClass("active");
@@ -259,7 +270,6 @@ var checkUser = function(repetitions) {
 }
 
 var fetchIdentity = function(){
-  console.log(treg, treg.identity, treg.identity.id);
   if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
     // We have a valid object, so return the ID
     // NOTE: The ID might be null, but we know one way or another
@@ -270,22 +280,66 @@ var fetchIdentity = function(){
   }
 }
 
+// If the user is coming to site with a share link, render those results
+var renderUserResults = function() {
+  // See if we have the info
+  var queryResult = checkForParam("share");
+  if (queryResult){
+    // Decode the result
+    queryResult = $.base64.decode(queryResult);
+    // Try to fetch data with it
+    getData(queryResult);
+    // Actual rendering happens in the getData success callback
+  }
+}
+
+// Inspect the URL for the relevant query string
+var checkForParam = function(query) {
+  var queryValue = location.search.match(new RegExp("[\?\&]"+query+"=([^\&]*)(\&?)","i"));
+  if (queryValue){
+    // We found a share value, return it
+    return queryValue[1];
+  } else {
+    // Either no query or mismatched query
+    return null;
+  }
+}
+
 // Start by seeing if we can get the user on load
 checkUser();
+renderUserResults();
 
 // Get data
-function getData() {
+function getData(user) {
+  let shareLink = false;
+  if (user != userIdentity){
+    shareLink = true;
+  }
+
   $.ajax({
     method: "GET",
     dataType: "json",
-    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + userIdentity,
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + user,
     error: function(msg) {
       // This can error if there's no data yet -- go ahead and just set it blank
-      restaurantList = [];
+      if (!shareLink){
+        // Only set if it's for the current user's data
+        restaurantList = [];
+      }
     },
     success: function(data) {
-      restaurantList = data;
-      setIcons();
+      if (!shareLink){
+        // Only set if it's for the current user's data
+        restaurantList = data;
+        setIcons();
+      } else {
+        // If this is a search for another user's data, just render the result
+        const mappedList = data.map(function(item){
+          // Shave the prefix off of item
+          return item.substring(4, item.length);
+        });
+        findMatches(mappedList);
+      }
     }
   });
 }
@@ -307,8 +361,6 @@ function saveNewData(user, restaurants) {
     "edbId":user,
     "restaurants":restaurants
   };
-  console.log("SENDING DATA ");
-  console.log(JSON.stringify(newSavedData));
   $.ajax({
     method: "POST",
     data: JSON.stringify(newSavedData),
@@ -332,11 +384,8 @@ $(".save-button").each(function(index) {
 
       // are we adding or removing the restaurant from the list?
       if( $("i", $(this)).hasClass("fa-check-square-o") ) {
-        console.log("we do not have this restaurant yet, ID: ", itemID);
         restaurantList.push(itemID);
-        console.log(restaurantList);
       } else {
-        console.log("we need to remove this restaurant, ID: ", itemID)
         var index = restaurantList.indexOf(itemID);
         restaurantList.splice(index,1);
       }
@@ -373,25 +422,20 @@ function showMyList() {
     $("#log-in-instructions").show();
     $("body, html").css("overflow-y", "hidden");
   } else {
-    // TODO: Show list as a filter
-    console.log(restaurantList);
-    // var fav_count = 0;
-    // $(".restaurant").filter(function() {
-    //   var thisID = this.getAttribute("id");
+    // Show list as a filter
+    const mappedList = restaurantList.map(function(item){
+      // Shave the prefix off of item
+      return item.substring(4, item.length);
+    });
+    findMatches(mappedList);
+    // Append query string to let people share their list
+    // Use history API to update query
+    if (history.pushState) {
+      // Get URL with no query or hash (or trailing slash)
+      var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity);
+      window.history.pushState({path:fullUrl},'',fullUrl);
+    }
 
-    //   if (restaurantList.indexOf(prefix+thisID) > -1) {
-    //     $(this).addClass("active");
-    //     fav_count += 1;
-    //   } else {
-    //     $(this).removeClass("active");
-    //   }
-    // });
-
-    // if (fav_count == 0) {
-    //   $('#no-saved-restaurants').show();
-    // } else {
-    //   $('#no-saved-restaurants').hide();
-    // }
   }
 }
 
