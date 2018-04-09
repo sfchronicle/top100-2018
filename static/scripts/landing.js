@@ -134,6 +134,9 @@ $("#search-bar input").on("input", function(){
   $(".search").addClass("homepage");
   $(".mylist").removeClass("active");
 
+  // Hide list text in case we are switching to search
+  $("#no-saved-restaurants").hide();
+
   // If there's a value in the search bar, allow cancel
   if ($(this).val()){
     $(".cancel-search").show();
@@ -435,17 +438,44 @@ function showMyList() {
       var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
       window.history.pushState({path:fullUrl},'',fullUrl);
     }
-
   }
 }
+
+$(".search-link").on("click", function(e){  
+  //Intercept the link functionality on homepage and just bring user to search
+  e.preventDefault();
+  // Set nav colors
+  $(".search").addClass("homepage");
+  $(".mylist").removeClass("active");
+  // Bring user to search
+  scrollToResults();
+  // Use history API to update query
+  if (history.pushState) {
+    // Get URL with no query or hash (or trailing slash)
+    var fullUrl = location.href.split('#')[0].split('?')[0] + "#search";
+    window.history.pushState({path:fullUrl},'',fullUrl);
+  }
+  // Put focus into search bar
+  $("#search-bar input").focus();
+});
 
 // event listener for "My List" button
 $(".mylist").on("click",function() {
   $(this).toggleClass("selected");
   showMyList();
+  // Clear any search terms from bar
+  $("#search-bar input").val("");
+  // Change result text a little
+  var resultsText = $("#count-results").text();
+  $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+  // Handle zero results condition
+  if (resultsText.substring(0,1) == "0"){
+    $("#no-saved-restaurants").show();
+    $("#search-noresults").hide();
+  }
 });
 
-// event listener for "My List" button
+// exit the subscribe window
 $("#exit").on("click", function(){
   $("#log-in-instructions").hide();
   $("body, html").css("overflow-y", "auto");

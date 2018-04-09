@@ -321,7 +321,7 @@
 		}
 
 		@media @mobile{
-			padding:0 0 4em;
+			padding:0 0 1em;
 		}
 
 		.restaurant{
@@ -407,11 +407,18 @@
 	font-family:@title;
 }
 
-#search-noresults {
+#search-noresults, #no-saved-restaurants {
   font-style: italic;
-  text-align:center;
-  width: 100%;
+  text-align: center;
+  width: 500px;
+  max-width: 100%;
+  margin: auto;
+  padding: 0 10px;
   font-family: @title;
+
+  @media @mobile {
+  	font-size: 15px;
+  }
 }
 
 .link-button {
@@ -539,13 +546,6 @@
 		color: white;
 		background: @dark-gray;
 	}
-}
-
-#no-saved-restaurants {
-	margin: 3% 0 0 3%;
-  font-family: @title;
-  padding: 10px;
-  max-width: 550px;
 }
 
 .button {
