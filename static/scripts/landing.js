@@ -19,7 +19,6 @@ document.getElementById("introduction").addEventListener("click",function(){
   // top position relative to the document
   var pos = $("#intro").offset().top-60;
   // animated top scrolling
-  console.log("SCROLL");
   $('body, html').animate({scrollTop: pos});
 });
 
@@ -481,3 +480,18 @@ $("#exit").on("click", function(){
   $("body, html").css("overflow-y", "auto");
 })
 
+
+$("#readmore-btn").on("click",function() {
+  $('#readmore-text').slideToggle('slow');
+
+  if($(this).hasClass("uncollapsed")) {
+    $(this).removeClass('uncollapsed');
+    $(this).html('Read Less');
+  } else {
+    $(this).addClass('uncollapsed');
+    $(this).html('Read More');
+    var topIntro = $("#intro").offset().top-60;
+    $('body, html').animate({scrollTop: topIntro});
+  }
+
+});

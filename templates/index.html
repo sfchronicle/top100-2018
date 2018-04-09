@@ -65,10 +65,22 @@
       </div>
 
       <div id="intro">
-        {% for i in intro %}
+
+    
+        {% for i in intro.text %}
           <p>{{i.value|safe}}</p>
         {% endfor %}
-        <p><em>- Michael Bauer</em></p>
+        <div id="readmore-text">
+          {% for i in intro.readmore %}
+            <p>{{i.value|safe}}</p> 
+          {% endfor %}
+        </div>
+
+        <div id="readmore-btn-container"><span id="readmore-btn" class="uncollapsed">Read More</span></div>
+
+        
+
+        
       </div>
 
       <div id="search-stick-here"></div>

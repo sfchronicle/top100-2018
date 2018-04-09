@@ -33,7 +33,7 @@ with open(restaurant_data) as r:
 
 with open(intro_data) as i:
   data = json.load(i)
-  intro = data['text']
+  intro = data
 
 @app.route("/map/")
 def mapfile():
