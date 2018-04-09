@@ -9,23 +9,18 @@ Array.prototype.min = function() {
 // variable to keep track of number of restaurants displayed
 var count = 100;
 
-// how long to wait before saving
-var timeTimeout = 5000;
-
 // smooth scroll to skip reading Michael's intro if you want
 document.getElementById("restaurants").addEventListener("click",function(){
-    // top position relative to the document
-    var pos = $("#search-stick-here").offset().top-30;
-    // animated top scrolling
-    $('body, html').animate({scrollTop: pos});
+  scrollToResults();
 });
 
 // smooth scroll to read Michael's intro
 document.getElementById("introduction").addEventListener("click",function(){
-    // top position relative to the document
-    var pos = $("#intro").offset().top-60;
-    // animated top scrolling
-    $('body, html').animate({scrollTop: pos});
+  // top position relative to the document
+  var pos = $("#intro").offset().top-60;
+  // animated top scrolling
+  console.log("SCROLL");
+  $('body, html').animate({scrollTop: pos});
 });
 
 // determine phone vs desktop
@@ -36,10 +31,7 @@ if (screen.width > window.devicePixelRatio*480){
 
   // smooth scroll to skip reading Michael's intro if you want
   document.getElementById("search-button").addEventListener("click",function(){
-      // top position relative to the document
-      var pos = $("#search").offset().top-60;
-      // animated top scrolling
-      $('body, html').animate({scrollTop: pos});
+    scrollToResults();
   });
 }
 
@@ -149,7 +141,7 @@ $("#search-bar input").on("input", function(){
 // Finds and displays results that match the term
 var findMatches = function(term){
   // Scroll user back to stop to observe results
-  $('body,html').animate({ scrollTop: $('#results').position().top-80 }, 150);
+  scrollToResults();
 
   var matchingEntries;
   if (typeof term === "string"){
@@ -215,10 +207,12 @@ $(".cancel-search").on("click", function(){
   $("#search-bar input").val("");
 });
 
-// check for log on information on load ------------------------------------------------
 
-// DO NOT DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// temporary code for testing ---------------------------
+// Scrolls user to results list (keeping that logic in one place)
+var scrollToResults = function(){
+  $('body,html').animate({ scrollTop: $('#results').position().top-80 }, 150);
+}
+
 var userIdentity;
 var restaurantList;
 
@@ -338,6 +332,7 @@ function getData(user) {
           // Shave the prefix off of item
           return item.substring(4, item.length);
         });
+        // Filter and scroll user there
         findMatches(mappedList);
       }
     }
@@ -432,7 +427,7 @@ function showMyList() {
     // Use history API to update query
     if (history.pushState) {
       // Get URL with no query or hash (or trailing slash)
-      var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity);
+      var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
       window.history.pushState({path:fullUrl},'',fullUrl);
     }
 
