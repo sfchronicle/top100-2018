@@ -130,6 +130,10 @@ $( "#search-bar input" ).autocomplete({
 $("#search-bar input").on("input", function(){
   findMatches($(this).val());
 
+  // Restore gold on search nav (if user was looking at mylist)
+  $(".search").addClass("homepage");
+  $(".mylist").removeClass("active");
+
   // If there's a value in the search bar, allow cancel
   if ($(this).val()){
     $(".cancel-search").show();
@@ -410,13 +414,14 @@ function showAllRestaurants() {
 
 function showMyList() {
   var prefix = "save";
-  // Remove yellow from the search item 
-  $(".search").removeClass("homepage");
-
+  // Prompt login if the user has no ID
   if (userIdentity === null){
     $("#log-in-instructions").show();
     $("body, html").css("overflow-y", "hidden");
   } else {
+    // Remove yellow from the search item 
+    $(".search").removeClass("homepage");
+    $(".mylist").addClass("active");
     // Show list as a filter
     const mappedList = restaurantList.map(function(item){
       // Shave the prefix off of item

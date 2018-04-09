@@ -36,11 +36,21 @@
     font-weight: 800;
     color: @main;
     margin-right: 15px;
-    padding-top: 7px;
+    height: 100%;
+    padding: 7px;
     cursor: pointer;
 
     &:hover {
       color: @main-hover;
+    }
+
+    &.active {
+      background: @main;
+      color: white;
+
+      &:hover {
+        color: white;
+      }
     }
   }
 }
@@ -134,9 +144,8 @@
 }
 
 #social-links{
-  position:fixed;
-  top:0;
-  right:0;
+  margin-left: auto;
+  height: 100%;
 }
 
 .secondary-link-container, .secondary-link-container-mobile {
