@@ -17,7 +17,7 @@ document.getElementById("restaurants").addEventListener("click",function(){
 // smooth scroll to read Michael's intro
 document.getElementById("introduction").addEventListener("click",function(){
   // top position relative to the document
-  var pos = $("#intro").offset().top-60;
+  var pos = $("#intro").offset().top -125;
   // animated top scrolling
   $('body, html').animate({scrollTop: pos});
 });
@@ -41,45 +41,36 @@ if (screen.width > window.devicePixelRatio*480){
 function activate() {
   var sticker = document.getElementById('search');
   var sticker_ph = document.getElementById('search-stick-ph');
-  var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
-  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
-  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 70;
-  if (window_top > intro_top){
-    $("#top100-nav-link").addClass("active");
-    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfletter_c_black.png");
-  } else {
-    $("#top100-nav-link").removeClass("active");
-    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfc_logo_black.png");
-  }
+  var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
+  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
+ 
   if (window_top > div_top) {
-    $(".secondary-link-container").addClass("active");
+    $("#top-nav").addClass("fixed");
     sticker.classList.add('fixed-second');
     sticker_ph.style.display = 'block'; // puts in a placeholder for where sticky used to be for smooth scrolling
   } else {
-    $(".secondary-link-container").removeClass("active");
+    $("#top-nav").removeClass("fixed");
     sticker.classList.remove('fixed-second');
-    sticker_ph.style.display = 'none'; // puts in a placeholder for where sticky used to be for smooth scrolling
+    sticker_ph.style.display = 'none'; // removes placeholder for where sticky used to be for smooth scrolling
   }
 }
 
 function activateMobile() {
-  var window_top = document.documentElement.scrollTop || document.body.scrollTop;//document.body.scrollTop;
-  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top - 46;
-  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top - 46;
-  if (window_top > intro_top){
-    $("#top100-nav-link").addClass("active");
-    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfletter_c_black.png");
-  } else {
-    $("#top100-nav-link").removeClass("active");
-    $("#top-nav img").attr("src","//projects.sfchronicle.com/shared/logos/sfc_logo_black.png");
+  var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
+  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
 
-    
-  }
   if (window_top > div_top) {
     $(".secondary-link-container-mobile").addClass("active");
+    $("#bottom-nav").addClass("active");
+
   } else {
     $(".secondary-link-container-mobile").removeClass("active");
+    $("#bottom-nav").removeClass("active");
   }
+
+
 }
 
 // Give restaurants that haven't been seen yet a little flag

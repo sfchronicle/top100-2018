@@ -8,14 +8,23 @@
 }
 
 #top100-nav-link{
-  opacity: 0;
   -webkit-transition: opacity 500ms linear;
   -ms-transition: opacity 500ms linear;
   transition: opacity 500ms linear;
   line-height:0;
-  &.active {
-    opacity: 1;
+
+  @media @w1000{
+    display:none;
   }
+
+  @media @mobile{
+    display:block;
+    margin:0 5px;
+  }
+}
+
+#bottom100-nav-link{
+  padding: 4px 0 0 5px;
 }
 
 .social-link {
@@ -87,7 +96,7 @@
 }
 
 #search-stick-ph {
-  height: 52px;
+  height: 98px;
   @media @mobile {
     display: none;
   }
@@ -97,7 +106,6 @@
 
 #top-nav{
   box-shadow: 0 1px 1px 1px #ccc;
-  position: fixed;
   height:46px;
   top:0;
   width:100%;
@@ -106,12 +114,8 @@
   .display-flex;
   .align-items(center);
 
-  @media @width1100 {
-  	height: 40px;
-
-  	.top100.top {
-  		font-size: 15px;
-  	}
+  @media @w750 {
+  	display: none;
   }
 
 	.top100-top {
@@ -140,12 +144,76 @@
       -ms-transition: opacity 500ms linear;
       transition: opacity 500ms linear;
     }
+
+    
+    @media @mobile{
+      display:none;
+    }
+ 
+  }
+}
+
+
+#bottom-nav{
+  box-shadow: 0 1px 1px 1px #ccc;
+  height:46px;
+  bottom:0;
+  width:100%;
+  z-index:2018;
+  background:#fff;
+  .display-flex;
+  .align-items(center);
+  display: none;
+
+  @media @w750 {
+    height: 40px;
+
+    .top100.top {
+      font-size: 15px;
+    }
+  }
+
+  .logo{
+    display:block;
+    float: left;
+    height: 100%;
+    padding: 10px 0;
+  }
+
+  .top100-top {
+    font-weight: 800;
+  }
+
+  div.link {
+    .rest {
+      @media @tablet {
+        display: none;
+      }
+    }
+
+    .year {
+      font-weight: 800;
+      @media @tablet {
+        display: none;
+      }
+    }
+  }
+
+  &.active{
+    display: block;
   }
 }
 
 #social-links{
   margin-left: auto;
   height: 100%;
+}
+
+.bottom-social{
+  position:fixed;
+  bottom:0;
+  right:0;
+  height: unset;
 }
 
 .secondary-link-container, .secondary-link-container-mobile {
@@ -170,7 +238,7 @@
 .secondary-link-container-mobile {
   display: none;
   position: fixed;
-  top: 40px;
+  top: 0;
   left: 0;
   right: 0;
   margin-left: 0;
@@ -186,7 +254,7 @@
     padding: 1px 3px;
   }
 
-  @media @width1100 {
+  @media @w750 {
     display: block;
   }
 }
@@ -195,7 +263,7 @@
   .display-flex;
   height:100%;
 
-  @media @width1100 {
+  @media @w750 {
     display: none;
   }
 }
