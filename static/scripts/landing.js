@@ -87,7 +87,7 @@ $(function(){
   var restaurantCookie = getCookie("sfc_top100_2018");
   $(".restaurant").each(function(){
     if (restaurantCookie.indexOf($(this).attr("id")) == -1){
-      $(this).find(".border").addClass("unseen");
+      $(this).find(".border").addClass("unseen").eq(1).addClass("white");
     }
   });
 });
