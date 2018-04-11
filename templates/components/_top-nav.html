@@ -30,19 +30,20 @@
 
     <div class="secondary-link-container active">
 
-      <div class="secondary-link search {{homepage}}"><a href="{{ url_for('index') }}#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
 
-      <div class="secondary-link {{map}}"><a href="{{ url_for('index') }}map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+      <a href="{{ url_for('index') }}"><div class="secondary-link search {{homepage}}#search"><i class="fa fa-search" aria-hidden="true"></i> Search</div></a>
 
-      <div class="secondary-link {{regions}}"><a href="{{ url_for('index') }}guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
+      <a href="{{ url_for('index') }}map" class="map-link"><div class="secondary-link {{map}}"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</div></a>
 
-      <div class="secondary-link {{cuisines}}"><a href="{{ url_for('index') }}guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+      <a href="{{ url_for('index') }}guides/regions" class="region-link"><div class="secondary-link {{regions}}"><i class="fa fa-globe" aria-hidden="true"></i> Regions</div></a>
 
-      <div class="secondary-link {{brunch}}"><a href="{{ url_for('index') }}guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+      <a href="{{ url_for('index') }}guides/cuisines" class="cuisine-link"><div class="secondary-link {{cuisines}}"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</div></a>
 
-      <div class="secondary-link {{classics}}"><a href="{{ url_for('index') }}guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+      <a href="{{ url_for('index') }}guides/brunch" class="brunch-link"><div class="secondary-link {{brunch}}"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</div></a>
 
-      <div class="secondary-link {{new}}"><a href="{{ url_for('index') }}guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+      <a href="{{ url_for('index') }}guides/classics" class="classics-link"><div class="secondary-link {{classics}}"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</div></a>
+
+      <a href="{{ url_for('index') }}guides/new" class="new-link"><div class="secondary-link {{new}}"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</div></a>
 
     </div>
 

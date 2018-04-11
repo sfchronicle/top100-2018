@@ -1,5 +1,4 @@
-# top100-2017
-
+# 2018's Top 100 Restaurants 
 
 ### Includes:
 - Livereload for fast development
@@ -10,13 +9,13 @@
 ### Requirements
 - Python 2.7.x
 - Node.js 0.12+
-- Grunt (`npm install -g grunt-cli`)
+- Grunt
 
 ### Installation
 ```bash
-$ git clone git@github.com:sfchronicle/top100-2017.git top100-2017
-$ cd top100-2017
-$ mkvirtualenv top100-2017
+$ git clone git@github.com:sfchronicle/top100-2018.git top100-2018
+$ cd top100-2018
+$ mkvirtualenv top100-2018
 $ pip install -r requirements.txt && npm install
 ```
 
@@ -29,7 +28,7 @@ $ pip install -r requirements.txt && npm install
 ### Build and deployment
 Now run `build.py` and specify if its for `production` or `staging` to compress assets for upload.
 ```bash
-$ python build.py production
+$ grunt build:production
 ```
 
 ## Contributing
