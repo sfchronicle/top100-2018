@@ -40,6 +40,8 @@
       </div>
     </div>
 
+    
+      <div id="search-stick-here"></div>  
     <div id="container">
       <div id="landing-logo"><img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_white.png"></div>
 
@@ -63,24 +65,7 @@
 
       
 
-      <div id="intro">
-
-        {% for i in intro.text %}
-          <p>{{i.value|safe}}</p>
-        {% endfor %}
-        <div id="readmore-text">
-          {% for i in intro.readmore %}
-            <p>{{i.value|safe}}</p> 
-          {% endfor %}
-        </div>
-
-        <div id="readmore-btn-container"><span id="readmore-btn" class="uncollapsed">Read More</span></div>
-
-        <div id="search-stick-here"></div>
-        
-      </div>
-
-
+      
       
       {% include 'components/_top-nav.html' %}
 
