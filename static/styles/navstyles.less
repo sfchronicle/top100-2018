@@ -22,10 +22,15 @@
 .social-link {
   display: inline-block;
   float: right;
-  font-size: 18px;
+  font-size: 16px;
 
   a {
     padding-right: 10px;
+    color:@dark-gray;
+
+    &:hover{
+      color:@dark-gray;
+    }
   }
 
   &.mylist {
@@ -54,7 +59,7 @@
 .rest{
   font-family: @logo2;
   text-transform: uppercase;
-  color: black;
+  color: #000;
   font-weight:100;
   letter-spacing: 1px;
   font-size: 21px;
@@ -65,6 +70,10 @@
   	@media @mobile{
   		font-size:19px;
   	}
+  }
+
+  &:hover{
+    color:#000;
   }
 }
 
@@ -182,11 +191,16 @@
     color: @dark-gray;
   }
 
-  &.active, &.map, &.cuisines, &.new, &.classics, &.regions, &.brunch, &.homepage {
+  &.active,
+  &.map,
+  &.cuisines,
+  &.new,
+  &.classics,
+  &.regions,
+  &.brunch,
+  &.homepage {
     background: @main;
-    a {
-      color: white;
-    }
+    color: white;
   }
 }
 
@@ -244,5 +258,14 @@
     margin:0 10px;
     color:@main;
     cursor: pointer;
+  }
+}
+
+.infobox{
+  
+  a{
+    color:#000;
+    border-bottom:2px solid @main;
+    
   }
 }

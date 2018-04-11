@@ -54,7 +54,7 @@
       <div class="infobox">
         <div><span>Cuisine</span><br>{{restaurant.Cuisine}}</div>
         <div><span>Neighborhood</span><br>{{restaurant.SubRegion}}</div>
-        <div><span>Phone</span><br><a href="tel:{{restaurant.Phone.replace('(','').replace(') ','-')}}" class="phone-link"><i class="fa fa-phone" aria-hidden="true"></i>{{restaurant.Phone}}</a></div>
+        <div><span>Phone</span><br><a href="tel:{{restaurant.Phone.replace('(','').replace(') ','-')}}" class="phone-link">{{restaurant.Phone}}</a></div>
         <div><span>Noise</span><br>
           {% if restaurant.Noise == 'ONE BELL' %}
               <i class="fa fa-bell"></i>
@@ -73,9 +73,9 @@
                <i class="fa fa-bomb"></i>
           {% endif %}
         </div>
-        <div><span>Address</span><br><a href="https://www.google.com/maps/place/{{restaurant.GoogleAddress}}"  target="_blank" class="google-link"><i class="fa fa-map-marker" aria-hidden="true"></i>{{restaurant.GoogleAddress}}</a></div>
+        <div><span>Address</span><br><a href="https://www.google.com/maps/place/{{restaurant.GoogleAddress}}"  target="_blank" class="google-link">{{restaurant.GoogleAddress}}</a></div>
         {% if restaurant.Website %}
-        <div><span>Website</span><br><a href="{{restaurant.Website}}" target="_blank" class="restaurant-link"><i class="fa fa-external-link" aria-hidden="true"></i>{{restaurant.Website}}</a></div>
+        <div><span>Website</span><br><a href="{{restaurant.Website}}" target="_blank" class="restaurant-link">{{restaurant.Website}}</a></div>
         {% endif %}
         <div><span>Prices</span><br>{{restaurant.Prices}}</div>
         <div><span>Seats</span><br>{{restaurant.Seats}}</div>
