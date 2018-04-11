@@ -39,6 +39,12 @@
     <p id="mobile-h1">{{restaurant.Name}} {{restaurant.otherName|safe}}</p>
 
     <div class="article">
+      {% if (restaurant.Returning == "Classic") %}
+      <label class="classic-label">Classic</label>
+      {% endif %}
+      {% if (restaurant.Returning == "Classic" or restaurant.Returning == "No") %}
+      <img class="special-icon" />
+      {% endif %}
       {% for r in article %}
         <p>{{ r.Text }}</p>
       {% endfor %}

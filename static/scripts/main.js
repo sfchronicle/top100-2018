@@ -60,6 +60,22 @@ if (cookiesNumber > 10){
 	$("#final-text").show();
 }
 
+// Add a special icon if this restaurant is new or a classic
+var newIcon = "//projects.sfchronicle.com/shared/logos/top100_new.png?a";
+var classicIcon = "//projects.sfchronicle.com/shared/logos/top100_classic.png?a";
+var iconChoice;
+var returningVal = restaurant.Returning.toLowerCase();
+// Check values on restaurant
+if (returningVal == "no"){
+	iconChoice = newIcon;
+} else if (returningVal == "classic"){
+	iconChoice = classicIcon;
+}
+// If a value was chosen, set src
+if (iconChoice){
+	$(".special-icon").attr("src", iconChoice);
+}
+
 // ************* RELATED SECTION ****************
 
 console.log(restaurant, restaurants);
@@ -74,9 +90,6 @@ var findUnseenRestaurant = function(index, cookie, alreadySelected){
 		if (countIndex == 100){
 			countIndex = 0;
 		}
-
-		console.log(countIndex);
-		console.log(restaurants[countIndex]);
 
 		if (cookie.indexOf(restaurants[countIndex].Slug) == -1){
 			// Check if it's already selected
@@ -113,8 +126,6 @@ var relatedRestaurants = [];
 for (var r = 0; r < 3; r++){
 	relatedRestaurants[r] = findUnseenRestaurant(thisRestaurantIndex, cookieValue, relatedRestaurants); 
 }
-
-console.log(relatedRestaurants);
 
 // Set values on HTML
 $("#related-rest .wrap").each(function(index){
