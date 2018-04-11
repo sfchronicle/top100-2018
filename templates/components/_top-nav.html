@@ -107,11 +107,13 @@
       </a>
     </div>
 
-    <div class="social-link mylist nav-link">
-      My list
-    </div>
+    {% if (homepage) %}{% else %}<a href="{{ url_for('index') }}#search">{% endif %}
+    {% if (map) %}{% else %}<div class="social-link mylist nav-link">My list</div>{% endif %}
+    {% if (homepage) %}{% else %}</a>{% endif %}
 
-    <div class="social-link mobile-search"><i class="fa fa-search" aria-hidden="true"></i></div>
+    {% if (homepage) %}{% else %}<a href="{{ url_for('index') }}#search">{% endif %}
+    {% if (map) %}{% else %}<div class="social-link mobile-search"><i class="fa fa-search" aria-hidden="true"></i></div>{% endif %}
+    {% if (homepage) %}{% else %}</a>{% endif %}
     
   </div>
 

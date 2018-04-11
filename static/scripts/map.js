@@ -268,3 +268,9 @@ $(document).ready(function(){
   }
 
 });
+
+
+if ($(window).width() < 666) {
+  $('.landing-nav').removeClass("active");
+  $('#landing-mobile-nav').addClass("active");
+}
