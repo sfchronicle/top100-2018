@@ -44,8 +44,6 @@ if (cookieValue.indexOf(restaurant.Slug) == -1){
 	setCookie("sfc_top100_2018", cookieValue, 2147483647);
 }
 
-console.log("cookieValue", cookieValue, cookieValue.split("|"));
-
 // Get current strings in cookie and report back
 var cookiesNumber = 100 - cookieValue.split("|").length;
 

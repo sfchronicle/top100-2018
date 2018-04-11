@@ -1,4 +1,5 @@
 // Insert logic for grabbing most popular here
+var cookies = require("./cookies");
 // WORKING, hide our API key
 // ALSO instead of pinging chartbeat directly, we should ping our server which has cached results
 var settings = {
@@ -35,13 +36,14 @@ $.ajax(settings).done(function (response) {
   }
   // One last filter to remove the undefineds and the current item (if it exists in the set)
   top100Results = top100Results.filter(function(item){
-    if (typeof item != "undefined" && item != restaurant.Slug){
+    if (typeof item != "undefined" && (typeof restaurant == "undefined" || item != restaurant.Slug)){
       return true;
     } else {
       return false;
     }
   });
   // Final filter to create an array of restaurants objects
+  var goldArray = [];
   var finalPopular = restaurants.filter(function(item){
     if (top100Results.indexOf(item.Slug) != -1){
       return true;
@@ -52,7 +54,10 @@ $.ajax(settings).done(function (response) {
   // Set values on HTML
   $("#popular-rest .wrap").each(function(index){
     // Get URL with no query or hash (or trailing slash)
-    var fullUrl = location.href.split('#')[0].split('?')[0].slice(0, -1);
+    var fullUrl = location.href.split('#')[0].split('?')[0];
+    if ((fullUrl.match(/\//g) || []).length == 4){
+      fullUrl = fullUrl.slice(0, -1);
+    }
     // Get array based on slashes
     fullUrl = fullUrl.split("/");
     // Remove the restaurant path and rejoin
@@ -73,7 +78,11 @@ $.ajax(settings).done(function (response) {
     $(this).find(".name div").text(finalPopular[index].Name);
     // Set region
     $(this).find(".info").text(finalPopular[index].Region + " | " + finalPopular[index].SubRegion);
+    // Give popular restaurants that haven't been seen yet a little flag
+    var restaurantCookie = getCookie("sfc_top100_2018");
+    if (restaurantCookie.indexOf(finalPopular[index].Slug) == -1){
+      $(this).find(".border").addClass("unseen").eq(1).addClass("white");
+    }
   });
-  // WORKING, do something with these results
-  console.log("TOP 100", top100Results);
 });
+

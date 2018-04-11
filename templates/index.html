@@ -142,9 +142,11 @@
         <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Check the box next to any restaurant's name to add it to this list.</div>
 
       </div><!-- Closing #restaurants -->
-
+      <script>
+        // Pass var into JS
+        var restaurants = {{ restaurants|tojson }};
+      </script>
       {% include 'components/_popular.html' %}
-
       {% include 'components/_footer.html' %}
 
     </div><!-- Closing #container -->

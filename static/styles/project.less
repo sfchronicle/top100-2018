@@ -263,3 +263,94 @@ hr{
 .none{
 	display:none;
 }
+
+#related-rest, #popular-rest{
+	.display-flex;
+	.justify-content(center);
+	.flex-wrap(wrap);
+	max-width:1000px;
+	margin:2em auto;
+
+	#nearing-text, #final-text {
+		display: none;
+	}
+
+	.rtitle span {
+		color: #EDBE22;
+		font-weight: 800;
+
+		&.number {
+			font-size: 130%;
+		}
+	}
+
+	@media @mobile{
+		margin: 1em auto;
+	}
+
+	.wrap{
+		.flex(0 0 30%);
+		padding: 10px;
+
+		@media @mobile{
+			.flex(0 0 100%);
+		}
+
+		.name{
+			color:#000;
+			font-size:16px;
+			font-family: @fancy-serif;
+		}
+	}
+
+	.rtitle{
+		.flex(0 0 100%);
+		padding:0 10px;
+		line-height:1.2;
+		font-family:@title;
+		text-align:center;
+		margin-bottom:1em;
+
+		@media @mobile{
+	    font-size: 17px;
+	    margin: 20px 0;
+		}
+	}
+
+	.prev-next{
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: left;
+    font-family: @title;
+    color: #8b8b8b;
+	}
+}
+
+.save-button {
+	background: #e5e6ea;
+	flex: 0 0 auto; /* Prevents shrinking and strange appearance */
+	font-size: 12px;
+	padding: 8px;
+	border-radius: 6px;
+	font-family: @sans-serif-light;
+	cursor: pointer;
+	white-space: nowrap;
+  overflow: hidden;
+  height: 32px;
+
+	&:hover {
+		background: #666666;
+		color: white;
+	}
+
+	.save-restaurant {
+		padding-left: 5px;
+
+		i {
+			font-size: 20px;
+	    line-height: 12px;
+	    position: relative;
+	    top: 2px;
+		}
+	}
+}
