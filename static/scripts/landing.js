@@ -72,7 +72,7 @@ $(function(){
   var restaurantCookie = getCookie("sfc_top100_2018");
   $(".restaurant").each(function(){
     if (restaurantCookie.indexOf($(this).attr("id")) == -1){
-      $(this).find(".border").addClass("unseen");
+      $(this).find(".border").addClass("unseen").eq(1).addClass("white");
     }
   });
 });
@@ -449,6 +449,7 @@ $(".mylist").on("click",function() {
   showMyList();
   // Clear any search terms from bar
   $("#search-bar input").val("");
+  $(".cancel-search").hide();
   // Change result text a little
   var resultsText = $("#count-results").text();
   $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
@@ -456,6 +457,25 @@ $(".mylist").on("click",function() {
   if (resultsText.substring(0,1) == "0"){
     $("#no-saved-restaurants").show();
     $("#search-noresults").hide();
+  } else {
+    // If there are results, append share tools
+    var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+    var twitterCopy = $("#twitter-icon").clone();
+    twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
+    var facebookCopy = $("#facebook-icon").clone();
+    facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
+    var linkIcon = $("<a>", {
+      html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
+    });
+    // Add buttons
+    $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
+    // Add event to link button
+    linkIcon.on("click", function(){
+      $(".link-copy-text").show();
+      $(".link-copy-input").show().val(encodedURL);
+      $(".link-copy-input")[0].select();
+      document.execCommand('copy');
+    });
   }
 });
 
