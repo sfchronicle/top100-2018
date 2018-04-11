@@ -414,6 +414,8 @@ function showMyList() {
 $(".search").on("click", function(e){  
   //Intercept the link functionality on homepage and just bring user to search
   e.preventDefault();
+  // Hide explainer text 
+  $("#mylist-box").hide();
   // Set nav colors
   $(".search").addClass("homepage");
   $(".mylist").removeClass("active");
