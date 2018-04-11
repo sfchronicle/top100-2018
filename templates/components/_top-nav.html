@@ -1,12 +1,3 @@
-<div id="top-nav">
-
-  <div class="logo nav-link">
-  	<a href="https://www.sfchronicle.com" target="_blank"><img src="//projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></a>
-  </div>
-
-  <div class="nav-link active" id="top100-nav-link"><a href="{{ url_for('index') }}"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
-
-
   {% if collection == "regions" %}
   {% set regions = "regions" %}
   {% endif %}
@@ -27,43 +18,77 @@
   {% set new = "new" %}
   {% endif %}
 
-  <div class="secondary-link-container active">
+<div class="landing-nav {% if (homepage) %}{% else %}active{% endif %}">
+  <div id="top-nav" class="fixed">
 
-    <div class="secondary-link search {{homepage}}"><a href="{{ url_for('index') }}#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+    <div class="logo nav-link">
+      <a href="https://www.sfchronicle.com" target="_blank"><img src="//projects.sfchronicle.com/shared/logos/sfletter_c_black.png"></a>
+    </div>
 
-     <div class="secondary-link {{map}}"><a href="{{ url_for('index') }}map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+    <div class="nav-link active" id="top100-nav-link"><a href="{{ url_for('index') }}"><span class="top100-top top">Top 100 </span><span class="rest">Restaurants </span><span class="top100-top top">2018</span></a></div>
 
-     <div class="secondary-link {{regions}}"><a href="{{ url_for('index') }}guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
 
-     <div class="secondary-link {{cuisines}}"><a href="{{ url_for('index') }}guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+    <div class="secondary-link-container active">
 
-     <div class="secondary-link {{brunch}}"><a href="{{ url_for('index') }}guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+      <div class="secondary-link search {{homepage}}"><i class="fa fa-search" aria-hidden="true"></i> Search</div>
 
-     <div class="secondary-link {{classics}}"><a href="{{ url_for('index') }}guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+      <div class="secondary-link {{map}}"><a href="{{ url_for('index') }}map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
 
-     <div class="secondary-link {{new}}"><a href="{{ url_for('index') }}guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
-   </div>
+      <div class="secondary-link {{regions}}"><a href="{{ url_for('index') }}guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
 
-   
-  <div class="secondary-link-container-mobile {% if (homepage) %}homepage {% else %}active{% endif %}">
+      <div class="secondary-link {{cuisines}}"><a href="{{ url_for('index') }}guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
 
-    <div class="secondary-link search {{homepage}}" id="search-button"><a href="{{ url_for('index') }}#search" class="search-link"><i class="fa fa-search" aria-hidden="true"></i> Search</a></div>
+      <div class="secondary-link {{brunch}}"><a href="{{ url_for('index') }}guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
 
-    <div class="secondary-link {{map}}"><a href="{{ url_for('index') }}map" class="map-link"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a></div>
+      <div class="secondary-link {{classics}}"><a href="{{ url_for('index') }}guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
 
-    <div class="secondary-link {{regions}}"><a href="{{ url_for('index') }}guides/regions" class="region-link"><i class="fa fa-globe" aria-hidden="true"></i> Regions</a></div>
+      <div class="secondary-link {{new}}"><a href="{{ url_for('index') }}guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
 
-    <div class="secondary-link {{cuisines}}"><a href="{{ url_for('index') }}guides/cuisines" class="cuisine-link"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</a></div>
+    </div>
 
-    <div class="secondary-link {{brunch}}"><a href="{{ url_for('index') }}guides/brunch" class="brunch-link"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</a></div>
+    <div id="social-links">  
+      <div class="social-link email">
+        <a id="mail-icon" title="Share via email" href="mailto:?subject=<%= grunt.data.json.project.title_landing %>&body=<%= grunt.data.json.project.description_landing %>%0A%0Ahttp%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
 
-    <div class="secondary-link {{classics}}"><a href="{{ url_for('index') }}guides/classics" class="classics-link"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</a></div>
+      <div class="social-link">
+        <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </div>
 
-    <div class="secondary-link {{new}}"><a href="{{ url_for('index') }}guides/new" class="new-link"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a></div>
+      <div class="social-link">
+        <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>&text=<%= grunt.data.json.project.twitter_text_landing %>&hashtags=<%= grunt.data.json.project.hashtag %>">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </div>
+
+      <div class="social-link mylist">
+        My list
+      </div>
+      
+    </div>
 
   </div>
 
-  <div id="social-links">  
+  <div id="search" class="fixed-second {% if (homepage) %}{% else %}none{% endif %}">
+    <div id="search-bar">
+      <div class="cancel-search"><i class="fa fa-close" aria-hidden="true"></i></div>
+      <input type="text" placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+  </div>
+
+</div>
+
+
+<div id="landing-mobile-nav">
+
+
+  <div class="nav-link" ><a href="{{ url_for('index') }}"><span class="top100 mobile">Top 100 </span><span class="rest mobile">Restaurants </span></a></div>
+  
+  <div class="social-links nav-link">  
     <div class="social-link email">
       <a id="mail-icon" title="Share via email" href="mailto:?subject=<%= grunt.data.json.project.title_landing %>&body=<%= grunt.data.json.project.description_landing %>%0A%0Ahttp%3A%2F%2Fprojects.sfchronicle.com%2F<%= grunt.data.json.project.year %>%2F<%= grunt.data.json.project.slug_landing %>">
         <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -82,12 +107,15 @@
       </a>
     </div>
 
-    <div class="social-link mylist">
+    <div class="social-link mylist nav-link">
       My list
     </div>
+
+    <div class="social-link mobile-search"><i class="fa fa-search" aria-hidden="true"></i></div>
     
   </div>
 
 </div>
 
 
+<div id="mobile-nav-stick"></div>

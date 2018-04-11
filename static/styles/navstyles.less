@@ -8,18 +8,10 @@
 }
 
 #top100-nav-link{
-  -webkit-transition: opacity 500ms linear;
-  -ms-transition: opacity 500ms linear;
-  transition: opacity 500ms linear;
-  line-height:0;
+  margin:0 5px;
 
   @media @w1000{
-    display:none;
-  }
-
-  @media @mobile{
-    display:block;
-    margin:0 5px;
+    display: none;
   }
 }
 
@@ -32,9 +24,7 @@
   float: right;
   font-size: 18px;
   padding-top: 10px;
-  @media @mobile {
-    padding-top: 5px;
-  }
+
   a {
     padding-right: 10px;
   }
@@ -89,10 +79,6 @@
   height: 52px;
   box-shadow: 0 1px 1px 0px #ccc;
   z-index:2019;
-
-  @media @mobile {
-    top: 70px;
-  }
 }
 
 #search-stick-ph {
@@ -102,7 +88,16 @@
   }
 }
 
+.landing-nav{
+  opacity: 0;
+  -webkit-transition: opacity 250ms linear;
+  -ms-transition: opacity 250ms linear;
+  transition: opacity 250ms linear;
 
+  &.active{
+    opacity: 1;
+  }
+}
 
 #top-nav{
   box-shadow: 0 1px 1px 1px #ccc;
@@ -113,10 +108,6 @@
   background:#fff;
   .display-flex;
   .align-items(center);
-
-  @media @w750 {
-  	display: none;
-  }
 
 	.top100-top {
     font-weight: 800;
@@ -140,13 +131,13 @@
   .logo{
 
     .img{
-      -webkit-transition: opacity 500ms linear;
-      -ms-transition: opacity 500ms linear;
-      transition: opacity 500ms linear;
+      -webkit-transition: opacity 250ms linear;
+      -ms-transition: opacity 250ms linear;
+      transition: opacity 250ms linear;
     }
 
     
-    @media @mobile{
+    @media @w777{
       display:none;
     }
  
@@ -154,151 +145,47 @@
 }
 
 
-#bottom-nav{
-  box-shadow: 0 1px 1px 1px #ccc;
-  height:46px;
-  bottom:0;
-  width:100%;
-  z-index:2018;
-  background:#fff;
-  .display-flex;
-  .align-items(center);
-  display: none;
 
-  @media @w750 {
-    height: 40px;
-
-    .top100.top {
-      font-size: 15px;
-    }
-  }
-
-  .logo{
-    display:block;
-    float: left;
-    height: 100%;
-    padding: 10px 0;
-  }
-
-  .top100-top {
-    font-weight: 800;
-  }
-
-  div.link {
-    .rest {
-      @media @tablet {
-        display: none;
-      }
-    }
-
-    .year {
-      font-weight: 800;
-      @media @tablet {
-        display: none;
-      }
-    }
-  }
-
-  &.active{
-    display: block;
-  }
-}
 
 #social-links{
   margin-left: auto;
   height: 100%;
 }
 
-.bottom-social{
-  position:fixed;
-  bottom:0;
-  right:0;
-  height: unset;
-}
-
-.secondary-link-container, .secondary-link-container-mobile {
-
-  opacity: 0;
-  -webkit-transition: opacity 500ms linear;
-  -ms-transition: opacity 500ms linear;
-  transition: opacity 500ms linear;
-  margin-left: 10px;
-
-  &.active {
-    opacity: 1;
-  }
-
-  @media @mobile {
-    -webkit-transition: opacity 10ms linear;
-    -ms-transition: opacity 10ms linear;
-    transition: opacity 10ms linear;
-  }
-}
-
-.secondary-link-container-mobile {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin-left: 0;
-  z-index: 999;
-  height: 37px;
-  background: white;
-  -webkit-box-shadow: 0 0 6px 0 #ccc;
-  -moz-box-shadow: 0 0 6px 0 #ccc;
-  box-shadow: 0 0 6px 0 #ccc;
-
-  .secondary-link{
-    float:left;   
-    padding: 1px 3px;
-  }
-
-  @media @w750 {
-    display: block;
-  }
-}
 
 .secondary-link-container {
   .display-flex;
-  height:100%;
+  .align-items(center);
+  .justify-content(space-between);
 
-  @media @w750 {
-    display: none;
+  @media @mobile{
+    width: 100%;
   }
 }
 
 .secondary-link {
-  color: white;
-  padding:5px;
-
+  padding: 10px;
+  font-family: @logo2;
+  font-size: 17px;
+  color: @dark-gray;
+  
   @media @mobile {
-    margin: 0 0 2px 0;
-    height: 37px;
+    font-size: 16px;
+    padding: 11px 9px;
   }
 
   .fa {
     padding-right: 1px;
-    @media @mobile {
+
+    @media @w777 {
       display: none;
     }
   }
 
   a {
-    padding: 0 10px;
-    padding-top: 7px;
-    vertical-align: middle;
-    color: black;
-    font-family: @logo2;
-    font-size: 17px;
-    height: 100%;
     color: @dark-gray;
-    @media @mobile {
-      font-size: 16px;
-      padding: 0 6px;
-      padding-top: 7px;
-    }
   }
+
   &.active, &.map, &.cuisines, &.new, &.classics, &.regions, &.brunch, &.homepage {
     background: @main;
     a {
@@ -323,4 +210,42 @@
 
 .ui-menu .ui-menu-item{
     width:100%;
+}
+
+
+#landing-mobile-nav{
+  opacity: 0;
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 1;
+  background:#fff;
+  padding:0 10px;
+  box-shadow: 0 1px 1px 1px #ccc;
+  .display-flex;
+  .align-items(center);
+  .justify-content(space-between); 
+  /*opacity: 0;*/
+  -webkit-transition: opacity 200ms linear;
+  -ms-transition: opacity 200ms linear;
+  transition: opacity 200ms linear;
+
+  &.active{
+    opacity: 1;
+  
+  }
+
+  img{
+    max-width: 20px;
+  }
+
+  .mobile{
+    font-size:18px;
+  }
+
+  .mobile-search{
+    margin:0 10px;
+    color:@main;
+    cursor: pointer;
+  }
 }

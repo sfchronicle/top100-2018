@@ -61,16 +61,7 @@
       
       </div>
 
-      <div id="search-stick-here"></div>
-      {% include 'components/_top-nav.html' %}
-      {% include 'components/_bottom-nav.html' %}
-      <div id="search">
-        <div id="search-bar">
-          <div class="cancel-search"><i class="fa fa-close" aria-hidden="true"></i></div>
-          <input type="text" placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div id="search-stick-ph"></div>
+      
 
       <div id="intro">
 
@@ -84,10 +75,14 @@
         </div>
 
         <div id="readmore-btn-container"><span id="readmore-btn" class="uncollapsed">Read More</span></div>
+
+        <div id="search-stick-here"></div>
         
       </div>
 
+
       
+      {% include 'components/_top-nav.html' %}
 
       <div id="restaurants">
         <div id="results">
@@ -145,9 +140,9 @@
         <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try another search term.</div>
         <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Check the box next to any restaurant's name to add it to this list.</div>
 
-        {% include 'components/_footer.html' %}
-
       </div><!-- Closing #restaurants -->
+
+      {% include 'components/_footer.html' %}
 
     </div><!-- Closing #container -->
 

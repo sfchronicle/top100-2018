@@ -112,7 +112,11 @@
 }
 
 #intro {
-	margin: 30px 0;
+	margin: 7em 0;
+
+	@media @tablet{
+		margin: 2.5em 0;
+	}
 }
 
 .sf-logo{
@@ -153,7 +157,7 @@
 		.flex-wrap(wrap);
 		z-index: 1;
     padding-top: 10px;
-    background: @light-gray;
+    background: #ececec;
 
 		button {
   		font-family: @sans-serif-light;
@@ -450,33 +454,6 @@
 			color:@main;
 		}
 	}
-}
-
-#bottom-nav{
-	position:fixed;
-	width:100%;
-	display:none;
-	z-index:2017;
-	background:white;
-	bottom:0;
-	-webkit-box-shadow: 0 0 6px 0 #696969;
-  -moz-box-shadow: 0 0 6px 0 #696969;
-  box-shadow: 0 0 6px 0 #696969;
-
-  .link{
-  	vertical-align: 1px;
-  	padding:5px 10px 0 0;
-    margin-left: 6px;
-  }
-
-  .logo-link{
-  	margin-left:10px;
-  	line-height:0;
-
-  	img{
-  		height:15px;
-  	}
-  }
 }
 
 .login{

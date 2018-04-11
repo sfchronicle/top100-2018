@@ -16,62 +16,56 @@ document.getElementById("restaurants").addEventListener("click",function(){
 
 // smooth scroll to read Michael's intro
 document.getElementById("introduction").addEventListener("click",function(){
-  // top position relative to the document
-  var pos = $("#intro").offset().top -125;
+
+  if ($(window).width() < 768) {
+     var pos = $("#intro").offset().top-30;
+  }
+  else {
+   var pos = $("#intro").offset().top -100;
+  }
   // animated top scrolling
   $('body, html').animate({scrollTop: pos});
 });
 
-// determine phone vs desktop
-if (screen.width > window.devicePixelRatio*480){
-  window.onscroll = function() {activate()};
-} else {
-  window.onscroll = function() {activateMobile()};
 
-  // smooth scroll to skip reading Michael's intro if you want
-  document.getElementById("search-button").addEventListener("click",function(){
-    scrollToResults();
-  });
-}
 
-// scrolling functionality: ----------------------------------------------------
-// stick the second nav once you get to it -------------------------------------
-// fade in various nav elements depending on page location ---------------------
+if ($(window).width() < 666) {
+  $('.landing-nav').addClass("active");
+  $('#top-nav').removeClass("fixed");
+  $('#social-links').hide();
+  $('#search').removeClass("fixed-second");
 
-function activate() {
-  var sticker = document.getElementById('search');
-  var sticker_ph = document.getElementById('search-stick-ph');
-  var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
-  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
- 
-  if (window_top > div_top) {
-    $("#top-nav").addClass("fixed");
-    sticker.classList.add('fixed-second');
-    sticker_ph.style.display = 'block'; // puts in a placeholder for where sticky used to be for smooth scrolling
-  } else {
-    $("#top-nav").removeClass("fixed");
-    sticker.classList.remove('fixed-second');
-    sticker_ph.style.display = 'none'; // removes placeholder for where sticky used to be for smooth scrolling
+  window.onscroll = function() {
+    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+    var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
+    if (window_top > div_top) {
+      $('#landing-mobile-nav').addClass("active");
+    } else {
+      $('#landing-mobile-nav').removeClass("active");
+    }
   }
-}
-
-function activateMobile() {
-  var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-  var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
-  var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
-
-  if (window_top > div_top) {
-    $(".secondary-link-container-mobile").addClass("active");
-    $("#bottom-nav").addClass("active");
-
-  } else {
-    $(".secondary-link-container-mobile").removeClass("active");
-    $("#bottom-nav").removeClass("active");
+}else {
+  window.onscroll = function() {
+    var sticker = document.getElementById('search');
+    var sticker_ph = document.getElementById('search-stick-ph');
+    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+    var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
+    var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
+    if (window_top > div_top) {
+      $('.landing-nav').addClass("active");
+    } else {
+      $('.landing-nav').removeClass("active");
+    }
   }
+} 
 
 
-}
+// smooth scroll to mobile nav
+$(".mobile-search").click(function(){
+   var pos = $(".landing-nav").offset().top;
+  $('body, html').animate({scrollTop: pos});
+});
+
 
 // Give restaurants that haven't been seen yet a little flag
 $(function(){
