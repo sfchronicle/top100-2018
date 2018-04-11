@@ -11,7 +11,6 @@
     <script src="//projects.sfchronicle.com/shared/js/jquery.min.js"></script>
     <script src="//projects.sfchronicle.com/shared/js/jquery-ui.min.js"></script>
     <script src="//projects.sfchronicle.com/shared/js/jquery-base64.min.js"></script>
-    <!-- <script src="//projects.sfchronicle.com/shared/js/lazyload.js"></script> -->
     <link rel="stylesheet" href="//projects.sfchronicle.com/shared/js/jquery-ui.min.css">
     <link href="https://fonts.googleapis.com/css?family=Cardo|Fjalla+One|Pathway+Gothic+One" rel="stylesheet">
     {% include 'components/_hearst.html' %}
@@ -125,7 +124,7 @@
               <div class="border"></div>
               <div class="border"></div>
               <div class="image-wrapper">
-                <img data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
+                <img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
               </div>
             </a>
             <div class="name">

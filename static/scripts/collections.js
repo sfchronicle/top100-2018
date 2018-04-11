@@ -1,3 +1,5 @@
+require('lazyload');
+lazyload();
 
 // if we are on the "Regions" collection, implement "Regions" buttons and drop-downs
 if (document.getElementById("sf-region")){
@@ -203,19 +205,6 @@ if ($(window).width() < 666) {
       $('#landing-mobile-nav').addClass("active");
     } else {
       $('#landing-mobile-nav').removeClass("active");
-    }
-  }
-}else {
-  window.onscroll = function() {
-    var sticker = document.getElementById('search');
-    var sticker_ph = document.getElementById('search-stick-ph');
-    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-    var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
-    var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
-    if (window_top > div_top) {
-      $('.landing-nav').addClass("active");
-    } else {
-      $('.landing-nav').removeClass("active");
     }
   }
 }
