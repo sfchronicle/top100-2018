@@ -16,21 +16,6 @@ document.getElementById("restaurants").addEventListener("click",function(){
   scrollToResults();
 });
 
-// smooth scroll to read Michael's intro
-document.getElementById("introduction").addEventListener("click",function(){
-
-  if ($(window).width() < 768) {
-     var pos = $("#intro").offset().top-30;
-  }
-  else {
-   var pos = $("#intro").offset().top -100;
-  }
-  // animated top scrolling
-  $('body, html').animate({scrollTop: pos});
-});
-
-
-
 if ($(window).width() < 666) {
   $('.landing-nav').addClass("active");
   $('#top-nav').removeClass("fixed");
@@ -48,11 +33,8 @@ if ($(window).width() < 666) {
   }
 }else {
   window.onscroll = function() {
-    var sticker = document.getElementById('search');
-    var sticker_ph = document.getElementById('search-stick-ph');
     var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-    var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top;
-    var intro_top = document.getElementById('intro').getBoundingClientRect().top + window_top;
+    var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
     if (window_top > div_top) {
       $('.landing-nav').addClass("active");
     } else {
