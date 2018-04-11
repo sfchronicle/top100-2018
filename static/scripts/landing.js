@@ -121,7 +121,7 @@ $("#search-bar input").on("input", function(){
   $(".mylist").removeClass("active");
 
   // Hide list text in case we are switching to search
-  $("#no-saved-restaurants").hide();
+  $("#mylist-box").hide();
 
   // If there's a value in the search bar, allow cancel
   if ($(this).val()){
@@ -459,9 +459,9 @@ $(".mylist").on("click",function() {
   // Change result text a little
   var resultsText = $("#count-results").text();
   $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+  $("#mylist-box").show();
   // Handle zero results condition
   if (resultsText.substring(0,1) == "0"){
-    $("#no-saved-restaurants").show();
     $("#search-noresults").hide();
   } else {
     // If there are results, append share tools

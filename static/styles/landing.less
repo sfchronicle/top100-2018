@@ -143,10 +143,10 @@
 }
 
 
-.count-results {
+.count-results, #mylist-box > * {
 	font-style: italic;
 	.flex(0 1 100%);
-	margin:1em;
+	margin: 20px;
 	font-family:@title;
 
 	@media @width650{
@@ -419,7 +419,21 @@
 	font-family:@title;
 }
 
-#search-noresults, #no-saved-restaurants {
+#mylist-box {
+	width: 100%;
+
+	.mylist-title {
+		font-family: @sans-serif;
+		font-size: 30px;
+	}
+
+	.mylist-explainer {
+		font-size: 16px;
+		max-width: 720px;
+	}
+}
+
+#search-noresults {
   font-style: italic;
   text-align: center;
   width: 500px;

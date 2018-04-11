@@ -87,6 +87,16 @@
       <div id="restaurants">
         <div id="results">
           <div class="count-results hide" id="count-results">100 result(s)</div>
+
+          <div class="hide" id="mylist-box">
+            <div class="mylist-title">
+              My List
+            </div>
+            <div class="mylist-explainer">
+              Use this list to keep track of your favorite restaurants or places you'd like to visit! Check the "Save" box next to any restaurant's name to add it to this list.
+            </div>
+          </div>
+
           {% set cuisineString = "" %}
           {% set regionString = "" %}
           {% set nameString = "" %}
@@ -141,7 +151,6 @@
         </div>
 
         <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try another search term.</div>
-        <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Check the box next to any restaurant's name to add it to this list.</div>
 
       </div><!-- Closing #restaurants -->
       <script>
