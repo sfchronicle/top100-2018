@@ -23,8 +23,6 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-
-
     <div id="log-in-instructions">
     	<div class="login">
         <!-- Gigya signin -->
@@ -42,16 +40,15 @@
       </div>
     </div>
 
-    {% include 'components/_top-nav.html' %}
-
     <div id="container">
+      <div id="landing-logo"><img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_white.png"></div>
 
       <div class="lead-container">
         
         <div class="overlay-container">
           <div class="overlay">
             <div class="link"><span class="top100-hed">Top 100 </span><span class="top100-hed-rest">Restaurants </span><span class="top100-hed">2018</span></div>
-            <div class="deck">This is the 23rd annual guide I’ve compiled, and the selections are continually evolving. Unlike many lists on the Internet, the Top 100 is heavily vetted. Every restaurant has been visited a minimum of three times, and in most cases many more. Each year, I revisit the restaurants in the previous year’s guide, compare them to the new restaurants that I’m considering and cull the ones that aren’t up to standard. This keeps the list current and raises the bar each year.<br><br>– Michael Bauer</div>
+            <div class="deck">San Francisco Chronicle's Food Critic, Michael Bauer, Top 100 picks for the best restaurants in the Bay Area, with the finest dining, the best ambiances and the most memorable experiences.</div>
             <div id="buttons">
               <div class="instructions" id="introduction">Read the intro</div>
               <div class="instructions" id="restaurants">Restaurants</div>
@@ -60,13 +57,14 @@
           </div>
         </div>
 
-        <div id="lead-image" class="lead-desktop"><img src="{{url_for('static', filename='images/cover.jpg')}}"></img></div>
+        <div id="lead-image" class="lead-desktop"><img src="{{url_for('static', filename='images/cover3.jpg')}}"></img></div>
       
       </div>
 
+      
+
       <div id="intro">
 
-    
         {% for i in intro.text %}
           <p>{{i.value|safe}}</p>
         {% endfor %}
@@ -78,19 +76,13 @@
 
         <div id="readmore-btn-container"><span id="readmore-btn" class="uncollapsed">Read More</span></div>
 
-        
-
+        <div id="search-stick-here"></div>
         
       </div>
 
-      <div id="search-stick-here"></div>
-      <div id="search">
-        <div id="search-bar">
-          <div class="cancel-search"><i class="fa fa-close" aria-hidden="true"></i></div>
-          <input type="text" placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div id="search-stick-ph"></div>
+
+      
+      {% include 'components/_top-nav.html' %}
 
       <div id="restaurants">
         <div id="results">
@@ -149,9 +141,9 @@
         <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try another search term.</div>
         <div class="hide" id="no-saved-restaurants">Use this list to keep track of your favorite restaurants, restaurants you want to visit, or anything you like! Check the box next to any restaurant's name to add it to this list.</div>
 
-        {% include 'components/_footer.html' %}
-
       </div><!-- Closing #restaurants -->
+
+      {% include 'components/_footer.html' %}
 
     </div><!-- Closing #container -->
 
