@@ -340,6 +340,8 @@ function getData(user) {
         });
         // Filter and scroll user there
         findMatches(mappedList);
+        // Add a bit of help text
+        $("#count-results").text($("#count-results").text() + " shared from a reader's list");
       }
     }
   });
@@ -456,6 +458,8 @@ $(".search-link").on("click", function(e){
   }
   // Put focus into search bar
   $("#search-bar input").focus();
+  // Restore 100 results 
+  showAllRestaurants();
 });
 
 // event listener for "My List" button

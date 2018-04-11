@@ -18,14 +18,6 @@
 
     <!-- Begin Hearst analytics -->
     <script type="text/javascript">
-        var omni_channelPath = "Food :: Top 100 2018";
-        var omni_title = "{{ restaurant.Name|safe }}";
-        var omni_paywallSite = "1";
-        var omni_className = "article";
-        var omni_publicationDate = "{{ config.DATE }} 00:00:00";
-        var omni_authorName = "{% block author %}{% endblock %}";
-        var omni_authorTitle = "San Francisco Chronicle staff";
-
         var HDN = HDN || {};
         HDN.dataLayer = HDN.dataLayer || {};
 
@@ -57,7 +49,7 @@
 
         // HDN.dataLayer object for source information
         HDN.dataLayer.source = HDN.dataLayer.source || {};
-        HDN.dataLayer.source.authorName = "Michael Bauer, Kitty Morgan, Russell Yip, Paolo Luchesi, Lucio Villa, Emma O'Neill";
+        HDN.dataLayer.source.authorName = "Michael Bauer, Kitty Morgan, Russell Yip, Paolo Luchesi, Lucio Villa, Emma O'Neill, Evan Wagstaff";
         HDN.dataLayer.source.authorTitle = "San Francisco Chronicle Staff";
         HDN.dataLayer.source.originalSourceSite = "SF";
         HDN.dataLayer.source.publishingSite = "premiumsfgate";
@@ -65,11 +57,11 @@
 
         // HDN.dataLayer object for sharing information
         HDN.dataLayer.sharing = HDN.dataLayer.sharing || {};
-        HDN.dataLayer.sharing.openGraphUrl = "http://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.sharing.openGraphUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
         HDN.dataLayer.sharing.openGraphType = "article";
 
-        HDN.dataLayer.href.pageUrl = "http://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
-        HDN.dataLayer.href.canonicalUrl = "http://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.href.pageUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.href.canonicalUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
         HDN.dataLayer.href.pageUrlPath = window.location.pathname;
         HDN.dataLayer.href.pageUrlPathFolders = window.location.pathname.replace(/[A-Za-z0-9-_.]+$/, '');
         HDN.dataLayer.href.pageUrlQueryParams = window.location.search.replace(/^\?/, '');
@@ -118,7 +110,7 @@
     {% block content %}{% endblock %}
 
     <script>
-        // Pass slug to main for saving cookie
+        // Pass vars into JS
         var restaurant = {{ restaurant|tojson }};
         var restaurants = {{ restaurants|tojson }};
     </script>

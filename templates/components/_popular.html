@@ -1,0 +1,93 @@
+
+<div id="popular-rest">
+  <div class="rtitle">
+    <div id="popular-text">Most popular from the Top 100</div>
+  </div>
+  <div class="wrap">
+    <a href="">
+      <div class="border unseen"></div>
+      <div class="border unseen white"></div>
+      <img>
+    </a>
+    <div class="name">
+      <div></div>
+    </div>
+    <div class="info"></div>        
+  </div>
+  
+  <div class="wrap">
+    <a href="">
+      <div class="border unseen"></div>
+      <div class="border unseen white"></div>
+      <img>
+    </a>
+    <div class="name">
+      <div></div>
+    </div>
+    <div class="info"></div>        
+  </div>
+
+  <div class="wrap">
+    <a href="">
+      <div class="border unseen"></div>
+      <div class="border unseen white"></div>
+      <img>
+    </a>
+    <div class="name">
+      <div></div>
+    </div>
+    <div class="info"></div>        
+  </div>
+</div>
+
+<script>
+  // Insert logic for grabbing most popular here
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://api.chartbeat.com/live/toppages/v3/?apikey=6033653176adbfc228e9358316a06054&host=sfchronicle.com&section=food&limit=100",
+    "method": "GET",
+  }
+  // Make the request
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+    var top100Results = response.pages.filter(function(item){
+      if (item.path.indexOf("projects.sfchronicle.com/2018/top-100-restaurants/") != -1){
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (top100Results){
+      console.log("top100Results 1", top100Results);
+      // Now just render an array of IDs
+      top100Results = top100Results.map(function(item){
+        // Get the text before the final slash (that's the ID we need)
+        var result = item.path.split("/");
+        result = result[result.length - 2]; 
+        if (result != "top-100-restaurants"){
+          return result;
+        }
+        // If we didn't find an ID, it'll map undefined 
+      });
+      console.log("top100Results", top100Results);
+      // One last filter to remove the undefineds 
+      top100Results = top100Results.filter(function(item){
+        if (typeof item != "undefined"){
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+    // If we're developing on localhost, fake the results (since no real results are probably live yet)
+    // Also serve this up if it's we've got less than 3 popular results :(
+    if (window.location.href.indexOf("localhost") != -1 || top100Results < 3){
+      top100Results = ["a16", "acaciahouse", "acquerello"];
+    } 
+    // WORKING, do something with these results
+    console.log("TOP 100", top100Results);
+  });
+
+  // Remove the "unseen" flags for restaurants that have already been visited
+</script>
