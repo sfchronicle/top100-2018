@@ -18,6 +18,7 @@ module.exports = function(grunt) {
     var seeds = {
       "./static/scripts/landing.js": "build/static/scripts/landing.js",
       "./static/scripts/main.js": "build/static/scripts/main.js",
+      "./static/scripts/popular.js": "build/static/scripts/popular.js",
       "./static/scripts/map.js": "build/static/scripts/map.js",
       "./static/scripts/collections.js": "build/static/scripts/collections.js"
     };

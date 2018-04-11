@@ -427,7 +427,7 @@ function showMyList() {
   }
 }
 
-$(".search-link").on("click", function(e){  
+$(".search").on("click", function(e){  
   //Intercept the link functionality on homepage and just bring user to search
   e.preventDefault();
   // Set nav colors
