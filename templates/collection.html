@@ -128,7 +128,7 @@
       </a>
       <div class="name">
         <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
-        <div class="favorites">
+        <div class="save-button">
           Save
           <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
         </div>
@@ -138,13 +138,19 @@
 
   {% endif %}
 
-  {% if (collection == "brunch" and r.Brunch != "No") %}
+  {% 
+    if (
+      (collection == "brunch" and r.Brunch != "No") or
+      (collection == "classics" and r.Returning == "Classic") or
+      (collection == "new" and r.Returning == "No")
+    )
+  %}
     <div class="restaurant active" target="_blank">
         <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
       </a>
       <div class="name">
         <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
-        <div class="favorites">
+        <div class="save-button">
           Save
           <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
         </div>
@@ -152,38 +158,6 @@
       <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
     </div>
   {% endif %}
-
-  {% if (collection == "classics" and r.Returning == "Classic") %}
-    <div class="restaurant active" target="_blank">
-        <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
-      </a>
-      <div class="name">
-        <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
-        <div class="favorites">
-          Save
-          <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
-        </div>
-      </div>
-      <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
-    </div>
-  {% endif %}
-
-  {% if (collection == "new" and r.Returning == "No") %}
-    <div class="restaurant active" target="_blank">
-        <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
-      </a>
-      <div class="name">
-        <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
-        <div class="favorites">
-          Save
-          <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
-        </div>
-      </div>
-      <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
-    </div>
-  {% endif %}
-
-
 
 {% endfor %}
 </div>
