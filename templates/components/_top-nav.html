@@ -31,7 +31,7 @@
     <div class="secondary-link-container active">
 
 
-      <a href="{{ url_for('index') }}"><div class="secondary-link search {{homepage}}#search"><i class="fa fa-search" aria-hidden="true"></i> Search</div></a>
+      <a href="{{ url_for('index') }}{% if (homepage) %}{% else %}#search{% endif %}"><div class="secondary-link search {{homepage}}#search"><i class="fa fa-search" aria-hidden="true"></i> Search</div></a>
 
       <a href="{{ url_for('index') }}map" class="map-link"><div class="secondary-link {{map}}"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</div></a>
 
