@@ -42,6 +42,7 @@
 
 <script>
   // Insert logic for grabbing most popular here
+  // WORKING, hide our API key
   var settings = {
     "async": true,
     "crossDomain": true,
@@ -59,7 +60,6 @@
       }
     });
     if (top100Results){
-      console.log("top100Results 1", top100Results);
       // Now just render an array of IDs
       top100Results = top100Results.map(function(item){
         // Get the text before the final slash (that's the ID we need)
@@ -70,10 +70,9 @@
         }
         // If we didn't find an ID, it'll map undefined 
       });
-      console.log("top100Results", top100Results);
-      // One last filter to remove the undefineds 
+      // One last filter to remove the undefineds and the current item (if it exists in the set)
       top100Results = top100Results.filter(function(item){
-        if (typeof item != "undefined"){
+        if (typeof item != "undefined" && item != restaurant.Slug){
           return true;
         } else {
           return false;
@@ -81,10 +80,10 @@
       });
     }
     // If we're developing on localhost, fake the results (since no real results are probably live yet)
-    // Also serve this up if it's we've got less than 3 popular results :(
-    if (window.location.href.indexOf("localhost") != -1 || top100Results < 3){
-      top100Results = ["a16", "acaciahouse", "acquerello"];
-    } 
+    // Also serve this up if it's we've got less than 4 popular results :(
+    if (window.location.href.indexOf("localhost") != -1 || top100Results < 4){
+      top100Results = top100Results.concat(["a16", "acaciahouse", "acquerello", "ad-hoc"]);
+    }
     // WORKING, do something with these results
     console.log("TOP 100", top100Results);
   });
