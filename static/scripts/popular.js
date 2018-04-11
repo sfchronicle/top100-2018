@@ -1,11 +1,9 @@
 // Insert logic for grabbing most popular here
 var cookies = require("./cookies");
-// WORKING, hide our API key
-// ALSO instead of pinging chartbeat directly, we should ping our server which has cached results
+// Hit our cached chartbeat results for data
 var settings = {
   "async": true,
-  "crossDomain": true,
-  "url": "http://api.chartbeat.com/live/toppages/v3/?apikey=6033653176adbfc228e9358316a06054&host=sfchronicle.com&section=food&limit=100",
+  "url": "https://extras.sfgate.com/editorial/analytics/chartbeatfood.json",
   "method": "GET",
 }
 // Make the request
