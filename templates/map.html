@@ -68,9 +68,9 @@
             <div class="name">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
               <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
-              <div class="map-locator" id="map-locator-{{loop.index-1}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Find me on the map</div>
-              <div class="map-review"><a href="../{{r.Slug}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>Read the review</a></div>
-              <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Get directions</a></div>
+              <div class="map-locator" id="map-locator-{{loop.index-1}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Locate on map</div>
+              <div class="map-review"><a href="../{{r.Slug}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i>Read review</a></div>
+              <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Directions</a></div>
           </div>
         </div>
         {% endfor %}
