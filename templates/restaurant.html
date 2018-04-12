@@ -45,6 +45,11 @@
       {% if (restaurant.Returning == "Classic" or restaurant.Returning == "No") %}
       <img class="special-icon" />
       {% endif %}
+      <a href="{{ url_for('index') }}map/#{{restaurant.Slug}}">
+        <div class="map-link region-button">
+          View on the map <i class="fa fa-map-marker" aria-hidden="true"></i>
+        </div>
+      </a>
       {% for r in article %}
         <p>{{ r.Text }}</p>
       {% endfor %}

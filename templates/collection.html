@@ -124,7 +124,7 @@
     {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ').replace('and',' ').replace('-','') %}
 
     <div class="restaurant active {{ regionName }} {{ subregionName }} {{cuisineName}}">
-      <a href="{{ url_for('index') }}{{r.Slug}}" target="_blank">
+      <a href="{{ url_for('index') }}{{r.Slug}}">
         <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
       </a>
       <div class="name">
@@ -147,7 +147,7 @@
     )
   %}
     <div class="restaurant active">
-      <a href="{{ url_for('index') }}{{r.Slug}}" target="_blank">
+      <a href="{{ url_for('index') }}{{r.Slug}}">
         <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
       </a>
       <div class="name">
