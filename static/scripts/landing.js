@@ -286,7 +286,7 @@ var checkForHash = function(){
 
     if (hash == "#mylist"){
       // Also display list results
-      showMyList();
+      $(".mylist").click();
     }
   }
 }
