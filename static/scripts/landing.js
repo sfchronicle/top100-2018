@@ -511,17 +511,16 @@ $(".print-link").on("click", function(){
 
 
 
-$("#readmore-btn").on("click",function() {
-  $('#readmore-text').slideToggle('slow');
+$('#introduction, .closer').on("click", function(){
+  $("body, html").toggleClass('noscroll');
+  $('.intro-overlay').toggleClass('hide');
+})
 
-  if($(this).hasClass("uncollapsed")) {
-    $(this).removeClass('uncollapsed');
-    $(this).html('Read Less');
-  } else {
-    $(this).addClass('uncollapsed');
-    $(this).html('Read More');
-    var topIntro = $("#intro").offset().top-60;
-    $('body, html').animate({scrollTop: topIntro});
+$(".intro-overlay").mouseup(function(e){
+  var popup = $("#about-popup"); 
+
+  if(e.target.id != popup.attr('id') && !popup.has(e.target).length){
+    $("body, html").toggleClass('noscroll');
+    $('.intro-overlay').toggleClass('hide');
   }
-
 });
