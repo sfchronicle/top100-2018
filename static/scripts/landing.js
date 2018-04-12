@@ -503,6 +503,13 @@ $("#exit").on("click", function(){
   $("body, html").css("overflow-y", "auto");
 })
 
+// handle print button functionality
+$(".print-link").on("click", function(){
+  window.print();
+  return false;
+})
+
+
 
 $("#readmore-btn").on("click",function() {
   $('#readmore-text').slideToggle('slow');

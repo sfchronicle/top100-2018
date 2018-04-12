@@ -78,7 +78,7 @@
               My List
             </div>
             <div class="mylist-explainer">
-              Use this list to keep track of your favorite restaurants or places you'd like to visit! Check the "Save" box next to any restaurant's name to add it to this list.
+              Track your favorite restaurants or build a dining wish list. Check the "Save" box next to any restaurant's name and it will be saved to your list. Then go ahead &mdash; share your list with friends.
             </div>
           </div>
 
@@ -130,6 +130,7 @@
               </div>
             </div>
             <div class="info">{{ r.Cuisine }} | {{ r.SubRegion }}</div>
+            <div class="vitals">{{ r.Vitals }}</div>
           </div>
           {% endfor %}
 
@@ -138,11 +139,17 @@
         <div class="search-noresults hide" id="search-noresults">No restaurants match your search.<br>Try another search term.</div>
 
       </div><!-- Closing #restaurants -->
+
       <script>
         // Pass var into JS
         var restaurants = {{ restaurants|tojson }};
       </script>
       {% include 'components/_popular.html' %}
+
+      <div class="print-link region-button">
+        <i class="fa fa-print" aria-hidden="true"></i> Get a printable Top 100
+      </div>
+
       {% include 'components/_footer.html' %}
 
     </div><!-- Closing #container -->

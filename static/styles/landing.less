@@ -413,10 +413,14 @@
 	}
 }
 
-.info{
+.info, .vitals {
 	font-size:0.8em;
 	color:#333;
 	font-family:@title;
+}
+
+.vitals {
+	display: none !important;
 }
 
 #mylist-box {
@@ -712,3 +716,52 @@
     opacity: 0.7;
 	}
 }
+
+
+/* THIS SECTION IS RESERVED FOR PRINT CSS */
+
+.region-button.print-link {
+	margin: auto;
+  text-align: center;
+  display: block;
+  width: 250px;
+}
+
+@media print {
+	#lead-image, .landing-nav, #landing-logo, .instructions, #count-results, .border, #popular-rest, .print-link, .nav-bottom {
+		display: none !important;
+	}
+
+	#results {
+		padding-top: 0 !important;
+	}
+
+	.deck {
+		margin-bottom: 0 !important;
+		max-width: 500px !important;
+	}
+
+	.rname {
+		font-size: 30px !important;
+	}
+
+	.restaurant {
+		display: block !important;
+
+		.image-wrapper, .save-button {
+			display: none !important;
+		}
+	}
+
+	.vitals {
+		margin-top: 10px;
+		display: block !important;
+	}
+
+	.top100-hed-rest, .deck {
+		color: black !important;
+	}
+}
+
+
+

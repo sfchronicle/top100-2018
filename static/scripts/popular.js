@@ -8,7 +8,6 @@ var settings = {
 }
 // Make the request
 $.ajax(settings).done(function (response) {
-  console.log(response);
   // Filter to get only the top 100 pages
   var top100Results = response.pages.filter(function(item){
     if (item.path.indexOf("projects.sfchronicle.com/2018/top-100-restaurants/") != -1){
