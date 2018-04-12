@@ -77,7 +77,7 @@ var markersArray = [];
 // markers for restaurants
 restaurants.forEach(function(d,dIDX){
   var photos = d.wcm_img.split(' ');
-  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='../"+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
+  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='/"+d.Slug+"/'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
   if (screen.width <= 480){
       var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   } else {
@@ -256,7 +256,10 @@ for (var t = 0; t < locatorList.length; t++){
 
 // see if the reader is loading a specific restaurant
 $(document).ready(function(){
+  findByHash();
+});
 
+function findByHash() {
   if(window.location.hash) {
     console.log(window.location.hash.split("#")[1]);
     for (var idx=0; idx<restaurants.length; idx++){
@@ -266,9 +269,13 @@ $(document).ready(function(){
       }
     }
   }
+}
 
+$(".img-link-map").on("click", function(){
+  setTimeout(function(){
+    findByHash();
+  }, 10);
 });
-
 
 if ($(window).width() < 666) {
   $('.landing-nav').removeClass("active");
