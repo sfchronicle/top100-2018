@@ -1,5 +1,6 @@
 // Insert logic for grabbing most popular here
 var cookies = require("./cookies");
+var top100Results = [];
 // Hit our cached chartbeat results for data
 var settings = {
   "async": true,
@@ -9,7 +10,7 @@ var settings = {
 // Make the request
 $.ajax(settings).done(function (response) {
   // Filter to get only the top 100 pages
-  var top100Results = response.pages.filter(function(item){
+  top100Results = response.pages.filter(function(item){
     if (item.path.indexOf("projects.sfchronicle.com/2018/top-100-restaurants/") != -1){
       return true;
     } else {
@@ -26,9 +27,12 @@ $.ajax(settings).done(function (response) {
     }
     // If we didn't find an ID, it'll map undefined 
   });
+  
+}).always(function(){
+  // NOTE: It's okay if the request failed because we'll still come in with our defaults below
   // If we're developing on localhost, fake the results (since no real results are probably live yet)
   // Also serve this up if it's we've got less than 4 popular results :(
-  if (window.location.href.indexOf("localhost") != -1 || top100Results < 3){
+  if (window.location.href.indexOf("localhost") != -1 || top100Results.length < 3){
     top100Results = top100Results.concat(["a16", "acaciahouse", "acquerello", "ad-hoc"]);
   }
   // One last filter to remove the undefineds and the current item (if it exists in the set)

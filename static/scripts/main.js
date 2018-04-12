@@ -78,8 +78,6 @@ if (iconChoice){
 
 // ************* RELATED SECTION ****************
 
-console.log(restaurant, restaurants);
-
 var findUnseenRestaurant = function(index, cookie, alreadySelected){
 	// Loop through and find a restaurant the user hasn't seen yet
 	var foundRest = false;
