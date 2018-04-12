@@ -262,18 +262,28 @@ h1 {
 .swiper-button-prev, .swiper-button-next {
   background-color: rgba(100, 100, 100, 0.5);
   padding: 30px;
-  border-radius: 30px;
   background-image: none;
+  height: calc(~"100% - 6px");
+  top: 0;
 
+  @media @mobile {
+    padding: 20px;
+  }
+  
   i {
   	font-size: 35px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    color: #EDBE22;
+    color: @main;
+    top: 50%;
+    position: relative;
+    right: 11px;
   }
 }
 
-.swiper-button-prev i {
-	right: 19px;
+.swiper-button-prev {
+  left: 0;
 }
+
+.swiper-button-next {
+  right: 0;
+}
+
