@@ -12,37 +12,39 @@ Array.prototype.min = function() {
 var count = 100;
 
 // smooth scroll to skip reading Michael's intro if you want
-document.getElementById("restaurants").addEventListener("click",function(){
+$("#restaurants").on("click",function(){
   scrollToResults();
 });
 
-if ($(window).width() < 666) {
-  $('.landing-nav').addClass("active");
-  $('#top-nav').removeClass("fixed");
-  $('#social-links').hide();
-  $('#search').removeClass("fixed-second");
+//Only trigger search bar fades if we're not in a guide
+if (window.location.href.indexOf("/guides/") == -1){
+  if ($(window).width() < 666) {
+    $('.landing-nav').addClass("active");
+    $('#top-nav').removeClass("fixed");
+    $('#social-links').hide();
+    $('#search').removeClass("fixed-second");
 
-  window.onscroll = function() {
-    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-    var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
-    if (window_top > div_top) {
-      $('#landing-mobile-nav').addClass("active");
-    } else {
-      $('#landing-mobile-nav').removeClass("active");
+    window.onscroll = function() {
+      var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+      var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
+      if (window_top > div_top) {
+        $('#landing-mobile-nav').addClass("active");
+      } else {
+        $('#landing-mobile-nav').removeClass("active");
+      }
     }
-  }
-}else {
-  window.onscroll = function() {
-    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-    var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
-    if (window_top > div_top) {
-      $('.landing-nav').addClass("active");
-    } else {
-      $('.landing-nav').removeClass("active");
+  } else {
+    window.onscroll = function() {
+      var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+      var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
+      if (window_top > div_top) {
+        $('.landing-nav').addClass("active");
+      } else {
+        $('.landing-nav').removeClass("active");
+      }
     }
-  }
-} 
-
+  } 
+}
 
 // smooth scroll to mobile nav
 $(".mobile-search").click(function(){
@@ -82,36 +84,38 @@ function getFilterList() {
 }
 
 // Create autocomplete
-$( "#search-bar input" ).autocomplete({
-  source: function(request, response) {
-    var results = $.ui.autocomplete.filter(getFilterList(), request.term);
-    // Sort alphabetically, limit results
-    response(results.sort().slice(0, 5));
-  },
-  // Find matches on selection
-  select: function( event, ui ) {
-    findMatches(ui.item.value);
-  }
-});
+if (typeof $("#search-bar input").autocomplete == "function"){
+  $("#search-bar input").autocomplete({
+    source: function(request, response) {
+      var results = $.ui.autocomplete.filter(getFilterList(), request.term);
+      // Sort alphabetically, limit results
+      response(results.sort().slice(0, 5));
+    },
+    // Find matches on selection
+    select: function( event, ui ) {
+      findMatches(ui.item.value);
+    }
+  });
 
-// Find matches while typing
-$("#search-bar input").on("input", function(){
-  findMatches($(this).val());
+  // Find matches while typing
+  $("#search-bar input").on("input", function(){
+    findMatches($(this).val());
 
-  // Restore gold on search nav (if user was looking at mylist)
-  $(".search").addClass("homepage");
-  $(".mylist").removeClass("active");
+    // Restore gold on search nav (if user was looking at mylist)
+    $(".search").addClass("homepage");
+    $(".mylist").removeClass("active");
 
-  // Hide list text in case we are switching to search
-  $("#mylist-box").hide();
+    // Hide list text in case we are switching to search
+    $("#mylist-box").hide();
 
-  // If there's a value in the search bar, allow cancel
-  if ($(this).val()){
-    $(".cancel-search").show();
-  } else {
-    $(".cancel-search").hide();
-  }
-});
+    // If there's a value in the search bar, allow cancel
+    if ($(this).val()){
+      $(".cancel-search").show();
+    } else {
+      $(".cancel-search").hide();
+    }
+  });
+}
 
 // Finds and displays results that match the term
 var findMatches = function(term){
@@ -319,7 +323,7 @@ function getData(user) {
 // set checks on load for a particular user
 function setIcons() {
   restaurantList.forEach(function(saveID){
-    var elem = document.getElementById(saveID);
+    var elem = $("#"+saveID)[0];
     if ($("i", elem).hasClass("fa-square-o")) {
       $("i", elem).toggleClass("fa-square-o fa-check-square-o");
     }
