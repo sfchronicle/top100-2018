@@ -34,25 +34,31 @@
     }
   }
 
-  &.mylist {
+  &.mylist a {
     text-transform: uppercase;
     font-family: @logo2;
     font-weight: 800;
     color: @main;
-    margin-right: 15px;
     cursor: pointer;
     padding: 11px;
 
     &:hover {
       color: @main-hover;
     }
+  }
+
+  &.mylist {
+    margin-right: 15px;
 
     &.active {
       background: @main;
-      color: white;
 
-      &:hover {
+      a {
         color: white;
+
+        &:hover {
+          color: white;
+        }
       }
     }
   }

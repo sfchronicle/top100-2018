@@ -278,6 +278,19 @@ var checkForParam = function(query) {
   }
 }
 
+var checkForHash = function(){
+  var hash = window.location.hash;
+  // If this is one of the hashes we're expecting, scroll the reader down
+  if (hash == "#search" || hash == "#mylist"){
+    scrollToResults();
+
+    if (hash == "#mylist"){
+      // Also display list results
+      showMyList();
+    }
+  }
+}
+
 // Start by seeing if we can get the user on load
 checkUser();
 renderUserResults();
@@ -305,6 +318,8 @@ function getData(user) {
         // Only set if it's for the current user's data
         restaurantList = data;
         setIcons();
+        // Now that we're ready, deal with hash
+        checkForHash();
       } else {
         // If this is a search for another user's data, just render the result
         const mappedList = data.map(function(item){
@@ -324,8 +339,11 @@ function getData(user) {
 function setIcons() {
   restaurantList.forEach(function(saveID){
     var elem = $("#"+saveID)[0];
-    if ($("i", elem).hasClass("fa-square-o")) {
-      $("i", elem).toggleClass("fa-square-o fa-check-square-o");
+    // If this is a collection page, the element might be undefined -- check for that
+    if (typeof elem != "undefined"){
+      if ($("i", elem).hasClass("fa-square-o")) {
+        $("i", elem).toggleClass("fa-square-o fa-check-square-o");
+      }
     }
   });
 }
@@ -415,63 +433,69 @@ function showMyList() {
   }
 }
 
-$(".search").on("click", function(e){  
-  //Intercept the link functionality on homepage and just bring user to search
-  e.preventDefault();
-  // Hide explainer text 
-  $("#mylist-box").hide();
-  // Set nav colors
-  $(".search").addClass("homepage");
-  $(".mylist").removeClass("active");
-  // Bring user to search
-  scrollToResults();
-  // Use history API to update query
-  if (history.pushState) {
-    // Get URL with no query or hash (or trailing slash)
-    var fullUrl = location.href.split('#')[0].split('?')[0] + "#search";
-    window.history.pushState({path:fullUrl},'',fullUrl);
-  }
-  // Put focus into search bar
-  $("#search-bar input").focus();
-  // Restore 100 results 
-  showAllRestaurants();
-});
+// Only trigger homepage-specific actions if we're on the homepage
+if (window.location.href.indexOf("/guides/") == -1){
+  $(".search").on("click", function(e){  
+    //Intercept the link functionality on homepage and just bring user to search
+    e.preventDefault();
+    // Hide explainer text 
+    $("#mylist-box").hide();
+    // Set nav colors
+    $(".search").addClass("homepage");
+    $(".mylist").removeClass("active");
+    // Bring user to search
+    scrollToResults();
+    // Use history API to update query
+    if (history.pushState) {
+      // Get URL with no query or hash (or trailing slash)
+      var fullUrl = location.href.split('#')[0].split('?')[0] + "#search";
+      window.history.pushState({path:fullUrl},'',fullUrl);
+    }
+    // Put focus into search bar
+    $("#search-bar input").focus();
+    // Restore 100 results 
+    showAllRestaurants();
+  });
 
-// event listener for "My List" button
-$(".mylist").on("click",function() {
-  $(this).toggleClass("selected");
-  showMyList();
-  // Clear any search terms from bar
-  $("#search-bar input").val("");
-  $(".cancel-search").hide();
-  // Change result text a little
-  var resultsText = $("#count-results").text();
-  $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
-  $("#mylist-box").show();
-  // Handle zero results condition
-  if (resultsText.substring(0,1) == "0"){
-    $("#search-noresults").hide();
-  } else {
-    // If there are results, append share tools
-    var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
-    var twitterCopy = $("#twitter-icon").clone();
-    twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
-    var facebookCopy = $("#facebook-icon").clone();
-    facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
-    var linkIcon = $("<a>", {
-      html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
-    });
-    // Add buttons
-    $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
-    // Add event to link button
-    linkIcon.on("click", function(){
-      $(".link-copy-text").show();
-      $(".link-copy-input").show().val(encodedURL);
-      $(".link-copy-input")[0].select();
-      document.execCommand('copy');
-    });
-  }
-});
+  // event listener for "My List" button
+  $(".mylist").on("click",function(e) {
+    //Intercept the link functionality on homepage and just bring user to search
+    e.preventDefault();
+    // Give it gold bg
+    $(this).toggleClass("selected");
+    showMyList();
+    // Clear any search terms from bar
+    $("#search-bar input").val("");
+    $(".cancel-search").hide();
+    // Change result text a little
+    var resultsText = $("#count-results").text();
+    $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+    $("#mylist-box").show();
+    // Handle zero results condition
+    if (resultsText.substring(0,1) == "0"){
+      $("#search-noresults").hide();
+    } else {
+      // If there are results, append share tools
+      var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+      var twitterCopy = $("#twitter-icon").clone();
+      twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
+      var facebookCopy = $("#facebook-icon").clone();
+      facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
+      var linkIcon = $("<a>", {
+        html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
+      });
+      // Add buttons
+      $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
+      // Add event to link button
+      linkIcon.on("click", function(){
+        $(".link-copy-text").show();
+        $(".link-copy-input").show().val(encodedURL);
+        $(".link-copy-input")[0].select();
+        document.execCommand('copy');
+      });
+    }
+  });
+}
 
 // exit the subscribe window
 $("#exit").on("click", function(){
