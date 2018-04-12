@@ -32,6 +32,55 @@
 	}
 }
 
+.promotion {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 820px;
+  margin: 20px auto 0;
+
+  .promo-item {
+    flex: 0 0 50%;
+    font-size: 16px;
+
+    @media @tablet {
+      flex: 0 0 100%;
+    }
+
+    &.buy-book {
+      border-right: 1px solid #ccc;
+
+      @media @tablet {
+        border: none;
+      }
+    }
+
+    &.newsletter-signup {
+      @media @tablet {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        margin: 15px 0 0;
+        padding: 15px 0;
+      }
+    }
+
+    p {
+      font-family: @sans-serif;
+    }
+
+    p.light {
+      font-family: @sans-serif-light;
+    }
+
+    img {
+      width: 30%;
+      float: left;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+  }
+}
+
 .fave{
   font-family: @title;
   font-weight: 100;
@@ -101,6 +150,13 @@
 
   .vitals{
   	.flex(0 1 100%);
+  }
+}
+
+.infobox, .promotion {
+  a {
+    color:#000;
+    border-bottom:2px solid @main;
   }
 }
 
