@@ -16,8 +16,15 @@ app.config['PAYWALL'] = 'meter'
 # Publication date
 app.config['DATE'] = '2018-04-01'
 
+# Main title
+app.config['TITLE'] = 'Top 100 Bay Area Restaurants 2018'
+
 # Hashtag
 app.config['HASHTAG'] = 'Top100restaurants'
+
+# Authors
+app.config['AUTHORS'] = "Michael Bauer, Kitty Morgan, Russell Yip, Lucio Villa, Emma O'Neill, Evan Wagstaff"
+
 
 # name collections
 collections = ["regions","cuisines","brunch","classics","new"]
@@ -26,7 +33,7 @@ print(collections)
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 restaurant_data = os.path.join(SITE_ROOT, "data", "top_100_2018_digital_text.json")
-intro_data = os.path.join(SITE_ROOT, "data", "2018_bauer_intro_top_100.json")
+intro_data = os.path.join(SITE_ROOT, "data", "top100_short_copy.json")
 with open(restaurant_data) as r:
   data = json.load(r)
   restaurants = data['restaurants']
@@ -40,7 +47,9 @@ def mapfile():
   return render_template(
     'map.html',
     restaurants=restaurants,
-    map="map"
+    map="map",
+    description='Explore the best of Bay Area dining, from brunch to the classics.',
+    tweet='Explore the best of Bay Area dining, from brunch to the classics.'
   )
 
 @app.route("/")
@@ -49,7 +58,9 @@ def index():
     'index.html',
     restaurants=restaurants,
     intro=intro,
-    homepage="homepage"
+    homepage="homepage",
+    description='Explore the best of Bay Area dining, from brunch to the classics.',
+    tweet='Explore the best of Bay Area dining, from brunch to the classics.'
   )
 
 @app.route('/guides/<collection>/')
@@ -57,7 +68,8 @@ def collection_view(collection):
   return render_template(
     'collection.html',
     restaurants=restaurants,
-    collection=collection
+    collection=collection,
+    collectionPath='guides/'+collection
   )
 
 @app.route('/<slug>/')

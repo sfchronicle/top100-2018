@@ -7,12 +7,10 @@
 		<div id="intro">
 
 			<div class="title">Welcome to the Top 100</div>
-
-		  {% for i in intro.text %}
+			{% set introtext = intro.longintro%}
+		  {% for i in introtext %}
 		    <p>{{i.value|safe}}</p>
 		  {% endfor %}
-
-		  <hr>
 
 		</div>
 
@@ -74,6 +72,7 @@
 
 			<div class="entry info">Have feedback about this project? E-mail The Chronicle's Food team at <a href="mailto:food@sfchronicle.com?subject=Top 100 Feedback">food@sfchronicle.com</a>.</div>
 
+			<div class="entry disclosure"><b>Cover image:</b> Stephen Lam, Special to The Chronicle</div>
 			<div class="entry disclosure"><b>Full disclosure:</b> My partner is involved with the IfOnly website, which features chefs and owners from a number of Bay Area restaurants. Those included in the Top 100 are A16, Bar Agricole, Bottega, Camino, Chez Panisse, Coqueta Frances, Gary Danko, Hawker Fare, La Ciccia, Marlowe, Mourad, Park Tavern, Progress, Octavia, Tosca, SPQR and Wayfare Tavern.
 			</div>
 

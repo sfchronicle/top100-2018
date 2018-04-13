@@ -1,7 +1,7 @@
 {
-  "name": "top100-2017",
+  "name": "top100-2018",
   "private": true,
-  "author": "Lucio Villa",
+  "author": "",
   "devDependencies": {
     "archieml": "^0.3.1",
     "async": "^2.3.0",

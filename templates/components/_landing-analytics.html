@@ -18,7 +18,7 @@
         HDN.dataLayer.content.subtitle = "";
         HDN.dataLayer.content.objectId = "";
         HDN.dataLayer.content.objectType = "article";
-        HDN.dataLayer.content.sectionPath = ['Food', 'Special Projects'];
+        HDN.dataLayer.content.sectionPath = ['Food', 'Top 100 2018'];
         HDN.dataLayer.content.pubDate = "{{ config.DATE }} 00:00:00";
         HDN.dataLayer.content.wordCount = "";
         HDN.dataLayer.content.keywords = [];
@@ -39,7 +39,7 @@
 
         // HDN.dataLayer object for source information
         HDN.dataLayer.source = HDN.dataLayer.source || {};
-        HDN.dataLayer.source.authorName = "Michael Bauer, Kitty Morgan, Russell Yip, Paolo Luchesi, Lucio Villa, Emma O'Neill";
+        HDN.dataLayer.source.authorName = "{{ config.AUTHORS|safe }}";
         HDN.dataLayer.source.authorTitle = "San Francisco Chronicle Staff";
         HDN.dataLayer.source.originalSourceSite = "SF";
         HDN.dataLayer.source.publishingSite = "premiumsfgate";
