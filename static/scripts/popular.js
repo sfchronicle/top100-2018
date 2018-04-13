@@ -73,7 +73,7 @@ $.ajax(settings).done(function (response) {
     }
     // Set image URL
     if (finalPopular[index].wcm_img){
-      $(this).find("img").attr("src", "https://ww3.hdnux.com/photos/60/22/02/"+finalPopular[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
+      $(this).find("img").attr("data-src", "https://ww3.hdnux.com/photos/60/22/02/"+finalPopular[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
     }
     // Set name
     $(this).find(".name div").text(finalPopular[index].Name);

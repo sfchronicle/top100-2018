@@ -1,5 +1,7 @@
 require("./lib/social");
 var cookies = require("./cookies");
+require('lazyload');
+lazyload();
 
 //Set proper image size for slideshow
 var imageWidth = $(".swiper-container").width();
@@ -145,7 +147,7 @@ $("#related-rest .wrap").each(function(index){
 	  }
 	  // Set image URL
 	  if (relatedRestaurants[index].wcm_img){
-	    $(this).find("img").attr("src", "https://ww3.hdnux.com/photos/60/22/02/"+relatedRestaurants[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
+	    $(this).find("img").attr("data-src", "https://ww3.hdnux.com/photos/60/22/02/"+relatedRestaurants[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
 	  }
 	  // Set name
 	  $(this).find(".name div").text(relatedRestaurants[index].Name);

@@ -46,6 +46,9 @@ if (window.location.href.indexOf("/guides/") == -1){
   } 
 }
 
+// Trigger scroll immediately so the search bar can appear if necessary
+$(window).trigger("scroll");
+
 // smooth scroll to mobile nav
 $(".mobile-search").click(function(){
    var pos = $(".landing-nav").offset().top;
