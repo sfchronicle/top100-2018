@@ -83,7 +83,7 @@ module.exports = function(grunt) {
                 href = url.parse(aTag.attribs.href, true).query.q;
               }
 
-              var str = '<a href="' + href + '">';
+              var str = '<a href="' + href + '" target="_blank">';
               str += tagHandlers._base(aTag);
               str += '</a>';
               return str;
