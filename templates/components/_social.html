@@ -1,16 +1,16 @@
 {% set photos = restaurant.wcm_img.split(' ') %}
     <!-- BEGIN TWITTER SUMMARY CARD -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{restaurant.PageTitle}}">
+    <meta name="twitter:title" content="Top 100 Restaurants: {{restaurant.Name}}">
     <meta name="twitter:site" content="@sfchronicle">
-    <meta name="twitter:url" content="http://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{restaurant.slug}}">
+    <meta name="twitter:url" content="http://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{restaurant.Slug}}">
 
     <!-- Social sharing meta -->
-    <meta name="description" content="{{restaurant.FacebookDescription|safe}}">
+    <meta name="description" content="Explore the best of Bay Area dining, from brunch to the classics.">
     <meta property="fb:app_id" content="537896802938133"/>
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{restaurant.FacebookTitle}}">
+    <meta property="og:title" content="Top 100 Restaurants: {{restaurant.Name}}">
     <meta property="og:site_name" content="San Francisco Chronicle">
-    <meta property="og:url" content="http://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{restaurant.slug}}">
-    <meta property="og:image" content="http://ww2.hdnux.com/photos/54/11/64/{{ photos[1] }}/3/premium_gallery_landscape.jpg">
-    <meta property="og:description" content="{{restaurant.FacebookDescription|safe}}">
+    <meta property="og:url" content="http://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{restaurant.Slug}}">
+    <meta property="og:image" content="https://s.hdnux.com/photos/54/11/64/{{ photos[1] }}/3/premium_gallery_landscape.jpg">
+    <meta property="og:description" content="Explore the best of Bay Area dining, from brunch to the classics.">

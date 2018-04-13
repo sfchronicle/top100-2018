@@ -49,19 +49,19 @@
 
     <div id="social-links">  
       <div class="social-link email">
-        <a id="mail-icon" title="Share via email" href="mailto:?subject={{config.TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}">
+        <a id="mail-icon" title="Share via email" href="mailto:?subject={{config.TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}">
           <i class="fa fa-envelope" aria-hidden="true"></i>
         </a>
       </div>
 
       <div class="social-link">
-        <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+        <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
           <i class="fa fa-facebook"></i>
         </a>
       </div>
 
       <div class="social-link">
-        <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}&text={{tweet}}&hashtags={{config.HASHTAG}}">
+        <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}&text={{tweet}}{% if article %}Top 100 Restaurants: {{restaurant.Name}}{% endif %}&hashtags={{config.HASHTAG}}">
           <i class="fa fa-twitter"></i>
         </a>
       </div>
@@ -93,19 +93,19 @@
   
   <div class="social-links nav-link">  
     <div class="social-link email">
-      <a id="mail-icon" title="Share via email" href="mailto:?subject={{TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}">
+      <a id="mail-icon" title="Share via email" href="mailto:?subject={{TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}">
         <i class="fa fa-envelope" aria-hidden="true"></i>
       </a>
     </div>
 
     <div class="social-link">
-      <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+      <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
         <i class="fa fa-facebook"></i>
       </a>
     </div>
 
     <div class="social-link">
-      <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}&text={{tweet}}&hashtags={{config.HASHTAG}}">
+      <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}&text={{tweet}}&hashtags={{config.HASHTAG}}">
         <i class="fa fa-twitter"></i>
       </a>
     </div>
