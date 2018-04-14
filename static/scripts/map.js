@@ -246,9 +246,11 @@ for (var t = 0; t < locatorList.length; t++){
   if (typeof window.addEventListener === 'function'){
     (function (_td) {
       td.addEventListener('click', function(){
-        var IDX = _td.id.split("map-locator-")[1];//_td.classList[0].split("day")[1];
+        var IDX = _td.id.split("map-locator-")[1];
         map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
         markersArray[IDX].openPopup();
+        var slug = '#'+$(this).data('slug');
+        history.replaceState(null, null, slug);
       });
     })(td);
   }
@@ -261,7 +263,6 @@ $(document).ready(function(){
 
 function findByHash() {
   if(window.location.hash) {
-    console.log(window.location.hash.split("#")[1]);
     for (var idx=0; idx<restaurants.length; idx++){
       if (window.location.hash.split("#")[1] == restaurants[idx].Slug){
         map.setView([+restaurants[idx].Lat+lat_offset,restaurants[idx].Lng],14);
@@ -271,10 +272,11 @@ function findByHash() {
   }
 }
 
+// locat restaurant on map and update the hash in URL
 $(".img-link-map").on("click", function(){
-  setTimeout(function(){
-    findByHash();
-  }, 10);
+  var slug = '#'+$(this).data('slug');
+  history.replaceState(null, null, slug);
+  findByHash();
 });
 
 if ($(window).width() < 666) {
