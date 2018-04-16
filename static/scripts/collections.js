@@ -210,3 +210,12 @@ if ($(window).width() < 666) {
 } else {
   $('.landing-nav').css("pointer-events", "auto");
 }
+
+
+$(".region-button").on("click",function(){
+  $('body,html').animate({ scrollTop: $('.regions-container').position().top-70 }, 150);
+});
+
+$(".cuisine-button").on("click",function(){
+  $('body,html').animate({ scrollTop: $('.cuisines-container').position().top-70 }, 150);
+});

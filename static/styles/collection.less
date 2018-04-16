@@ -61,26 +61,52 @@
   }
 }
 
-.region-button, .subregion-button, .cuisine-button {
+.region-button,
+.subregion-button,
+.cuisine-button {
   padding: 5px 20px;
   display: inline-block;
-  color: @main;
-  background: lighten(@light-gray,26%);
+  color: #333;
   font-family: @logo2;
-  font-weight: 800;
-  &:hover {
-    background: @light-gray;
-    cursor: pointer;
-    color: black;
+  font-size:19px; 
+  cursor: pointer;
+}
+
+.region-button{
+  cursor:pointer;
+  &.active{
+    background:#f4f4f4;
   }
-  &.active {
-    background: @light-gray;
+}
+
+.subregion-button{
+  border-bottom: 3px solid #f4f4f4;
+  padding: 4px 8px;
+  text-decoration: underline;
+  font-size:18px;
+
+  &:hover {
+    background: #ffffff;
     cursor: pointer;
     color: black;
+    border-bottom: 3px solid @main;
+    text-decoration: none;
+  }
+
+   &.active {
+    background: #fff;
+    color: black;
+    border-bottom: 3px solid @main;
+    text-decoration: none;
   }
 }
 
 .region-button {
+  border:2px solid #f4f4f4;
+
+  &:hover{
+    background:#d4d4d4;
+  }
   @media @mobile {
     margin-top: 5px;
   }
@@ -91,16 +117,34 @@
 }
 
 .subregions-container {
-  max-width: 1400px;
+  max-width: 950px;
   margin: auto;
-  margin-top: 10px;
   text-align: center;
   display: none;
+  background: #f4f4f4;
+  padding:5px 10px 10px;
+
   &.active {
     display: block;
     @media @mobile {
       display: none;
     }
+  }
+}
+
+#southbay-subregions{
+  padding:0;
+}
+
+.cuisines-container{
+  max-width:960px;
+}
+.cuisine-button{
+  border: 2px solid #f4f4f4;
+
+  &.active{
+    background: #f4f4f4;
+    border-bottom: 2px solid @main;
   }
 }
 
