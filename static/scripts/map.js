@@ -279,6 +279,7 @@ $(".img-link-map").on("click", function(){
   findByHash();
 });
 
+// Enable nav
 if ($(window).width() < 666) {
   $('.landing-nav').removeClass("active");
   $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
