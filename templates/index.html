@@ -59,11 +59,24 @@
           </div>
         </div>
 
-        <div id="lead-image" class="lead-desktop"><img src="{{url_for('static', filename='images/cover3.jpg')}}"></img></div>
-      
+        <div id="lead-image" class="lead-desktop">
+          <img src="{{url_for('static', filename='images/cover3.jpg')}}">
+        </div>
+
       </div>
 
-      
+      <div class="latest-news">
+        <label>Latest from Michael Bauer</label>
+        <a target="_blank">
+          <img />
+        </a>
+        <a target="_blank">
+          <h3><span></span></h3>
+        </a>
+        <p></p>
+        <div class="spacer"></div>
+      </div>
+
       {% include 'components/_intro.html' %}
       
       {% include 'components/_top-nav.html' %}

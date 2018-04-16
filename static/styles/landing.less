@@ -717,6 +717,75 @@
   }
 }
 
+.latest-news {
+  margin: 20px auto;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  width: 700px;
+  max-width: 100%;
+
+  @media @w666 {
+  	padding: 15px;
+ 	}
+
+  label {
+  	font-family: @logo;
+  	text-transform: uppercase;
+  	font-size: 14px;
+
+  	@media @w666 {
+    	font-size: 12px;
+  	}
+  }
+
+  img {
+  	width: 300px;
+  	margin-right: 20px;
+  	float: left;
+
+  	@media @w666 {
+  		width: 40%;
+  		margin-right: 10px;
+  	}
+  }
+
+  h3 {
+  	margin: 0 0 3px;
+    line-height: 32px;  	
+    font-family: @fancy-serif;
+
+    @media @w666 {
+    	font-size: 18px;
+    	line-height: 24px;
+  	}
+  }
+
+  a span {
+  	color: #000;
+    border-bottom: 3px solid #EDBE22;
+
+    &:hover {
+    	color: #000;
+    }
+  }
+
+  p {
+  	font-family: @sans-serif-light;
+  	font-size: 18px;
+    line-height: 26px;
+    padding: 0;
+
+    @media @w666 {
+    	display: none;
+  	}
+  }
+
+  .spacer {
+  	clear: both;
+  }
+}
+
 /* THIS SECTION IS RESERVED FOR PRINT CSS */
 
 .region-button.print-link {

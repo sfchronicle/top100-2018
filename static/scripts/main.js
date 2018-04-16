@@ -6,9 +6,22 @@ lazyload();
 //Set proper image size for slideshow
 var imageWidth = $(".swiper-container").width();
 imageWidth *= window.devicePixelRatio;
-$(".swiper-slide img").attr("src", function(){
+
+// Load first photo instantly
+$(".swiper-slide img").first().attr("src", function(){
 	return $(this).data("noload-src")+imageWidth.toString()+"x0.jpg";
 });
+
+// Load up other photos after delay
+setTimeout(function(){
+	$(".swiper-slide img").each(function(){
+		if (!$(this).attr("src")){
+			$(this).attr("src", function(){
+				return $(this).data("noload-src")+imageWidth.toString()+"x0.jpg";
+			});
+		}
+	});
+}, 1000);
 
 // Slider
 if($('.swiper-slide').length === 1){

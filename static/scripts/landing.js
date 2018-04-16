@@ -526,3 +526,30 @@ $(".intro-overlay").mouseup(function(e){
     $('.intro-overlay').toggleClass('hide');
   }
 });
+
+// Populate the latest news section of the site
+var url= 'https://www.sfchronicle.com/default/feed/test-feed-for-top100-2003.php';
+$.ajax({
+  type: 'GET',
+  url: "https://api.rss2json.com/v1/api.json?rss_url=" + url,
+  dataType: 'jsonp',
+  success: function(data) {   
+    var firstItem = data.items[0];
+    // Populate latest news box
+    $(".latest-news h3 span").text(firstItem.title);
+    // Remove all HTML formatting
+    var modifiedDesc = firstItem.description.replace(/<p>|<\/p>/g, "");
+    if (modifiedDesc.length > 88){
+      modifiedDesc = modifiedDesc.substring(0, 85) + "...";
+    }
+    $(".latest-news p").text(modifiedDesc);
+    // Add image
+    $(".latest-news img").attr("src", firstItem.enclosure.link);
+    // Add link
+    $(".latest-news a").attr("href", firstItem.link);
+    // Reveal the box
+    $(".latest-news").show();
+  }
+});
+
+

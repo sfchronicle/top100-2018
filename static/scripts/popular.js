@@ -44,6 +44,17 @@ $.ajax(settings).done(function (response) {
     }
   });
   // Final filter to create an array of restaurants objects
+  finalFilter(top100Results);
+});
+
+// Try this a couple times and then bail out
+var finalFilter = function(top100Results){
+  // If the global var is not defined yet, try again in a moment
+  if (typeof restaurants == "undefined"){
+    setTimeout(finalFilter, 500);
+    return false;
+  }
+  // If it is defined, carry on
   var goldArray = [];
   var finalPopular = restaurants.filter(function(item){
     if (top100Results.indexOf(item.Slug) != -1){
@@ -85,5 +96,5 @@ $.ajax(settings).done(function (response) {
       $(this).find(".border").addClass("unseen").eq(1).addClass("white");
     }
   });
-});
+}
 
