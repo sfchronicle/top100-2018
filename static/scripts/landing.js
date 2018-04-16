@@ -49,13 +49,6 @@ if (window.location.href.indexOf("/guides/") == -1){
 // Trigger scroll immediately so the search bar can appear if necessary
 $(window).trigger("scroll");
 
-// smooth scroll to mobile nav
-$(".mobile-search").click(function(){
-   var pos = $(".landing-nav").offset().top;
-  $('body, html').animate({scrollTop: pos});
-});
-
-
 // Give restaurants that haven't been seen yet a little flag
 $(function(){
   var restaurantCookie = getCookie("sfc_top100_2018");
@@ -192,7 +185,13 @@ $(".cancel-search").on("click", function(){
 
 // Scrolls user to results list (keeping that logic in one place)
 var scrollToResults = function(){
-  $('body,html').animate({ scrollTop: $('#results').position().top-80 }, 150);
+  if ($(window).width() < 768){
+    // Adjust for mobile
+    $('body,html').animate({ scrollTop: $('#results').position().top-108 }, 150);
+  } else {
+    // Adjust for desktop
+    $('body,html').animate({ scrollTop: $('#results').position().top-80 }, 150);
+  }
 }
 
 var userIdentity;
@@ -438,7 +437,7 @@ function showMyList() {
 
 // Only trigger homepage-specific actions if we're on the homepage
 if (window.location.href.indexOf("/guides/") == -1){
-  $(".search").on("click", function(e){  
+  $(".search, .mobile-search").on("click", function(e){  
     //Intercept the link functionality on homepage and just bring user to search
     e.preventDefault();
     // Hide explainer text 
