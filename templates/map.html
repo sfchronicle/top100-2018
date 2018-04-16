@@ -53,7 +53,7 @@
             <div class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></div><input autofocus class="map-input" id="mapsearchbar" type="text" placeholder="Search by restaurant, city or cuisine... ">
           </div>
         </div>
-        
+
         <div class="scrolly-restaurants">
           <div id="no-results">There are no results for your search. Please try again.</div>
           <div class="num-results">There <span id="num-results-search"></span> for your search.</div>
@@ -65,9 +65,9 @@
             <div class="name">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
               <div class="info">{{ r.Cuisine }}</div>
-              <div class="map-locator" id="map-locator-{{loop.index-1}}" data-slug="{{r.Slug}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Locate on map</div>
-              <div class="map-review"><a href="/{{r.Slug}}"><i class="fa fa-external-link" aria-hidden="true"></i>Read review</a></div>
-              <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>Directions</a></div>
+              <div class="map-locator" id="map-locator-{{loop.index-1}}" data-slug="{{r.Slug}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i><span class="locate-text">Locate on map</span></div>
+              <div class="map-review"><a href="/{{r.Slug}}"><i class="fa fa-external-link" aria-hidden="true"></i><span class="map-text-span">Read review</span></a></div>
+              <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i><span class="map-text-span">Directions</a></span></div>
           </div>
         </div>
         {% endfor %}

@@ -29,9 +29,16 @@
 .click-popup {
   padding-top: 5px;
   font-size: 14px;
-  font-family: @sans-serif;
+  font-family: @serif;
   .fa {
     padding-right: 5px;
+  }
+  a {
+    color: #000;
+    border-bottom: 2px solid @main;
+    &:hover {
+      color: darken(@main,10%);
+    }
   }
 }
 
@@ -111,7 +118,7 @@
 }
 
 .scrolly-restaurants {
-  
+
   margin-top: 150px;
 
   .map-restaurant {
@@ -173,27 +180,34 @@
 .map-review,
 .map-directions {
   font-size:12px;
-  text-decoration: underline;
+  // text-decoration: underline;
   cursor: pointer;
 
-  a{
-    color:#000;
-  }
+  // a{
+  //   color:#000;
+  //   border-bottom: 2px solid @main;
+  // }
 
   .fa {
+    color:#000;
     padding-right: 10px;
   }
 }
 
-.map-locator {
-
-  text-decoration: underline;
-  outline: 0 !important;
-
-  &:hover {
-    color: darken(@main,10%);
-  }
+.locate-text, .map-text-span {
+  color:#000;
+  border-bottom: 2px solid @main;
 }
+
+// .map-locator {
+
+  // text-decoration: underline;
+  // outline: 0 !important;
+
+//   &:hover {
+//     color: darken(@main,10%);
+//   }
+// }
 
 #no-results {
   display: none;
