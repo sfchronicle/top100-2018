@@ -19,7 +19,7 @@ $("#restaurants").on("click",function(){
 //Only trigger search bar fades if we're not in a guide
 if (window.location.href.indexOf("/guides/") == -1){
   if ($(window).width() < 666) {
-    $('.landing-nav').addClass("active");
+    $('.landing-nav').addClass("active").css("pointer-events", "auto");
     $('#top-nav').removeClass("fixed");
     $('#social-links').hide();
     $('#search').removeClass("fixed-second");
@@ -28,9 +28,9 @@ if (window.location.href.indexOf("/guides/") == -1){
       var window_top = document.documentElement.scrollTop || document.body.scrollTop;
       var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
       if (window_top > div_top) {
-        $('#landing-mobile-nav').addClass("active");
+        $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
       } else {
-        $('#landing-mobile-nav').removeClass("active");
+        $('#landing-mobile-nav').removeClass("active").css("pointer-events", "none");
       }
     }
   } else {
@@ -38,9 +38,9 @@ if (window.location.href.indexOf("/guides/") == -1){
       var window_top = document.documentElement.scrollTop || document.body.scrollTop;
       var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
       if (window_top > div_top) {
-        $('.landing-nav').addClass("active");
+        $('.landing-nav').addClass("active").css("pointer-events", "auto");
       } else {
-        $('.landing-nav').removeClass("active");
+        $('.landing-nav').removeClass("active").css("pointer-events", "none");
       }
     }
   } 
