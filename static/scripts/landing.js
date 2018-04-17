@@ -528,7 +528,7 @@ $(".intro-overlay").mouseup(function(e){
 });
 
 // Populate the latest news section of the site
-var url= 'https://www.sfchronicle.com/default/feed/test-feed-for-top100-2003.php';
+var url = 'https://www.sfchronicle.com/default/feed/test-feed-for-top100-2003.php';
 $.ajax({
   type: 'GET',
   url: "https://api.rss2json.com/v1/api.json?rss_url=" + url,

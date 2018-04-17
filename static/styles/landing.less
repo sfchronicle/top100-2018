@@ -793,10 +793,22 @@
   text-align: center;
   display: block;
   width: 250px;
+
+  i {
+  	margin-right: 5px;
+  }
 }
 
 @media print {
-	#lead-image, .landing-nav, #landing-logo, .instructions, #count-results, .border, #popular-rest, .print-link, .nav-bottom, #mylist-box, .feedback-text {
+	#restaurants #results {
+		display: block !important;
+	}
+
+	.overlay .link {
+		text-align: center !important;
+	}
+
+	#lead-image, .latest-news, .landing-nav, #landing-logo, .instructions, #count-results, .border, #popular-rest, .print-link, .nav-bottom, #mylist-box, .feedback-text {
 		display: none !important;
 	}
 
