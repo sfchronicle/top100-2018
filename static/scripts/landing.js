@@ -220,17 +220,9 @@ var checkUser = function(repetitions) {
     if (user){
       // If we found a user, set the var
       userIdentity = user;
-      // If we're developing on localhost, use a test identity
-      if (window.location.href.indexOf("localhost") != -1){
-        // NOTE: Comment this next line out if you want to test what happens 
-        // when a user is not logged in (in the local dev environment)
-        // Alternatively, increment the integer to start with fresh data
-        userIdentity = 11220454;
-      } 
       // Only get data if it's actually the user
       // Otherwise, we will need to prompt a login
       if (userIdentity){
-        console.log("WE GOT IT! NOW GET DATA");
         getData(userIdentity);
       }
     } else {
@@ -251,6 +243,13 @@ var fetchIdentity = function(){
   if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
     // We have a valid object, so return the ID
     // NOTE: The ID might be null, but we know one way or another
+    if (window.location.href.indexOf("localhost") != -1){
+      // If we're developing on localhost, use a test identity
+      // NOTE: Comment this next line out if you want to test what happens 
+      // when a user is not logged in (in the local dev environment)
+      // Alternatively, increment the integer to start with fresh data
+      return 11220454;
+    }
     return treg.identity.id;
   } else {  
     // The objects are not ready yet
@@ -288,16 +287,22 @@ var checkForHash = function(){
   // If this is one of the hashes we're expecting, scroll the reader down
   if (hash == "#search" || hash == "#mylist"){
     scrollToResults();
-
+    // Only simulate a click on list if we've got an identity back
     if (hash == "#mylist"){
-      // Also display list results
-      $(".mylist").click();
+      setTimeout(function(){
+        console.log("HEYAGD", userIdentity);
+        if (userIdentity){
+          // Also display list results
+          $(".mylist").click();
+        }
+      }, 600);
     }
   }
 }
 
 // Start by seeing if we can get the user on load
 checkUser();
+checkForHash();
 renderUserResults();
 
 // Get data
@@ -324,8 +329,6 @@ function getData(user) {
         // Only set if it's for the current user's data
         restaurantList = data;
         setIcons();
-        // Now that we're ready, deal with hash
-        checkForHash();
       } else {
         // If this is a search for another user's data, just render the result
         const mappedList = data.map(function(item){
@@ -548,7 +551,10 @@ $.ajax({
     }
     $(".latest-news p").text(modifiedDesc);
     // Add image
-    $(".latest-news img").attr("src", firstItem.enclosure.link);
+    var imageURL = firstItem.enclosure.link;
+    var lastSlash = imageURL.lastIndexOf("/");
+    imageURL = imageURL.replace(imageURL.substring(lastSlash+1), "premium_gallery_landscape.jpg");
+    $(".latest-news img").attr("src", imageURL);
     // Add link
     $(".latest-news a").attr("href", firstItem.link);
     // Reveal the box

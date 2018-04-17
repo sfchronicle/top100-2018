@@ -135,7 +135,9 @@
               </div>
             </a>
             <div class="name">
-              <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
+              <a href="{{ url_for('index') }}{{r.Slug}}">
+                <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
+              </a>
               <div class="save-button">
                 Save
                 <span class="save-restaurant" id="save{{ r.Slug }}"><i class="fa fa-square-o" aria-hidden="true"></i></span>
