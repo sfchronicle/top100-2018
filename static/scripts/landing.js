@@ -207,6 +207,7 @@ var checkUser = function(repetitions) {
     repetitions = 0;
   }
 
+  console.log("HERE'S USER ID", userIdentity);
   if (userIdentity){
     // If we already know the user's identity, we can bail out here
     return userIdentity;
@@ -215,7 +216,8 @@ var checkUser = function(repetitions) {
   // Keep setting a timeout until we have what we need
   setTimeout(function(){
     var user = fetchIdentity();
-    if (user || user === null){
+    console.log("Try to fetch", user);
+    if (user){
       // If we found a user, set the var
       userIdentity = user;
       // If we're developing on localhost, use a test identity
@@ -228,6 +230,7 @@ var checkUser = function(repetitions) {
       // Only get data if it's actually the user
       // Otherwise, we will need to prompt a login
       if (userIdentity){
+        console.log("WE GOT IT! NOW GET DATA");
         getData(userIdentity);
       }
     } else {
@@ -316,6 +319,7 @@ function getData(user) {
       }
     },
     success: function(data) {
+      console.log("SUCCESS, here's the data ", data);
       if (!shareLink){
         // Only set if it's for the current user's data
         restaurantList = data;

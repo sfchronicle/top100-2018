@@ -79,7 +79,7 @@
     <script>
       var restaurants = {{ restaurants|tojson }};
     </script>
-    <script src="/static/scripts/map.js"></script>
+    <script src="{{ url_for('index') }}static/scripts/map.js"></script>
 
   </body>
 </html>

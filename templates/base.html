@@ -113,7 +113,7 @@
         var restaurant = {{ restaurant|tojson }};
         var restaurants = {{ restaurants|tojson }};
     </script>
-    <script src="/static/scripts/main.js"></script>
+    <script src="{{ url_for('index') }}static/scripts/main.js"></script>
 
     {% block javascript %}{% endblock %}
 
