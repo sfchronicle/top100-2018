@@ -6,7 +6,8 @@
 
 		<div id="intro">
 
-			<div class="title">Welcome to the Top 100</div>
+			<div class="intro-link">
+				<img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_white.png"><span class="top100-hed">Top 100 </span><span class="top100-hed-rest">Restaurants </span><span class="top100-hed">2018</span><div class="author">From Michael Bauer</div></div>
 			{% set introtext = intro.longintro%}
 		  {% for i in introtext %}
 		    <p>{{i.value|safe}}</p>
@@ -27,17 +28,6 @@
 			  </ul>
 			</div>
 
-			<div class="text">Guide to the price rating:
-			  <ul>
-			    <li>$ = Inexpensive (main course <$15)</li>
-			    <li>$$ = Moderate (main course $16-20)</li>
-			    <li>$$$ = Expensive (main course $26-35)</li>
-			    <li>$$$$ = Very expensive (main course $35+)</li>
-			    <li>Very pricey = (prix fixe with full cost $200+)</li>
-			  </ul>
-			  Prix fixe and small plate menus are analyzed for equivalency.
-			</div>
-
 			<div class="intro-hed">Credits</div>
 
 			<div class="entry">Editor at large / Restaurant critic
@@ -56,10 +46,6 @@
 			  <div class="entry-name"><a href="mailto:lvilla@sfchronicle.com">Lucio Villa</a></div>
 			  <div class="entry-name"><a href="mailto:evan.wagstaff@sfchronicle.com">Evan Wagstaff</a></div>
 			  <div class="entry-name"><a href="mailto:eoneill@sfchronicle.com">Emma O'Neill</a></div>
-			</div>
-
-			<div class="entry">Designer
-			  <div class="entry-name"><a href="mailto:lvilla@sfchronicle.com">Lucio Villa</a></div>
 			</div>
 
 			<div class="entry">Editors

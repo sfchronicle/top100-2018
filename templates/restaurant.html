@@ -35,9 +35,10 @@
     <div class="article">
       {% if (restaurant.Returning == "Classic") %}
       <label class="classic-label">Classic</label>
+      <a href="{{url_for('index')}}guides/classics"><img class="special-icon"></a>
       {% endif %}
-      {% if (restaurant.Returning == "Classic" or restaurant.Returning == "No") %}
-      <img class="special-icon" />
+      {% if (restaurant.Returning == "No") %}
+      <a href="{{url_for('index')}}guides/new"><img class="special-icon"></a>
       {% endif %}
       <a href="{{ url_for('index') }}map/#{{restaurant.Slug}}">
         <div class="map-link region-button">

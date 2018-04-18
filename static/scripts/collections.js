@@ -25,13 +25,13 @@ if (document.getElementById("sf-region")){
   });
 
   // if reader clicks on "South Bay", show appropriate sub-regions and filter
-  document.getElementById("southbay-region").addEventListener("click",function(){
+  document.getElementById("southofsf-region").addEventListener("click",function(){
     $(".region-button").removeClass("active");
     $(".subregion-button").removeClass("active");
     $(".subregions-container").removeClass("active");
-    document.getElementById("southbay-region").classList.add("active");
-    document.getElementById("southbay-subregions").classList.add("active");
-    checkRestaurants("southbay");
+    document.getElementById("southofsf-region").classList.add("active");
+    // document.getElementById("southofsf-subregions").classList.add("active");
+    checkRestaurants("southofsf");
   });
 
   // if reader clicks on "East Bay", show appropriate sub-regions and filter

@@ -127,7 +127,12 @@
 
     font-size:17px;
     max-width:none;
-    padding:0;
+    padding:0 2em;
+
+    @media @mobile{
+    	padding:0 1em;
+    	font-size:15px;
+    }
 
 		&:last-child{
     	font-style: italic;
@@ -846,6 +851,14 @@
 }
 
 .about {
+	
+	padding:0 2em;
+
+	@media @mobile{
+		padding:0 1em;
+	}
+
+
 
   li {
     list-style: none;
@@ -911,6 +924,12 @@
     letter-spacing:normal;
     font-size:17px;
   }
+
+  ul{
+  	@media @mobile{
+  		padding-left:0;
+  	}
+  }
 }
 
 .intro-overlay{
@@ -927,7 +946,7 @@
   background: #fff;
   max-width: 750px;
   margin: 4em auto;
-  padding: 2em;
+  padding: 0 0 2em;
 
   @media @w1080{
     max-width:none;
@@ -935,7 +954,6 @@
   }
 
   @media @tablet{
-    padding: 1em;
     width: 100%;
     margin: 0;
   }
@@ -961,6 +979,51 @@
     right: 0;
     color: #000;
     font-size: 1em;
-    text-shadow: 1px 1px 2px #717171;
+    text-shadow: 2px 1px 0 #fff;
   }
+}
+
+.intro-link{
+  line-height: 1.2;
+  padding: 1.5em 0;
+  margin-bottom:2em;
+  background:#000;
+  text-align:center;
+
+  @media @mobile{
+  	margin-bottom:1em;
+  }
+
+  img{
+  	max-width: 165px;
+    display: block;
+    margin: 0 auto -9px;
+    width: 100%;
+
+    @media @mobile{
+    	margin-bottom:0;
+    }
+  }
+
+  .top100-hed,
+  .top100-hed-rest {
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    color: @main;
+
+    @media @mobile{
+    	font-size:35px;
+    }
+   }
+
+   .top100-hed-rest{
+   	color:#fff;
+   }
+
+   .author{
+      margin-top:10px;
+      color: #fff;
+    	font-size: 15px;
+   }
 }

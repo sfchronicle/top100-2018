@@ -36,9 +36,9 @@
   a {
     color: #000;
     border-bottom: 2px solid @main;
-    &:hover {
-      color: darken(@main,10%);
-    }
+    // &:hover {
+    //   color: darken(@main,10%);
+    // }
   }
 }
 
@@ -180,8 +180,9 @@
 .map-review,
 .map-directions {
   font-size:12px;
+  color:#000;
   // text-decoration: underline;
-  cursor: pointer;
+  // cursor: pointer;
 
   // a{
   //   color:#000;
@@ -197,6 +198,11 @@
 .locate-text, .map-text-span {
   color:#000;
   border-bottom: 2px solid @main;
+  cursor: pointer;
+  &:hover {
+    color:#000;
+    font-weight: 600;
+  }
 }
 
 // .map-locator {

@@ -28,7 +28,6 @@ app.config['AUTHORS'] = "Michael Bauer, Kitty Morgan, Russell Yip, Lucio Villa, 
 
 # name collections
 collections = ["regions","cuisines","brunch","classics","new"]
-print(collections)
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
