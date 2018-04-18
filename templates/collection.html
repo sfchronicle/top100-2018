@@ -26,7 +26,7 @@
   <div class="regions-container">
     <div class="region-button" id="sf-region">San Francisco</div>
     <div class="region-button" id="northbay-region">North Bay</div>
-    <div class="region-button" id="southbay-region">South Bay</div>
+    <div class="region-button" id="southofsf-region">South of S.F.</div>
     <div class="region-button" id="eastbay-region">East Bay</div>
   </div>
   <div class="dropdown-container active">
@@ -35,7 +35,7 @@
       <option value='all'>All</option>
       <option value="sanfrancisco-region">San Francisco</option>
       <option value="northbay-region">North Bay</option>
-      <option value="southbay-region">South Bay</option>
+      <option value="southofsf-region">South of S.F.</option>
       <option value="eastbay-region">East Bay</option>
     </select>
   </div>
@@ -135,7 +135,7 @@
 
   {% if (collection == "regions" or collection == "cuisines") %}
 
-    {% set regionName = r.Region.lower().replace(' ','').replace(',',' ').replace('/',' ') %}
+    {% set regionName = r.Region.lower().replace(' ','').replace(' ','').replace(',',' ').replace('/',' ').replace('.','').replace('.','') %}
     {% set subregionName = r.SubRegion.lower().replace(' ','').replace(',',' ').replace('/','') %}
     {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ').replace('and',' ').replace('-','') %}
 
@@ -155,7 +155,7 @@
 
   {% endif %}
 
-  {% 
+  {%
     if (
       (collection == "brunch" and r.Brunch != "No") or
       (collection == "classics" and r.Returning == "Classic") or
