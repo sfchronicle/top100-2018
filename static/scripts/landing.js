@@ -199,17 +199,19 @@ var restaurantList;
 
 // Sets the user ID from treg (hopefully) 
 var checkUser = function(repetitions) {
+  var waitForUser = $.Deferred();
   // Set a timeout logic waits for resolution
-  var delay = 500;
+  var delay = 200;
 
   if (!repetitions){
     // Start us off with 0 if unspecified
-    repetitions = 0;
+    repetitions = 20;
   }
 
   console.log("HERE'S USER ID", userIdentity);
   if (userIdentity){
     // If we already know the user's identity, we can bail out here
+    waitForUser.resolve();
     return userIdentity;
   }
   
@@ -223,11 +225,11 @@ var checkUser = function(repetitions) {
       // Only get data if it's actually the user
       // Otherwise, we will need to prompt a login
       if (userIdentity){
-        getData(userIdentity);
+        getData(userIdentity, waitForUser);
       }
     } else {
-      if (repetitions < 10){
-        checkUser(repetitions+1);
+      if (repetitions > 0){
+        checkUser(repetitions-1);
       } else {
         // If we've looped 10 times, bail out
         return null;
@@ -235,8 +237,8 @@ var checkUser = function(repetitions) {
     }
   }, delay);
 
-  // Return null if we didn't resolve anything
-  return null;
+  // Return the deferred
+  return waitForUser;
 }
 
 var fetchIdentity = function(){
@@ -306,7 +308,7 @@ checkForHash();
 renderUserResults();
 
 // Get data
-function getData(user) {
+function getData(user, promise) {
   let shareLink = false;
   if (user != userIdentity){
     shareLink = true;
@@ -339,6 +341,10 @@ function getData(user) {
         findMatches(mappedList);
         // Add a bit of help text
         $("#count-results").text($("#count-results").text() + " shared from a reader's list");
+      }
+      // Resolve promise if there was one
+      if (promise){
+        promise.resolve();
       }
     }
   });
@@ -397,15 +403,19 @@ $(".save-button").each(function(index) {
       saveNewData(userIdentity, restaurantList);
 
     } else {
-      userIdentity = fetchIdentity();
-      if (!userIdentity){
-        // User hasn't logged in -- prompt them to do so
-        $("#log-in-instructions").show();
-        $("body, html").css("overflow-y", "hidden");
-      } else {
-        // Successfully fetched -- proceed with original logic
-        $(this).click();
-      }
+      // Only give it one chance
+      var promise = checkUser(1);
+      $.when(promise).then(function(data){
+        console.log("PROMISE DATA", data);
+        if (!userIdentity){
+          // User hasn't logged in -- prompt them to do so
+          $("#log-in-instructions").show();
+          $("body, html").css("overflow-y", "hidden");
+        } else {
+          // Successfully fetched -- proceed with original logic
+          $(this).click();
+        }
+      });
     }
   });
 });
@@ -425,29 +435,31 @@ function showAllRestaurants() {
 function showMyList() {
   var prefix = "save";
   // Fetch in case we don't have it yet
-  userIdentity = fetchIdentity();
-  // Prompt login if the user has no ID
-  if (!userIdentity){
-    $("#log-in-instructions").show();
-    $("body, html").css("overflow-y", "hidden");
-  } else {
-    // Remove yellow from the search item 
-    $(".search").removeClass("homepage");
-    $(".mylist").addClass("active");
-    // Show list as a filter
-    const mappedList = restaurantList.map(function(item){
-      // Shave the prefix off of item
-      return item.substring(4, item.length);
-    });
-    findMatches(mappedList);
-    // Append query string to let people share their list
-    // Use history API to update query
-    if (history.pushState) {
-      // Get URL with no query or hash (or trailing slash)
-      var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
-      window.history.pushState({path:fullUrl},'',fullUrl);
+  var promise = checkUser(1);
+  $.when(promise).then(function(data){
+    // Prompt login if the user has no ID
+    if (!userIdentity){
+      $("#log-in-instructions").show();
+      $("body, html").css("overflow-y", "hidden");
+    } else {
+      // Remove yellow from the search item 
+      $(".search").removeClass("homepage");
+      $(".mylist").addClass("active");
+      // Show list as a filter
+      const mappedList = restaurantList.map(function(item){
+        // Shave the prefix off of item
+        return item.substring(4, item.length);
+      });
+      findMatches(mappedList);
+      // Append query string to let people share their list
+      // Use history API to update query
+      if (history.pushState) {
+        // Get URL with no query or hash (or trailing slash)
+        var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+        window.history.pushState({path:fullUrl},'',fullUrl);
+      }
     }
-  }
+  });
 }
 
 // Only trigger homepage-specific actions if we're on the homepage
