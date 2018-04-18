@@ -201,11 +201,17 @@ var globalTimeout;
 
 // Sets the user ID from treg (hopefully) 
 console.log("CHECK USER 3");
-var checkUser = function(repetitions) {
+var checkUser = function(repetitions, original_promise) {
   // Clear timeout if there's an interruption
   clearTimeout(globalTimeout);
   // Set a deferred to return immediately
-  var waitForUser = $.Deferred();
+  var waitForUser;
+  if (!original_promise){
+    waitForUser = $.Deferred();
+  } else {
+    waitForUser = original_promise;
+  }
+   
   // Set a timeout logic waits for resolution
   var delay = 100;
 
@@ -217,24 +223,29 @@ var checkUser = function(repetitions) {
   console.log("HERE'S USER ID", userIdentity, repetitions);
   if (userIdentity && userIdentity != "no id"){
     // If we already know the user's identity, we can bail out here
+    console.log("RESOLVE 1");
     waitForUser.resolve();
+    return userIdentity;
   }
   
   // Keep setting a timeout until we have what we need
   globalTimeout = setTimeout(function(){
-    var userIdentity = fetchIdentity();
-    if (userIdentity){
+    var getUser = fetchIdentity();
+    if (getUser){
+      // If we got something, set it for real
+      userIdentity = getUser;
       // Only get data if it's actually the user
       // Otherwise, we will need to prompt a login
       getData(userIdentity, waitForUser, false);
     } else {
       if (repetitions > 0){
         console.log("CHECK USER 4");
-        checkUser(repetitions-1);
+        checkUser(repetitions-1, waitForUser);
       } else {
         // If we've looped 10 times, bail out with "no id" flag
         userIdentity = "no id";
         console.log("BAIL OUT", userIdentity);
+        console.log("RESOLVE 2");
         waitForUser.resolve();
       }
     }
@@ -246,15 +257,16 @@ var checkUser = function(repetitions) {
 
 var fetchIdentity = function(){
   if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
-    console.log("treg.identity.id", treg.identity.id);
     // We have a valid object, so return the ID
     // NOTE: The ID might be null, but we know one way or another
     if (window.location.href.indexOf("localhost") != -1){
+      var tempID = 11220454;
+      console.log("THIS IS LOCALHOST, SETTING TEMP ID", tempID);
       // If we're developing on localhost, use a test identity
       // NOTE: Comment this next line out if you want to test what happens 
       // when a user is not logged in (in the local dev environment)
       // Alternatively, increment the integer to start with fresh data
-      return 11220454;
+      return tempID;
     }
     return treg.identity.id;
   } else {  
@@ -293,16 +305,6 @@ var checkForHash = function(){
   // If this is one of the hashes we're expecting, scroll the reader down
   if (hash == "#search" || hash == "#mylist"){
     scrollToResults();
-    // Only simulate a click on list if we've got an identity back
-    if (hash == "#mylist"){
-      setTimeout(function(){
-        console.log("HEYAGD", userIdentity);
-        if (userIdentity){
-          // Also display list results
-          $(".mylist").click();
-        }
-      }, 600);
-    }
   }
 }
 
@@ -330,6 +332,13 @@ function getData(user, promise, share) {
         // Only set if it's for the current user's data
         restaurantList = data;
         setIcons();
+        // If coming from a collex to mylist, handle that
+        // Only simulate a click on list if we've got an identity back
+        console.log("CHECK HASH", window.location.hash, userIdentity);
+        if (window.location.hash == "#mylist" && userIdentity){
+          // Also display list results
+          $(".mylist").click();
+        }
       } else {
         // If this is a search for another user's data, just render the result
         const mappedList = data.map(function(item){
@@ -383,6 +392,7 @@ function saveNewData(user, restaurants) {
 $(".save-button").each(function(index) {
   $(this).on("click", function(e) {
 
+    console.log("BEEEE SOMETHING", userIdentity);
     if (userIdentity && userIdentity != "no id") {
       // Get ID for saving
       var itemID = $(this).find(".save-restaurant").attr("id");
@@ -403,8 +413,8 @@ $(".save-button").each(function(index) {
 
     } else {
       // Only give it one chance
-      console.log("CHECK USER 1");
       var promise = checkUser(1);
+      console.log("CHECK USER 1", promise);
       $.when(promise).then(function(data){
         console.log("PROMISE RESOLVE", userIdentity);
         if (userIdentity == "no id"){
@@ -415,7 +425,7 @@ $(".save-button").each(function(index) {
           // Successfully fetched -- proceed with original logic
           $(this).click();
         } else {
-          console.log("NO RESULT, BAD");
+          console.log("NO RESULT, BAD 1");
         }
       });
     }
@@ -436,36 +446,22 @@ function showAllRestaurants() {
 
 function showMyList() {
   var prefix = "save";
-  // Fetch in case we don't have it yet
-  console.log("CHECK USER 2");
-  var promise = checkUser(1);
-  $.when(promise).then(function(data){
-    console.log("PROMISE RESOLVE", userIdentity);
-    // Prompt login if the user has no ID
-    if (userIdentity == "no id"){
-      $("#log-in-instructions").show();
-      $("body, html").css("overflow-y", "hidden");
-    } else if (userIdentity) {
-      // Remove yellow from the search item 
-      $(".search").removeClass("homepage");
-      $(".mylist").addClass("active");
-      // Show list as a filter
-      const mappedList = restaurantList.map(function(item){
-        // Shave the prefix off of item
-        return item.substring(4, item.length);
-      });
-      findMatches(mappedList);
-      // Append query string to let people share their list
-      // Use history API to update query
-      if (history.pushState) {
-        // Get URL with no query or hash (or trailing slash)
-        var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
-        window.history.pushState({path:fullUrl},'',fullUrl);
-      }
-    } else {
-      console.log("NO RESULT, BAD");
-    }
+  // Remove yellow from the search item 
+  $(".search").removeClass("homepage");
+  $(".mylist").addClass("active");
+  // Show list as a filter
+  const mappedList = restaurantList.map(function(item){
+    // Shave the prefix off of item
+    return item.substring(4, item.length);
   });
+  findMatches(mappedList);
+  // Append query string to let people share their list
+  // Use history API to update query
+  if (history.pushState) {
+    // Get URL with no query or hash (or trailing slash)
+    var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+    window.history.pushState({path:fullUrl},'',fullUrl);
+  }
 }
 
 // Only trigger homepage-specific actions if we're on the homepage
@@ -496,39 +492,49 @@ if (window.location.href.indexOf("/guides/") == -1){
   $(".mylist").on("click",function(e) {
     //Intercept the link functionality on homepage and just bring user to search
     e.preventDefault();
-    // Give it gold bg
-    $(this).toggleClass("selected");
-    showMyList();
-    // Clear any search terms from bar
-    $("#search-bar input").val("");
-    $(".cancel-search").hide();
-    // Change result text a little
-    var resultsText = $("#count-results").text();
-    $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
-    $("#mylist-box").show();
-    // Handle zero results condition
-    if (resultsText.substring(0,1) == "0"){
-      $("#search-noresults").hide();
-    } else {
-      // If there are results, append share tools
-      var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
-      var twitterCopy = $("#twitter-icon").clone();
-      twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
-      var facebookCopy = $("#facebook-icon").clone();
-      facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
-      var linkIcon = $("<a>", {
-        html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
-      });
-      // Add buttons
-      $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
-      // Add event to link button
-      linkIcon.on("click", function(){
-        $(".link-copy-text").show();
-        $(".link-copy-input").show().val(encodedURL);
-        $(".link-copy-input")[0].select();
-        document.execCommand('copy');
-      });
-    }
+    var promise = checkUser(1);
+    $.when(promise).then(function(data){
+      if (userIdentity == "no id"){
+        $("#log-in-instructions").show();
+        $("body, html").css("overflow-y", "hidden");
+      } else if (userIdentity) {
+        // Give it gold bg
+        $(this).toggleClass("selected");
+        showMyList();
+        // Clear any search terms from bar
+        $("#search-bar input").val("");
+        $(".cancel-search").hide();
+        // Change result text a little
+        var resultsText = $("#count-results").text();
+        $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+        $("#mylist-box").show();
+        // Handle zero results condition
+        if (resultsText.substring(0,1) == "0"){
+          $("#search-noresults").hide();
+        } else {
+          // If there are results, append share tools
+          var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+          var twitterCopy = $("#twitter-icon").clone();
+          twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
+          var facebookCopy = $("#facebook-icon").clone();
+          facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
+          var linkIcon = $("<a>", {
+            html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
+          });
+          // Add buttons
+          $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
+          // Add event to link button
+          linkIcon.on("click", function(){
+            $(".link-copy-text").show();
+            $(".link-copy-input").show().val(encodedURL);
+            $(".link-copy-input")[0].select();
+            document.execCommand('copy');
+          });
+        }
+      } else {
+        console.log("NO RESULT, BAD 2");
+      }
+    });
   });
 }
 
