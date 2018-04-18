@@ -65,18 +65,10 @@ var finalFilter = function(top100Results){
   });
   // Set values on HTML
   $("#popular-rest .wrap").each(function(index){
-    // Get URL with no query or hash (or trailing slash)
-    var fullUrl = location.href.split('#')[0].split('?')[0];
-    if ((fullUrl.match(/\//g) || []).length == 4){
-      fullUrl = fullUrl.slice(0, -1);
-    }
-    // Get array based on slashes
-    fullUrl = fullUrl.split("/");
-    // Remove the restaurant path and rejoin
-    fullUrl.pop();
-    fullUrl = fullUrl.join("/"); 
+    // Get URL
+    var fullUrl = $(this).find("a").data("link");
     // Set new path using slug
-    var finalUrl = fullUrl+"/"+finalPopular[index].Slug;
+    var finalUrl = fullUrl+finalPopular[index].Slug;
     $(this).find("a").attr("href", finalUrl);
     // Set next link as the text link
     if (index == 0){

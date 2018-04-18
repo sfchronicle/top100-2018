@@ -382,7 +382,7 @@ function saveNewData(user, restaurants) {
 $(".save-button").each(function(index) {
   $(this).on("click", function(e) {
 
-    if (userIdentity) {
+    if (userIdentity && userIdentity != "no id") {
       // Get ID for saving
       var itemID = $(this).find(".save-restaurant").attr("id");
 
