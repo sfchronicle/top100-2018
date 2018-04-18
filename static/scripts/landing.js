@@ -196,43 +196,45 @@ var scrollToResults = function(){
 
 var userIdentity;
 var restaurantList;
+var globalTimeout;
 
 // Sets the user ID from treg (hopefully) 
+console.log("CHECK USER 3");
 var checkUser = function(repetitions) {
+  // Clear timeout if there's an interruption
+  clearTimeout(globalTimeout);
+  // Set a deferred to return immediately
   var waitForUser = $.Deferred();
   // Set a timeout logic waits for resolution
-  var delay = 200;
+  var delay = 100;
 
-  if (!repetitions){
+  if (typeof repetitions == "undefined"){
     // Start us off with 0 if unspecified
     repetitions = 20;
   }
 
-  console.log("HERE'S USER ID", userIdentity);
-  if (userIdentity){
+  console.log("HERE'S USER ID", userIdentity, repetitions);
+  if (userIdentity && userIdentity != "no id"){
     // If we already know the user's identity, we can bail out here
     waitForUser.resolve();
-    return userIdentity;
   }
   
   // Keep setting a timeout until we have what we need
-  setTimeout(function(){
-    var user = fetchIdentity();
-    console.log("Try to fetch", user);
-    if (user){
-      // If we found a user, set the var
-      userIdentity = user;
+  globalTimeout = setTimeout(function(){
+    var userIdentity = fetchIdentity();
+    if (userIdentity){
       // Only get data if it's actually the user
       // Otherwise, we will need to prompt a login
-      if (userIdentity){
-        getData(userIdentity, waitForUser);
-      }
+      getData(userIdentity, waitForUser, false);
     } else {
       if (repetitions > 0){
+        console.log("CHECK USER 4");
         checkUser(repetitions-1);
       } else {
-        // If we've looped 10 times, bail out
-        return null;
+        // If we've looped 10 times, bail out with "no id" flag
+        userIdentity = "no id";
+        console.log("BAIL OUT", userIdentity);
+        waitForUser.resolve();
       }
     }
   }, delay);
@@ -243,6 +245,7 @@ var checkUser = function(repetitions) {
 
 var fetchIdentity = function(){
   if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
+    console.log("treg.identity.id", treg.identity.id);
     // We have a valid object, so return the ID
     // NOTE: The ID might be null, but we know one way or another
     if (window.location.href.indexOf("localhost") != -1){
@@ -267,7 +270,7 @@ var renderUserResults = function() {
     // Decode the result
     queryResult = $.base64.decode(queryResult);
     // Try to fetch data with it
-    getData(queryResult);
+    getData(queryResult, null, true);
     // Actual rendering happens in the getData success callback
   }
 }
@@ -308,26 +311,21 @@ checkForHash();
 renderUserResults();
 
 // Get data
-function getData(user, promise) {
-  let shareLink = false;
-  if (user != userIdentity){
-    shareLink = true;
-  }
-
+function getData(user, promise, share) {
   $.ajax({
     method: "GET",
     dataType: "json",
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + user,
     error: function(msg) {
       // This can error if there's no data yet -- go ahead and just set it blank
-      if (!shareLink){
+      if (!share){
         // Only set if it's for the current user's data
         restaurantList = [];
       }
     },
     success: function(data) {
       console.log("SUCCESS, here's the data ", data);
-      if (!shareLink){
+      if (!share){
         // Only set if it's for the current user's data
         restaurantList = data;
         setIcons();
@@ -404,16 +402,19 @@ $(".save-button").each(function(index) {
 
     } else {
       // Only give it one chance
+      console.log("CHECK USER 1");
       var promise = checkUser(1);
       $.when(promise).then(function(data){
-        console.log("PROMISE DATA", data);
-        if (!userIdentity){
+        console.log("PROMISE RESOLVE", userIdentity);
+        if (userIdentity == "no id"){
           // User hasn't logged in -- prompt them to do so
           $("#log-in-instructions").show();
           $("body, html").css("overflow-y", "hidden");
-        } else {
+        } else if (userIdentity) {
           // Successfully fetched -- proceed with original logic
           $(this).click();
+        } else {
+          console.log("NO RESULT, BAD");
         }
       });
     }
@@ -435,13 +436,15 @@ function showAllRestaurants() {
 function showMyList() {
   var prefix = "save";
   // Fetch in case we don't have it yet
+  console.log("CHECK USER 2");
   var promise = checkUser(1);
   $.when(promise).then(function(data){
+    console.log("PROMISE RESOLVE", userIdentity);
     // Prompt login if the user has no ID
-    if (!userIdentity){
+    if (userIdentity == "no id"){
       $("#log-in-instructions").show();
       $("body, html").css("overflow-y", "hidden");
-    } else {
+    } else if (userIdentity) {
       // Remove yellow from the search item 
       $(".search").removeClass("homepage");
       $(".mylist").addClass("active");
@@ -458,6 +461,8 @@ function showMyList() {
         var fullUrl = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
         window.history.pushState({path:fullUrl},'',fullUrl);
       }
+    } else {
+      console.log("NO RESULT, BAD");
     }
   });
 }
