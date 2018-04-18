@@ -14,6 +14,7 @@ var count = 100;
 // smooth scroll to skip reading Michael's intro if you want
 $("#restaurants").on("click",function(){
   scrollToResults();
+  $(".search").click();
 });
 
 //Only trigger search bar fades if we're not in a guide
