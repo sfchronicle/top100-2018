@@ -197,13 +197,11 @@ var scrollToResults = function(){
 
 var userIdentity;
 var restaurantList;
-var globalTimeout;
+var globalTimeout = null;
 
 // Sets the user ID from treg (hopefully) 
 console.log("CHECK USER 3");
 var checkUser = function(repetitions, original_promise) {
-  // Clear timeout if there's an interruption
-  clearTimeout(globalTimeout);
   // Set a deferred to return immediately
   var waitForUser;
   if (!original_promise){
@@ -246,6 +244,7 @@ var checkUser = function(repetitions, original_promise) {
         userIdentity = "no id";
         console.log("BAIL OUT", userIdentity);
         console.log("RESOLVE 2");
+        globalTimeout = null;
         waitForUser.resolve();
       }
     }
@@ -328,6 +327,9 @@ function getData(user, promise, share) {
     },
     success: function(data) {
       console.log("SUCCESS, here's the data ", data);
+      // Reset timeout var
+      globalTimeout = null;
+
       if (!share){
         // Only set if it's for the current user's data
         restaurantList = data;
@@ -350,6 +352,7 @@ function getData(user, promise, share) {
         // Add a bit of help text
         $("#count-results").text($("#count-results").text() + " shared from a reader's list");
       }
+      
       // Resolve promise if there was one
       if (promise){
         promise.resolve();
@@ -392,7 +395,6 @@ function saveNewData(user, restaurants) {
 $(".save-button").each(function(index) {
   $(this).on("click", function(e) {
 
-    console.log("BEEEE SOMETHING", userIdentity);
     if (userIdentity && userIdentity != "no id") {
       // Get ID for saving
       var itemID = $(this).find(".save-restaurant").attr("id");
@@ -412,22 +414,21 @@ $(".save-button").each(function(index) {
       saveNewData(userIdentity, restaurantList);
 
     } else {
-      // Only give it one chance
-      var promise = checkUser(1);
-      console.log("CHECK USER 1", promise);
-      $.when(promise).then(function(data){
-        console.log("PROMISE RESOLVE", userIdentity);
-        if (userIdentity == "no id"){
-          // User hasn't logged in -- prompt them to do so
-          $("#log-in-instructions").show();
-          $("body, html").css("overflow-y", "hidden");
-        } else if (userIdentity) {
-          // Successfully fetched -- proceed with original logic
-          $(this).click();
-        } else {
-          console.log("NO RESULT, BAD 1");
-        }
-      });
+      // Don't do anything unless the initial check has resolved
+      if (globalTimeout == null){
+        // Only give it one chance
+        var promise = checkUser(1);
+        $.when(promise).then(function(data){
+          if (userIdentity == "no id"){
+            // User hasn't logged in -- prompt them to do so
+            $("#log-in-instructions").show();
+            $("body, html").css("overflow-y", "hidden");
+          } else if (userIdentity) {
+            // Successfully fetched -- proceed with original logic
+            $(this).click();
+          }
+        });
+      }
     }
   });
 });
@@ -492,49 +493,50 @@ if (window.location.href.indexOf("/guides/") == -1){
   $(".mylist").on("click",function(e) {
     //Intercept the link functionality on homepage and just bring user to search
     e.preventDefault();
-    var promise = checkUser(1);
-    $.when(promise).then(function(data){
-      if (userIdentity == "no id"){
-        $("#log-in-instructions").show();
-        $("body, html").css("overflow-y", "hidden");
-      } else if (userIdentity) {
-        // Give it gold bg
-        $(this).toggleClass("selected");
-        showMyList();
-        // Clear any search terms from bar
-        $("#search-bar input").val("");
-        $(".cancel-search").hide();
-        // Change result text a little
-        var resultsText = $("#count-results").text();
-        $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
-        $("#mylist-box").show();
-        // Handle zero results condition
-        if (resultsText.substring(0,1) == "0"){
-          $("#search-noresults").hide();
-        } else {
-          // If there are results, append share tools
-          var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
-          var twitterCopy = $("#twitter-icon").clone();
-          twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
-          var facebookCopy = $("#facebook-icon").clone();
-          facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
-          var linkIcon = $("<a>", {
-            html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
-          });
-          // Add buttons
-          $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
-          // Add event to link button
-          linkIcon.on("click", function(){
-            $(".link-copy-text").show();
-            $(".link-copy-input").show().val(encodedURL);
-            $(".link-copy-input")[0].select();
-            document.execCommand('copy');
-          });
-        }
-      } else {
-        console.log("NO RESULT, BAD 2");
-      }
-    });
+    // Don't do anything unless the initial check has resolved
+    if (globalTimeout == null){
+      var promise = checkUser(1);
+      $.when(promise).then(function(data){
+        if (userIdentity == "no id"){
+          $("#log-in-instructions").show();
+          $("body, html").css("overflow-y", "hidden");
+        } else if (userIdentity) {
+          // Give it gold bg
+          $(this).toggleClass("selected");
+          showMyList();
+          // Clear any search terms from bar
+          $("#search-bar input").val("");
+          $(".cancel-search").hide();
+          // Change result text a little
+          var resultsText = $("#count-results").text();
+          $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+          $("#mylist-box").show();
+          // Handle zero results condition
+          if (resultsText.substring(0,1) == "0"){
+            $("#search-noresults").hide();
+          } else {
+            // If there are results, append share tools
+            var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+            var twitterCopy = $("#twitter-icon").clone();
+            twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
+            var facebookCopy = $("#facebook-icon").clone();
+            facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
+            var linkIcon = $("<a>", {
+              html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
+            });
+            // Add buttons
+            $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
+            // Add event to link button
+            linkIcon.on("click", function(){
+              $(".link-copy-text").show();
+              $(".link-copy-input").show().val(encodedURL);
+              $(".link-copy-input")[0].select();
+              document.execCommand('copy');
+            });
+          }
+        } 
+      });
+    }
   });
 }
 
