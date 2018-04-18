@@ -59,7 +59,7 @@
           <div id="no-results">There are no results for your search. Please try again.</div>
           <div class="num-results">There <span id="num-results-search"></span> for your search.</div>
         {% for r in restaurants %}{% set photos = r.wcm_img.split(' ') %}
-          <div class="map-restaurant {{ r.Name }} {{ r.Cuisine.replace(' ','') }} {{ r.Region.replace(' ','').replace('/',' ').replace(',',' ') }} {{ r.SubRegion.replace(' ','').replace('/',' ').replace(',',' ') }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.Slug }}">
+          <div class="map-restaurant {{ r.Slug }} {{ r.Cuisine.replace(' ','') }} {{ r.Region.replace(' ','').replace('/',' ').replace(',',' ') }} {{ r.SubRegion.replace(' ','').replace('/',' ').replace(',',' ') }} {{ r.New }} {{ r.Brunch }} {{ r.PriceCategory }} {{r.Noise}} active" id="{{ r.Slug }}">
             <div class="img-link-map" data-slug="{{r.Slug}}">
               <img src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">
             </div>
