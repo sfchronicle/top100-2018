@@ -397,9 +397,15 @@ $(".save-button").each(function(index) {
       saveNewData(userIdentity, restaurantList);
 
     } else {
-      // User hasn't logged in -- prompt them to do so
-      $("#log-in-instructions").show();
-      $("body, html").css("overflow-y", "hidden");
+      userIdentity = fetchIdentity();
+      if (!userIdentity){
+        // User hasn't logged in -- prompt them to do so
+        $("#log-in-instructions").show();
+        $("body, html").css("overflow-y", "hidden");
+      } else {
+        // Successfully fetched -- proceed with original logic
+        $(this).click();
+      }
     }
   });
 });
@@ -418,8 +424,10 @@ function showAllRestaurants() {
 
 function showMyList() {
   var prefix = "save";
+  // Fetch in case we don't have it yet
+  userIdentity = fetchIdentity();
   // Prompt login if the user has no ID
-  if (userIdentity === null){
+  if (!userIdentity){
     $("#log-in-instructions").show();
     $("body, html").css("overflow-y", "hidden");
   } else {

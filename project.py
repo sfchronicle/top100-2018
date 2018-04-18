@@ -14,13 +14,13 @@ app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 app.config['PAYWALL'] = 'meter'
 
 # Publication date
-app.config['DATE'] = '2018-04-01'
+app.config['DATE'] = '2018-04-24'
 
 # Main title
 app.config['TITLE'] = 'Top 100 Bay Area Restaurants 2018'
 
 # Hashtag
-app.config['HASHTAG'] = 'Top100restaurants'
+app.config['HASHTAG'] = 'Top100Restaurants'
 
 # Authors
 app.config['AUTHORS'] = "Michael Bauer, Kitty Morgan, Russell Yip, Lucio Villa, Emma O'Neill, Evan Wagstaff"
