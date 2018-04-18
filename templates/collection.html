@@ -21,8 +21,18 @@
 
 
 {% if (collection == "regions") %}
-  <div class="title">{{collection}}</div>
-  <div class="deck">With more than 4,000 restaurants within 49 square miles, it’s no surprise San Francisco has the lion’s share of the Top 100. But the Bay Area boasts plenty of stellar spots outside the city, and all of them are destination-worthy.</div>
+  <div class="video-container">
+    <div class="lead-video">
+      <video width="100%" muted autoplay playsinline loop id="video-topper"><source src="{{url_for('static', filename='videos/cuisines.mp4')}}" type="video/mp4"></video>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="title">{{collection}}</div>
+        <div class="deck">With more than 4,000 restaurants within 49 square miles, it’s no surprise San Francisco has the lion’s share of the Top 100. But the Bay Area boasts plenty of stellar spots outside the city, and all of them are destination-worthy.</div>
+      </div>
+    </div>
+  </div>
+  
   <div class="regions-container">
     <div class="region-button" id="sf-region">San Francisco</div>
     <div class="region-button" id="northbay-region">North Bay</div>
@@ -94,22 +104,59 @@
 {% endif %}
 
 {% if (collection == "new") %}
-<div class="title">New This Year</div>
-<div class="deck">Scores of restaurants opened in the Bay Area this past year, and these are the best of the best. This list also includes restaurants that have been around for a while but were elevated into the Top 100 thanks to a fresh infusion of creativity.</div>
+<div class="video-container">
+  <div class="lead-video">
+    <video width="100%" muted autoplay playsinline loop id="video-topper"><source src="{{url_for('static', filename='videos/new.mp4')}}" type="video/mp4"></video>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="title">New This Year</div>
+      <div class="deck">Scores of restaurants opened in the Bay Area this past year, and these are the best of the best. This list also includes restaurants that have been around for a while but were elevated into the Top 100 thanks to a fresh infusion of creativity.</div>
+    </div>
+  </div>
+</div>
 {%endif%}
 {% if (collection == "classics") %}
-<div class="title">{{collection}}</div>
-<div class="deck">The restaurants in this category have been in the Top 100 for at least 20 years. Each has adapted and thrived in what is increasingly a fad-chasing culture. All continue to capture the best of what the Bay Area has to offer.</div>
+<div class="video-container">
+  <div class="lead-video">
+    <video width="100%" muted autoplay playsinline loop id="video-topper"><source src="{{url_for('static', filename='videos/classics.mp4')}}" type="video/mp4"></video>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+    <div class="title">{{collection}}</div>
+    <div class="deck">The restaurants in this category have been in the Top 100 for at least 20 years. Each has adapted and thrived in what is increasingly a fad-chasing culture. All continue to capture the best of what the Bay Area has to offer.</div>
+    </div>
+  </div>
+</div>
 {%endif%}
 {% if (collection == "brunch") %}
-<div class="title">{{collection}}</div>
-<div class="deck">Love it or hate it, brunch is here to stay. What used to be a very limited menu has taken on new interpretations in the Bay Area. Many restaurants that otherwise are only open for dinner lure weekend diners with creative takes on egg dishes and exceptional savory items.</div>
+<div class="video-container">
+  <div class="lead-video">
+    <video width="100%" muted autoplay playsinline loop id="video-topper"><source src="{{url_for('static', filename='videos/brunch.mp4')}}" type="video/mp4"></video>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="title">{{collection}}</div>
+      <div class="deck">Love it or hate it, brunch is here to stay. What used to be a very limited menu has taken on new interpretations in the Bay Area. Many restaurants that otherwise are only open for dinner lure weekend diners with creative takes on egg dishes and exceptional savory items.</div>
+    </div>
+  </div>
+</div>
 {%endif%}
 
 {% if (collection == "cuisines") %}
-<div class="title">{{collection}}</div>
-  {% set cuisineList = 'American','Chinese','Drink-centric','French','Greek','Hawaiian','Indian','International','Italian','Japanese','Mexican','Moroccan','Northern California','Rotisserie','Seafood','Spanish','Thai','Vietnamese' %}
-  <div class="deck">Northern California cuisine draws inspiration from around the world, from dim sum-style State Bird Provisions in San Francisco to the kaiseki-inspired Single Thread in Healdsburg. There has also been an infusion of Chinese, Japanese and Indian restaurants, and Hawaiian food is having a moment.</div>
+{% set cuisineList = 'American','Chinese','Drink-centric','French','Greek','Hawaiian','Indian','International','Italian','Japanese','Mexican','Moroccan','Northern California','Rotisserie','Seafood','Spanish','Thai','Vietnamese' %}
+<div class="video-container">
+  <div class="lead-video">
+    <video width="100%" muted autoplay playsinline loop id="video-topper"><source src="{{url_for('static', filename='videos/new.mp4')}}" type="video/mp4"></video>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="title">{{collection}}</div>
+      <div class="deck">Northern California cuisine draws inspiration from around the world, from dim sum-style State Bird Provisions in San Francisco to the kaiseki-inspired Single Thread in Healdsburg. There has also been an infusion of Chinese, Japanese and Indian restaurants, and Hawaiian food is having a moment.</div>
+    </div>
+  </div>
+</div>
+  
   <div class="cuisines-container">
     {% for c in cuisineList %}
       {% set cuisineName = c.lower().replace('-','').replace(' ','').replace(',',' ').replace('/',' ') %}
