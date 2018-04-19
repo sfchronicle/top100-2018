@@ -1,7 +1,11 @@
 require("./lib/social");
 var cookies = require("./cookies");
-require('lazyload');
-lazyload();
+require('jquery-recliner');
+$(".lazyload").recliner({
+    attrib: "data-src", // selector for attribute containing the media src
+    threshold: 800,     // scroll distance from element before its loaded
+    printable: true,    // be printer friendly and show all elements on document print
+});
 
 //Set proper image size for slideshow
 var imageWidth = $(".swiper-container").width();

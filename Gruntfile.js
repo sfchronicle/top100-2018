@@ -16,7 +16,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-run');
   grunt.loadTasks('./tasks');
@@ -110,12 +109,12 @@ module.exports = function (grunt) {
       production: {
         exec: 'python build.py production'
       },
-      dev: {
-        exec: 'python build.py dev'
-      },
       deploy: {
         exec: './deploy.sh test-proj top2018'
       },
+      dev: {
+        exec: 'python build.py dev'
+      }
     },
 
     // Converts .html files to .php
@@ -150,7 +149,7 @@ module.exports = function (grunt) {
   // Build static files; defaults to dev. Command = 'grunt build:production'
   grunt.registerTask('build', function(target) {
     if (target) {
-      grunt.task.run (['run:' + target, 'bundle', 'deploy']);
+      grunt.task.run (['run:' + target, 'php', 'bundle']);
     } else {
       grunt.task.run(['run:dev']);
     }
