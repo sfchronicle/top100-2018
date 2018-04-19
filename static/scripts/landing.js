@@ -66,7 +66,9 @@ $(function(){
 function getFilterList() {
   // NOTE: If we want to curate these instead of pull them dynamically off list
   // Replace the vars below with a complete array of autocomplete options
-  var cuisineArray = cuisineString.split("|");
+  // var cuisineArray = cuisineString.split("|");
+  // Our curated list:
+  var cuisineArray = ["American", "Italian", "Northern California", "French", "Indian", "Drink-centric", "Spanish", "Thai", "Chinese", "Japanese", "Greek", "Moroccan", "Vietnamese", "Rotisserie", "Hawaiian", "Seafood", "Mexican"];
   var regionArray = regionString.split(/,|\||\//);
   // Fix some names
   var nameArray = nameString.replace(/&amp;/g, "&").replace(/&#39;/g, "'").split("|");
