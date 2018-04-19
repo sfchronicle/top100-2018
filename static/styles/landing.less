@@ -802,7 +802,11 @@
       }
 
       img{
-        max-width:200px;
+        width:150px;
+
+        @media @mobile{
+          width:120px;
+        }
       }
 
       .timestamp{
@@ -811,6 +815,10 @@
         font-size: 12px;
         font-family: sanchez-bold;
         color: #a90000;
+
+        @media @mobile{
+          display:none;
+        }
       }
 
       h3{
