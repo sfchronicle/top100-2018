@@ -1,9 +1,5 @@
-require('jquery-recliner');
-$(".lazyload").recliner({
-    attrib: "data-src", // selector for attribute containing the media src
-    threshold: 800,     // scroll distance from element before its loaded
-    printable: true,    // be printer friendly and show all elements on document print
-});
+require("lazyload");
+lazyload();
 
 // if we are on the "Regions" collection, implement "Regions" buttons and drop-downs
 if (document.getElementById("sf-region")){

@@ -1,11 +1,7 @@
 require("./lib/social");
 var cookies = require("./cookies");
-require('jquery-recliner');
-$(".lazyload").recliner({
-    attrib: "data-src", // selector for attribute containing the media src
-    threshold: 800,     // scroll distance from element before its loaded
-    printable: true,    // be printer friendly and show all elements on document print
-});
+require("lazyload");
+lazyload();
 
 // function to find minimum
 Array.prototype.min = function() {
@@ -32,6 +28,7 @@ if (window.location.href.indexOf("/guides/") == -1){
     window.onscroll = function() {
       var window_top = document.documentElement.scrollTop || document.body.scrollTop;
       var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
+      console.log("HERE'S POS", window_top, div_top);
       if (window_top > div_top) {
         $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
       } else {
@@ -53,8 +50,9 @@ if (window.location.href.indexOf("/guides/") == -1){
 
 // Trigger scroll immediately so the search bar can appear if necessary
 $(window).trigger("scroll");
+console.log("TESTING ANDROID");
 
-// Give restaurants that haven't been seen yet a little flag
+//Give restaurants that haven't been seen yet a little flag
 $(function(){
   var restaurantCookie = getCookie("sfc_top100_2018");
   $(".restaurant").each(function(){
@@ -500,7 +498,6 @@ if (window.location.href.indexOf("/guides/") == -1){
   });
 
   // event listener for "My List" button
-  // event listener for "My List" button
   $(".mylist").on("click",function(e) {
     //Intercept the link functionality on homepage and just bring user to search
     e.preventDefault();
@@ -509,7 +506,7 @@ if (window.location.href.indexOf("/guides/") == -1){
       var promise = checkUser(1);
       $.when(promise).then(function(data){
         if (userIdentity == "no id"){
-          $("#log-in-instructions").show();
+          $("body").find("#log-in-instructions").show();
           $("body, html").css("overflow-y", "hidden");
         } else if (userIdentity) {
           // Give it gold bg
@@ -623,4 +620,3 @@ function timeConverter(timeStamp){
   var time = month + ' ' + day + ', ' + year ;
   return time;
 }
-
