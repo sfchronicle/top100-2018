@@ -35,7 +35,7 @@ if($('.swiper-slide').length === 1){
 	var swiperData = {
     spaceBetween: 100,
     autoHeight: true, 
-    calculateHeight:true,
+    calculateHeight: true,
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev',
     pagination: '.swiper-pagination',
