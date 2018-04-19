@@ -186,6 +186,7 @@
 	}
 
 	.link-copy-text {
+		display: none;
 		font-size: 14px;
 		margin-left: 5px;
 		font-weight: 800;
@@ -206,9 +207,9 @@
 #count-results{
   font-family:@sans-serif;
   text-align:center;
-  margin-top:0;
+  margin-top:30px;
 
-  span{
+  span:not(.link-copy-text){
     display:block;
     font-family:@sans-serif-light;
     font-size:15px;
@@ -478,6 +479,7 @@
 
 #mylist-box {
 	width: 100%;
+	margin-top: 20px;
 
 	.mylist-title {
 		font-family: @fancy-serif;
@@ -490,7 +492,7 @@
 	.mylist-explainer {
 		font-size: 16px;
     max-width: 720px;
-    margin: 0 auto 2em;
+    margin: 0 auto;
     text-align: center;
     font-family: @body;
 	}

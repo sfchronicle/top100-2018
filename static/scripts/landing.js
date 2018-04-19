@@ -78,6 +78,10 @@ function getFilterList() {
   for (var i = 0; i < allArrays.length; i++){
     masterArray = masterArray.concat(allArrays[i]);
   }
+  // Filter out dups
+  masterArray = masterArray.filter(function (item, pos) {
+    return masterArray.indexOf(item) == pos;
+  });
   // Return the full array of autocomplete options
   return masterArray;
 }
@@ -513,6 +517,10 @@ if (window.location.href.indexOf("/guides/") == -1){
           // Change result text a little
           var resultsText = $("#count-results").text();
           $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+          // Swap out "restaurants" if it's just 1 result
+          if (resultsText.substring(0,2) == "1 "){
+            $("#count-results").text($("#count-results").text().replace("restaurants", "restaurant"));
+          }
           $("#mylist-box").show();
           // Handle zero results condition
           if (resultsText.substring(0,1) == "0"){
@@ -531,7 +539,7 @@ if (window.location.href.indexOf("/guides/") == -1){
             $("#count-results").append('<span>Share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
             // Add event to link button
             linkIcon.on("click", function(){
-              $(".link-copy-text").show();
+              $(".link-copy-text").css("display", "block");
               $(".link-copy-input").show().val(encodedURL);
               $(".link-copy-input")[0].select();
               document.execCommand('copy');

@@ -69,6 +69,10 @@ if (cookiesNumber > 10){
 	// Let them know they're close!
 	$("#explore-text").hide();
 	$("#nearing-text").show().find("span.number").html(cookiesNumber);
+	// A lot of work just to remove an 'S' but sure
+	if (cookiesNumber == 1){
+		$("#nearing-text").text($("#nearing-text").text().replace("restaurants", "restaurant"));
+	}
 } else {
 	// Congratulate the reader!
 	$("#explore-text").hide();
