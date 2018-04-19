@@ -585,26 +585,38 @@ $.ajax({
   type: 'GET',
   url: "https://api.rss2json.com/v1/api.json?rss_url=" + url,
   dataType: 'jsonp',
-  success: function(data) {   
-    var firstItem = data.items[0];
-    // Populate latest news box
-    $(".latest-news h3 span").text(firstItem.title);
-    // Remove all HTML formatting
-    var modifiedDesc = firstItem.description.replace(/<p>|<\/p>/g, "");
-    if (modifiedDesc.length > 88){
-      modifiedDesc = modifiedDesc.substring(0, 85) + "...";
-    }
-    $(".latest-news p").text(modifiedDesc);
-    // Add image
-    var imageURL = firstItem.enclosure.link;
-    var lastSlash = imageURL.lastIndexOf("/");
-    imageURL = imageURL.replace(imageURL.substring(lastSlash+1), "premium_gallery_landscape.jpg");
-    $(".latest-news img").attr("src", imageURL);
-    // Add link
-    $(".latest-news a").attr("href", firstItem.link);
-    // Reveal the box
-    $(".latest-news").show();
+  success: function(data) {  
+    var items = data.items.splice(0,3);
+
+    items.forEach(function(item){
+
+      // Get title
+      var title = item.title;
+      // Get link
+      var link = item.link;
+      // Get pubdate and convert to AP style
+      var date = timeConverter(item.pubDate);
+      // Get image src
+      var imageURL = item.enclosure.link;
+      var lastSlash = imageURL.lastIndexOf("/");
+      imageURL = imageURL.replace(imageURL.substring(lastSlash+1), "premium_gallery_landscape.jpg");
+
+      // push each story html
+      var html = '<div class="story "><a target="_blank" href="'+link+'"><img src="'+imageURL+'"></a><div class="story-info"><label class="timestamp">'+date+'</label><h3><span>'+title+'</span></h3></div></div>';
+      $('.stories').append(html);
+    });
+
   }
 });
 
+function timeConverter(timeStamp){
+  var UNIX_timestamp = new Date(timeStamp).getTime();
+  var a = new Date(UNIX_timestamp);
+  var months = ['Jan.','Feb.','March','April','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var day = a.getDate();
+  var time = month + ' ' + day + ', ' + year ;
+  return time;
+}
 
