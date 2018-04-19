@@ -150,68 +150,76 @@ $("#mapsearchbar").bind("input propertychange", function () {
   $('html, body').animate({ scrollTop: 0 }, "fast");
 
   if (filterval != ""){
+    $("#map").addClass("smallmap");
+    $("#stick-me").addClass("smallmap");
+    $(".map-sidebar").addClass("smallmap");
 
-  $(".map-restaurant").filter(function() {
+    $(".map-restaurant").filter(function() {
 
-    var classes = this.className.split(" ");
-    for (var i=0; i< classes.length; i++) {
+      var classes = this.className.split(" ");
+      for (var i=0; i< classes.length; i++) {
 
-      var current_class = classes[i].toLowerCase();
+        var current_class = classes[i].toLowerCase();
 
-      if ( current_class.match(filterval)) {
-        class_match = class_match + 1;
+        if ( current_class.match(filterval)) {
+          class_match = class_match + 1;
+        }
       }
-    }
 
-    if (class_match > 0) {
-      $(this).addClass("active");
-      count+=1;
-    } else {
-      $(this).removeClass("active");
-    }
-    class_match = 0;
-
-  });
-
-  $(".leaflet-marker-icon").filter(function() {
-
-    var classes = this.className.split(" ");
-    for (var i=0; i< classes.length; i++) {
-
-      var current_class = classes[i].toLowerCase();
-
-      if ( current_class.match(filterval)) {
-        class_match = class_match + 1;
+      if (class_match > 0) {
+        $(this).addClass("active");
+        count+=1;
+      } else {
+        $(this).removeClass("active");
       }
-    }
+      class_match = 0;
 
-    if (class_match > 0) {
-      $(this).addClass("active");
+    });
+
+    $(".leaflet-marker-icon").filter(function() {
+
+      var classes = this.className.split(" ");
+      for (var i=0; i< classes.length; i++) {
+
+        var current_class = classes[i].toLowerCase();
+
+        if ( current_class.match(filterval)) {
+          class_match = class_match + 1;
+        }
+      }
+
+      if (class_match > 0) {
+        $(this).addClass("active");
+      } else {
+        $(this).removeClass("active");
+      }
+      class_match = 0;
+
+    });
+
+    console.log(count);
+
+    if (count != 0){
+      $("#no-results").css("display","none");
+      // $(".scrolly-restaurants").css("padding-top","220px");
+      $(".num-results").addClass("active");
+      if (count == 1){
+        document.getElementById("num-results-search").innerHTML = "is 1 result";
+      } else {
+        document.getElementById("num-results-search").innerHTML = "are "+count+" results";
+      }
     } else {
-      $(this).removeClass("active");
+      $("#no-results").css("display","block");
+      // $(".scrolly-restaurants").css("padding-top","0px");
+      $(".num-results").removeClass("active");
     }
-    class_match = 0;
-
-  });
-
-  console.log(count);
-
-  if (count != 0){
-    $("#no-results").css("display","none");
-    // $(".scrolly-restaurants").css("padding-top","220px");
-    $(".num-results").addClass("active");
-    if (count == 1){
-      document.getElementById("num-results-search").innerHTML = "is 1 result";
-    } else {
-      document.getElementById("num-results-search").innerHTML = "are "+count+" results";
-    }
-  } else {
-    $("#no-results").css("display","block");
-    // $(".scrolly-restaurants").css("padding-top","0px");
-    $(".num-results").removeClass("active");
-  }
 
   } else {
+
+    $("#stick-me").removeClass("smallmap");
+    $("#map").removeClass("smallmap");
+    $(".map-sidebar").removeClass("smallmap");
+
     $(".map-restaurant").addClass("active");
     $(".leaflet-marker-icon").addClass("active");
 
@@ -225,6 +233,10 @@ $("#mapsearchbar").bind("input propertychange", function () {
 document.getElementById("reset-map-button").addEventListener("click",function(){
   console.log("click");
   // $(".scrolly-restaurants").css("padding-top","220px");
+
+  $("#stick-me").removeClass("smallmap");
+  $("#map").removeClass("smallmap");
+  $(".map-sidebar").removeClass("smallmap");
 
   $('html, body').animate({ scrollTop: 0 }, "fast");
 
@@ -245,11 +257,16 @@ for (var t = 0; t < locatorList.length; t++){
   if (typeof window.addEventListener === 'function'){
     (function (_td) {
       td.addEventListener('click', function(){
+        console.log("here we are");
         var IDX = _td.id.split("map-locator-")[1];
         map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
         markersArray[IDX].openPopup();
         var slug = '#'+$(this).data('slug');
         history.replaceState(null, null, slug);
+
+        $("#stick-me").removeClass("smallmap");
+        $("#map").removeClass("smallmap");
+        $(".map-sidebar").removeClass("smallmap");
       });
     })(td);
   }

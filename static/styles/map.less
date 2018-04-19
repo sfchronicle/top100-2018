@@ -81,6 +81,14 @@
   svg {
     pointer-events: all;
   }
+  &.smallmap {
+    @media @mobile {
+      height: 100px;
+      -webkit-transition: all 500ms linear;
+      -ms-transition: all 500ms linear;
+      transition: all 500ms linear;
+    }
+  }
 }
 
 .restaurant-map {
@@ -105,6 +113,14 @@
    width: 100%;
     margin-top: 250px;
     padding-top: 140px
+  }
+  &.smallmap {
+    @media @mobile {
+      margin-top: 50px;
+      -webkit-transition: all 500ms linear;
+      -ms-transition: all 500ms linear;
+      transition: all 500ms linear;
+    }
   }
 }
 
@@ -243,6 +259,16 @@
     width: 100%;
     top: 250px;
   }
+  &.smallmap {
+    @media @mobile {
+      top: 100px;
+      -webkit-transition: all 500ms linear;
+      -ms-transition: all 500ms linear;
+      transition: all 500ms linear;
+    }
+  }
+
+
   .map-title, .map-button {
     display: inline-block;
   }
