@@ -169,7 +169,6 @@
 
 
 .count-results, #mylist-box > * {
-	font-style: italic;
 	.flex(0 1 100%);
 	margin: 20px;
 	font-family:@title;
@@ -202,6 +201,18 @@
 	a{
 	 color:@main;
 	}
+}
+
+#count-results{
+  font-family:@sans-serif;
+  text-align:center;
+  margin-top:0;
+
+  span{
+    display:block;
+    font-family:@sans-serif-light;
+    font-size:15px;
+  }
 }
 
 #container{
@@ -469,14 +480,19 @@
 	width: 100%;
 
 	.mylist-title {
-		font-family: @sans-serif;
-		font-size: 30px;
-		margin-top: 0px;
+		font-family: @fancy-serif;
+		font-size: 45px;
+		margin: 0;
+    text-align:center;
+    font-style:normal;
 	}
 
 	.mylist-explainer {
 		font-size: 16px;
-		max-width: 720px;
+    max-width: 720px;
+    margin: 0 auto 2em;
+    text-align: center;
+    font-family: @body;
 	}
 }
 

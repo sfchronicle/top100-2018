@@ -490,6 +490,7 @@ if (window.location.href.indexOf("/guides/") == -1){
   });
 
   // event listener for "My List" button
+  // event listener for "My List" button
   $(".mylist").on("click",function(e) {
     //Intercept the link functionality on homepage and just bring user to search
     e.preventDefault();
@@ -525,7 +526,7 @@ if (window.location.href.indexOf("/guides/") == -1){
               html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
             });
             // Add buttons
-            $("#count-results").append('<span> &bull; share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
+            $("#count-results").append('<span>Share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
             // Add event to link button
             linkIcon.on("click", function(){
               $(".link-copy-text").show();
