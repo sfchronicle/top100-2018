@@ -5,7 +5,7 @@ lazyload();
 
 //Set proper image size for slideshow
 var imageWidth = $(".swiper-container").width();
-imageWidth *= window.devicePixelRatio;
+imageWidth *= Math.round(window.devicePixelRatio);
 
 // Load first photo instantly
 $(".swiper-slide img").first().attr("src", function(){
