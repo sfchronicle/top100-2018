@@ -2,6 +2,10 @@ require("./lib/social");
 require("./lib/leaflet-mapbox-gl");
 require("leaflet");
 
+// IMPORTANT: This is the inner height of the window with the bottom toolbar
+// If this value is different later, that means it's gone
+var initialInnerHeight = window.innerHeight;
+
 console.log("screen", screen);
 
 // setting parameters for the center of the map and initial zoom level
@@ -316,23 +320,39 @@ function revealMobileMap() {
   if ($(window).width() <= 480){
     var offset = 100;
     var specialiOSoffset = 0;
+    var ua = window.navigator.userAgent;
+    var webkit;
+    var iOSSafari;
     // If this is iOS, account for that awful bar on the bottom
-    var iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    var iOS = /(iPad|iPhone|iPod)/g.test(ua);
     if (iOS){
-      specialiOSoffset = 70;
-      offset += specialiOSoffset;
-    }
-    var scrollHeight = $(window).height()-offset;
-    console.log("CALCULATE", iOS, $(window).height(), document.documentElement.clientHeight, window.innerHeight, window, document);
-    $("#map").show().css("height", "calc(100vh - "+offset+"px)");
-    $(".map-sidebar").css({"margin-top": scrollHeight+70});
-    $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
-    $('html, body').css("overflow-y", "hidden");
-    map.dragging.enable();
+      // If the above condition is true, that means we still have the bottom bar
+      // Now check for Safari also
+      webkit = !!ua.match(/WebKit/i);
+      iOSSafari = webkit && !ua.match(/CriOS/i);
+
+      if (iOSSafari){
+        specialiOSoffset = 70;
+        offset += specialiOSoffset;
+
+        // If the initial does not match the current, that means the map needs more space
+        if (initialInnerHeight != window.innerHeight){
+          offset -= (window.innerHeight-initialInnerHeight);
+        }
+      }
+    } 
+
+    // Actually modify the DOM so everything looks nice
+    var scrollHeight = $(window).height()-offset;    
+    $('html, body').animate({ scrollTop: 0 }, "fast", function(){
+      $("#map").show().css("height", "calc(100vh - "+offset+"px)");
+      $(".map-sidebar").css({"margin-top": scrollHeight+70});
+      $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
+      $(this).css("overflow-y", "hidden");
+      map.dragging.enable();
+    })
   }
 }
-
-
 
 // locat restaurant on map and update the hash in URL
 $(".img-link-map").on("click", function(){
