@@ -74,7 +74,7 @@
 
   @media @mobile {
     width: 100%;
-    height: 180px;
+    height: calc(~"100vh - 100px");
     top: 0px;
     z-index: 999;
     position: relative;
@@ -168,7 +168,11 @@
 
       .info{
         margin-bottom:5px;
-        font-size: 12px;
+        cursor: pointer;
+
+        @media @tablet {
+          font-size: 12px;
+        }
       }
 
     }
@@ -262,7 +266,7 @@
 
   @media @mobile {
     width: 100%;
-    top: 180px;
+    top: calc(~"100vh - 100px");
     padding: 60px 0 12px 10px;
   }
   &.smallmap {
