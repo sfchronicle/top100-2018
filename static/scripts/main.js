@@ -183,3 +183,21 @@ if ($(window).width() < 666) {
   $('.landing-nav').css("pointer-events", "auto");
 }
 
+// $(function(){
+// 	$( ".unseen" ).tooltip({
+//     content: "New for you",
+//     position: {
+//       my: "left bottom-20",
+//       at: "left top",
+//       using: function( position, feedback ) {
+//         $( this ).css( position );
+//         $( "<div>" )
+//           .addClass( "arrow" )
+//           .addClass( feedback.vertical )
+//           .addClass( feedback.horizontal )
+//           .appendTo( this );
+//       }
+//     }
+//   });
+// });
+      

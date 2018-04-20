@@ -11,6 +11,8 @@
     <link href="//fonts.googleapis.com/css?family=Cardo|Fjalla+One|Pathway+Gothic+One" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <script src="//projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+    <script src="//projects.sfchronicle.com/shared/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//projects.sfchronicle.com/shared/js/jquery-ui.min.css">
     {% include 'components/_hearst.html' %}
     {% include 'components/_landing-analytics.html' %}
     {% include 'components/_landing-social.html' %}
@@ -139,8 +141,10 @@
     {% set subregionName = r.SubRegion.lower().replace(' ','').replace(',',' ').replace('/','') %}
     {% set cuisineName = r.Cuisine.lower().replace(' ','').replace(',',' ').replace('/',' ').replace('and',' ').replace('-','') %}
 
-    <div class="restaurant active {{ regionName }} {{ subregionName }} {{cuisineName}}">
+    <div class="restaurant active {{ regionName }} {{ subregionName }} {{cuisineName}}" id="{{r.Slug}}">
       <a href="{{ url_for('index') }}{{r.Slug}}">
+        <div class="border" title=""></div>
+        <div class="border"></div>
         <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
       </a>
       <div class="name">
@@ -162,8 +166,10 @@
       (collection == "new" and r.Returning == "No")
     )
   %}
-    <div class="restaurant active">
+    <div class="restaurant active" id="{{r.Slug}}">
       <a href="{{ url_for('index') }}{{r.Slug}}">
+        <div class="border" title=""></div>
+        <div class="border"></div>
         <div class="image-wrapper"><img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg"></div>
       </a>
       <div class="name">

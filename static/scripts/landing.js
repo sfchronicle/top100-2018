@@ -50,7 +50,6 @@ if (window.location.href.indexOf("/guides/") == -1){
 
 // Trigger scroll immediately so the search bar can appear if necessary
 $(window).trigger("scroll");
-console.log("TESTING ANDROID");
 
 //Give restaurants that haven't been seen yet a little flag
 $(function(){
@@ -60,6 +59,25 @@ $(function(){
       $(this).find(".border").addClass("unseen").eq(1).addClass("white");
     }
   });
+
+  // Enable tooltips
+  if ($( ".unseen" ).length > 0){
+    $( ".unseen" ).tooltip({
+      content: "New for you",
+      position: {
+        my: "left bottom-20",
+        at: "left top",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+    });
+  }
 });
 
 
