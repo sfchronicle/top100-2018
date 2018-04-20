@@ -142,9 +142,7 @@ var count;
 // searchbar code
 if ($(window).width() <= 480){
   $("#mapsearchbar").on("focus", function(){
-    $("#map").hide();
-    $(".map-sidebar").animate({"margin-top": "40px"});
-    $("#stick-me").animate({"top": "-50px"});
+    hideMobileMap();
   });
 }
 
@@ -287,6 +285,9 @@ for (var t = 0; t < locatorList.length; t++){
 
 // see if the reader is loading a specific restaurant
 $(document).ready(function(){
+  //Start by revealing mobile map
+  revealMobileMap();
+  // Now get hash
   findByHash();
 });
 
@@ -294,7 +295,6 @@ function findByHash() {
   if(window.location.hash) {
     for (var idx=0; idx<restaurants.length; idx++){
       if (window.location.hash.split("#")[1] == restaurants[idx].Slug){
-        revealMobileMap();
         map.setView([+restaurants[idx].Lat+lat_offset,restaurants[idx].Lng],14);
         markersArray[idx].openPopup();
       }
@@ -302,21 +302,41 @@ function findByHash() {
   }
 }
 
-function revealMobileMap() {
+function hideMobileMap() {
   if ($(window).width() <= 480){
-    console.log("CALCULATE", $(window).height(), $(window).height()-100);
-    var scrollHeight = $(window).height()-100;
-    $("#map").show();
-    $(".map-sidebar").css({"margin-top": scrollHeight+70});
-    $("#stick-me").css({"top": scrollHeight});
+    $("#map").hide();
+    $(".map-sidebar").animate({"margin-top": "40px"});
+    $("#stick-me").animate({"top": "-50px"});
+    $('html, body').animate({ scrollTop: 0 }, "fast").css("overflow-y", "auto");
+    map.dragging.disable();
   }
 }
 
+function revealMobileMap() {
+  if ($(window).width() <= 480){
+    var offset = 100;
+    var specialiOSoffset = 0;
+    // If this is iOS, account for that awful bar on the bottom
+    var iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    if (iOS){
+      specialiOSoffset = 70;
+      offset += specialiOSoffset;
+    }
+    var scrollHeight = $(window).height()-offset;
+    console.log("CALCULATE", iOS, $(window).height(), document.documentElement.clientHeight, window.innerHeight, window, document);
+    $("#map").show().css("height", "calc(100vh - "+offset+"px)");
+    $(".map-sidebar").css({"margin-top": scrollHeight+70});
+    $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
+    $('html, body').css("overflow-y", "hidden");
+    map.dragging.enable();
+  }
+}
+
+
+
 // locat restaurant on map and update the hash in URL
 $(".img-link-map").on("click", function(){
-  var slug = '#'+$(this).data('slug');
-  history.replaceState(null, null, slug);
-  findByHash();
+  $(this).parent().find(".map-locator").click();
 });
 
 // locat restaurant on map and update the hash in URL
