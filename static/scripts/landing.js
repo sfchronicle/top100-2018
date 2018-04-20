@@ -334,9 +334,15 @@ var checkForHash = function(){
 }
 
 // Start by seeing if we can get the user on load
-checkUser();
+var waitForTreg = checkUser();
 checkForHash();
 renderUserResults();
+
+// Wait until we have a user to place the modal
+$.when(waitForTreg).then(function(){
+  // Add things that should happen after user is obtained here
+  
+});
 
 // Get data
 function getData(user, promise, share) {
@@ -570,19 +576,17 @@ if (window.location.href.indexOf("/guides/") == -1){
   });
 }
 
-// exit the subscribe window
-$("#exit").on("click", function(){
-  $("#log-in-instructions").hide();
-  $("body, html").css("overflow-y", "auto");
-})
-
 // handle print button functionality
 $(".print-link").on("click", function(){
   window.print();
   return false;
 })
 
-
+// exit the subscribe window
+$("#exit").on("click", function(){
+  $("#log-in-instructions").hide();
+  $("body, html").css("overflow-y", "auto");
+})
 
 $('#introduction, .closer').on("click", function(){
   $("body, html").toggleClass('noscroll');
@@ -638,3 +642,4 @@ function timeConverter(timeStamp){
   var time = month + ' ' + day + ', ' + year ;
   return time;
 }
+
