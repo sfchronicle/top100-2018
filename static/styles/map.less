@@ -46,7 +46,8 @@
   img {
     max-width: 200px;
     @media @mobile {
-      max-width: 130px;
+      // max-width: 60px;
+      display: none;
     }
   }
 }
@@ -73,7 +74,7 @@
 
   @media @mobile {
     width: 100%;
-    height: 250px;
+    height: 180px;
     top: 0px;
     z-index: 999;
     position: relative;
@@ -110,9 +111,9 @@
   background: white;
 
   @media @mobile {
-   width: 100%;
+    width: 100%;
     margin-top: 250px;
-    padding-top: 140px
+    padding-top: 40px
   }
   &.smallmap {
     @media @mobile {
@@ -131,6 +132,9 @@
   right: 0px;
   z-index: 7;
   top: 0px;
+  @media @mobile {
+    display: none;
+  }
 }
 
 .scrolly-restaurants {
@@ -257,7 +261,8 @@
 
   @media @mobile {
     width: 100%;
-    top: 250px;
+    top: 180px;
+    padding: 60px 0 12px 10px;
   }
   &.smallmap {
     @media @mobile {
@@ -294,6 +299,12 @@
       background: #666666;
       color: white;
     }
+    @media @mobile {
+      height: 30px;
+      padding-top: 5px;
+      float: right;
+      margin-right: 10px;
+    }
   }
   .map-search {
     font-size: 16px;
@@ -310,9 +321,15 @@
     height: 44px;
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    @media @mobile {
+      height: 30px;
+    }
 
     .fa {
       color: @dark-gray;
+      @media @mobile {
+        font-size: 14px;
+      }
     }
     input {border: none;
     padding: 0px;
@@ -333,7 +350,8 @@
         width: 100%;
       }
       @media @mobile {
-        width: 90%;
+        height: 30px;
+        width: 100%;
         font-size: 16px;
       }
     }
