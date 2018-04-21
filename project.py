@@ -62,13 +62,44 @@ def index():
     tweet='Explore the best of Bay Area dining, from brunch to the classics.'
   )
 
-@app.route('/guides/<collection>/')
-def collection_view(collection):
+@app.route('/new/')
+def collection_new():
   return render_template(
     'collection.html',
     restaurants=restaurants,
-    collection=collection,
-    collectionPath='guides/'+collection
+    collection='new'
+  )
+
+@app.route('/classics/')
+def collection_classics():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='classics'
+  )
+
+@app.route('/brunch/')
+def collection_brunch():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='brunch'
+  )
+
+@app.route('/regions/')
+def collection_regions():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='regions'
+  )
+
+@app.route('/cuisines/')
+def collection_cuisines():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='cuisines'
   )
 
 @app.route('/<slug>/')
@@ -98,8 +129,3 @@ def internal_error(error):
 def restaurant_view():
   for restaurant in restaurants:
     yield { 'slug': restaurant['Slug']}
-
-@freezer.register_generator
-def collection_view():
-  for collection in collections:
-    yield { 'collection': collection }

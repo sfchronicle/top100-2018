@@ -17,36 +17,34 @@ $("#restaurants").on("click",function(){
   $(".search").click();
 });
 
-//Only trigger search bar fades if we're not in a guide
-if (window.location.href.indexOf("/guides/") == -1){
-  if ($(window).width() < 666) {
-    $('.landing-nav').addClass("active").css("pointer-events", "auto");
-    $('#top-nav').removeClass("fixed");
-    $('#social-links').hide();
-    $('#search').removeClass("fixed-second");
 
-    window.onscroll = function() {
-      var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-      var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
-      console.log("HERE'S POS", window_top, div_top);
-      if (window_top > div_top) {
-        $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
-      } else {
-        $('#landing-mobile-nav').removeClass("active").css("pointer-events", "none");
-      }
+if ($(window).width() < 666) {
+  $('.landing-nav').addClass("active").css("pointer-events", "auto");
+  $('#top-nav').removeClass("fixed");
+  $('#social-links').hide();
+  $('#search').removeClass("fixed-second");
+
+  window.onscroll = function() {
+    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+    var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
+    console.log("HERE'S POS", window_top, div_top);
+    if (window_top > div_top) {
+      $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
+    } else {
+      $('#landing-mobile-nav').removeClass("active").css("pointer-events", "none");
     }
-  } else {
-    window.onscroll = function() {
-      var window_top = document.documentElement.scrollTop || document.body.scrollTop;
-      var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
-      if (window_top > div_top) {
-        $('.landing-nav').addClass("active").css("pointer-events", "auto");
-      } else {
-        $('.landing-nav').removeClass("active").css("pointer-events", "none");
-      }
+  }
+} else {
+  window.onscroll = function() {
+    var window_top = document.documentElement.scrollTop || document.body.scrollTop;
+    var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
+    if (window_top > div_top) {
+      $('.landing-nav').addClass("active").css("pointer-events", "auto");
+    } else {
+      $('.landing-nav').removeClass("active").css("pointer-events", "none");
     }
-  } 
-}
+  }
+} 
 
 // Trigger scroll immediately so the search bar can appear if necessary
 $(window).trigger("scroll");
@@ -407,7 +405,6 @@ function setIcons() {
 }
 
 // saving restaurants as favorites ------------------------------------------------
-
 function saveNewData(user, restaurants) {
   var newSavedData = {
     "edbId":user,
@@ -497,84 +494,82 @@ function showMyList() {
   }
 }
 
-// Only trigger homepage-specific actions if we're on the homepage
-if (window.location.href.indexOf("/guides/") == -1){
-  $(".search, .mobile-search").on("click", function(e){  
-    //Intercept the link functionality on homepage and just bring user to search
-    e.preventDefault();
-    // Hide explainer text 
-    $("#mylist-box").hide();
-    // Set nav colors
-    $(".search").addClass("homepage");
-    $(".mylist").removeClass("active");
-    // Bring user to search
-    scrollToResults();
-    // Use history API to update query
-    if (history.pushState) {
-      // Get URL with no query or hash (or trailing slash)
-      var fullUrl = location.href.split('#')[0].split('?')[0] + "#search";
-      window.history.pushState({path:fullUrl},'',fullUrl);
-    }
-    // Put focus into search bar
-    $("#search-bar input").focus();
-    // Restore 100 results 
-    showAllRestaurants();
-  });
 
-  // event listener for "My List" button
-  $(".mylist").on("click",function(e) {
-    //Intercept the link functionality on homepage and just bring user to search
-    e.preventDefault();
-    // Don't do anything unless the initial check has resolved
-    if (globalTimeout == null){
-      var promise = checkUser(1);
-      $.when(promise).then(function(data){
-        if (userIdentity == "no id"){
-          $("body").find("#log-in-instructions").show();
-          $("body, html").css("overflow-y", "hidden");
-        } else if (userIdentity) {
-          // Give it gold bg
-          $(this).toggleClass("selected");
-          showMyList();
-          // Clear any search terms from bar
-          $("#search-bar input").val("");
-          $(".cancel-search").hide();
-          // Change result text a little
-          var resultsText = $("#count-results").text();
-          $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
-          // Swap out "restaurants" if it's just 1 result
-          if (resultsText.substring(0,2) == "1 "){
-            $("#count-results").text($("#count-results").text().replace("restaurants", "restaurant"));
-          }
-          $("#mylist-box").show();
-          // Handle zero results condition
-          if (resultsText.substring(0,1) == "0"){
-            $("#search-noresults").hide();
-          } else {
-            // If there are results, append share tools
-            var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
-            var twitterCopy = $("#twitter-icon").clone();
-            twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
-            var facebookCopy = $("#facebook-icon").clone();
-            facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
-            var linkIcon = $("<a>", {
-              html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
-            });
-            // Add buttons
-            $("#count-results").append('<span>Share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
-            // Add event to link button
-            linkIcon.on("click", function(){
-              $(".link-copy-text").css("display", "block");
-              $(".link-copy-input").show().val(encodedURL);
-              $(".link-copy-input")[0].select();
-              document.execCommand('copy');
-            });
-          }
-        } 
-      });
-    }
-  });
-}
+$(".search, .mobile-search").on("click", function(e){  
+  //Intercept the link functionality on homepage and just bring user to search
+  e.preventDefault();
+  // Hide explainer text 
+  $("#mylist-box").hide();
+  // Set nav colors
+  $(".search").addClass("homepage");
+  $(".mylist").removeClass("active");
+  // Bring user to search
+  scrollToResults();
+  // Use history API to update query
+  if (history.pushState) {
+    // Get URL with no query or hash (or trailing slash)
+    var fullUrl = location.href.split('#')[0].split('?')[0] + "#search";
+    window.history.pushState({path:fullUrl},'',fullUrl);
+  }
+  // Put focus into search bar
+  $("#search-bar input").focus();
+  // Restore 100 results 
+  showAllRestaurants();
+});
+
+// event listener for "My List" button
+$(".mylist").on("click",function(e) {
+  //Intercept the link functionality on homepage and just bring user to search
+  e.preventDefault();
+  // Don't do anything unless the initial check has resolved
+  if (globalTimeout == null){
+    var promise = checkUser(1);
+    $.when(promise).then(function(data){
+      if (userIdentity == "no id"){
+        $("body").find("#log-in-instructions").show();
+        $("body, html").css("overflow-y", "hidden");
+      } else if (userIdentity) {
+        // Give it gold bg
+        $(this).toggleClass("selected");
+        showMyList();
+        // Clear any search terms from bar
+        $("#search-bar input").val("");
+        $(".cancel-search").hide();
+        // Change result text a little
+        var resultsText = $("#count-results").text();
+        $("#count-results").text(resultsText.replace(/[a-zA-Z]+/, "") + " restaurants on your list");
+        // Swap out "restaurants" if it's just 1 result
+        if (resultsText.substring(0,2) == "1 "){
+          $("#count-results").text($("#count-results").text().replace("restaurants", "restaurant"));
+        }
+        $("#mylist-box").show();
+        // Handle zero results condition
+        if (resultsText.substring(0,1) == "0"){
+          $("#search-noresults").hide();
+        } else {
+          // If there are results, append share tools
+          var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
+          var twitterCopy = $("#twitter-icon").clone();
+          twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
+          var facebookCopy = $("#facebook-icon").clone();
+          facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
+          var linkIcon = $("<a>", {
+            html: '<i class="fa fa-link" aria-hidden="true"></i><span class="hide link-copy-text">URL copied to clipboard!</span><input class="hide link-copy-input" />',
+          });
+          // Add buttons
+          $("#count-results").append('<span>Share with a friend: </span>').append(twitterCopy).append(facebookCopy).append(linkIcon);
+          // Add event to link button
+          linkIcon.on("click", function(){
+            $(".link-copy-text").css("display", "block");
+            $(".link-copy-input").show().val(encodedURL);
+            $(".link-copy-input")[0].select();
+            document.execCommand('copy');
+          });
+        }
+      } 
+    });
+  }
+});
 
 // handle print button functionality
 $(".print-link").on("click", function(){
