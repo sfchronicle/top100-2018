@@ -14,7 +14,7 @@ app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 app.config['PAYWALL'] = 'meter'
 
 # Publication date
-app.config['DATE'] = '2018-04-24'
+app.config['DATE'] = '2018-04-26'
 
 # Main title
 app.config['TITLE'] = 'Top 100 Bay Area Restaurants 2018'
@@ -47,8 +47,8 @@ def mapfile():
     'map.html',
     restaurants=restaurants,
     map="map",
-    description='Explore the best of Bay Area dining, from brunch to the classics.',
-    tweet='Explore the best of Bay Area dining, from brunch to the classics.'
+    description='Find a restaurant near you with The Chronicle\'s definitive Bay Area guide from critic Michael Bauer.',
+    tweet='Map of Top 100 Bay Area Restaurants'
   )
 
 @app.route("/")
@@ -58,8 +58,8 @@ def index():
     restaurants=restaurants,
     intro=intro,
     homepage="homepage",
-    description='Explore the best of Bay Area dining, from brunch to the classics.',
-    tweet='Explore the best of Bay Area dining, from brunch to the classics.'
+    description='Explore The Chronicle\'s definitive Bay Area restaurant guide from critic Michael Bauer.',
+    tweet='Top 100 Bay Area Restaurants 2018'
   )
 
 @app.route('/new/')
