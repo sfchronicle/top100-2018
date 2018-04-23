@@ -550,7 +550,7 @@ $(".mylist").on("click",function(e) {
           // If there are results, append share tools
           var encodedURL = location.href.split('#')[0].split('?')[0] + "?share=" + $.base64.encode(userIdentity) + "#search";
           var twitterCopy = $("#twitter-icon").clone();
-          twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my favorites from @sfchronicle's 100 best restaurants"));
+          twitterCopy.attr("href", "https://twitter.com/intent/tweet?url="+encodeURIComponent(encodedURL)+"&text="+encodeURIComponent("Check out my list from @sfchronicle's Top 100 Restaurants."));
           var facebookCopy = $("#facebook-icon").clone();
           facebookCopy.attr("onclick", "window.open('https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(encodedURL)+"', 'facebook-share-dialog', 'width=626,height=436'); return false;");
           var linkIcon = $("<a>", {

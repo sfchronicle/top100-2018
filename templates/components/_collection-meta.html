@@ -1,34 +1,17 @@
-<!doctype html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>{{restaurant.Name|safe}}: Top 100 Bay Area Restaurants 2018</title>
-    <meta name="ispremium" content="1">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" href="https://www.sfchronicle.com/favicon.ico?v=3">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-    <link rel="stylesheet" href="//projects.sfchronicle.com/shared/css/swiper.min.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='styles/style.css')}}">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href="//fonts.googleapis.com/css?family=Cardo|Fjalla+One|Pathway+Gothic+One" rel="stylesheet">
-    <script src="//projects.sfchronicle.com/shared/js/swiper.min.js"></script>
-    <script src="//projects.sfchronicle.com/shared/js/jquery.min.js"></script>
-    <script src="//projects.sfchronicle.com/shared/js/jquery-ui.min.js"></script>
-    {% include 'components/_hearst.html' %}
-
-    <!-- Begin Hearst analytics -->
+<!-- Begin Hearst analytics -->
     <script type="text/javascript">
+        
         var HDN = HDN || {};
         HDN.dataLayer = HDN.dataLayer || {};
 
         // HDN.dataLayer object for content and href data
         HDN.dataLayer.content = HDN.dataLayer.content || {};
         HDN.dataLayer.href = HDN.dataLayer.href || {};
-        HDN.dataLayer.content.title = "{{ restaurant.Name|safe }}: Top 100 Restaurants 2018";
+        HDN.dataLayer.content.title = "Top 100 Restaurants 2018: {{collection|upper}}";
         HDN.dataLayer.content.subtitle = "";
         HDN.dataLayer.content.objectId = "";
         HDN.dataLayer.content.objectType = "article";
-        HDN.dataLayer.content.sectionPath = ['Food', 'Special Projects'];
+        HDN.dataLayer.content.sectionPath = ['Food', 'Top 100 2018'];
         HDN.dataLayer.content.pubDate = "{{ config.DATE }} 00:00:00";
         HDN.dataLayer.content.wordCount = "";
         HDN.dataLayer.content.keywords = [];
@@ -49,19 +32,19 @@
 
         // HDN.dataLayer object for source information
         HDN.dataLayer.source = HDN.dataLayer.source || {};
-        HDN.dataLayer.source.authorName = "Michael Bauer, Kitty Morgan, Russell Yip, Lucio Villa, Emma O'Neill, Evan Wagstaff";
+        HDN.dataLayer.source.authorName = "{{ config.AUTHORS|safe }}";
         HDN.dataLayer.source.authorTitle = "San Francisco Chronicle Staff";
         HDN.dataLayer.source.originalSourceSite = "SF";
         HDN.dataLayer.source.publishingSite = "premiumsfgate";
         HDN.dataLayer.source.sourceSite = "sfgate";
-
+        
         // HDN.dataLayer object for sharing information
         HDN.dataLayer.sharing = HDN.dataLayer.sharing || {};
-        HDN.dataLayer.sharing.openGraphUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.sharing.openGraphUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{collection}}";
         HDN.dataLayer.sharing.openGraphType = "article";
 
-        HDN.dataLayer.href.pageUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
-        HDN.dataLayer.href.canonicalUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{restaurant.slug}}";
+        HDN.dataLayer.href.pageUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{collection}}";
+        HDN.dataLayer.href.canonicalUrl = "https://projects.sfchronicle.com/2018/top-100-restaurants/{{collection}}";
         HDN.dataLayer.href.pageUrlPath = window.location.pathname;
         HDN.dataLayer.href.pageUrlPathFolders = window.location.pathname.replace(/[A-Za-z0-9-_.]+$/, '');
         HDN.dataLayer.href.pageUrlQueryParams = window.location.search.replace(/^\?/, '');
@@ -98,25 +81,20 @@
         e.write("<scr"+"ipt src='"+e.location.protocol+t+"'></scr"+"ipt>");
       })(document);
     </script>
-    <!-- End Hearst analytics: Ensighten -->
+   
+    <!-- BEGIN TWITTER SUMMARY CARD -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{pageTitle}}">
+    <meta name="twitter:site" content="@sfchronicle">
+    <meta name="twitter:url" content="https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{collection}}">
+    <meta name="twitter:description" content="{{description|safe}}">
 
-    {% block head %}{% endblock %}
-
-  </head>
-  <body class="{% if config.DEV %}debug{% endif %}">
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    {% block content %}{% endblock %}
-
-    <script>
-        // Pass vars into JS
-        var restaurant = {{ restaurant|tojson }};
-        var restaurants = {{ restaurants|tojson }};
-    </script>
-    <script src="{{ url_for('index') }}static/scripts/main.js"></script>
-
-    {% block javascript %}{% endblock %}
-
-</body>
-</html>
+    <!-- Social sharing meta -->
+    <meta name="description" content="Find a restaurant near you with The Chronicle's definitive Bay Area guide from critic Michael Bauer.">
+    <meta property="fb:app_id" content="537896802938133"/>
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{pageTitle}}">
+    <meta property="og:site_name" content="San Francisco Chronicle">
+    <meta property="og:url" content="https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{collection}}">
+    <meta property="og:image" content="https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/static/images/social.jpg">
+    <meta property="og:description" content="{{description|safe}}">
