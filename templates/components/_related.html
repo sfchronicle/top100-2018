@@ -1,7 +1,7 @@
 
 <div id="related-rest">
   <div class="rtitle">
-    <div id="explore-text">There are <span class="number">99</span> restaurants in the Top 100 you haven't seen yet. <span><a class="next-link">Still hungry?</a></span></div>
+    <div id="explore-text">There are <a href="{{ url_for('index') }}#search"><span class="number">99</span></a> restaurants in the Top 100 you haven't seen yet. <span><a href="{{ url_for('index') }}#search" class="next-link">Still hungry?</a></span></div>
     <div id="nearing-text">Only <span class="number">99</span> restaurants you haven't seen yet. <span><a class="next-link">You've almost sampled them all!</a></span></div>
     <div id="final-text">You've seen all <span class="number">100</span> restaurants in the Top 100. Did you add your favorites to <span><a href="{{ url_for('index') }}#mylist">your list</a></span>?</div>
   </div>
