@@ -272,17 +272,24 @@ for (var t = 0; t < locatorList.length; t++){
   if (typeof window.addEventListener === 'function'){
     (function (_td) {
       td.addEventListener('click', function(){
-        console.log("here we are");
-        revealMobileMap();
-        var IDX = _td.id.split("map-locator-")[1];
-        map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
-        markersArray[IDX].openPopup();
         var slug = '#'+$(this).data('slug');
-        history.replaceState(null, null, slug);
 
-        $("#stick-me").removeClass("smallmap");
-        $("#map").removeClass("smallmap");
-        $(".map-sidebar").removeClass("smallmap");
+        if ($(window).width() <= 480){
+          // If it's a small window, reload it
+          window.location.href = document.location.protocol +"//"+ document.location.host + document.location.pathname + slug;
+          window.location.reload();
+        } else {
+          // If it's a big window, reset it
+          var IDX = _td.id.split("map-locator-")[1];
+          map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
+          markersArray[IDX].openPopup();
+          
+          history.replaceState(null, null, slug);
+
+          $("#stick-me").removeClass("smallmap");
+          $("#map").removeClass("smallmap");
+          $(".map-sidebar").removeClass("smallmap");
+        }
       });
     })(td);
   }
@@ -297,6 +304,7 @@ $(document).ready(function(){
 });
 
 function findByHash() {
+  console.log("FIND ME!");
   if(window.location.hash) {
     for (var idx=0; idx<restaurants.length; idx++){
       if (window.location.hash.split("#")[1] == restaurants[idx].Slug){
@@ -309,26 +317,25 @@ function findByHash() {
 
 function hideMobileMap() {
   if ($(window).width() <= 480){
-    $("#map").hide();
-    $(".map-sidebar").animate({"margin-top": "40px"});
+    $(".map-container").hide();
+    $(".map-sidebar").animate({"margin-top": "0px"});
     $("#stick-me").animate({"top": "-50px"});
     $('html, body').animate({ scrollTop: 0 }, "fast").css("overflow-y", "auto");
 
     // Remove timeout that might have been set to position search bar
     clearTimeout(navTimeout);
     navTimeout = null;
-    //map.dragging.disable();
   }
 }
 
 function revealMobileMap() {
   if ($(window).width() <= 480){
-    console.log("REVEALED");
     var offset = 100;
     var specialiOSoffset = 0;
     var ua = window.navigator.userAgent;
     var webkit;
     var iOSSafari;
+    $('html, body').css("overflow-y", "hidden");
     // If this is iOS, account for that awful bar on the bottom
     var iOS = /(iPad|iPhone|iPod)/g.test(ua);
     if (iOS){
@@ -342,6 +349,7 @@ function revealMobileMap() {
         offset += specialiOSoffset;
 
         // If we have to deal with mobile Safari, keep a timeout watching for the bottom nav
+        clearTimeout(navTimeout);
         navTimeout = setTimeout(revealMobileMap, 1000);
 
         // If the initial does not match the current, that means the map needs more space
@@ -354,12 +362,14 @@ function revealMobileMap() {
     // Actually modify the DOM so everything looks nice
     var scrollHeight = $(window).height()-offset;    
     $('html, body').animate({ scrollTop: 0 }, "fast", function(){
-      $("#map").show().css("height", "calc(100vh - "+offset+"px)");
-      $(".map-sidebar").css({"margin-top": scrollHeight+70});
-      $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
-      $(this).css("overflow-y", "hidden");
-      //map.dragging.enable();
-    })
+      // Only call callback if the timeout is waiting to be fired
+      // Or if this is not iOSSafari
+      if (!iOSSafari || navTimeout != null){
+        $(".map-container").show().find("#map").css("height", "calc(100vh - "+offset+"px)");
+        $(".map-sidebar").css({"margin-top": scrollHeight+70});
+        $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
+      }
+    });
   }
 }
 
