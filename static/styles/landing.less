@@ -50,7 +50,11 @@
 		border-top:1px solid #ccc;
 		text-align:left;
 		
-		@media @mobile {
+		@media @tablet {
+      font-size:15px;
+    }
+
+    @media @mobile {
 			font-size:15px;
 		}
 	}
@@ -85,6 +89,10 @@
 		text-transform: uppercase;
 		color:@main;
 
+    @media @w1080{
+      font-size:40px;
+    }
+
 		@media @tablet{
 			font-size:35px;
 			text-align:center;
@@ -97,8 +105,14 @@
 
 
 #lead-image {
+
+  .flex(0 0 40%);
   img {
     width: 100%;
+  }
+
+  @media @tablet{
+    .flex(1 0 40%);
   }
 
   @media @width650{
@@ -1110,6 +1124,10 @@
 
     @media @mobile{
     	font-size:35px;
+    }
+
+    @media @w1080{
+      font-size:40px;
     }
    }
 
