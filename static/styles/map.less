@@ -9,7 +9,7 @@
 }
 
 .leaflet-popup-content {
-  width: 200px;
+  width: 200px !important;
   z-index: 1000;
 }
 
@@ -72,6 +72,10 @@
   z-index: 0;
   cursor: auto;
 
+  @media @tablet and @biggerthanmobile {
+    width: ~"calc(100% - 260px)";
+  }
+
   @media @mobile {
     width: 100%;
     height: calc(~"100vh - 150px");
@@ -110,6 +114,10 @@
   z-index: 100;
   background: white;
 
+  @media @tablet and @biggerthanmobile {
+    width: 250px;
+  }
+
   @media @mobile {
     width: 100%;
     margin-top: 250px;
@@ -139,7 +147,19 @@
 
 .scrolly-restaurants {
 
-  margin-top: 150px;
+  margin-top: 120px;
+  padding-top: 30px;
+  height: calc(~"100vh - 121px");
+  overflow-y: scroll;
+
+  @media @tablet and @biggerthanmobile {
+    width: 250px;
+
+    .map-restaurant .name {
+      flex: 0 0 100% !important;
+      align-self: flex-start !important;
+    }
+  }
 
   .map-restaurant {
     display: none;
@@ -265,6 +285,14 @@
   -webkit-box-shadow: 0 1px 1px 0px #ccc;;
   -moz-box-shadow: 0 1px 1px 0px #ccc;;
   box-shadow: 0 1px 1px 0px #ccc;;
+
+  @media @tablet and @biggerthanmobile {
+    width: 260px;
+
+    .map-search-container {
+      width: 120px !important;
+    }
+  }
 
   @media @mobile {
     width: 100%;

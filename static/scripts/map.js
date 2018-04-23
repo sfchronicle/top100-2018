@@ -5,6 +5,7 @@ require("leaflet");
 // IMPORTANT: This is the inner height of the window with the bottom toolbar
 // If this value is different later, that means it's gone
 var initialInnerHeight = window.innerHeight;
+var navTimeout = null;
 
 console.log("screen", screen);
 
@@ -312,12 +313,17 @@ function hideMobileMap() {
     $(".map-sidebar").animate({"margin-top": "40px"});
     $("#stick-me").animate({"top": "-50px"});
     $('html, body').animate({ scrollTop: 0 }, "fast").css("overflow-y", "auto");
-    map.dragging.disable();
+
+    // Remove timeout that might have been set to position search bar
+    clearTimeout(navTimeout);
+    navTimeout = null;
+    //map.dragging.disable();
   }
 }
 
 function revealMobileMap() {
   if ($(window).width() <= 480){
+    console.log("REVEALED");
     var offset = 100;
     var specialiOSoffset = 0;
     var ua = window.navigator.userAgent;
@@ -335,6 +341,9 @@ function revealMobileMap() {
         specialiOSoffset = 70;
         offset += specialiOSoffset;
 
+        // If we have to deal with mobile Safari, keep a timeout watching for the bottom nav
+        navTimeout = setTimeout(revealMobileMap, 1000);
+
         // If the initial does not match the current, that means the map needs more space
         if (initialInnerHeight != window.innerHeight){
           offset -= (window.innerHeight-initialInnerHeight);
@@ -349,7 +358,7 @@ function revealMobileMap() {
       $(".map-sidebar").css({"margin-top": scrollHeight+70});
       $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
       $(this).css("overflow-y", "hidden");
-      map.dragging.enable();
+      //map.dragging.enable();
     })
   }
 }
