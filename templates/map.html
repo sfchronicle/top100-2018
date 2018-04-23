@@ -21,23 +21,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div id="log-in-instructions">
-    	<div class="login">
-        <!-- Gigya signin -->
-        <div class="treg-is-gigya gigya_menu" >
-          <div class="gigya-login">
-          <div id="exit">X</div>
-            <div class="login-header">Login with your subscription account to save restaurants to "My List" and/or "Favorites."</div>
-            <div class="treg-gya-login-widget"></div>
-            <div class="subscribe">
-              <h6 class="no-sub">Don't have a subscription?</h6>
-              <a class="gya-btn" href="https://offers.sfchronicle.com/offers/top100?groupid=31" target="_blank">Subscribe</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
+    {% include 'components/_login.html' %}
     {% include 'components/_top-nav.html' %}
 
     <div class="restaurant-map">
