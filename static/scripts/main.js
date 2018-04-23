@@ -183,21 +183,215 @@ if ($(window).width() < 666) {
   $('.landing-nav').css("pointer-events", "auto");
 }
 
-// $(function(){
-// 	$( ".unseen" ).tooltip({
-//     content: "New for you",
-//     position: {
-//       my: "left bottom-20",
-//       at: "left top",
-//       using: function( position, feedback ) {
-//         $( this ).css( position );
-//         $( "<div>" )
-//           .addClass( "arrow" )
-//           .addClass( feedback.vertical )
-//           .addClass( feedback.horizontal )
-//           .appendTo( this );
-//       }
-//     }
-//   });
-// });
+$(function(){
+	$( ".unseen" ).tooltip({
+    content: "New for you",
+    position: {
+      my: "left bottom-20",
+      at: "left top",
+      using: function( position, feedback ) {
+        $( this ).css( position );
+        $( "<div>" )
+          .addClass( "arrow" )
+          .addClass( feedback.vertical )
+          .addClass( feedback.horizontal )
+          .appendTo( this );
+      }
+    }
+  });
+});
       
+
+var userIdentity;
+var restaurantList;
+var globalTimeout = null;
+
+// Sets the user ID from treg (hopefully) 
+var checkUser = function(repetitions, original_promise) {
+	console.log("CHECKINNNN");
+  // Set a deferred to return immediately
+  var waitForUser;
+  if (!original_promise){
+    waitForUser = $.Deferred();
+  } else {
+    waitForUser = original_promise;
+  }
+   
+  // Set a timeout logic waits for resolution
+  var delay = 100;
+
+  if (typeof repetitions == "undefined"){
+    // Start us off with 0 if unspecified
+    repetitions = 20;
+  }
+
+  if (userIdentity && userIdentity != "no id"){
+    // If we already know the user's identity, we can bail out here
+    console.log("RESOLVE 1");
+    waitForUser.resolve();
+    return userIdentity;
+  }
+  
+  // Keep setting a timeout until we have what we need
+  globalTimeout = setTimeout(function(){
+    var getUser = fetchIdentity();
+    if (getUser){
+      // If we got something, set it for real
+      userIdentity = getUser;
+      // Only get data if it's actually the user
+      // Otherwise, we will need to prompt a login
+      getData(userIdentity, waitForUser, false);
+    } else {
+      if (repetitions > 0){
+        console.log("CHECK USER 4");
+        checkUser(repetitions-1, waitForUser);
+      } else {
+        // If we've looped 10 times, bail out with "no id" flag
+        userIdentity = "no id";
+        console.log("BAIL OUT", userIdentity);
+        console.log("RESOLVE 2");
+        globalTimeout = null;
+        waitForUser.resolve();
+      }
+    }
+  }, delay);
+
+  // Return the deferred
+  return waitForUser;
+}
+
+var fetchIdentity = function(){
+  if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
+    // We have a valid object, so return the ID
+    // NOTE: The ID might be null, but we know one way or another
+    console.log(treg.identity.id);
+    if (window.location.href.indexOf("localhost") != -1){
+      var tempID = 11220454;
+      console.log("THIS IS LOCALHOST, SETTING TEMP ID", tempID);
+      // If we're developing on localhost, use a test identity
+      // NOTE: Comment this next line out if you want to test what happens 
+      // when a user is not logged in (in the local dev environment)
+      // Alternatively, increment the integer to start with fresh data
+      return tempID;
+    }
+    return treg.identity.id;
+  } else {  
+    // The objects are not ready yet
+    return null;
+  }
+}
+
+// Start by seeing if we can get the user on load
+var waitForTreg = checkUser();
+
+// Wait until we have a user to place the modal
+$.when(waitForTreg).then(function(){
+  // Add things that should happen after user is obtained here
+  // Add button event
+  $(".save-button").each(function(index) {
+	
+	  $(this).on("click", function(e) {
+
+	    if (userIdentity && userIdentity != "no id") {
+	      // Get ID for saving
+	      var itemID = $(this).find(".save-restaurant").attr("id");
+
+	      // Either check or uncheck
+	      $("i", $(this)).toggleClass("fa-square-o fa-check-square-o");
+
+	      // are we adding or removing the restaurant from the list?
+	      if( $("i", $(this)).hasClass("fa-check-square-o") ) {
+	        restaurantList.push(itemID);
+	      } else {
+	        var index = restaurantList.indexOf(itemID);
+	        restaurantList.splice(index,1);
+	      }
+
+	      // Save new data
+	      saveNewData(userIdentity, restaurantList);
+
+	    } else {
+	      // Don't do anything unless the initial check has resolved
+	      if (globalTimeout == null){
+	        // Only give it one chance
+	        var promise = checkUser(1);
+	        $.when(promise).then(function(data){
+	          if (userIdentity == "no id"){
+	            // User hasn't logged in -- prompt them to do so
+	            $("#log-in-instructions").show();
+	            $("body, html").css("overflow-y", "hidden");
+	          } else if (userIdentity) {
+	            // Successfully fetched -- proceed with original logic
+	            $(this).click();
+	          }
+	        });
+	      }
+	    }
+	  });
+	});
+});
+
+/* HANDLE SAVE CODE */
+
+// Get data
+function getData(user, promise) {
+  $.ajax({
+    method: "GET",
+    dataType: "json",
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist/" + user,
+    error: function(msg) {
+      // This can error if there's no data yet -- go ahead and just set it blank
+    },
+    success: function(data) {
+      // Reset timeout var
+      globalTimeout = null;
+
+      // Only set if it's for the current user's data
+      restaurantList = data;
+      setIcons();
+      
+      // Resolve promise if there was one
+      if (promise){
+        promise.resolve();
+      }
+    }
+  });
+}
+
+// set checks on load for a particular user
+function setIcons() {
+  restaurantList.forEach(function(saveID){
+    var elem = $("#"+saveID)[0];
+    console.log("ELEM", elem, saveID);
+    // If this is a collection page, the element might be undefined -- check for that
+    if (typeof elem != "undefined"){
+      if ($("i", elem).hasClass("fa-square-o")) {
+        $("i", elem).toggleClass("fa-square-o fa-check-square-o");
+      }
+    }
+  });
+}
+
+// saving restaurants as favorites ------------------------------------------------
+function saveNewData(user, restaurants) {
+  var newSavedData = {
+    "edbId":user,
+    "restaurants":restaurants
+  };
+  $.ajax({
+    method: "POST",
+    data: JSON.stringify(newSavedData),
+    contentType: "application/json",
+    error: function(msg) { 
+      console.log("Failed to save data"); 
+    },
+    url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist"
+  });
+}
+
+// exit the subscribe window
+$("#exit").on("click", function(){
+  $("#log-in-instructions").hide();
+  $("body, html").css("overflow-y", "auto");
+});
+

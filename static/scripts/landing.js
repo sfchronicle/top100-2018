@@ -597,33 +597,35 @@ $(".intro-overlay").mouseup(function(e){
 });
 
 // Populate the latest news section of the site
-var url = 'https://www.sfchronicle.com/default/feed/test-feed-for-top100-2003.php';
-$.ajax({
-  type: 'GET',
-  url: "https://api.rss2json.com/v1/api.json?rss_url=" + url,
-  dataType: 'jsonp',
-  success: function(data) {  
-    var items = data.items.splice(0,3);
+$(function(){
+  var url = 'https://www.sfchronicle.com/default/feed/test-feed-for-top100-2003.php';
+  $.ajax({
+    type: 'GET',
+    url: "https://api.rss2json.com/v1/api.json?rss_url=" + url,
+    dataType: 'jsonp',
+    success: function(data) {  
+      var items = data.items.splice(0,3);
 
-    items.forEach(function(item){
+      items.forEach(function(item){
 
-      // Get title
-      var title = item.title;
-      // Get link
-      var link = item.link;
-      // Get pubdate and convert to AP style
-      var date = timeConverter(item.pubDate);
-      // Get image src
-      var imageURL = item.enclosure.link;
-      var lastSlash = imageURL.lastIndexOf("/");
-      imageURL = imageURL.replace(imageURL.substring(lastSlash+1), "premium_gallery_landscape.jpg");
+        // Get title
+        var title = item.title;
+        // Get link
+        var link = item.link;
+        // Get pubdate and convert to AP style
+        var date = timeConverter(item.pubDate);
+        // Get image src
+        var imageURL = item.enclosure.link;
+        var lastSlash = imageURL.lastIndexOf("/");
+        imageURL = imageURL.replace(imageURL.substring(lastSlash+1), "premium_gallery_landscape.jpg");
 
-      // push each story html
-      var html = '<div class="story "><a target="_blank" href="'+link+'"><img src="'+imageURL+'"></a><div class="story-info"><label class="timestamp">'+date+'</label><h3><span>'+title+'</span></h3></div></div>';
-      $('.stories').append(html);
-    });
+        // push each story html
+        var html = '<div class="story "><a target="_blank" href="'+link+'"><img src="'+imageURL+'"></a><div class="story-info"><label class="timestamp">'+date+'</label><h3><span>'+title+'</span></h3></div></div>';
+        $('.stories').append(html);
+      });
 
-  }
+    }
+  });
 });
 
 function timeConverter(timeStamp){

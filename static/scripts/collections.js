@@ -36,11 +36,7 @@ var userIdentity;
 var restaurantList;
 var globalTimeout = null;
 
-
-
-
 // Sets the user ID from treg (hopefully) 
-console.log("CHECK USER 3");
 var checkUser = function(repetitions, original_promise) {
   // Set a deferred to return immediately
   var waitForUser;
@@ -231,7 +227,8 @@ $(".save-button").each(function(index) {
 $("#exit").on("click", function(){
   $("#log-in-instructions").hide();
   $("body, html").css("overflow-y", "auto");
-})
+});
+
 // if we are on the "Regions" collection, implement "Regions" buttons and drop-downs
 if (document.getElementById("sf-region")){
 
