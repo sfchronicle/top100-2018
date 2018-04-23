@@ -158,10 +158,6 @@ $("#related-rest .wrap").each(function(index){
 	  // Set new path using slug
 	  var finalUrl = fullUrl+"/"+relatedRestaurants[index].Slug;
 	  $(this).find("a").attr("href", finalUrl);
-	  // Set next link as the text link
-	  if (index == 0){
-	  	$(".rtitle .next-link").attr("href", finalUrl);
-	  }
 	  // Set image URL
 	  if (relatedRestaurants[index].wcm_img){
 	    $(this).find("img").attr("src", "https://s.hdnux.com/photos/60/22/02/"+relatedRestaurants[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");

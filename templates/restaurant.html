@@ -53,6 +53,12 @@
       {% for r in article %}
         <p>{{ r.Text }}</p>
       {% endfor %}
+
+      {% if (restaurant.Note) %}
+        <div class="note">
+          <p>{{restaurant.Note|safe}}</p>
+        </div>
+      {% endif %}
     </div>
 
     <div class="wrap">
