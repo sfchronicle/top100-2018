@@ -2,13 +2,6 @@ require("./lib/social");
 require("./lib/leaflet-mapbox-gl");
 require("leaflet");
 
-// IMPORTANT: This is the inner height of the window with the bottom toolbar
-// If this value is different later, that means it's gone
-var initialInnerHeight = window.innerHeight;
-var navTimeout = null;
-
-console.log("screen", screen);
-
 // setting parameters for the center of the map and initial zoom level
 if ($(window).width() <= 480){
   var sf_lat = 37.779480;
@@ -158,10 +151,7 @@ $("#mapsearchbar").bind("input propertychange", function () {
   var class_match = 0;
   count = 0;
 
-  // $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
-  // $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
-  // $(window).animate({ scrollTop: 0 }, "fast");
-  $('html, body').animate({ scrollTop: 0 }, "fast");
+  $('html, body').css({ scrollTop: 0 });
 
   if (filterval != ""){
     $("#map").addClass("smallmap");
@@ -211,11 +201,9 @@ $("#mapsearchbar").bind("input propertychange", function () {
 
     });
 
-    console.log(count);
 
     if (count != 0){
       $("#no-results").css("display","none");
-      // $(".scrolly-restaurants").css("padding-top","220px");
       $(".num-results").addClass("active");
       if (count == 1){
         document.getElementById("num-results-search").innerHTML = "is 1 result";
@@ -224,7 +212,6 @@ $("#mapsearchbar").bind("input propertychange", function () {
       }
     } else {
       $("#no-results").css("display","block");
-      // $(".scrolly-restaurants").css("padding-top","0px");
       $(".num-results").removeClass("active");
     }
 
@@ -245,8 +232,6 @@ $("#mapsearchbar").bind("input propertychange", function () {
 });
 
 document.getElementById("reset-map-button").addEventListener("click",function(){
-  console.log("click");
-  // $(".scrolly-restaurants").css("padding-top","220px");
 
   $("#stick-me").removeClass("smallmap");
   $("#map").removeClass("smallmap");
@@ -254,7 +239,7 @@ document.getElementById("reset-map-button").addEventListener("click",function(){
 
   revealMobileMap();
 
-  $('html, body').animate({ scrollTop: 0 }, "fast");
+  $('html, body').css({ scrollTop: 0 });
 
   document.getElementById('mapsearchbar').value = "";
 
@@ -277,7 +262,13 @@ for (var t = 0; t < locatorList.length; t++){
 
         if ($(window).width() <= 480){
           // If it's a small window, reload it
-          window.location.href = document.location.protocol +"//"+ document.location.host + document.location.pathname + slug;
+          if (history.pushState) {
+            // Try the history API to update the slug
+            history.pushState(null, null, slug);
+          } else {
+            // If no history API, just force it
+            window.location.href = document.location.protocol +"//"+ document.location.host + document.location.pathname + slug;
+          }
           window.location.reload();
         } else {
           // If it's a big window, reset it
@@ -305,7 +296,6 @@ $(document).ready(function(){
 });
 
 function findByHash() {
-  console.log("FIND ME!");
   if(window.location.hash) {
     for (var idx=0; idx<restaurants.length; idx++){
       if (window.location.hash.split("#")[1] == restaurants[idx].Slug){
@@ -319,60 +309,22 @@ function findByHash() {
 function hideMobileMap() {
   if ($(window).width() <= 480){
     $(".map-container").hide();
-    $(".map-sidebar").animate({"margin-top": "0px"});
-    $("#stick-me").animate({"top": "-50px"});
-    $('html, body').animate({ scrollTop: 0 }, "fast").css("overflow-y", "auto");
-
-    // Remove timeout that might have been set to position search bar
-    clearTimeout(navTimeout);
-    navTimeout = null;
+    $(".map-sidebar").css({"margin-top": "0px"});
+    $('html, body').css({ "overflow-y": "auto" });
   }
 }
 
 function revealMobileMap() {
   if ($(window).width() <= 480){
-    var offset = 100;
-    var specialiOSoffset = 0;
-    var ua = window.navigator.userAgent;
-    var webkit;
-    var iOSSafari;
-    $('html, body').css("overflow-y", "hidden");
-    // If this is iOS, account for that awful bar on the bottom
-    var iOS = /(iPad|iPhone|iPod)/g.test(ua);
-    if (iOS){
-      // If the above condition is true, that means we still have the bottom bar
-      // Now check for Safari also
-      webkit = !!ua.match(/WebKit/i);
-      iOSSafari = webkit && !ua.match(/CriOS/i);
-
-      if (iOSSafari){
-        specialiOSoffset = 70;
-        offset += specialiOSoffset;
-
-        // If we have to deal with mobile Safari, keep a timeout watching for the bottom nav
-        clearTimeout(navTimeout);
-        navTimeout = setTimeout(revealMobileMap, 1000);
-
-        // If the initial does not match the current, that means the map needs more space
-        if (initialInnerHeight != window.innerHeight){
-          offset -= (window.innerHeight-initialInnerHeight);
-        }
-      }
-    } 
-
     // Actually modify the DOM so everything looks nice
-    var scrollHeight = $(window).height()-offset;    
-    $('html, body').animate({ scrollTop: 0 }, "fast", function(){
-      // Only call callback if the timeout is waiting to be fired
-      // Or if this is not iOSSafari
-      if (!iOSSafari || navTimeout != null){
-        $(".map-container").show().find("#map").css("height", "calc(100vh - "+offset+"px)");
-        $(".map-sidebar").css({"margin-top": scrollHeight+70});
-        $("#stick-me").css({"top": scrollHeight+specialiOSoffset});
-      }
-    });
+    var scrollHeight = $(window).height()+70;    
+    $(".map-container").show();
+    $(".map-sidebar").css({"margin-top": scrollHeight});
+    $('html, body').css({ "overflow-y": "hidden", "scrollTop": "0" });
   }
 }
+
+$('html, body').css({ "overflow-y": "hidden" });
 
 // locat restaurant on map and update the hash in URL
 $(".img-link-map").on("click", function(){

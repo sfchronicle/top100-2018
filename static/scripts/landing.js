@@ -27,7 +27,6 @@ if ($(window).width() < 666) {
   window.onscroll = function() {
     var window_top = document.documentElement.scrollTop || document.body.scrollTop;
     var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
-    console.log("HERE'S POS", window_top, div_top);
     if (window_top > div_top) {
       $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
     } else {
