@@ -79,13 +79,16 @@
           {% endif %}
         </div>
         <div><span>Address</span><br><a href="https://www.google.com/maps/place/{{restaurant.GoogleAddress}}"  target="_blank" class="google-link">{{restaurant.GoogleAddress}}</a></div>
+        {% if restaurant.Meals %}
+        <div><span>Meals</span><br>{{restaurant.Meals}}</div>
+        {% endif %}
+        <div><span>Main Course Price</span><br>{{restaurant.Prices}}</div>
         {% if restaurant.Website %}
         <div><span>Website</span><br><a href="{{restaurant.Website}}" target="_blank" class="restaurant-link">{{restaurant.Website}}</a></div>
         {% endif %}
-        <div><span>Prices</span><br>{{restaurant.Prices}}</div>
         <div><span>Seats</span><br>{{restaurant.Seats}}</div>
-        <div><span>Specialties</span><br>{{restaurant.Specialties}}</div>
         <div><span>Parking</span><br>{{restaurant.Parking}}</div>
+        <div><span>Specialties</span><br>{{restaurant.Specialties}}</div>
 
         {% if restaurant.otherlocation == 'Yes' %}
           <div><span>Other location</span><br>{{restaurant.otherlocationname}}

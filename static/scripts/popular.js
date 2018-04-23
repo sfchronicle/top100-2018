@@ -35,7 +35,7 @@ $.ajax(settings).done(function (response) {
   if (window.location.href.indexOf("localhost") != -1 || top100Results.length < 3){
     top100Results = top100Results.concat(["a16", "acaciahouse", "acquerello", "ad-hoc"]);
   }
-  console.log("Top 1", top100Results);
+  console.log("Top 1", top100Results.length);
   // One last filter to remove the undefineds and the current item (if it exists in the set)
   top100Results = top100Results.filter(function(item){
     if (typeof item != "undefined" && (typeof restaurant == "undefined" || item != restaurant.Slug)){
@@ -44,7 +44,7 @@ $.ajax(settings).done(function (response) {
       return false;
     }
   });
-  console.log("Top 2", top100Results);
+  console.log("Top 2", top100Results.length);
   // Final filter to create an array of restaurants objects
   finalFilter(top100Results);
 });
