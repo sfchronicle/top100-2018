@@ -1,7 +1,17 @@
 require("./lib/social");
 var cookies = require("./cookies");
 require("lazyload");
-lazyload();
+try { 
+  // Attempt to load lazyload
+  lazyload();
+} catch (err){
+  // We're on iPad or some device that can't handle this
+  // Flip all the data-srcs to srcs
+  $(".image-wrapper img").attr("src", function(){
+    return $(this).data("src");
+  });
+}
+
 
 // function to find minimum
 Array.prototype.min = function() {

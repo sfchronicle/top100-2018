@@ -1,7 +1,16 @@
 require("./lib/social");
 var cookies = require("./cookies");
 require("lazyload");
-lazyload();
+try { 
+  // Attempt to load lazyload
+  lazyload();
+} catch (err){
+  // We're on iPad or some device that can't handle this
+  // Flip all the data-srcs to srcs
+  $(".image-wrapper img").attr("src", function(){
+    return $(this).data("src");
+  });
+}
 
 //Give restaurants that haven't been seen yet a little flag
 $(function(){
