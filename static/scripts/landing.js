@@ -641,7 +641,7 @@ $(function(){
 });
 
 function timeConverter(timeStamp){
-  var UNIX_timestamp = new Date(timeStamp).getTime();
+  var UNIX_timestamp = new Date(timeStamp.replace(/\s/, 'T')).getTime();
   var a = new Date(UNIX_timestamp);
   var months = ['Jan.','Feb.','March','April','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'];
   var year = a.getFullYear();
