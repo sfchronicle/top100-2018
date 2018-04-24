@@ -171,7 +171,7 @@
   margin-bottom:1em;
   position:relative;
 
-  @media @mobile{
+  @media @tablet{
     height:100%;
     overflow:auto;
   }
@@ -185,7 +185,7 @@
     width: 100%;
     z-index:1;
 
-    @media @mobile{
+    @media @tablet{
       padding:5px 14px 10px;
       background:none;
       position:static;
@@ -198,7 +198,7 @@
     left: 0;
     width: 100%;
 
-    @media @mobile{
+    @media @tablet{
       position:static;
     }
   }
@@ -208,7 +208,7 @@
     margin-top:0;
     text-shadow: 1px 1px 1px #333;
 
-    @media @mobile{
+    @media @tablet{
       color:#000;
       font-size:35px;
       padding:0;
@@ -225,7 +225,7 @@
     text-align:center;
     border-top:1px solid #ccc;
     
-    @media @mobile {
+    @media @tablet {
       font-size:15px;
       padding:10px 0 0;
       color:#000;
@@ -240,5 +240,9 @@
   &.regions{
     position: absolute;
     top: -55px;
+
+    @media @tablet{
+      position:static;
+    }
   }
 }
