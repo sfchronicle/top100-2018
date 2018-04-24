@@ -634,6 +634,7 @@ $(function(){
 
         // push each story html
         var html = '<div class="story "><a target="_blank" href="'+link+'"><img src="'+imageURL+'"></a><div class="story-info"><label class="timestamp">'+date+'</label><h3><a target="_blank" href="'+link+'"><span class="latest-title">'+title+'</span></a></h3></div></div>';
+        $('.story.loading').remove();
         $('.stories').append(html);
       });
     }

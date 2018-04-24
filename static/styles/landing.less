@@ -812,12 +812,28 @@
       .flex(0 0 28%);
 
       @media @tablet-horiz{
-
         .flex(0 0 48%);
+
         &:nth-child(3){
           display:none;
         }
       }  
+
+      &.loading{
+        height: 84.38px;
+
+        @media @mobile{
+          height:67.5px;
+        }
+
+        img{
+          width: 100%;
+
+          @media @mobile{
+            width:262px;
+          }
+        }
+      }
 
       @media @mobile{
         .flex(0 0 100%);
