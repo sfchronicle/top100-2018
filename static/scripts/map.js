@@ -324,8 +324,6 @@ function revealMobileMap() {
   }
 }
 
-$('html, body').css({ "overflow-y": "hidden" });
-
 // locat restaurant on map and update the hash in URL
 $(".img-link-map").on("click", function(){
   $(this).parent().find(".map-locator").click();

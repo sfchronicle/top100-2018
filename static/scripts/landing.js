@@ -260,15 +260,18 @@ var checkUser = function(repetitions, original_promise) {
       getData(userIdentity, waitForUser, false);
     } else {
       if (repetitions > 0){
-        console.log("CHECK USER 4");
         checkUser(repetitions-1, waitForUser);
       } else {
         // If we've looped 10 times, bail out with "no id" flag
         userIdentity = "no id";
-        console.log("BAIL OUT", userIdentity);
-        console.log("RESOLVE 2");
         globalTimeout = null;
         waitForUser.resolve();
+        // If user entered this loop with mylist hash, activate the logic
+        if (window.location.hash == "#mylist"){
+          // Pop subscribe
+          $("body").find("#log-in-instructions").show();
+          $("body, html").css("overflow-y", "hidden");
+        }
       }
     }
   }, delay);
