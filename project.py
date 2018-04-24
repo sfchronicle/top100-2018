@@ -14,7 +14,7 @@ app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 app.config['PAYWALL'] = 'meter'
 
 # Publication date
-app.config['DATE'] = '2018-04-24'
+app.config['DATE'] = '2018-04-26'
 
 # Main title
 app.config['TITLE'] = 'Top 100 Bay Area Restaurants 2018'
@@ -47,8 +47,8 @@ def mapfile():
     'map.html',
     restaurants=restaurants,
     map="map",
-    description='Explore the best of Bay Area dining, from brunch to the classics.',
-    tweet='Explore the best of Bay Area dining, from brunch to the classics.'
+    description='Find a restaurant near you with The Chronicle\'s definitive Bay Area guide from critic Michael Bauer.',
+    tweet='Map of Top 100 Bay Area Restaurants'
   )
 
 @app.route("/")
@@ -58,17 +58,58 @@ def index():
     restaurants=restaurants,
     intro=intro,
     homepage="homepage",
-    description='Explore the best of Bay Area dining, from brunch to the classics.',
-    tweet='Explore the best of Bay Area dining, from brunch to the classics.'
+    description='Explore The Chronicle\'s definitive Bay Area restaurant guide from critic Michael Bauer.',
+    tweet='Top 100 Bay Area Restaurants 2018'
   )
 
-@app.route('/guides/<collection>/')
-def collection_view(collection):
+@app.route('/new/')
+def collection_new():
   return render_template(
     'collection.html',
     restaurants=restaurants,
-    collection=collection,
-    collectionPath='guides/'+collection
+    collection='new',
+    pageTitle='Top 100 Bay Area Restaurants: New in 2018',
+    description='Explore The Chronicle\'s definitive Bay Area restaurant guide and see what\'s new to the list this year.'
+  )
+
+@app.route('/classics/')
+def collection_classics():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='classics',
+    pageTitle='Top 100 Bay Area Restaurants: The Classics',
+    description='Explore the classics. The restaurants in this category have been on The Chronicle\'s Top 100 list for at least 20 years. '
+  )
+
+@app.route('/brunch/')
+def collection_brunch():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='brunch',
+    pageTitle='Top 100 Bay Area Restaurants: Brunch',
+    description='Explore The Chronicle\'s definitive Bay Area restaurant guide for the best in brunch.'
+  )
+
+@app.route('/regions/')
+def collection_regions():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='regions',
+    pageTitle='Top 100 Bay Area Restaurants by region',
+    description='Find a restaurant near you with The Chronicle\'s definitive Bay Area guide from critic Michael Bauer.'
+  )
+
+@app.route('/cuisines/')
+def collection_cuisines():
+  return render_template(
+    'collection.html',
+    restaurants=restaurants,
+    collection='cuisines',
+    pageTitle='Top 100 Bay Area Restaurants by cuisine',
+    description='Explore The Chronicle\'s definitive Bay Area restaurant guide featuring cuisines from around the world.'
   )
 
 @app.route('/<slug>/')
@@ -77,10 +118,6 @@ def restaurant_view(slug):
   restaurant_info = [x for x in restaurants if x['Slug'] == slug]
   restaurant = restaurant_info[0]
   article = [y for y in restaurants if y['Slug'] == slug]
-
-  # next_article = [y for y in restaurants if y['slug'] == restaurant['next']]
-  # prev_article = [y for y in restaurants if y['slug'] == restaurant['previous']]
-  # nextone_article = [y for y in restaurants if y['slug'] == restaurant['nextone']]
 
   return render_template(
     'restaurant.html',
@@ -98,8 +135,3 @@ def internal_error(error):
 def restaurant_view():
   for restaurant in restaurants:
     yield { 'slug': restaurant['Slug']}
-
-@freezer.register_generator
-def collection_view():
-  for collection in collections:
-    yield { 'collection': collection }

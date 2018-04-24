@@ -45,9 +45,20 @@
           <i class="fa fa-map-marker" aria-hidden="true"></i> View on the map
         </div>
       </a>
+      <a>
+        <div class="save-button region-button map-link">
+          <span class="save-restaurant" id="save{{restaurant.Slug}}"><i class="fa fa-square-o" aria-hidden="true"></i></span> Save to My List
+        </div>
+       </a>
       {% for r in article %}
         <p>{{ r.Text }}</p>
       {% endfor %}
+
+      {% if (restaurant.Note) %}
+        <div class="note">
+          <p>{{restaurant.Note|safe}}</p>
+        </div>
+      {% endif %}
     </div>
 
     <div class="wrap">
@@ -74,13 +85,16 @@
           {% endif %}
         </div>
         <div><span>Address</span><br><a href="https://www.google.com/maps/place/{{restaurant.GoogleAddress}}"  target="_blank" class="google-link">{{restaurant.GoogleAddress}}</a></div>
+        {% if restaurant.Meals %}
+        <div><span>Hours</span><br>{{restaurant.Meals}}</div>
+        {% endif %}
+        <div><span>Main Course Price</span><br>{{restaurant.Prices}}</div>
         {% if restaurant.Website %}
         <div><span>Website</span><br><a href="{{restaurant.Website}}" target="_blank" class="restaurant-link">{{restaurant.Website}}</a></div>
         {% endif %}
-        <div><span>Prices</span><br>{{restaurant.Prices}}</div>
         <div><span>Seats</span><br>{{restaurant.Seats}}</div>
-        <div><span>Specialties</span><br>{{restaurant.Specialties}}</div>
         <div><span>Parking</span><br>{{restaurant.Parking}}</div>
+        <div><span>Specialties</span><br>{{restaurant.Specialties}}</div>
 
         {% if restaurant.otherlocation == 'Yes' %}
           <div><span>Other location</span><br>{{restaurant.otherlocationname}}
@@ -100,8 +114,8 @@
 
     <div class="promotion">
       <div class="promo-item buy-book">
-        <a href="https://sfchronicle.myshopify.com/" target="_blank"><img src="//projects.sfchronicle.com/shared/assets/top100cover.jpg" /></a>
-        <p><a href="https://sfchronicle.myshopify.com/" target="_blank">Buy the hard copy</a></p>
+        <a href="https://sfchronicle.myshopify.com/products/san-francisco-chronicle-top-100-restaurants-2018?variant=12099148120132" target="_blank"><img src="//projects.sfchronicle.com/shared/assets/top100cover.jpg" /></a>
+        <p><a href="https://sfchronicle.myshopify.com/products/san-francisco-chronicle-top-100-restaurants-2018?variant=12099148120132" target="_blank">Buy the hard copy</a></p>
         <p class="light">Michael Bauer's Top 100 Restaurants</p>
       </div>
       <div class="promo-item newsletter-signup">

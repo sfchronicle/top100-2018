@@ -3,7 +3,7 @@ require("./lib/leaflet-mapbox-gl");
 require("leaflet");
 
 // setting parameters for the center of the map and initial zoom level
-if (screen.width <= 480){
+if ($(window).width() <= 480){
   var sf_lat = 37.779480;
   var sf_long = -122.426623;
   var zoom_deg = 11;//13 zoomed out
@@ -73,12 +73,13 @@ function clickZoom(e) {
 
 // Get parent URL from jinja string in meta tag
 var parentURL = $('#parentURL').data('url');
+
 // all the markers for the map
 var markersArray = [];
 // markers for restaurants
 restaurants.forEach(function(d,dIDX){
   var photos = d.wcm_img.split(' ');
-  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"/'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
+  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"/'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a target='_blank' href='https://www.google.com/maps/place/"+d.GoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
   if (screen.width <= 480){
       var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   } else {
@@ -101,7 +102,7 @@ restaurants.forEach(function(d,dIDX){
 restaurants.forEach(function(d,dIDX){
   if (d.OtherLat){
     var photos = d.wcm_img.split(' ');
-    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
+    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a target='_blank' href='https://www.google.com/maps/place/"+d.OtherLocationGoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
     if (screen.width <= 480){
       var marker = L.marker([d.OtherLat,d.OtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
     } else {
@@ -116,11 +117,11 @@ restaurants.forEach(function(d,dIDX){
   }
 });
 
-// markers for restaurants with two locations
+// markers for restaurants with three locations
 restaurants.forEach(function(d,dIDX){
   if (d.OtherOtherLat){
     var photos = d.wcm_img.split(' ');
-    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.slug+"' target='_blank'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>Read the review</a></div>";
+    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a target='_blank' href='https://www.google.com/maps/place/"+d.OtherOtherLocationGoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
     if (screen.width <= 480){
       var marker = L.marker([d.OtherOtherLat,d.OtherOtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
     } else {
@@ -138,80 +139,88 @@ restaurants.forEach(function(d,dIDX){
 var count;
 
 // searchbar code
+if ($(window).width() <= 480){
+  $("#mapsearchbar").on("focus", function(){
+    hideMobileMap();
+  });
+}
+
 $("#mapsearchbar").bind("input propertychange", function () {
   var filterval = $(this).val().toLowerCase().replace(/ /g,'');
   console.log(filterval);
   var class_match = 0;
   count = 0;
 
-  // $(".scrolly-restaurants").animate({ scrollTop: 0 }, "fast");
-  // $(".map-sidebar").animate({ scrollTop: 0 }, "fast");
-  // $(window).animate({ scrollTop: 0 }, "fast");
-  $('html, body').animate({ scrollTop: 0 }, "fast");
+  $('html, body').css({ scrollTop: 0 });
 
   if (filterval != ""){
+    $("#map").addClass("smallmap");
+    $("#stick-me").addClass("smallmap");
+    $(".map-sidebar").addClass("smallmap");
 
-  $(".map-restaurant").filter(function() {
+    $(".map-restaurant").filter(function() {
 
-    var classes = this.className.split(" ");
-    for (var i=0; i< classes.length; i++) {
+      var classes = this.className.split(" ");
+      for (var i=0; i< classes.length; i++) {
 
-      var current_class = classes[i].toLowerCase();
+        var current_class = classes[i].toLowerCase();
 
-      if ( current_class.match(filterval)) {
-        class_match = class_match + 1;
+        if ( current_class.match(filterval)) {
+          class_match = class_match + 1;
+        }
       }
-    }
 
-    if (class_match > 0) {
-      $(this).addClass("active");
-      count+=1;
-    } else {
-      $(this).removeClass("active");
-    }
-    class_match = 0;
-
-  });
-
-  $(".leaflet-marker-icon").filter(function() {
-
-    var classes = this.className.split(" ");
-    for (var i=0; i< classes.length; i++) {
-
-      var current_class = classes[i].toLowerCase();
-
-      if ( current_class.match(filterval)) {
-        class_match = class_match + 1;
+      if (class_match > 0) {
+        $(this).addClass("active");
+        count+=1;
+      } else {
+        $(this).removeClass("active");
       }
-    }
+      class_match = 0;
 
-    if (class_match > 0) {
-      $(this).addClass("active");
+    });
+
+    $(".leaflet-marker-icon").filter(function() {
+
+      var classes = this.className.split(" ");
+      for (var i=0; i< classes.length; i++) {
+
+        var current_class = classes[i].toLowerCase();
+
+        if ( current_class.match(filterval)) {
+          class_match = class_match + 1;
+        }
+      }
+
+      if (class_match > 0) {
+        $(this).addClass("active");
+      } else {
+        $(this).removeClass("active");
+      }
+      class_match = 0;
+
+    });
+
+
+    if (count != 0){
+      $("#no-results").css("display","none");
+      $(".num-results").addClass("active");
+      if (count == 1){
+        document.getElementById("num-results-search").innerHTML = "is 1 result";
+      } else {
+        document.getElementById("num-results-search").innerHTML = "are "+count+" results";
+      }
     } else {
-      $(this).removeClass("active");
+      $("#no-results").css("display","block");
+      $(".num-results").removeClass("active");
     }
-    class_match = 0;
-
-  });
-
-  console.log(count);
-
-  if (count != 0){
-    $("#no-results").css("display","none");
-    // $(".scrolly-restaurants").css("padding-top","220px");
-    $(".num-results").addClass("active");
-    if (count == 1){
-      document.getElementById("num-results-search").innerHTML = "is 1 result";
-    } else {
-      document.getElementById("num-results-search").innerHTML = "are "+count+" results";
-    }
-  } else {
-    $("#no-results").css("display","block");
-    // $(".scrolly-restaurants").css("padding-top","0px");
-    $(".num-results").removeClass("active");
-  }
 
   } else {
+
+    $("#stick-me").removeClass("smallmap");
+    $("#map").removeClass("smallmap");
+    $(".map-sidebar").removeClass("smallmap");
+
     $(".map-restaurant").addClass("active");
     $(".leaflet-marker-icon").addClass("active");
 
@@ -223,10 +232,14 @@ $("#mapsearchbar").bind("input propertychange", function () {
 });
 
 document.getElementById("reset-map-button").addEventListener("click",function(){
-  console.log("click");
-  // $(".scrolly-restaurants").css("padding-top","220px");
 
-  $('html, body').animate({ scrollTop: 0 }, "fast");
+  $("#stick-me").removeClass("smallmap");
+  $("#map").removeClass("smallmap");
+  $(".map-sidebar").removeClass("smallmap");
+
+  revealMobileMap();
+
+  $('html, body').css({ scrollTop: 0 });
 
   document.getElementById('mapsearchbar').value = "";
 
@@ -245,11 +258,30 @@ for (var t = 0; t < locatorList.length; t++){
   if (typeof window.addEventListener === 'function'){
     (function (_td) {
       td.addEventListener('click', function(){
-        var IDX = _td.id.split("map-locator-")[1];
-        map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
-        markersArray[IDX].openPopup();
         var slug = '#'+$(this).data('slug');
-        history.replaceState(null, null, slug);
+
+        if ($(window).width() <= 480){
+          // If it's a small window, reload it
+          if (history.pushState) {
+            // Try the history API to update the slug
+            history.pushState(null, null, slug);
+          } else {
+            // If no history API, just force it
+            window.location.href = document.location.protocol +"//"+ document.location.host + document.location.pathname + slug;
+          }
+          window.location.reload();
+        } else {
+          // If it's a big window, reset it
+          var IDX = _td.id.split("map-locator-")[1];
+          map.setView([+restaurants[IDX].Lat+lat_offset,restaurants[IDX].Lng],14);
+          markersArray[IDX].openPopup();
+          
+          history.replaceState(null, null, slug);
+
+          $("#stick-me").removeClass("smallmap");
+          $("#map").removeClass("smallmap");
+          $(".map-sidebar").removeClass("smallmap");
+        }
       });
     })(td);
   }
@@ -257,6 +289,9 @@ for (var t = 0; t < locatorList.length; t++){
 
 // see if the reader is loading a specific restaurant
 $(document).ready(function(){
+  //Start by revealing mobile map
+  revealMobileMap();
+  // Now get hash
   findByHash();
 });
 
@@ -271,12 +306,36 @@ function findByHash() {
   }
 }
 
+function hideMobileMap() {
+  if ($(window).width() <= 480){
+    $(".map-container").hide();
+    $(".map-sidebar").css({"margin-top": "0px"});
+    $('html, body').css({ "overflow-y": "auto" });
+  }
+}
+
+function revealMobileMap() {
+  if ($(window).width() <= 480){
+    // Actually modify the DOM so everything looks nice
+    var scrollHeight = $(window).height()+70;    
+    $(".map-container").show();
+    $(".map-sidebar").css({"margin-top": scrollHeight});
+    $('html, body').css({ "overflow-y": "hidden", "scrollTop": "0" });
+  }
+}
+
+$('html, body').css({ "overflow-y": "hidden" });
+
 // locat restaurant on map and update the hash in URL
 $(".img-link-map").on("click", function(){
-  var slug = '#'+$(this).data('slug');
-  history.replaceState(null, null, slug);
-  findByHash();
+  $(this).parent().find(".map-locator").click();
 });
+
+// locat restaurant on map and update the hash in URL
+$(".name .info").on("click", function(){
+  $("#mapsearchbar").val($(this).text()).trigger("input");
+});
+
 
 // Enable nav
 if ($(window).width() < 666) {

@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="//projects.sfchronicle.com/shared/js/jquery-ui.min.css">
     <link href="https://fonts.googleapis.com/css?family=Cardo|Fjalla+One|Pathway+Gothic+One" rel="stylesheet">
     {% include 'components/_hearst.html' %}
+
+    <!-- Loading syncronex paywall -->
+    {% include 'components/_syncronex.html' %}
+
     {% include 'components/_landing-analytics.html' %}
     {% include 'components/_landing-social.html' %}
   </head>
@@ -23,27 +27,13 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div id="log-in-instructions">
-    	<div class="login">
-        <!-- Gigya signin -->
-        <div class="treg-is-gigya gigya_menu" >
-          <div class="gigya-login">
-          <div id="exit"><i class="fa fa-close"></i></div>
-            <div class="login-header">Log in with your subscription account to save restaurants to your list.</div>
-            <div class="treg-gya-login-widget"></div>
-            <div class="subscribe">
-              <h6 class="no-sub">Don't have a subscription?</h6>
-              <a class="gya-btn" href="https://offers.sfchronicle.com/offers/top100?groupid=31" target="_blank">Subscribe</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include 'components/_login.html' %}
 
     
-      <div id="search-stick-here"></div>  
+    <div id="search-stick-here"></div>  
+    
     <div id="container">
-      <div id="landing-logo"><img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_white.png"></div>
+      <div id="landing-logo"><a href="https://sfchronicle.com" target="_blank"><img src="http://projects.sfchronicle.com/shared/logos/sfc_logo_white.png"></a></div>
 
       <div class="lead-container">
         
@@ -59,22 +49,26 @@
           </div>
         </div>
 
-        <div id="lead-image" class="lead-desktop">
-          <img src="{{url_for('static', filename='images/cover3.jpg')}}">
+        <div id="lead-image">
+          <img src="{{url_for('static', filename='images/cover3_opt.jpg')}}">
         </div>
 
       </div>
 
       <div class="latest-news">
-        <label>Latest from Michael Bauer</label>
-        <a target="_blank">
-          <img />
-        </a>
-        <a target="_blank">
-          <h3><span></span></h3>
-        </a>
-        <p></p>
-        <div class="spacer"></div>
+        <div class="wrapper">
+          
+          <div class="info">
+            <a href="https://www.sfchronicle.com/author/michael-bauer/" target="_blank"><h2>Latest from Michael Bauer</h2></a>
+          </div>
+
+          <div class="stories">
+            
+            
+
+          </div>
+        </div>
+        
       </div>
 
       {% include 'components/_intro.html' %}
@@ -83,7 +77,6 @@
 
       <div id="restaurants">
         <div id="results">
-          <div class="count-results hide" id="count-results">100 result(s)</div>
 
           <div class="hide" id="mylist-box">
             <div class="mylist-title">
@@ -93,6 +86,8 @@
               Track your favorite restaurants or build a dining wish list. Check the "Save" box next to any restaurant's name and it will be saved to your list. Then go ahead &mdash; share your list with friends.
             </div>
           </div>
+
+          <div class="count-results hide" id="count-results">100 result(s)</div>
 
           {% set cuisineString = "" %}
           {% set regionString = "" %}
@@ -128,7 +123,7 @@
 
           <div class="restaurant active {{ r.Name }} {{ r.Cuisine }} {{ r.Region }} {{ r.SubRegion }} {{ r.New }}" id="{{ r.Slug }}">
           	<a href="{{ url_for('index') }}{{r.Slug}}">
-              <div class="border"></div>
+              <div class="border" title=""></div>
               <div class="border"></div>
               <div class="image-wrapper">
                 <img class="lazyload" data-src="https://s.hdnux.com/photos/72/15/17/{{ photos[0] }}/7/premium_landscape.jpg">

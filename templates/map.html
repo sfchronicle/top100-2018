@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>Top 100 2018</title>
+    <title>Map of Top 100 Bay Area Restaurants 2018</title>
     <meta name="ispremium" content="1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta id="parentURL" data-url="{{ url_for('index') }}">
@@ -13,8 +13,10 @@
     <link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <script src="//projects.sfchronicle.com/shared/js/jquery.min.js"></script>
     {% include 'components/_hearst.html' %}
-    {% include 'components/_landing-analytics.html' %}
-    {% include 'components/_landing-social.html' %}
+    <!-- Loading syncronex paywall -->
+    {% include 'components/_syncronex.html' %}
+    
+    {% include 'components/_map-meta.html' %}
   </head>
 
   <body class="{% if config.DEV %}debug{% endif %}">
@@ -22,23 +24,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div id="log-in-instructions">
-    	<div class="login">
-        <!-- Gigya signin -->
-        <div class="treg-is-gigya gigya_menu" >
-          <div class="gigya-login">
-          <div id="exit">X</div>
-            <div class="login-header">Login with your subscription account to save restaurants to "My List" and/or "Favorites."</div>
-            <div class="treg-gya-login-widget"></div>
-            <div class="subscribe">
-              <h6 class="no-sub">Don't have a subscription?</h6>
-              <a class="gya-btn" href="https://offers.sfchronicle.com/offers/top100?groupid=31" target="_blank">Subscribe</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
+    {% include 'components/_login.html' %}
     {% include 'components/_top-nav.html' %}
 
     <div class="restaurant-map">
@@ -51,7 +39,7 @@
         <div id="stick-me">
           <div class="map-button" id="reset-map-button">Reset map</div>
           <div class="map-search-container">
-            <div class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></div><input autofocus class="map-input" id="mapsearchbar" type="text" placeholder="Search by restaurant, city or cuisine... ">
+            <div class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></div><input class="map-input" id="mapsearchbar" type="text" placeholder="Search by restaurant, city or cuisine... ">
           </div>
         </div>
 
@@ -66,9 +54,9 @@
             <div class="name">
               <div class="rname">{{ r.Name }} {{ r.otherName }}</div>
               <div class="info">{{ r.Cuisine }}</div>
-              <div class="map-locator" id="map-locator-{{loop.index-1}}" data-slug="{{r.Slug}}"><i class="fa fa-hand-o-right" aria-hidden="true"></i><span class="locate-text">Locate on map</span></div>
-              <div class="map-review"><a href="/{{r.Slug}}"><i class="fa fa-external-link" aria-hidden="true"></i><span class="map-text-span">Read review</span></a></div>
-              <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i><span class="map-text-span">Directions</a></span></div>
+              <div class="map-locator" id="map-locator-{{loop.index-1}}" data-slug="{{r.Slug}}"><span class="locate-text">Locate on map</span></div>
+              <div class="map-review"><a href="{{ url_for('index') }}{{r.Slug}}"><span class="map-text-span">View restaurant</span></a></div>
+              <!-- <div class="map-directions"><a href="https://www.google.com/maps/place/{{r.GoogleAddress}}"  target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i><span class="map-text-span">Directions</a></span></div> -->
           </div>
         </div>
         {% endfor %}

@@ -1,15 +1,15 @@
 .map-container {
   @media @mobile {
     position: fixed;
-    top: 47px;
+    top: 93px;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 1;
   }
 }
 
 .leaflet-popup-content {
-  width: 200px;
+  width: 200px !important;
   z-index: 1000;
 }
 
@@ -46,7 +46,8 @@
   img {
     max-width: 200px;
     @media @mobile {
-      max-width: 130px;
+      // max-width: 60px;
+      display: none;
     }
   }
 }
@@ -71,15 +72,27 @@
   z-index: 0;
   cursor: auto;
 
+  @media @tablet and @biggerthanmobile {
+    width: ~"calc(100% - 260px)";
+  }
+
   @media @mobile {
     width: 100%;
-    height: 250px;
+    height: ~"calc(100vh - 93px)";
     top: 0px;
     z-index: 999;
     position: relative;
   }
   svg {
     pointer-events: all;
+  }
+  &.smallmap {
+    @media @mobile {
+      height: 100px;
+      -webkit-transition: all 500ms linear;
+      -ms-transition: all 500ms linear;
+      transition: all 500ms linear;
+    }
   }
 }
 
@@ -101,10 +114,22 @@
   z-index: 100;
   background: white;
 
+  @media @tablet and @biggerthanmobile {
+    width: 250px;
+  }
+
   @media @mobile {
-   width: 100%;
+    width: 100%;
     margin-top: 250px;
-    padding-top: 140px
+    padding-top: 40px
+  }
+  &.smallmap {
+    @media @mobile {
+      margin-top: 50px;
+      -webkit-transition: all 500ms linear;
+      -ms-transition: all 500ms linear;
+      transition: all 500ms linear;
+    }
   }
 }
 
@@ -115,11 +140,25 @@
   right: 0px;
   z-index: 7;
   top: 0px;
+  @media @mobile {
+    display: none;
+  }
 }
 
 .scrolly-restaurants {
 
-  margin-top: 150px;
+  margin-top: 120px;
+  padding-top: 30px;
+  height: auto;
+
+  @media @tablet and @biggerthanmobile {
+    width: 250px;
+
+    .map-restaurant .name {
+      flex: 0 0 100% !important;
+      align-self: flex-start !important;
+    }
+  }
 
   .map-restaurant {
     display: none;
@@ -129,6 +168,7 @@
       cursor:pointer;
       .flex(0 0 50%);
       padding-right: 10px;
+      line-height: 0;
 
       a {
         display: inline-block;
@@ -139,6 +179,7 @@
 
     .name {
       .flex(0 0 50%);
+      .align-self(flex-end);
 
       .rname {
         font-family:@fancy-serif;
@@ -148,6 +189,11 @@
 
       .info{
         margin-bottom:5px;
+        cursor: pointer;
+
+        @media @tablet {
+          font-size: 12px;
+        }
       }
 
     }
@@ -171,8 +217,8 @@
   }
 
   @media @mobile {
-    margin-top:0;
-    padding:0 10px;
+    margin-top: 40px;
+    padding: 30px 10px;
   }
 }
 
@@ -239,10 +285,29 @@
   -moz-box-shadow: 0 1px 1px 0px #ccc;;
   box-shadow: 0 1px 1px 0px #ccc;;
 
+  @media @tablet and @biggerthanmobile {
+    width: 260px;
+
+    .map-search-container {
+      width: 120px !important;
+    }
+  }
+
   @media @mobile {
     width: 100%;
-    top: 250px;
+    padding: 10px 0 12px 10px;
+    top: 40px !important;
   }
+  &.smallmap {
+    @media @mobile {
+      top: 100px;
+      -webkit-transition: all 500ms linear;
+      -ms-transition: all 500ms linear;
+      transition: all 500ms linear;
+    }
+  }
+
+
   .map-title, .map-button {
     display: inline-block;
   }
@@ -268,6 +333,12 @@
       background: #666666;
       color: white;
     }
+    @media @mobile {
+      height: 30px;
+      padding-top: 5px;
+      float: right;
+      margin-right: 10px;
+    }
   }
   .map-search {
     font-size: 16px;
@@ -284,9 +355,15 @@
     height: 44px;
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    @media @mobile {
+      height: 30px;
+    }
 
     .fa {
       color: @dark-gray;
+      @media @mobile {
+        font-size: 14px;
+      }
     }
     input {border: none;
     padding: 0px;
@@ -307,7 +384,8 @@
         width: 100%;
       }
       @media @mobile {
-        width: 90%;
+        height: 30px;
+        width: 100%;
         font-size: 16px;
       }
     }

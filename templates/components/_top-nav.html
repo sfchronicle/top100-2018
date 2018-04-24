@@ -33,35 +33,35 @@
 
       <a href="{{ url_for('index') }}{% if (homepage) %}{% else %}#search{% endif %}"><div class="secondary-link search {{homepage}}"><i class="fa fa-search" aria-hidden="true"></i> Search</div></a>
 
-      <a href="{{ url_for('index') }}map" class="map-link"><div class="secondary-link {{map}}"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</div></a>
+      <a href="{{ url_for('mapfile') }}" class="map-link"><div class="secondary-link {{map}}"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</div></a>
 
-      <a href="{{ url_for('index') }}guides/new" class="new-link"><div class="secondary-link {{new}}"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</div></a>
+      <a href="{{ url_for('collection_new') }}" class="new-link"><div class="secondary-link {{new}}"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</div></a>
 
-      <a href="{{ url_for('index') }}guides/classics" class="classics-link"><div class="secondary-link {{classics}}"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</div></a>
+      <a href="{{ url_for('collection_classics') }}" class="classics-link"><div class="secondary-link {{classics}}"><i class="fa fa-certificate" aria-hidden="true"></i> Classics</div></a>
 
-      <a href="{{ url_for('index') }}guides/brunch" class="brunch-link"><div class="secondary-link {{brunch}}"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</div></a>
+      <a href="{{ url_for('collection_brunch') }}" class="brunch-link"><div class="secondary-link {{brunch}}"><i class="fa fa-coffee" aria-hidden="true"></i> Brunch</div></a>
       
-      <a href="{{ url_for('index') }}guides/regions" class="region-link"><div class="secondary-link {{regions}}"><i class="fa fa-globe" aria-hidden="true"></i> Regions</div></a>
+      <a href="{{ url_for('collection_regions') }}" class="region-link"><div class="secondary-link {{regions}}"><i class="fa fa-globe" aria-hidden="true"></i> Regions</div></a>
 
-      <a href="{{ url_for('index') }}guides/cuisines" class="cuisine-link"><div class="secondary-link {{cuisines}}"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</div></a>
+      <a href="{{ url_for('collection_cuisines') }}" class="cuisine-link"><div class="secondary-link {{cuisines}}"><i class="fa fa-cutlery" aria-hidden="true"></i> Cuisines</div></a>
       
     </div>
 
     <div id="social-links">  
       <div class="social-link email">
-        <a id="mail-icon" title="Share via email" href="mailto:?subject={{config.TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}">
+        <a id="mail-icon" title="Share via email" href="mailto:?subject={{config.TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collection}}{% if article %}{{restaurant.Slug}}{% endif %}">
           <i class="fa fa-envelope" aria-hidden="true"></i>
         </a>
       </div>
 
       <div class="social-link">
-        <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+        <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collection}}{% if article %}{{restaurant.Slug}}{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
           <i class="fa fa-facebook"></i>
         </a>
       </div>
 
       <div class="social-link">
-        <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}&text={{tweet}}{% if article %}Top 100 Restaurants: {{restaurant.Name}}{% endif %}&hashtags={{config.HASHTAG}}">
+        <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collection}}{% if article %}{{restaurant.Slug}}{% endif %}&text={{tweet}}{% if article %}Top 100 Restaurants: {{restaurant.Name}}{% endif %}&hashtags={{config.HASHTAG}}">
           <i class="fa fa-twitter"></i>
         </a>
       </div>
@@ -79,7 +79,7 @@
   <div id="search" class="fixed-second {% if (homepage) %}{% else %}none{% endif %}">
     <div id="search-bar">
       <div class="cancel-search"><i class="fa fa-close" aria-hidden="true"></i></div>
-      <input type="text" autofocus placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
+      <input type="text" placeholder='Try "French" or "Oakland"...' /><i class="fa fa-search" aria-hidden="true"></i>
     </div>
   </div>
 
@@ -93,19 +93,19 @@
   
   <div class="social-links nav-link">  
     <div class="social-link email">
-      <a id="mail-icon" title="Share via email" href="mailto:?subject={{TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}">
+      <a id="mail-icon" title="Share via email" href="mailto:?subject={{TITLE}}&body={{description}}%0A%0Ahttps://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collection}}{% if article %}{{restaurant.Slug}}{% endif %}">
         <i class="fa fa-envelope" aria-hidden="true"></i>
       </a>
     </div>
 
     <div class="social-link">
-      <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
+      <a id="facebook-icon" title="Share on Facebook" href="#" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collection}}{% if article %}{{restaurant.Slug}}{% endif %}', 'facebook-share-dialog', 'width=626,height=436'); return false;">
         <i class="fa fa-facebook"></i>
       </a>
     </div>
 
     <div class="social-link">
-      <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collectionPath}}{% if article %}{{restaurant.Slug}}{% endif %}&text={{tweet}}&hashtags={{config.HASHTAG}}">
+      <a id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https://projects.sfchronicle.com/{{config.PROJECT_YEAR}}/{{config.PRODUCTION_PATH}}/{{map}}{{collection}}{% if article %}{{restaurant.Slug}}{% endif %}&text={{tweet}}&hashtags={{config.HASHTAG}}">
         <i class="fa fa-twitter"></i>
       </a>
     </div>

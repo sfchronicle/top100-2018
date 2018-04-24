@@ -35,6 +35,7 @@ $.ajax(settings).done(function (response) {
   if (window.location.href.indexOf("localhost") != -1 || top100Results.length < 3){
     top100Results = top100Results.concat(["a16", "acaciahouse", "acquerello", "ad-hoc"]);
   }
+  console.log("Top 1", top100Results.length);
   // One last filter to remove the undefineds and the current item (if it exists in the set)
   top100Results = top100Results.filter(function(item){
     if (typeof item != "undefined" && (typeof restaurant == "undefined" || item != restaurant.Slug)){
@@ -43,6 +44,7 @@ $.ajax(settings).done(function (response) {
       return false;
     }
   });
+  console.log("Top 2", top100Results.length);
   // Final filter to create an array of restaurants objects
   finalFilter(top100Results);
 });
@@ -56,6 +58,7 @@ var finalFilter = function(top100Results){
   }
   // If it is defined, carry on
   var goldArray = [];
+  console.log("Top 3", top100Results);
   var finalPopular = restaurants.filter(function(item){
     if (top100Results.indexOf(item.Slug) != -1){
       return true;
@@ -65,26 +68,14 @@ var finalFilter = function(top100Results){
   });
   // Set values on HTML
   $("#popular-rest .wrap").each(function(index){
-    // Get URL with no query or hash (or trailing slash)
-    var fullUrl = location.href.split('#')[0].split('?')[0];
-    if ((fullUrl.match(/\//g) || []).length == 4){
-      fullUrl = fullUrl.slice(0, -1);
-    }
-    // Get array based on slashes
-    fullUrl = fullUrl.split("/");
-    // Remove the restaurant path and rejoin
-    fullUrl.pop();
-    fullUrl = fullUrl.join("/"); 
+    // Get URL
+    var fullUrl = $(this).find("a").first().data("link");
     // Set new path using slug
-    var finalUrl = fullUrl+"/"+finalPopular[index].Slug;
+    var finalUrl = fullUrl+finalPopular[index].Slug;
     $(this).find("a").attr("href", finalUrl);
-    // Set next link as the text link
-    if (index == 0){
-      $(".rtitle .next-link").attr("href", finalUrl);
-    }
     // Set image URL
     if (finalPopular[index].wcm_img){
-      $(this).find("img").attr("data-src", "https://s.hdnux.com/photos/60/22/02/"+finalPopular[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
+      $(this).find("img").attr("src", "https://s.hdnux.com/photos/60/22/02/"+finalPopular[index].wcm_img.split(" ")[0]+"/7/premium_gallery_landscape.jpg");
     }
     // Set name
     $(this).find(".name div").text(finalPopular[index].Name);

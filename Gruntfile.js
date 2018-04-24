@@ -109,6 +109,9 @@ module.exports = function (grunt) {
       production: {
         exec: 'python build.py production'
       },
+      deploy: {
+        exec: './deploy.sh test-proj top2018'
+      },
       dev: {
         exec: 'python build.py dev'
       }

@@ -28,8 +28,8 @@
 	}
 
 	@media @mobile{
-    margin-top: 10px;
-	}
+    margin-top: 47px;	
+  }
 }
 
 .promotion {
@@ -179,9 +179,18 @@ h1 {
 	margin: 35px auto;
   padding: 0 10px;
 
+  .save-button {
+    text-transform: none;
+
+    .save-restaurant {
+      padding-left: 0px;
+    }
+  }
+
   .map-link {
-    margin: 0px 10px 0 0;
+    margin: 0px 10px 10px 0;
     padding: 4px 6px;
+    height: 40px;
     clear: both;
     float: left;
     font-size: 15px;
@@ -252,12 +261,12 @@ h1 {
   background: #EDBE22;
 }
 
-.swiper-container {
+.swiper-container, .swiper-wrapper {
   width: 100%;
   min-height: 400px;
 
   @media @tablet {
-  	min-height: 100px;
+  	min-height: 200px;
   }
 
   @media @mobile {
@@ -311,3 +320,18 @@ h1 {
   right: 0;
 }
 
+.note{
+  margin-top: 2em;
+  font-style: italic;
+  font-size: 0.8em;
+
+  a{
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid @main;
+
+    &:hover{
+      font-weight:normal;
+    }
+  }
+}

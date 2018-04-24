@@ -50,9 +50,9 @@
 		border-top:1px solid #ccc;
 		text-align:left;
 		
-		@media @mobile {
-			font-size:15px;
-		}
+		@media @tablet {
+      font-size:15px;
+    }
 	}
 
 	#buttons{
@@ -85,6 +85,10 @@
 		text-transform: uppercase;
 		color:@main;
 
+    @media @w1080{
+      font-size:40px;
+    }
+
 		@media @tablet{
 			font-size:35px;
 			text-align:center;
@@ -97,8 +101,14 @@
 
 
 #lead-image {
+
+  .flex(0 0 40%);
   img {
     width: 100%;
+  }
+
+  @media @tablet{
+    .flex(1 0 40%);
   }
 
   @media @width650{
@@ -121,6 +131,10 @@
 	a{
 		color:@black;
 		border-bottom:3px solid @main;
+
+		&:hover {
+			font-weight: normal;
+		}
 	}
 
 	p{
@@ -169,7 +183,6 @@
 
 
 .count-results, #mylist-box > * {
-	font-style: italic;
 	.flex(0 1 100%);
 	margin: 20px;
 	font-family:@title;
@@ -187,6 +200,7 @@
 	}
 
 	.link-copy-text {
+		display: none;
 		font-size: 14px;
 		margin-left: 5px;
 		font-weight: 800;
@@ -202,6 +216,18 @@
 	a{
 	 color:@main;
 	}
+}
+
+#count-results{
+  font-family:@sans-serif;
+  text-align:center;
+  margin-top:30px;
+
+  span:not(.link-copy-text){
+    display:block;
+    font-family:@sans-serif-light;
+    font-size:15px;
+  }
 }
 
 #container{
@@ -467,16 +493,23 @@
 
 #mylist-box {
 	width: 100%;
+	margin-top: 20px;
 
 	.mylist-title {
-		font-family: @sans-serif;
-		font-size: 30px;
-		margin-top: 0px;
+		font-family: @fancy-serif;
+		font-size: 45px;
+		margin: 0;
+    text-align:center;
+    font-style:normal;
 	}
 
 	.mylist-explainer {
 		font-size: 16px;
-		max-width: 720px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: @body;
+    padding:0 1em;
 	}
 }
 
@@ -723,38 +756,107 @@
 }
 
 .latest-news {
-  margin: 20px auto;
-  padding: 20px;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  width: 700px;
-  max-width: 100%;
+  padding: 30px 0;
+  width: 100%;
+  background:#eaeaea;
+  box-shadow: 1px 1px 1px 1px #ccc;
+
+  .wrapper{
+    margin: 0 auto;
+    max-width: 1200px;
+    width:100%;
+
+    .info{
+      font-family: Pierpont-bold;
+      line-height: 1.2;
+      font-size: 16px;
+      color: #000;
+      text-align:center;
+      margin-bottom:10px;
+
+      a{
+        color:#000;
+
+        :hover{
+          color:#000;
+        }
+      }
+
+      @media @mobile{
+        margin-bottom:0;
+      }
+
+      h2{
+        margin: 0 0 1em;
+        display: inline-block;
+        border-bottom: 2px solid @main;
+      }
+    }
+  }
+
+  .stories{
+      .display-flex;
+      .align-items(center);
+      .justify-content(space-around);
+      .flex-wrap(wrap);
+    }
+
+    .story-info{
+      align-self: flex-end;
+    }
+
+    .story{
+      .display-flex;
+      margin: 0 5px;
+      line-height:0;
+      .flex(0 0 28%);
+
+      @media @tablet-horiz{
+
+        .flex(0 0 48%);
+        &:nth-child(3){
+          display:none;
+        }
+      }  
+
+      @media @mobile{
+        .flex(0 0 100%);
+        margin-bottom:10px;
+      }
+
+      img{
+        width:150px;
+
+        @media @mobile{
+          width:120px;
+        }
+      }
+
+      .timestamp{
+        line-height: 1.4;
+        margin-left: 10px;
+        font-size: 12px;
+        font-family: sanchez-bold;
+        color: #a90000;
+
+        @media @tablet{
+          display:none;
+        }
+      }
+
+      h3{
+        font-size:16px;
+        margin-left:10px;
+        line-height:1.2;
+      }
+    }
 
   @media @w666 {
   	padding: 15px;
  	}
 
-  label {
-  	font-family: @logo;
-  	text-transform: uppercase;
-  	font-size: 14px;
-
-  	@media @w666 {
-    	font-size: 12px;
-  	}
-  }
-
   img {
-  	width: 300px;
-  	height: 169px;
-  	margin-right: 20px;
-  	float: left;
-
-  	@media @w666 {
-  		height: auto;
-  		width: 40%;
-  		margin-right: 10px;
-  	}
+  	width: 100%;
   }
 
   h3 {
@@ -771,6 +873,10 @@
   a span {
   	color: #000;
     border-bottom: 3px solid #EDBE22;
+
+    &.latest-title {
+    	border-bottom: none;
+    }
 
     &:hover {
     	color: #000;
@@ -1014,6 +1120,10 @@
 
     @media @mobile{
     	font-size:35px;
+    }
+
+    @media @w1080{
+      font-size:40px;
     }
    }
 
