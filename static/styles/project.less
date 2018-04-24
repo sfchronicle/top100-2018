@@ -296,8 +296,22 @@ hr{
 			width: 100%;
 		}
 
+		&:nth-child(3){
+      display:none;
+    }
+
 		@media @mobile{
-			.flex(0 0 100%);
+			.flex(0 0 50%);
+		}
+
+		.name{
+			line-height:1.2;
+		}
+
+		.info{
+			@media @mobile{
+				font-size:11px;
+			}
 		}
 
 		a .name div {
