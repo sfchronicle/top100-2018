@@ -44,8 +44,10 @@ if($('.swiper-slide').length === 1){
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev',
     pagination: '.swiper-pagination',
-    paginationClickable: true,
+    paginationClickable: true
   }
+
+  var mySwiper = new Swiper('.swiper-container', swiperData);
 }
 
 // We've arrived on an article, so save a cookie that says so
@@ -389,7 +391,7 @@ function saveNewData(user, restaurants) {
   if (typeof ens_specialEvent != "undefined"){
     ens_specialEvent("Top 100 Restaurants 2018","Button Click","Save To List");
   }
-
+  
   var newSavedData = {
     "edbId":user,
     "restaurants":restaurants
