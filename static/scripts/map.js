@@ -147,7 +147,6 @@ if ($(window).width() <= 480){
 
 $("#mapsearchbar").bind("input propertychange", function () {
   var filterval = $(this).val().toLowerCase().replace(/ /g,'');
-  console.log(filterval);
   var class_match = 0;
   count = 0;
 

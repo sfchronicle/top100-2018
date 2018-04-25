@@ -237,8 +237,7 @@ var userIdentity;
 var restaurantList;
 var globalTimeout = null;
 
-// Sets the user ID from treg (hopefully) 
-console.log("CHECK USER 3");
+// Sets the user ID from treg
 var checkUser = function(repetitions, original_promise) {
   // Set a deferred to return immediately
   var waitForUser;
@@ -256,10 +255,8 @@ var checkUser = function(repetitions, original_promise) {
     repetitions = 20;
   }
 
-  console.log("HERE'S USER ID", userIdentity, repetitions);
   if (userIdentity && userIdentity != "no id"){
     // If we already know the user's identity, we can bail out here
-    console.log("RESOLVE 1");
     waitForUser.resolve();
     return userIdentity;
   }
@@ -301,7 +298,6 @@ var fetchIdentity = function(){
     // NOTE: The ID might be null, but we know one way or another
     if (window.location.href.indexOf("localhost") != -1){
       var tempID = 11220454;
-      console.log("THIS IS LOCALHOST, SETTING TEMP ID", tempID);
       // If we're developing on localhost, use a test identity
       // NOTE: Comment this next line out if you want to test what happens 
       // when a user is not logged in (in the local dev environment)
@@ -373,7 +369,6 @@ function getData(user, promise, share) {
       }
     },
     success: function(data) {
-      console.log("SUCCESS, here's the data ", data);
       // Reset timeout var
       globalTimeout = null;
 
@@ -383,7 +378,6 @@ function getData(user, promise, share) {
         setIcons();
         // If coming from a collex to mylist, handle that
         // Only simulate a click on list if we've got an identity back
-        console.log("CHECK HASH", window.location.hash, userIdentity);
         if (window.location.hash == "#mylist" && userIdentity){
           // Also display list results
           $(".mylist").click();
@@ -437,7 +431,7 @@ function saveNewData(user, restaurants) {
     data: JSON.stringify(newSavedData),
     contentType: "application/json",
     error: function(msg) { 
-      console.log("Failed to save data"); 
+      // console.log("Failed to save data"); 
     },
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist"
   });

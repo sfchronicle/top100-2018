@@ -63,10 +63,8 @@ var checkUser = function(repetitions, original_promise) {
     repetitions = 20;
   }
 
-  console.log("HERE'S USER ID", userIdentity, repetitions);
   if (userIdentity && userIdentity != "no id"){
     // If we already know the user's identity, we can bail out here
-    console.log("RESOLVE 1");
     waitForUser.resolve();
     return userIdentity;
   }
@@ -82,13 +80,10 @@ var checkUser = function(repetitions, original_promise) {
       getData(userIdentity, waitForUser, false);
     } else {
       if (repetitions > 0){
-        console.log("CHECK USER 4");
         checkUser(repetitions-1, waitForUser);
       } else {
         // If we've looped 10 times, bail out with "no id" flag
         userIdentity = "no id";
-        console.log("BAIL OUT", userIdentity);
-        console.log("RESOLVE 2");
         globalTimeout = null;
         waitForUser.resolve();
       }
@@ -105,7 +100,6 @@ var fetchIdentity = function(){
     // NOTE: The ID might be null, but we know one way or another
     if (window.location.href.indexOf("localhost") != -1){
       var tempID = 11220454;
-      console.log("THIS IS LOCALHOST, SETTING TEMP ID", tempID);
       // If we're developing on localhost, use a test identity
       // NOTE: Comment this next line out if you want to test what happens 
       // when a user is not logged in (in the local dev environment)
@@ -190,7 +184,7 @@ function saveNewData(user, restaurants) {
     data: JSON.stringify(newSavedData),
     contentType: "application/json",
     error: function(msg) { 
-      console.log("Failed to save data"); 
+      // console.log("Failed to save data"); 
     },
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist"
   });
@@ -300,7 +294,6 @@ if (document.getElementById("select-regions")){
   // if reader picks a "region", show appropriate sub-region dropdowns and reset various things and filter results
   chooseRegion.addEventListener('change', function(d) {
     var key = chooseRegion.value.split("-")[0];
-    console.log(key);
     chooseEastbay.value = "all";
     chooseNorthbay.value = "all";
     chooseSF.value = "all";
@@ -368,7 +361,6 @@ for (var t = 0; t < cuisinesButtons.length; t++){
       td.addEventListener('click', function(){
         $(".cuisine-button").removeClass("active");
         _td.classList.add("active");
-        console.log(_td.id.split("-")[0])
         checkRestaurants(_td.id.split("-")[0])
       });
     })(td);
@@ -399,8 +391,6 @@ function checkRestaurants(key){
 
 // this is our function for filtering results based on buttons (aka Mobile filtering)
 function check_dropdowns(key) {
-
-  console.log(key);
 
   if (key != "all" && key != "allcuisines"){
 

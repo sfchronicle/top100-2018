@@ -221,7 +221,6 @@ var globalTimeout = null;
 
 // Sets the user ID from treg (hopefully) 
 var checkUser = function(repetitions, original_promise) {
-	console.log("CHECKINNNN");
   // Set a deferred to return immediately
   var waitForUser;
   if (!original_promise){
@@ -240,7 +239,6 @@ var checkUser = function(repetitions, original_promise) {
 
   if (userIdentity && userIdentity != "no id"){
     // If we already know the user's identity, we can bail out here
-    console.log("RESOLVE 1");
     waitForUser.resolve();
     return userIdentity;
   }
@@ -256,13 +254,10 @@ var checkUser = function(repetitions, original_promise) {
       getData(userIdentity, waitForUser, false);
     } else {
       if (repetitions > 0){
-        console.log("CHECK USER 4");
         checkUser(repetitions-1, waitForUser);
       } else {
         // If we've looped 10 times, bail out with "no id" flag
         userIdentity = "no id";
-        console.log("BAIL OUT", userIdentity);
-        console.log("RESOLVE 2");
         globalTimeout = null;
         waitForUser.resolve();
       }
@@ -277,10 +272,8 @@ var fetchIdentity = function(){
   if (treg && treg.identity && (typeof treg.identity.id === "string" || treg.identity.id === null)){
     // We have a valid object, so return the ID
     // NOTE: The ID might be null, but we know one way or another
-    console.log(treg.identity.id);
     if (window.location.href.indexOf("localhost") != -1){
       var tempID = 11220454;
-      console.log("THIS IS LOCALHOST, SETTING TEMP ID", tempID);
       // If we're developing on localhost, use a test identity
       // NOTE: Comment this next line out if you want to test what happens 
       // when a user is not logged in (in the local dev environment)
@@ -375,7 +368,6 @@ function getData(user, promise) {
 function setIcons() {
   restaurantList.forEach(function(saveID){
     var elem = $("#"+saveID)[0];
-    console.log("ELEM", elem, saveID);
     // If this is a collection page, the element might be undefined -- check for that
     if (typeof elem != "undefined"){
       if ($("i", elem).hasClass("fa-square-o")) {
@@ -401,7 +393,7 @@ function saveNewData(user, restaurants) {
     data: JSON.stringify(newSavedData),
     contentType: "application/json",
     error: function(msg) { 
-      console.log("Failed to save data"); 
+      // console.log("Failed to save data"); 
     },
     url: "https://hcyqzeoa9b.execute-api.us-west-1.amazonaws.com/v1/top100/2018/checklist"
   });
