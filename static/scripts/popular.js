@@ -50,17 +50,18 @@ $.ajax(settings).done(function (response) {
 });
 
 // Try this a couple times and then bail out
-var finalFilter = function(top100Results){
+var finalFilter = function(results){
   // If the global var is not defined yet, try again in a moment
   if (typeof restaurants == "undefined"){
-    setTimeout(finalFilter, 500);
+    console.log("Top RESET");
+    setTimeout(finalFilter.bind(null, results), 500);
     return false;
   }
   // If it is defined, carry on
   var goldArray = [];
-  console.log("Top 3", top100Results);
+  console.log("Top 3", results);
   var finalPopular = restaurants.filter(function(item){
-    if (top100Results.indexOf(item.Slug) != -1){
+    if (results.indexOf(item.Slug) != -1){
       return true;
     } else {
       return false;
@@ -86,6 +87,13 @@ var finalFilter = function(top100Results){
     if (restaurantCookie.indexOf(finalPopular[index].Slug) == -1){
       $(this).find(".border").addClass("unseen").eq(1).addClass("white");
     }
+    // Add analytics
+    $(this).find("a").on("click", function(){
+      // Check to see how often this is clicked
+      if (typeof ens_specialEvent != "undefined"){
+        ens_specialEvent("Top 100 Restaurants 2018","Button Click","Still Hungry Link");
+      }
+    });
   });
 }
 

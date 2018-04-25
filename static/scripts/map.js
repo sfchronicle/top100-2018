@@ -79,7 +79,7 @@ var markersArray = [];
 // markers for restaurants
 restaurants.forEach(function(d,dIDX){
   var photos = d.wcm_img.split(' ');
-  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"/'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a target='_blank' href='https://www.google.com/maps/place/"+d.GoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
+  var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"/'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a class='directions-link' target='_blank' href='https://www.google.com/maps/place/"+d.GoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
   if (screen.width <= 480){
       var marker = L.marker([d.Lat, d.Lng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
   } else {
@@ -102,7 +102,7 @@ restaurants.forEach(function(d,dIDX){
 restaurants.forEach(function(d,dIDX){
   if (d.OtherLat){
     var photos = d.wcm_img.split(' ');
-    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a target='_blank' href='https://www.google.com/maps/place/"+d.OtherLocationGoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
+    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a class='directions-link' target='_blank' href='https://www.google.com/maps/place/"+d.OtherLocationGoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
     if (screen.width <= 480){
       var marker = L.marker([d.OtherLat,d.OtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
     } else {
@@ -121,7 +121,7 @@ restaurants.forEach(function(d,dIDX){
 restaurants.forEach(function(d,dIDX){
   if (d.OtherOtherLat){
     var photos = d.wcm_img.split(' ');
-    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a target='_blank' href='https://www.google.com/maps/place/"+d.OtherOtherLocationGoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
+    var html_str = "<div class='rest-name-popup'>"+d.Name+"</div><div class='rest-img-link-popup'><a href='"+parentURL+d.Slug+"'><img src='https://s.hdnux.com/photos/72/15/17/"+photos[0]+"/7/premium_landscape.jpg'></div><div class='click-popup'><i class='fa fa-external-link'></i>View restaurant</a></div><div class='click-popup'><a class='directions-link' target='_blank' href='https://www.google.com/maps/place/"+d.OtherOtherLocationGoogleAddress+"/'><i class='fa fa-compass'></i>Get directions</a></div>";
     if (screen.width <= 480){
       var marker = L.marker([d.OtherOtherLat,d.OtherOtherLng], {icon: purpleIcon}).addTo(map).bindPopup(html_str);
     } else {
@@ -334,6 +334,12 @@ $(".name .info").on("click", function(){
   $("#mapsearchbar").val($(this).text()).trigger("input");
 });
 
+$(".directions-link").on("click", function(){
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Get Directions From Map");
+  }
+});
 
 // Enable nav
 if ($(window).width() < 666) {

@@ -12,7 +12,6 @@ try {
   });
 }
 
-
 // function to find minimum
 Array.prototype.min = function() {
   return Math.min.apply(null, this);
@@ -126,6 +125,10 @@ if (typeof $("#search-bar input").autocomplete == "function"){
     // Find matches on selection
     select: function( event, ui ) {
       findMatches(ui.item.value);
+      // Log any matches deliberately selected from autocomplete
+      if (typeof ens_specialEvent != "undefined"){
+        ens_specialEvent("Top 100 Restaurants 2018","Search Query",ui.item.value);
+      }
     }
   });
 
@@ -420,6 +423,11 @@ function setIcons() {
 
 // saving restaurants as favorites ------------------------------------------------
 function saveNewData(user, restaurants) {
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Save To List");
+  }
+  
   var newSavedData = {
     "edbId":user,
     "restaurants":restaurants
@@ -535,6 +543,10 @@ $(".search, .mobile-search").on("click", function(e){
 $(".mylist").on("click",function(e) {
   //Intercept the link functionality on homepage and just bring user to search
   e.preventDefault();
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","My List");
+  }
   // Don't do anything unless the initial check has resolved
   if (globalTimeout == null){
     var promise = checkUser(1);
@@ -588,6 +600,10 @@ $(".mylist").on("click",function(e) {
 // handle print button functionality
 $(".print-link").on("click", function(){
   window.print();
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Print Version");
+  }
   return false;
 })
 
@@ -600,6 +616,13 @@ $("#exit").on("click", function(){
 $('#introduction, .closer').on("click", function(){
   $("body, html").toggleClass('noscroll');
   $('.intro-overlay').toggleClass('hide');
+
+  if ($(this).attr("id") == "introduction"){
+    // Check to see how often this is clicked
+    if (typeof ens_specialEvent != "undefined"){
+      ens_specialEvent("Top 100 Restaurants 2018","Button Click","Read Intro");
+    }
+  }
 })
 
 $(".intro-overlay").mouseup(function(e){

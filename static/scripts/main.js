@@ -44,10 +44,8 @@ if($('.swiper-slide').length === 1){
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev',
     pagination: '.swiper-pagination',
-    paginationClickable: true
+    paginationClickable: true,
   }
-
-  var mySwiper = new Swiper('.swiper-container', swiperData);
 }
 
 // We've arrived on an article, so save a cookie that says so
@@ -87,6 +85,14 @@ if (cookiesNumber > 10){
 	$("#explore-text").hide();
 	$("#final-text").show();
 }
+
+// Add analytics for explore text
+$("#explore-text a, #nearing-text a, #final-text a").on("click", function(){
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Still Hungry Link");
+  }
+});
 
 // Add a special icon if this restaurant is new or a classic
 var newIcon = "//projects.sfchronicle.com/shared/logos/top100_new.png?a";
@@ -379,6 +385,11 @@ function setIcons() {
 
 // saving restaurants as favorites ------------------------------------------------
 function saveNewData(user, restaurants) {
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Save To List");
+  }
+
   var newSavedData = {
     "edbId":user,
     "restaurants":restaurants

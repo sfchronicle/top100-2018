@@ -176,6 +176,11 @@ function setIcons() {
 
 // saving restaurants as favorites ------------------------------------------------
 function saveNewData(user, restaurants) {
+  // Check to see how often this is clicked
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Save To List");
+  }
+  
   var newSavedData = {
     "edbId":user,
     "restaurants":restaurants
