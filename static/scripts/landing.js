@@ -39,7 +39,8 @@ if ($(window).width() < 666) {
     var div_top = document.getElementById('mobile-nav-stick').getBoundingClientRect().top + window_top;
     if (window_top > div_top) {
       $('#landing-mobile-nav').addClass("active").css("pointer-events", "auto");
-    } else {
+    } else if (!$("#search-bar input").is(":focus")) {
+      // Don't fade out if search bar has focus
       $('#landing-mobile-nav').removeClass("active").css("pointer-events", "none");
     }
   }
@@ -49,7 +50,8 @@ if ($(window).width() < 666) {
     var div_top = document.getElementById('search-stick-here').getBoundingClientRect().top + window_top +100;
     if (window_top > div_top) {
       $('.landing-nav').addClass("active").css("pointer-events", "auto");
-    } else {
+    } else if (!$("#search-bar input").is(":focus")) {
+      // Don't fade out if search bar has focus
       $('.landing-nav').removeClass("active").css("pointer-events", "none");
     }
   }
