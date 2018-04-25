@@ -69,6 +69,7 @@ def collection_new():
     restaurants=restaurants,
     collection='new',
     pageTitle='Top 100 Bay Area Restaurants: New in 2018',
+    tweet='Top 100 Bay Area Restaurants: New in 2018',
     description='Explore The Chronicle\'s definitive Bay Area restaurant guide and see what\'s new to the list this year.'
   )
 
@@ -79,6 +80,7 @@ def collection_classics():
     restaurants=restaurants,
     collection='classics',
     pageTitle='Top 100 Bay Area Restaurants: The Classics',
+    tweet='Top 100 Bay Area Restaurants: The Classics',
     description='Explore the classics. The restaurants in this category have been on The Chronicle\'s Top 100 list for at least 20 years. '
   )
 
@@ -89,6 +91,7 @@ def collection_brunch():
     restaurants=restaurants,
     collection='brunch',
     pageTitle='Top 100 Bay Area Restaurants: Brunch',
+    tweet='Top 100 Bay Area Restaurants: Brunch',
     description='Explore The Chronicle\'s definitive Bay Area restaurant guide for the best in brunch.'
   )
 
@@ -99,6 +102,7 @@ def collection_regions():
     restaurants=restaurants,
     collection='regions',
     pageTitle='Top 100 Bay Area Restaurants by region',
+    tweet='Top 100 Bay Area Restaurants by region',
     description='Find a restaurant near you with The Chronicle\'s definitive Bay Area guide from critic Michael Bauer.'
   )
 
@@ -109,6 +113,7 @@ def collection_cuisines():
     restaurants=restaurants,
     collection='cuisines',
     pageTitle='Top 100 Bay Area Restaurants by cuisine',
+    tweet='Top 100 Bay Area Restaurants by cuisine',
     description='Explore The Chronicle\'s definitive Bay Area restaurant guide featuring cuisines from around the world.'
   )
 
