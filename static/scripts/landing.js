@@ -260,11 +260,6 @@ var checkUser = function(repetitions, original_promise) {
     waitForUser.resolve();
     return userIdentity;
   }
-
-  // Check to see how often this is loaded
-  if (typeof ens_specialEvent != "undefined"){
-    ens_specialEvent("Top 100 Restaurants 2018","Page Load","My List Load");
-  }
   
   // Keep setting a timeout until we have what we need
   globalTimeout = setTimeout(function(){
