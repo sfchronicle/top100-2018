@@ -35,12 +35,12 @@
     <div class="article">
       {% if (restaurant.Returning == "Classic") %}
       <label class="classic-label">Classic</label>
-      <a href="{{url_for('index')}}guides/classics"><img class="special-icon"></a>
+      <a href="{{url_for('collection_classics')}}"><img class="special-icon"></a>
       {% endif %}
       {% if (restaurant.Returning == "No") %}
-      <a href="{{url_for('index')}}guides/new"><img class="special-icon"></a>
+      <a href="{{url_for('collection_new')}}"><img class="special-icon"></a>
       {% endif %}
-      <a href="{{ url_for('index') }}map/#{{restaurant.Slug}}">
+      <a href="{{ url_for('mapfile') }}#{{restaurant.Slug}}">
         <div class="map-link region-button">
           <i class="fa fa-map-marker" aria-hidden="true"></i> View on the map
         </div>
