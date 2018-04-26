@@ -4,7 +4,7 @@ var top100Results = [];
 // Hit our cached chartbeat results for data
 var settings = {
   "async": true,
-  "url": "https://extras.sfgate.com/editorial/analytics/chartbeatfood.json",
+  "url": "https://extras.sfgate.com/editorial/analytics/chartbeatfood.json?asv",
   "method": "GET",
 }
 // Make the request
@@ -54,15 +54,26 @@ var finalFilter = function(results){
     setTimeout(finalFilter.bind(null, results), 500);
     return false;
   }
-  // If it is defined, carry on
-  var goldArray = [];
-  var finalPopular = restaurants.filter(function(item){
-    if (results.indexOf(item.Slug) != -1){
-      return true;
-    } else {
+  // ^ If it is defined, carry on
+  var orderedArray = [];
+  // We need the complete objects from the restaurant list
+  // But we need them in order of popularity
+  var finalPopular = results.filter(function(item){
+    // Do not even start the loop if we have all we need
+    if (orderedArray.length >= 3){
       return false;
     }
+    // If we don't have what we need, cycle through
+    $.each(restaurants, function(index, rest){
+      if (item == rest.Slug){
+        orderedArray.push(rest);
+        return true;
+      }
+    });
   });
+  // Assign back so it can be used
+  finalPopular = orderedArray;
+
   // Set values on HTML
   $("#popular-rest .wrap").each(function(index){
     // Get URL
