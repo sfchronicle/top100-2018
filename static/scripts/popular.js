@@ -33,7 +33,7 @@ $.ajax(settings).done(function (response) {
   // If we're developing on localhost, fake the results (since no real results are probably live yet)
   // Also serve this up if it's we've got less than 4 popular results :(
   if (window.location.href.indexOf("localhost") != -1 || top100Results.length < 3){
-    top100Results = top100Results.concat(["a16", "acaciahouse", "acquerello", "ad-hoc"]);
+    top100Results = top100Results.concat(["templeclub", "cotogna", "acaciahouse", "ad-hoc"]);
   }
   // One last filter to remove the undefineds and the current item (if it exists in the set)
   top100Results = top100Results.filter(function(item){
