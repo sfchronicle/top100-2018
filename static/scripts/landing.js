@@ -260,6 +260,11 @@ var checkUser = function(repetitions, original_promise) {
     waitForUser.resolve();
     return userIdentity;
   }
+
+  // Check to see how often this is loaded
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Page Load","My List Load");
+  }
   
   // Keep setting a timeout until we have what we need
   globalTimeout = setTimeout(function(){
@@ -283,6 +288,10 @@ var checkUser = function(repetitions, original_promise) {
           // Pop subscribe
           $("body").find("#log-in-instructions").show();
           $("body, html").css("overflow-y", "hidden");
+          // Log creds request from save click
+          if (typeof ens_specialEvent != "undefined"){
+            ens_specialEvent("Top 100 Restaurants 2018","Page Load","My List Load Redirected to Login Modal");
+          }
         }
       }
     }
@@ -468,6 +477,10 @@ $(".save-button").each(function(index) {
             // User hasn't logged in -- prompt them to do so
             $("#log-in-instructions").show();
             $("body, html").css("overflow-y", "hidden");
+            // Log creds request from save click
+            if (typeof ens_specialEvent != "undefined"){
+              ens_specialEvent("Top 100 Restaurants 2018","Button Click","Save Attempt Redirected to Login Modal");
+            }
           } else if (userIdentity) {
             // Successfully fetched -- proceed with original logic
             $(this).click();
@@ -531,6 +544,10 @@ $(".search, .mobile-search").on("click", function(e){
   $("#search-bar input").focus();
   // Restore 100 results 
   showAllRestaurants();
+  // Log search click
+  if (typeof ens_specialEvent != "undefined"){
+    ens_specialEvent("Top 100 Restaurants 2018","Button Click","Search Navigation");
+  }
 });
 
 // event listener for "My List" button
@@ -548,6 +565,10 @@ $(".mylist").on("click",function(e) {
       if (userIdentity == "no id"){
         $("body").find("#log-in-instructions").show();
         $("body, html").css("overflow-y", "hidden");
+        // Log creds request from save click
+        if (typeof ens_specialEvent != "undefined"){
+          ens_specialEvent("Top 100 Restaurants 2018","Button Click","My List Attempt Redirected to Login Modal");
+        }
       } else if (userIdentity) {
         // Give it gold bg
         $(this).toggleClass("selected");
