@@ -6,9 +6,11 @@ import os
 
 app.config['TEST_PROJECT_PATH'] = 'test-proj'
 app.config['PROJECT_YEAR'] = '2018'
+app.config['PRETTY_DATE'] = 'April 26, 2018'
+app.config['BOT_DATE'] = '2018-04-26T06:00:00Z'
 
 # Site paths
-app.config['STAGING_PATH'] = 'top2018'
+app.config['STAGING_PATH'] = 'top-100-2018'
 app.config['PRODUCTION_PATH'] = 'top-100-restaurants'
 
 app.config['PAYWALL'] = 'meter'

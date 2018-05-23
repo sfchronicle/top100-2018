@@ -36,7 +36,8 @@
         <div class="overlay-container">
           <div class="overlay">
             <div class="link"><span class="top100-hed">Top 100 </span><span class="top100-hed-rest">Restaurants </span><span class="top100-hed">2018</span></div>
-            <div class="deck">{{intro.Intro}}</div>
+            <div class="deck dateline"><time itemprop="datePublished" datetime="{{config.BOT_DATE}}">{{config.PRETTY_DATE}}</time></div>
+            <div class="deck intro">{{intro.Intro}}</div>
             <div id="buttons">
               <div class="instructions" id="introduction">Read the intro</div>
               <div class="instructions" id="restaurants">Restaurants</div>

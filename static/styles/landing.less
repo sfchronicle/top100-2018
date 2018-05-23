@@ -12,7 +12,7 @@
 
 	.overlay-container {
 		.flex(0 0 46%);
-		padding:0 2%;
+		padding:0 2% 20px;
 
 		@media @tablet{
 			margin-top:20px;
@@ -49,6 +49,16 @@
 		font-size:17px;
 		border-top:1px solid #ccc;
 		text-align:left;
+
+    &.dateline {
+      margin-bottom: 0;
+      font-family: @logo2;
+    }
+
+    &.intro {
+      padding-top: 10px;
+      border-top: none;
+    }
 		
 		@media @tablet {
       font-size:15px;
@@ -101,10 +111,21 @@
 
 
 #lead-image {
+  
+  @media @biggerthantablet {
+    position: relative;
+    height: 400px;
+  }
 
   .flex(0 0 40%);
   img {
     width: 100%;
+
+    @media @biggerthantablet {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   }
 
   @media @tablet{
